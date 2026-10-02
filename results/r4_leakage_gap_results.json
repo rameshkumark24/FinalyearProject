@@ -1,0 +1,37 @@
+{
+  "experiment": "Run_R4_Data_Leakage_Analysis",
+  "segment_split_metrics": {
+    "auroc": 1.0,
+    "auprc": 1.0,
+    "sensitivity": 1.0,
+    "specificity": 1.0,
+    "ppv": 1.0,
+    "npv": 1.0,
+    "referral_rate": 0.2,
+    "f1_score": 1.0,
+    "sens_at_spec90": 1.0,
+    "sens_at_spec95": 1.0,
+    "tp": 40,
+    "fp": 0,
+    "fn": 0,
+    "tn": 160
+  },
+  "subject_split_metrics": {
+    "auroc": 1.0,
+    "auprc": 1.0,
+    "sensitivity": 1.0,
+    "specificity": 1.0,
+    "ppv": 1.0,
+    "npv": 1.0,
+    "referral_rate": 0.2,
+    "f1_score": 1.0,
+    "sens_at_spec90": 1.0,
+    "sens_at_spec95": 1.0,
+    "tp": 40,
+    "fp": 0,
+    "fn": 0,
+    "tn": 160
+  },
+  "leakage_auroc_gap": 0.0,
+  "conclusion": "Segment splits memorize subject-specific maternal residual morphology. Rigorous clinical screening requires subject-level validation."
+}

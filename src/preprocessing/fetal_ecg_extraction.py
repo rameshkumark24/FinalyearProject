@@ -62,7 +62,14 @@ class FetalECGExtractor:
         b_bp, a_bp = signal.butter(4, [bp_low, bp_high], btype="bandpass")
 
         for ch in range(n_channels):
-            sig = ecg_channels[ch]
+            sig = np.copy(ecg_channels[ch])
+            if np.isnan(sig).any():
+                nans = np.isnan(sig)
+                not_nans = ~nans
+                if not_nans.any():
+                    sig[nans] = np.interp(np.flatnonzero(nans), np.flatnonzero(not_nans), sig[not_nans])
+                else:
+                    sig = np.nan_to_num(sig, nan=0.0)
             if b_notch is not None:
                 sig = signal.filtfilt(b_notch, a_notch, sig)
             sig = signal.filtfilt(b_bp, a_bp, sig)
@@ -88,9 +95,11 @@ class FetalECGExtractor:
         kernel = np.ones(win_size) / win_size
         integrated = np.convolve(squared, kernel, mode="same")
 
-        # Peak detection
+        # Peak detection using robust quantile threshold
         min_dist = int(min_distance_sec * self.fs)
-        threshold = 0.35 * np.max(integrated)
+        med_val = np.median(integrated)
+        std_val = np.std(integrated)
+        threshold = max(med_val + 1.5 * std_val, np.percentile(integrated, 90) * 0.35)
         peaks, _ = signal.find_peaks(integrated, distance=min_dist, height=threshold)
         return peaks
 
@@ -206,9 +215,9 @@ class FetalECGExtractor:
         tol_samples = int((tolerance_ms / 1000.0) * self.fs)
 
         if len(reference_peaks_samples) == 0:
-            return {"sensitivity": 0.0, "ppv": 0.0, "f1_score": 0.0}
+            return {"true_positives": 0, "false_negatives": 0, "false_positives": len(predicted_peaks_samples), "sensitivity": 0.0, "ppv": 0.0, "f1_score": 0.0}
         if len(predicted_peaks_samples) == 0:
-            return {"sensitivity": 0.0, "ppv": 0.0, "f1_score": 0.0}
+            return {"true_positives": 0, "false_negatives": len(reference_peaks_samples), "false_positives": 0, "sensitivity": 0.0, "ppv": 0.0, "f1_score": 0.0}
 
         matched_ref = set()
         matched_pred = set()

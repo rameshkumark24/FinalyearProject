@@ -1,0 +1,22 @@
+{
+  "record_id": "set-a/a01",
+  "ground_truth_beats": 145,
+  "true_fetal_hr_bpm": 145.0,
+  "maternal_hr_bpm": 80.0,
+  "template_subtraction_metrics": {
+    "true_positives": 9,
+    "false_negatives": 136,
+    "false_positives": 71,
+    "sensitivity": 0.06206896551724138,
+    "ppv": 0.1125,
+    "f1_score": 0.08
+  },
+  "fastica_metrics": {
+    "true_positives": 21,
+    "false_negatives": 124,
+    "false_positives": 59,
+    "sensitivity": 0.14482758620689656,
+    "ppv": 0.2625,
+    "f1_score": 0.18666666666666668
+  }
+}
