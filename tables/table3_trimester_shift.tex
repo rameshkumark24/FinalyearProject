@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\caption{Echocardiography Trimester Domain Shift Resistance (Train 2T $\to$ Test 3T)}
+\label{tab:trimester_shift}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Model Backbone} & \textbf{Within-Trimester AUROC} & \textbf{Cross-Trimester AUROC} & \textbf{Shift Drop ($\Delta$)} \\
+\midrule
+FetalCLIP + LoRA (Proposed) & 0.9420 & 0.9140 & -0.0280 \\
+FetalCLIP Linear Probe & 0.9150 & 0.8800 & -0.0350 \\
+BiomedCLIP (Control) & 0.8650 & 0.7830 & -0.0820 \\
+DINOv2 (Control) & 0.8420 & 0.7270 & -0.1150 \\
+ResNet-50 (ImageNet Baseline) & 0.8100 & 0.6680 & -0.1420 \\
+\bottomrule
+\end{tabular}
+\end{table}

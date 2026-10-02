@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\centering
+\caption{Screening Performance Across Missing Modality Combinations (Population Prevalence = 0.9\%)}
+\label{tab:fusion_missingness}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l ccccc ccccc}
+\toprule
+& \multicolumn{5}{c}{\textbf{AUROC}} & \multicolumn{5}{c}{\textbf{Sensitivity (at 90\% Specificity)}} \\
+\cmidrule(lr){2-6} \cmidrule(lr){7-11}
+\textbf{Available Modalities} & \textbf{SL-OR (Ours)} & \textbf{Max} & \textbf{Noisy-OR} & \textbf{DS} & \textbf{Mean} & \textbf{SL-OR (Ours)} & \textbf{Max} & \textbf{Noisy-OR} & \textbf{DS} & \textbf{Mean} \\
+\midrule
+All Three ($S, F, R$) & 1.000 & 1.000 & 1.000 & 0.999 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+Echo + Doppler ($S, F, \emptyset$) & 0.909 & 0.895 & 0.909 & 0.909 & 0.909 & 0.778 & 0.778 & 0.778 & 0.778 & 0.778 \\
+Echo + ECG ($S, \emptyset, R$) & 0.833 & 0.821 & 0.833 & 0.832 & 0.833 & 0.722 & 0.722 & 0.722 & 0.722 & 0.722 \\
+Doppler + ECG ($\emptyset, F, R$) & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+Echo Only ($S, \emptyset, \emptyset$) & 0.765 & 0.766 & 0.766 & 0.765 & 0.766 & 0.556 & 0.556 & 0.556 & 0.556 & 0.556 \\
+Doppler Only ($\emptyset, F, \emptyset$) & 0.925 & 0.924 & 0.924 & 0.925 & 0.924 & 0.778 & 0.778 & 0.778 & 0.778 & 0.778 \\
+ECG Only ($\emptyset, \emptyset, R$) & 0.653 & 0.653 & 0.653 & 0.653 & 0.653 & 0.333 & 0.333 & 0.333 & 0.333 & 0.333 \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}

@@ -1,0 +1,71 @@
+{
+  "experiment": "Structure_Expert_FetalCLIP_Trimester_Benchmarks",
+  "view_dropout_robustness": {
+    "4_views_present": {
+      "views": [
+        "4CH",
+        "3VT",
+        "LVOT",
+        "RVOT"
+      ],
+      "auroc": 1.0,
+      "sensitivity": 1.0,
+      "sens_at_spec90": 1.0
+    },
+    "3_views_present": {
+      "views": [
+        "4CH",
+        "3VT",
+        "LVOT"
+      ],
+      "auroc": 1.0,
+      "sensitivity": 1.0,
+      "sens_at_spec90": 1.0
+    },
+    "2_views_present": {
+      "views": [
+        "4CH",
+        "3VT"
+      ],
+      "auroc": 1.0,
+      "sensitivity": 1.0,
+      "sens_at_spec90": 1.0
+    },
+    "1_views_present": {
+      "views": [
+        "4CH"
+      ],
+      "auroc": 1.0,
+      "sensitivity": 0.95,
+      "sens_at_spec90": 1.0
+    }
+  },
+  "trimester_domain_shift": {
+    "FetalCLIP + LoRA (Proposed)": {
+      "within_trimester_auroc": 0.942,
+      "cross_trimester_auroc": 0.914,
+      "generalization_gap": 0.028
+    },
+    "FetalCLIP Linear Probe": {
+      "within_trimester_auroc": 0.915,
+      "cross_trimester_auroc": 0.88,
+      "generalization_gap": 0.035
+    },
+    "BiomedCLIP (Control)": {
+      "within_trimester_auroc": 0.865,
+      "cross_trimester_auroc": 0.783,
+      "generalization_gap": 0.082
+    },
+    "DINOv2 (Control)": {
+      "within_trimester_auroc": 0.842,
+      "cross_trimester_auroc": 0.727,
+      "generalization_gap": 0.115
+    },
+    "ResNet-50 (ImageNet Baseline)": {
+      "within_trimester_auroc": 0.81,
+      "cross_trimester_auroc": 0.668,
+      "generalization_gap": 0.142
+    }
+  },
+  "conclusion": "FetalCLIP with LoRA achieves superior AUROC (0.942) and preserves generalization across gestational trimesters (gap: 0.028 vs 0.142 in ResNet-50)."
+}

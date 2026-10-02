@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering
+\caption{Rhythm Expert Screening on Real Clinical Cohort (NIFEADB, N=26 subjects, 5-Fold Subject-Level CV)}
+\label{tab:rhythm_benchmarks}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Model Architecture} & \textbf{AUROC} & \textbf{Sens @ 90\% Spec} & \textbf{Brier Score} \\
+\midrule
+HRV + Logistic Regression & 0.3667 & 0.2000 & 0.3586 \\
+HRV + Random Forest & 0.6000 & 0.4000 & 0.2965 \\
+1D-CNN (from scratch) & 0.5667 & 0.3333 & 0.3823 \\
+ECG Foundation Model (ECGFounder/ECG-FM) & 0.4667 & 0.3000 & 0.2280 \\
+\bottomrule
+\end{tabular}
+\end{table}
