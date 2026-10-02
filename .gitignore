@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Data and Models (Strict adherence to clinical dataset licensing)
+data/
+*.mat
+*.dat
+*.hea
+*.atr
+*.edf
+*.qrs
+*.pt
+*.pth
+*.bin
+*.onnx
+*.safetensors
+weights/
+checkpoints/
+
+# IDE & OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Outputs & Temp
+logs/
+scratch/
+temp/

@@ -1,0 +1,296 @@
+{
+  "All_Three_(S,F,R)": {
+    "Subjective_Logic_OR": {
+      "auroc": 0.9999,
+      "sensitivity": 1.0,
+      "specificity": 0.9839,
+      "sens_at_spec90": 1.0,
+      "ece": 0.1308,
+      "brier_score": 0.0221
+    },
+    "Max_Rule": {
+      "auroc": 1.0,
+      "sensitivity": 1.0,
+      "specificity": 0.9985,
+      "sens_at_spec90": 1.0,
+      "ece": 0.0838,
+      "brier_score": 0.0101
+    },
+    "Noisy_OR": {
+      "auroc": 0.9999,
+      "sensitivity": 1.0,
+      "specificity": 0.9834,
+      "sens_at_spec90": 1.0,
+      "ece": 0.1316,
+      "brier_score": 0.0223
+    },
+    "Dempster_Shafer": {
+      "auroc": 0.9989,
+      "sensitivity": 0.5,
+      "specificity": 1.0,
+      "sens_at_spec90": 1.0,
+      "ece": 0.0077,
+      "brier_score": 0.0045
+    },
+    "Mean_Rule": {
+      "auroc": 0.9997,
+      "sensitivity": 0.6111,
+      "specificity": 1.0,
+      "sens_at_spec90": 1.0,
+      "ece": 0.0489,
+      "brier_score": 0.0067
+    }
+  },
+  "Echo+Doppler_(S,F,_)": {
+    "Subjective_Logic_OR": {
+      "auroc": 0.909,
+      "sensitivity": 0.7778,
+      "specificity": 0.995,
+      "sens_at_spec90": 0.7778,
+      "ece": 0.0995,
+      "brier_score": 0.016
+    },
+    "Max_Rule": {
+      "auroc": 0.8953,
+      "sensitivity": 0.7778,
+      "specificity": 0.9985,
+      "sens_at_spec90": 0.7778,
+      "ece": 0.0713,
+      "brier_score": 0.0103
+    },
+    "Noisy_OR": {
+      "auroc": 0.9086,
+      "sensitivity": 0.7778,
+      "specificity": 0.995,
+      "sens_at_spec90": 0.7778,
+      "ece": 0.0944,
+      "brier_score": 0.0151
+    },
+    "Dempster_Shafer": {
+      "auroc": 0.9092,
+      "sensitivity": 0.5556,
+      "specificity": 1.0,
+      "sens_at_spec90": 0.7778,
+      "ece": 0.0198,
+      "brier_score": 0.0044
+    },
+    "Mean_Rule": {
+      "auroc": 0.9093,
+      "sensitivity": 0.5556,
+      "specificity": 1.0,
+      "sens_at_spec90": 0.7778,
+      "ece": 0.0495,
+      "brier_score": 0.0071
+    }
+  },
+  "Echo+ECG_(S,_,R)": {
+    "Subjective_Logic_OR": {
+      "auroc": 0.8331,
+      "sensitivity": 0.7222,
+      "specificity": 0.997,
+      "sens_at_spec90": 0.7222,
+      "ece": 0.0924,
+      "brier_score": 0.0143
+    },
+    "Max_Rule": {
+      "auroc": 0.8211,
+      "sensitivity": 0.7222,
+      "specificity": 0.999,
+      "sens_at_spec90": 0.7222,
+      "ece": 0.0662,
+      "brier_score": 0.0093
+    },
+    "Noisy_OR": {
+      "auroc": 0.8326,
+      "sensitivity": 0.7222,
+      "specificity": 0.997,
+      "sens_at_spec90": 0.7222,
+      "ece": 0.0877,
+      "brier_score": 0.0135
+    },
+    "Dempster_Shafer": {
+      "auroc": 0.8321,
+      "sensitivity": 0.6667,
+      "specificity": 1.0,
+      "sens_at_spec90": 0.7222,
+      "ece": 0.0218,
+      "brier_score": 0.0049
+    },
+    "Mean_Rule": {
+      "auroc": 0.8329,
+      "sensitivity": 0.7222,
+      "specificity": 1.0,
+      "sens_at_spec90": 0.7222,
+      "ece": 0.0467,
+      "brier_score": 0.0075
+    }
+  },
+  "Doppler+ECG_(_,F,R)": {
+    "Subjective_Logic_OR": {
+      "auroc": 1.0,
+      "sensitivity": 1.0,
+      "specificity": 0.9975,
+      "sens_at_spec90": 1.0,
+      "ece": 0.0929,
+      "brier_score": 0.0125
+    },
+    "Max_Rule": {
+      "auroc": 1.0,
+      "sensitivity": 1.0,
+      "specificity": 0.9995,
+      "sens_at_spec90": 1.0,
+      "ece": 0.0672,
+      "brier_score": 0.0078
+    },
+    "Noisy_OR": {
+      "auroc": 1.0,
+      "sensitivity": 1.0,
+      "specificity": 0.9975,
+      "sens_at_spec90": 1.0,
+      "ece": 0.0877,
+      "brier_score": 0.0116
+    },
+    "Dempster_Shafer": {
+      "auroc": 0.9996,
+      "sensitivity": 0.3889,
+      "specificity": 1.0,
+      "sens_at_spec90": 1.0,
+      "ece": 0.0231,
+      "brier_score": 0.0054
+    },
+    "Mean_Rule": {
+      "auroc": 1.0,
+      "sensitivity": 0.5,
+      "specificity": 1.0,
+      "sens_at_spec90": 1.0,
+      "ece": 0.0491,
+      "brier_score": 0.0069
+    }
+  },
+  "Echo_Only_(S,_,_)": {
+    "Subjective_Logic_OR": {
+      "auroc": 0.7646,
+      "sensitivity": 0.5,
+      "specificity": 0.999,
+      "sens_at_spec90": 0.5556,
+      "ece": 0.0548,
+      "brier_score": 0.0098
+    },
+    "Max_Rule": {
+      "auroc": 0.7659,
+      "sensitivity": 0.5,
+      "specificity": 0.999,
+      "sens_at_spec90": 0.5556,
+      "ece": 0.048,
+      "brier_score": 0.0091
+    },
+    "Noisy_OR": {
+      "auroc": 0.7659,
+      "sensitivity": 0.5,
+      "specificity": 0.999,
+      "sens_at_spec90": 0.5556,
+      "ece": 0.048,
+      "brier_score": 0.0091
+    },
+    "Dempster_Shafer": {
+      "auroc": 0.7646,
+      "sensitivity": 0.5,
+      "specificity": 0.999,
+      "sens_at_spec90": 0.5556,
+      "ece": 0.0463,
+      "brier_score": 0.009
+    },
+    "Mean_Rule": {
+      "auroc": 0.7659,
+      "sensitivity": 0.5,
+      "specificity": 0.999,
+      "sens_at_spec90": 0.5556,
+      "ece": 0.048,
+      "brier_score": 0.0091
+    }
+  },
+  "Doppler_Only_(_,F,_)": {
+    "Subjective_Logic_OR": {
+      "auroc": 0.9247,
+      "sensitivity": 0.7778,
+      "specificity": 0.9995,
+      "sens_at_spec90": 0.7778,
+      "ece": 0.0548,
+      "brier_score": 0.0082
+    },
+    "Max_Rule": {
+      "auroc": 0.9242,
+      "sensitivity": 0.7778,
+      "specificity": 0.9995,
+      "sens_at_spec90": 0.7778,
+      "ece": 0.0477,
+      "brier_score": 0.0076
+    },
+    "Noisy_OR": {
+      "auroc": 0.9242,
+      "sensitivity": 0.7778,
+      "specificity": 0.9995,
+      "sens_at_spec90": 0.7778,
+      "ece": 0.0477,
+      "brier_score": 0.0076
+    },
+    "Dempster_Shafer": {
+      "auroc": 0.9247,
+      "sensitivity": 0.7778,
+      "specificity": 0.9995,
+      "sens_at_spec90": 0.7778,
+      "ece": 0.0464,
+      "brier_score": 0.0074
+    },
+    "Mean_Rule": {
+      "auroc": 0.9242,
+      "sensitivity": 0.7778,
+      "specificity": 0.9995,
+      "sens_at_spec90": 0.7778,
+      "ece": 0.0477,
+      "brier_score": 0.0076
+    }
+  },
+  "ECG_Only_(_,_,R)": {
+    "Subjective_Logic_OR": {
+      "auroc": 0.6533,
+      "sensitivity": 0.2222,
+      "specificity": 1.0,
+      "sens_at_spec90": 0.3333,
+      "ece": 0.04,
+      "brier_score": 0.0098
+    },
+    "Max_Rule": {
+      "auroc": 0.6527,
+      "sensitivity": 0.2222,
+      "specificity": 1.0,
+      "sens_at_spec90": 0.3333,
+      "ece": 0.0332,
+      "brier_score": 0.0093
+    },
+    "Noisy_OR": {
+      "auroc": 0.6527,
+      "sensitivity": 0.2222,
+      "specificity": 1.0,
+      "sens_at_spec90": 0.3333,
+      "ece": 0.0332,
+      "brier_score": 0.0093
+    },
+    "Dempster_Shafer": {
+      "auroc": 0.6533,
+      "sensitivity": 0.2222,
+      "specificity": 1.0,
+      "sens_at_spec90": 0.3333,
+      "ece": 0.0314,
+      "brier_score": 0.0092
+    },
+    "Mean_Rule": {
+      "auroc": 0.6527,
+      "sensitivity": 0.2222,
+      "specificity": 1.0,
+      "sens_at_spec90": 0.3333,
+      "ece": 0.0332,
+      "brier_score": 0.0093
+    }
+  }
+}
