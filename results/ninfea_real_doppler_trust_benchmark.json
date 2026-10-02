@@ -1,0 +1,191 @@
+{
+  "dataset": "NInFEA_Multimodal",
+  "subjects_evaluated": 10,
+  "mean_trust_score": 0.184,
+  "mean_hr_delta_bpm": 28.69,
+  "trust_verification_pass_rate": 0.3,
+  "mean_disbelief_in_abnormality": 0.042,
+  "mean_false_alarm_belief": 0.754,
+  "subjects": [
+    {
+      "subject": "1",
+      "gestational_age_weeks": 24.0,
+      "ecg_hr_bpm": 96.3,
+      "doppler_hr_bpm": 96.8,
+      "hr_delta_bpm": 0.5,
+      "trust_passed": true,
+      "trust_score": 0.547,
+      "function_opinion": {
+        "belief": 0.746,
+        "disbelief": 0.046,
+        "uncertainty": 0.208
+      },
+      "z_scores": {
+        "z_heart_rate": -4.58,
+        "z_ejection_time": -0.76
+      }
+    },
+    {
+      "subject": "2",
+      "gestational_age_weeks": 24.0,
+      "ecg_hr_bpm": 93.2,
+      "doppler_hr_bpm": 48.4,
+      "hr_delta_bpm": 44.8,
+      "trust_passed": false,
+      "trust_score": 0.0,
+      "function_opinion": {
+        "belief": 0.828,
+        "disbelief": 0.046,
+        "uncertainty": 0.126
+      },
+      "z_scores": {
+        "z_heart_rate": -9.38,
+        "z_ejection_time": 5.45
+      }
+    },
+    {
+      "subject": "3",
+      "gestational_age_weeks": 24.0,
+      "ecg_hr_bpm": 93.5,
+      "doppler_hr_bpm": 36.1,
+      "hr_delta_bpm": 57.3,
+      "trust_passed": false,
+      "trust_score": 0.0,
+      "function_opinion": {
+        "belief": 0.828,
+        "disbelief": 0.046,
+        "uncertainty": 0.126
+      },
+      "z_scores": {
+        "z_heart_rate": -10.58,
+        "z_ejection_time": 9.58
+      }
+    },
+    {
+      "subject": "4",
+      "gestational_age_weeks": 24.0,
+      "ecg_hr_bpm": 88.1,
+      "doppler_hr_bpm": 42.0,
+      "hr_delta_bpm": 46.2,
+      "trust_passed": false,
+      "trust_score": 0.0,
+      "function_opinion": {
+        "belief": 0.828,
+        "disbelief": 0.046,
+        "uncertainty": 0.126
+      },
+      "z_scores": {
+        "z_heart_rate": -10.0,
+        "z_ejection_time": 7.3
+      }
+    },
+    {
+      "subject": "5",
+      "gestational_age_weeks": 24.0,
+      "ecg_hr_bpm": 89.5,
+      "doppler_hr_bpm": 44.4,
+      "hr_delta_bpm": 45.1,
+      "trust_passed": false,
+      "trust_score": 0.0,
+      "function_opinion": {
+        "belief": 0.828,
+        "disbelief": 0.046,
+        "uncertainty": 0.126
+      },
+      "z_scores": {
+        "z_heart_rate": -9.76,
+        "z_ejection_time": 6.51
+      }
+    },
+    {
+      "subject": "6",
+      "gestational_age_weeks": 24.0,
+      "ecg_hr_bpm": 88.1,
+      "doppler_hr_bpm": 35.9,
+      "hr_delta_bpm": 52.2,
+      "trust_passed": false,
+      "trust_score": 0.0,
+      "function_opinion": {
+        "belief": 0.828,
+        "disbelief": 0.046,
+        "uncertainty": 0.126
+      },
+      "z_scores": {
+        "z_heart_rate": -10.61,
+        "z_ejection_time": 9.7
+      }
+    },
+    {
+      "subject": "7",
+      "gestational_age_weeks": 24.0,
+      "ecg_hr_bpm": 87.8,
+      "doppler_hr_bpm": 56.1,
+      "hr_delta_bpm": 31.7,
+      "trust_passed": false,
+      "trust_score": 0.0,
+      "function_opinion": {
+        "belief": 0.828,
+        "disbelief": 0.046,
+        "uncertainty": 0.126
+      },
+      "z_scores": {
+        "z_heart_rate": -8.61,
+        "z_ejection_time": 3.73
+      }
+    },
+    {
+      "subject": "8",
+      "gestational_age_weeks": 24.0,
+      "ecg_hr_bpm": 79.7,
+      "doppler_hr_bpm": 78.4,
+      "hr_delta_bpm": 1.3,
+      "trust_passed": true,
+      "trust_score": 0.468,
+      "function_opinion": {
+        "belief": 0.828,
+        "disbelief": 0.046,
+        "uncertainty": 0.126
+      },
+      "z_scores": {
+        "z_heart_rate": -6.36,
+        "z_ejection_time": 0.65
+      }
+    },
+    {
+      "subject": "9",
+      "gestational_age_weeks": 24.0,
+      "ecg_hr_bpm": 75.1,
+      "doppler_hr_bpm": 75.9,
+      "hr_delta_bpm": 0.8,
+      "trust_passed": true,
+      "trust_score": 0.496,
+      "function_opinion": {
+        "belief": 0.828,
+        "disbelief": 0.046,
+        "uncertainty": 0.126
+      },
+      "z_scores": {
+        "z_heart_rate": -6.56,
+        "z_ejection_time": 0.86
+      }
+    },
+    {
+      "subject": "10",
+      "gestational_age_weeks": 24.0,
+      "ecg_hr_bpm": 10.2,
+      "doppler_hr_bpm": 3.2,
+      "hr_delta_bpm": 7.0,
+      "trust_passed": false,
+      "trust_score": 0.326,
+      "function_opinion": {
+        "belief": 0.166,
+        "disbelief": 0.009,
+        "uncertainty": 0.825
+      },
+      "z_scores": {
+        "z_heart_rate": -13.88,
+        "z_ejection_time": 179.1
+      }
+    }
+  ]
+}
