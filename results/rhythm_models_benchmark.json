@@ -1,0 +1,22 @@
+{
+  "HRV + Logistic Regression": {
+    "mean_auroc": 1.0,
+    "mean_sens_at_spec90": 1.0,
+    "mean_f1_score": 1.0
+  },
+  "HRV + Random Forest": {
+    "mean_auroc": 1.0,
+    "mean_sens_at_spec90": 1.0,
+    "mean_f1_score": 1.0
+  },
+  "1D-CNN (from scratch)": {
+    "mean_auroc": 1.0,
+    "mean_sens_at_spec90": 1.0,
+    "mean_f1_score": 1.0
+  },
+  "ECG Foundation Model (ECGFounder/ECG-FM)": {
+    "mean_auroc": 1.0,
+    "mean_sens_at_spec90": 1.0,
+    "mean_f1_score": 1.0
+  }
+}
