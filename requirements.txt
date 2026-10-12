@@ -1,36 +1,18 @@
-# ============================================================
-# SFR Framework — Prenatal Heart Screening
-# ============================================================
+# SFR prenatal heart screening - packages used by the rebuilt code.
+# Versions are those of the development machine (Windows 11, Python 3.13); newer ones should work.
 
-# Core ML
-torch>=2.0
-torchvision>=0.15
-torchaudio>=2.0
-timm>=0.9.0
+numpy>=2.0
+scipy>=1.13
+scikit-learn>=1.5
+wfdb>=4.1                  # PhysioNet records
+Pillow>=10.0               # Doppler strips, echo frames
+opencv-python>=4.8         # median filter in the envelope port (sfr/doppler/envelope.py)
+matplotlib>=3.8            # figures in scripts/build_report.py
 
-# Foundation models
-open_clip_torch>=2.24.0       # FetalCLIP
-transformers>=4.38.0          # ECG foundation models (HuBERT-ECG, ECGFounder)
-peft>=0.7.0                   # LoRA fine-tuning
-safetensors>=0.4.0
+# Models
+torch>=2.2                 # ECGFounder features, the small CNN, FetalCLIP
+open_clip_torch>=2.24      # FetalCLIP loader
+huggingface_hub>=0.23      # weight download with a pinned revision
 
-# Signal processing
-wfdb>=4.1.0                   # PhysioNet data loading
-neurokit2>=0.2.7              # ECG processing, HRV features
-scipy>=1.11.0
-mne>=1.6.0                    # EEG/ECG toolbox (ICA)
-
-# Data & evaluation
-numpy>=1.24.0
-pandas>=2.0.0
-scikit-learn>=1.3.0
-
-# Visualization
-matplotlib>=3.7.0
-seaborn>=0.13.0
-
-# Utilities
-tqdm>=4.65.0
-PyYAML>=6.0
-Pillow>=10.0.0
-opencv-python>=4.8.0          # Doppler envelope from video
+# Tests
+pytest>=8.0

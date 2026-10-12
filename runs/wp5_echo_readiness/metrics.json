@@ -1,0 +1,39 @@
+{
+  "statement": "No labelled echo data is available. Nothing in this run is a result on heart defects.",
+  "frames": 150,
+  "cases": 30,
+  "deidentification": {
+    "scan_share_of_frame_median": 0.6388738263078284,
+    "scan_share_min": 0.2878621419270833,
+    "frames_with_coloured_overlays_inside_scan": 140,
+    "pixels_outside_scan_blanked_median": 16989.5,
+    "pixels_outside_scan_remaining": 0,
+    "non_black_share_of_crop_min": 0.44014609421586165,
+    "not_verified": "text lying inside the scan region; a person must check a sample at full resolution"
+  },
+  "fetalclip": {
+    "checkpoint": {
+      "claimed_name": "FetalCLIP",
+      "verified": true,
+      "sha256": "90916caa408baf9374ee3f8c1533463331a4ace37a13e61385e782905b35c310",
+      "file": "FetalCLIP_weights.pt",
+      "bytes": 1710766661,
+      "source": "huggingface.co/numansaeed/fetalclip-model",
+      "licence": "CC BY-NC 4.0",
+      "n_parameters": 427647233
+    },
+    "embedding_shape": [
+      150,
+      768
+    ],
+    "all_finite": true,
+    "cosine_same_case_mean": 0.6437239646911621,
+    "cosine_other_case_mean": 0.5812658667564392,
+    "seconds_per_frame": 1.2600208457310995
+  },
+  "blocked": "CHD results need Heartbeat or CARDIUM. The access forms have not been sent.",
+  "gate_G5": {
+    "passed": false,
+    "reason": "no labelled data; the gate cannot be evaluated"
+  }
+}

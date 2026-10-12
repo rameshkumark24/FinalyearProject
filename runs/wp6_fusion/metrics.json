@@ -1,0 +1,188 @@
+{
+  "A_conformal_alarms": {
+    "rhythm": {
+      "alpha": 0.1,
+      "n_arrhythmia": 12,
+      "n_normal": 14,
+      "smallest_possible_p": 0.06666666666666667,
+      "arrhythmia_caught": 8,
+      "sensitivity": 0.6666666666666666,
+      "sensitivity_ci": [
+        0.3488755064188155,
+        0.9007539088504167
+      ],
+      "normal_flagged": 1,
+      "false_alarm_rate": 0.07142857142857142,
+      "false_alarm_ci": [
+        0.0018067806591253865,
+        0.3386844899318212
+      ],
+      "false_alarm_range_of_a_fixed_calibration_set_90pct": [
+        0.003657103191383564,
+        0.19263617565013527
+      ],
+      "other_scores_same_level_not_preselected": {
+        "oof_forest_rhythm": {
+          "arrhythmia_caught": 9,
+          "n_arrhythmia": 12,
+          "sensitivity_ci": [
+            0.4281415381218108,
+            0.9451393554720072
+          ],
+          "normal_flagged": 1,
+          "n_normal": 14
+        },
+        "succ_rel_median": {
+          "arrhythmia_caught": 8,
+          "n_arrhythmia": 12,
+          "sensitivity_ci": [
+            0.3488755064188155,
+            0.9007539088504167
+          ],
+          "normal_flagged": 1,
+          "n_normal": 14
+        },
+        "outlier_share_p90": {
+          "arrhythmia_caught": 8,
+          "n_arrhythmia": 12,
+          "sensitivity_ci": [
+            0.3488755064188155,
+            0.9007539088504167
+          ],
+          "normal_flagged": 1,
+          "n_normal": 14
+        }
+      }
+    },
+    "function": {
+      "alpha": 0.05,
+      "n_healthy_recordings": 60,
+      "n_women": 39,
+      "flagged": 2,
+      "false_alarm_rate": 0.03333333333333333,
+      "no_abnormal_cases": "sensitivity cannot be measured"
+    },
+    "structure": {
+      "status": "no labelled data; the expert is 'test not done' in every analysis below"
+    },
+    "false_referral_ceiling_two_experts": 0.15000000000000002
+  },
+  "B_real_paired_cohort": {
+    "cohort": "NInFEA: 60 simultaneous fetal ECG and Doppler recordings of 39 healthy fetuses (real pairs)",
+    "structure_expert": "test not done (no echo in NInFEA)",
+    "actions_as_is_echo_missing": {
+      "REFER": 31,
+      "REPEAT": 6,
+      "GET_TEST": 23,
+      "ROUTINE": 0,
+      "n": 60
+    },
+    "actions_if_echo_were_done_and_normal": {
+      "REFER": 31,
+      "REPEAT": 6,
+      "GET_TEST": 0,
+      "ROUTINE": 23,
+      "n": 60
+    },
+    "false_referrals": {
+      "recordings": 31,
+      "n": 60,
+      "share": 0.5166666666666667,
+      "ci": [
+        0.38394601733159683,
+        0.6476870699978736
+      ],
+      "women_with_a_referred_recording": 21,
+      "n_women": 39,
+      "by_expert": {
+        "rhythm": 30,
+        "function": 2
+      },
+      "ceiling_from_alarm_levels": 0.15000000000000002
+    },
+    "ecg_readable": 57,
+    "with_rhythm_score_calibrated_on_ninfea_leave_one_woman_out": {
+      "actions_if_echo_were_done_and_normal": {
+        "REFER": 6,
+        "REPEAT": 8,
+        "GET_TEST": 0,
+        "ROUTINE": 46,
+        "n": 60
+      },
+      "false_referrals": {
+        "recordings": 6,
+        "n": 60,
+        "share": 0.1,
+        "ci": [
+          0.03759126910856603,
+          0.2050577367080639
+        ],
+        "by_expert": {
+          "rhythm": 5,
+          "function": 2,
+          "both_on_the_same_recording": 1
+        },
+        "ceiling_from_alarm_levels": 0.15000000000000002
+      },
+      "what_this_shows": "false referrals of the two experts on real pairs of healthy fetuses, with both calibrated on healthy cases from the same setting. Sensitivity of this calibration is unknown: NInFEA has no arrhythmia."
+    },
+    "caveat": "The rhythm expert was fitted on NIFEADB (other device, later gestation, 60-second segments). Its alarms on NInFEA measure how it travels, not a tuned false-alarm rate.",
+    "note": "'if echo were done and normal' replaces the missing echo by an assumed normal result to show the ECG-Doppler part alone; it is a stated assumption, not data."
+  },
+  "C_rule_comparison": {
+    "rows": 12,
+    "own_rule": {
+      "independent": {
+        "false_referral_rate": 0.10238095238095238,
+        "sensitivity_for_arrhythmia": 0.6777777777777778,
+        "rhythm_expert_alone": 0.6666666666666666
+      },
+      "tied": {
+        "false_referral_rate": 0.06666666666666667,
+        "sensitivity_for_arrhythmia": 0.6666666666666666,
+        "rhythm_expert_alone": 0.6666666666666666
+      },
+      "opposed": {
+        "false_referral_rate": 0.1,
+        "sensitivity_for_arrhythmia": 0.7,
+        "rhythm_expert_alone": 0.6666666666666666
+      }
+    },
+    "bounds": {
+      "ceiling_sum_of_levels": 0.15000000000000002,
+      "false_referral_rate_by_coupling": {
+        "independent": 0.10238095238095238,
+        "tied": 0.06666666666666667,
+        "opposed": 0.1
+      },
+      "ceiling_respected": true,
+      "sensitivity_floor_respected": true
+    },
+    "note": "virtual patients; each row is one coupling, so the three rows together bracket the unknown joint behaviour"
+  },
+  "hypothesis_H7": {
+    "statement": "with mixed test availability and one threshold, averaging-type rules lose alarms that the OR rule keeps at the same false-referral rate",
+    "rows_checked": 6,
+    "rows_where_mean_rule_has_lower_sensitivity": 6,
+    "rows_where_interval_excludes_zero": 0,
+    "direction_as_predicted_in_all_rows": true,
+    "established": false
+  },
+  "gate_G6": {
+    "property_tests": "tests/test_fusion.py (19 tests)",
+    "every_row_states_real_and_virtual_counts_and_coupling": true
+  },
+  "decision_config": {
+    "alpha": {
+      "structure": 0.05,
+      "function": 0.05,
+      "rhythm": 0.1
+    },
+    "prior": {
+      "structure": 0.009,
+      "function": 0.002,
+      "rhythm": 0.001
+    },
+    "get_test_prior_limit": 0.005
+  }
+}

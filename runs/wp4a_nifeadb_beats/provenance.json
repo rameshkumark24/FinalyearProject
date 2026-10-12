@@ -1,0 +1,47 @@
+{
+  "run": "wp4a_nifeadb_beats",
+  "description": "Fetal beat extraction on the 26 NIFEADB recordings in 60-second segments",
+  "created_utc": "2026-10-11T18:11:27+00:00",
+  "script": "scripts/run_wp4a_nifeadb_beats.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "0eb55fa3713f831f8aad9d8da27e59ab24f7498d",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "ecg": {
+      "n_components": 3,
+      "max_sources": 8,
+      "n_tracked": 3,
+      "smoothness": 4.0,
+      "min_score": 0.2,
+      "seed": 0
+    },
+    "segment_s": 60.0,
+    "min_last_segment_s": 30.0
+  },
+  "data": {
+    "nifeadb": {
+      "n_files": 52,
+      "total_bytes": 186294562,
+      "manifest_sha256": "6171bc17ae2db8ffb7f9fc42ecd24e7ff9288edf2c7f942105d9a032c4a6a19b"
+    }
+  },
+  "n_real": 26,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "C:\\Finalyearproject\\scripts\\run_wp4a_nifeadb_beats.py"
+  ]
+}

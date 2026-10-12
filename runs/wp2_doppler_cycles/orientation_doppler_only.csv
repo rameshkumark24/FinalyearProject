@@ -1,0 +1,44 @@
+img,split,inferred_ejection_side,correct,rule,log_area_ratio,lag
+1,development,lower,True,area,0.554986,0.40625
+2,development,lower,True,area,0.653779,0.359375
+3,development,lower,True,area,0.70403,0.375
+4,development,lower,True,area,0.563318,0.34375
+5,development,lower,True,area,0.593039,0.984375
+6,development,lower,True,area,0.67997,0.28125
+7,development,lower,True,area,0.638209,0.015625
+8,development,lower,True,area,0.600326,0.03125
+9,development,lower,True,area,0.339059,0.28125
+10,development,lower,True,area,0.545696,0.3125
+11,development,lower,True,area,0.321862,0.984375
+12,development,lower,True,wave order,-0.15215,0.359375
+13,development,lower,True,area,0.442474,0.34375
+14,development,lower,True,wave order,0.074735,0.375
+15,development,lower,True,area,0.457787,0.328125
+16,test,lower,True,wave order,-0.205542,0.359375
+18,test,lower,True,area,0.394881,0.34375
+19,test,lower,True,area,0.676712,0.359375
+20,test,lower,True,area,0.371285,0.359375
+21,test,lower,True,area,0.327806,0.328125
+22,test,lower,True,area,0.419703,0.296875
+23,test,lower,True,area,0.85192,0.34375
+26,development,lower,True,area,0.645989,0.25
+27,test,lower,True,area,0.850077,0.25
+28,test,lower,True,area,0.926788,0.265625
+29,test,upper,False,area (peaks coincide),-0.130902,0.953125
+30,development,upper,False,area (peaks coincide),-0.098073,0.96875
+31,test,lower,True,wave order,0.078881,0.3125
+32,test,lower,True,area,0.393463,0.296875
+33,test,lower,True,wave order,0.224611,0.296875
+34,test,lower,True,wave order,-0.12909,0.296875
+35,test,lower,True,area,0.842593,0.28125
+37,test,lower,True,area,0.684718,0.3125
+38,development,lower,True,area,0.392923,0.3125
+39,test,lower,True,wave order,0.20692,0.328125
+40,test,lower,True,wave order,0.057052,0.34375
+41,test,lower,True,area,0.802364,0.328125
+43,test,lower,True,area,0.63583,0.34375
+46,test,lower,True,area,0.405508,0.265625
+47,test,lower,True,area,0.427526,0.34375
+48,test,lower,True,area,0.849855,0.34375
+49,development,lower,True,wave order,0.229783,0.34375
+50,test,lower,True,wave order,-0.056104,0.34375

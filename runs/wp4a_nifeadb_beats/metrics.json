@@ -1,0 +1,26 @@
+{
+  "segment_s": 60.0,
+  "n_segments": 296,
+  "by_label": {
+    "arrhythmia": {
+      "n_records": 12,
+      "n_segments": 156,
+      "usable_segments": 148,
+      "usable_share_per_record_median": 1.0,
+      "usable_share_per_record_min": 0.5,
+      "records_with_no_usable_segment": [],
+      "score_median": 0.40443861132059744
+    },
+    "normal": {
+      "n_records": 14,
+      "n_segments": 140,
+      "usable_segments": 140,
+      "usable_share_per_record_median": 1.0,
+      "usable_share_per_record_min": 1.0,
+      "records_with_no_usable_segment": [],
+      "score_median": 0.6351132338741182
+    }
+  },
+  "fetal_source_sampling_hz": 1000,
+  "note": "The usable share is reported by label because an extractor tuned for regular rhythms may fail more often on irregular ones."
+}

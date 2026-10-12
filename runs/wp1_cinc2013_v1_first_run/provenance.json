@@ -1,0 +1,75 @@
+{
+  "run": "wp1_cinc2013_v1_first_run",
+  "description": "Fetal QRS detection on CinC 2013 set A: frozen pipeline and four ablations",
+  "created_utc": "2026-10-11T15:40:56+00:00",
+  "script": "scripts/run_wp1_cinc2013.py",
+  "code_sha256": "e537ef4b069bc1739fce948bdd3c3f2cefc2a00cc38912822fd7afa9c0f49778",
+  "git_commit": "0eb55fa3713f831f8aad9d8da27e59ab24f7498d",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "frozen": {
+      "n_components": 3,
+      "max_sources": 8,
+      "n_tracked": 3,
+      "smoothness": 4.0,
+      "min_score": 0.2,
+      "seed": 0
+    },
+    "configs": {
+      "full": {
+        "cancel": true,
+        "separate": true,
+        "track": true
+      },
+      "no_tracking": {
+        "cancel": true,
+        "separate": true,
+        "track": false
+      },
+      "no_ica": {
+        "cancel": true,
+        "separate": false,
+        "track": true
+      },
+      "no_cancellation": {
+        "cancel": false,
+        "separate": true,
+        "track": true
+      },
+      "channel_only": {
+        "cancel": false,
+        "separate": false,
+        "track": false
+      }
+    },
+    "tolerance_ms": 50.0,
+    "split_file": "splits/cinc2013.json"
+  },
+  "data": {
+    "cinc2013_set_a": {
+      "n_files": 225,
+      "total_bytes": 36034682,
+      "manifest_sha256": "612b817290049328f3017e134d16ebbad573d1dbeb0fe31ea6f03889156b7783"
+    }
+  },
+  "n_real": 75,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "scripts/run_wp1_cinc2013.py"
+  ],
+  "frozen_copy_note": "Unchanged copy of the first CinC 2013 run of 11 Oct 2026, made before the maternal phase-lock guard was added to the extractor. The full pipeline's numbers are identical in the later run."
+}

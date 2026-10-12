@@ -1,0 +1,103 @@
+{
+  "run": "wp3_trust_check",
+  "description": "ECG-Doppler trust check on the 60 NInFEA recordings: agreement of real pairs and detection of built mismatches",
+  "created_utc": "2026-10-11T18:10:17+00:00",
+  "script": "scripts/run_wp3_trust_check.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "0eb55fa3713f831f8aad9d8da27e59ab24f7498d",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "ecg": {
+      "n_components": 3,
+      "max_sources": 8,
+      "n_tracked": 3,
+      "smoothness": 4.0,
+      "min_score": 0.2,
+      "seed": 0
+    },
+    "cycles": {
+      "click_width": 13,
+      "click_relative": 0.25,
+      "spike_width": 11,
+      "smooth": 15,
+      "floor_s": 0.6,
+      "track_sigma": 4.0,
+      "smoothness": 4.0,
+      "edge_sigma": 1.5,
+      "edge_fraction": 0.4,
+      "click_before": 6,
+      "click_after": 14,
+      "click_accept": 0.3,
+      "use_click_start": true,
+      "use_click_removal": true,
+      "use_floor": true,
+      "use_tracker": true
+    },
+    "rule": {
+      "tau_ms": 10.0,
+      "min_locked_share": 0.5,
+      "max_abs_drift_ms": 2.5,
+      "delay_range_ms": [
+        130.0,
+        275.0
+      ],
+      "min_pairs": 8
+    },
+    "shifts_s": [
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.3,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "drop_shares": [
+      0.1,
+      0.2,
+      0.3,
+      0.5
+    ],
+    "jitter_ms": [
+      2.0,
+      5.0,
+      10.0,
+      20.0
+    ],
+    "repeats": 5,
+    "min_common_s": 8.0,
+    "split_file": "splits/ninfea_dev_test.json"
+  },
+  "data": {
+    "ninfea_ecg": {
+      "n_files": 120,
+      "total_bytes": 510675335,
+      "manifest_sha256": "0fce81661ac675b573dd090f7659d722f105831be9fce180a4b131d156ca02c8"
+    },
+    "ninfea_strips": {
+      "n_files": 60,
+      "total_bytes": 562487132,
+      "manifest_sha256": "873102dfae84ea72eeddacc3189264150dce7c75b31e5dd495879ccc2420a05e"
+    }
+  },
+  "n_real": 60,
+  "n_synthetic": 2304,
+  "synthetic": true,
+  "synthetic_kind": "real beat series altered by a stated rule: time shift, dropped beats or timing jitter (files perturbations.csv); maternal and swap cases are unaltered real series",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "C:\\Finalyearproject\\scripts\\run_wp3_trust_check.py"
+  ]
+}

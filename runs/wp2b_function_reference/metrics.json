@@ -1,0 +1,332 @@
+{
+  "n_recordings": 60,
+  "n_women": 39,
+  "usable_recordings": 60,
+  "usable_women": 39,
+  "not_usable": [],
+  "ejection_side": {
+    "upper": 28,
+    "lower": 32
+  },
+  "values": {
+    "cycle_length_ms": {
+      "n_readable": 60,
+      "share_readable": 1.0,
+      "median": 428.82984237198895,
+      "q25": 410.3375694468567,
+      "q75": 444.11678403755866,
+      "min": 382.9492104139991,
+      "max": 806.5727699530516
+    },
+    "ejection_half_width_ms": {
+      "n_readable": 60,
+      "share_readable": 1.0,
+      "median": 138.38030034630373,
+      "q25": 122.24349369619651,
+      "q75": 163.14481009243266,
+      "min": 97.37814697807957,
+      "max": 340.77126407105425
+    },
+    "a_to_v_peak_ms": {
+      "n_readable": 60,
+      "share_readable": 1.0,
+      "median": 134.9258151497368,
+      "q25": 120.54185464348592,
+      "q75": 145.89779023405137,
+      "min": 33.70234212652967,
+      "max": 586.0255281690141
+    },
+    "v_peak_to_closure_ms": {
+      "n_readable": 60,
+      "share_readable": 1.0,
+      "median": 124.13820078675175,
+      "q25": 115.81549845950704,
+      "q75": 130.6161076703275,
+      "min": 92.34344334449318,
+      "max": 153.3733651911469
+    },
+    "closure_to_a_peak_ms": {
+      "n_readable": 60,
+      "share_readable": 1.0,
+      "median": 164.02812344318315,
+      "q25": 154.03689809040398,
+      "q75": 181.75751892487312,
+      "min": 69.31484741784038,
+      "max": 298.1518669307512
+    },
+    "a_half_width_ms": {
+      "n_readable": 58,
+      "share_readable": 0.9666666666666667,
+      "median": 116.50035140423964,
+      "q25": 73.18419734531356,
+      "q75": 154.67011500031674,
+      "min": 52.487233222614094,
+      "max": 298.33511196856773
+    },
+    "ea_ratio": {
+      "n_readable": 34,
+      "share_readable": 0.5666666666666667,
+      "median": 0.7156201119244741,
+      "q25": 0.6634561100522545,
+      "q75": 0.763550515595125,
+      "min": 0.5063673574058757,
+      "max": 0.9681851679529926
+    },
+    "e_to_a_ms": {
+      "n_readable": 34,
+      "share_readable": 0.5666666666666667,
+      "median": 93.03048533501736,
+      "q25": 87.37886133360686,
+      "q75": 105.04908905408554,
+      "min": 76.71838321596245,
+      "max": 136.63694750741288
+    }
+  },
+  "repeatability": {
+    "cycle_length_ms": {
+      "split_half_n": 57,
+      "split_half_abs_diff_median": 6.420878210439184,
+      "split_half_sd_of_one_half": 7.246463247072091,
+      "women_with_repeats": 19,
+      "icc": 0.7973796651236712,
+      "icc_ci": [
+        0.5665805122938459,
+        0.9165978564966819
+      ],
+      "within_woman_sd": 9.178880379404783
+    },
+    "ejection_half_width_ms": {
+      "split_half_n": 57,
+      "split_half_abs_diff_median": 7.2422530619986105,
+      "split_half_sd_of_one_half": 30.429846746041303,
+      "women_with_repeats": 19,
+      "icc": 0.2852299889534838,
+      "icc_ci": [
+        -0.26753573822719956,
+        0.8810730884822499
+      ],
+      "within_woman_sd": 47.506920402025344
+    },
+    "a_to_v_peak_ms": {
+      "split_half_n": 57,
+      "split_half_abs_diff_median": 3.9586397564719675,
+      "split_half_sd_of_one_half": 14.800494162973758,
+      "women_with_repeats": 19,
+      "icc": 0.16637637993770985,
+      "icc_ci": [
+        -0.242532670291215,
+        0.8558497441777303
+      ],
+      "within_woman_sd": 21.00271290354795
+    },
+    "v_peak_to_closure_ms": {
+      "split_half_n": 57,
+      "split_half_abs_diff_median": 5.3023217429577585,
+      "split_half_sd_of_one_half": 9.288444140967059,
+      "women_with_repeats": 19,
+      "icc": 0.5198880128763022,
+      "icc_ci": [
+        0.2286988637116162,
+        0.7446036772659391
+      ],
+      "within_woman_sd": 9.095127880470015
+    },
+    "closure_to_a_peak_ms": {
+      "split_half_n": 57,
+      "split_half_abs_diff_median": 8.286904683061806,
+      "split_half_sd_of_one_half": 18.355784792361952,
+      "women_with_repeats": 19,
+      "icc": -0.025991228362783825,
+      "icc_ci": [
+        -0.552356238450146,
+        0.7634819487527501
+      ],
+      "within_woman_sd": 24.123635642175824
+    },
+    "a_half_width_ms": {
+      "split_half_n": 55,
+      "split_half_abs_diff_median": 9.35685252387259,
+      "split_half_sd_of_one_half": 33.753384101562055,
+      "women_with_repeats": 19,
+      "icc": 0.4849007646103458,
+      "icc_ci": [
+        0.09554481253217953,
+        0.8326118305259217
+      ],
+      "within_woman_sd": 34.16412983566874
+    },
+    "ea_ratio": {
+      "split_half_n": 26,
+      "split_half_abs_diff_median": 0.050456726493197546,
+      "split_half_sd_of_one_half": 0.051118825544181734,
+      "women_with_repeats": 8,
+      "icc": 0.7473201991814878,
+      "icc_ci": [
+        0.24227203471482642,
+        0.8849238154168138
+      ],
+      "within_woman_sd": 0.04286611778094573
+    },
+    "e_to_a_ms": {
+      "split_half_n": 26,
+      "split_half_abs_diff_median": 8.965112767359201,
+      "split_half_sd_of_one_half": 8.177416677233817,
+      "women_with_repeats": 8,
+      "icc": 0.006620954590539638,
+      "icc_ci": [
+        -0.597974142217185,
+        0.8670336537087037
+      ],
+      "within_woman_sd": 15.995684806328487
+    }
+  },
+  "reference_lines_all_usable": {
+    "cycle_length_ms": {
+      "covariate": "gestation_days",
+      "slope": 0.06392329640099872,
+      "intercept": 420.0841794315043,
+      "sd": 54.51739240929777,
+      "n": 60
+    },
+    "a_to_v_peak_ms": {
+      "covariate": "cycle_length_ms",
+      "slope": 1.0124067125058531,
+      "intercept": -297.60138823704773,
+      "sd": 32.52551184095556,
+      "n": 60
+    },
+    "v_peak_to_closure_ms": {
+      "covariate": "cycle_length_ms",
+      "slope": 0.10986891755164593,
+      "intercept": 76.20740625318295,
+      "sd": 12.454959854112087,
+      "n": 60
+    },
+    "ejection_half_width_ms": {
+      "covariate": "cycle_length_ms",
+      "slope": -0.057424052768184825,
+      "intercept": 183.51011719738213,
+      "sd": 57.24336761682148,
+      "n": 60
+    }
+  },
+  "healthy_recordings_flagged": {
+    "0.05": {
+      "recordings": 60,
+      "recordings_flagged": 2,
+      "share": 0.03333333333333333,
+      "share_ci_by_woman": [
+        0.0,
+        0.08771929824561403
+      ],
+      "women": 39,
+      "women_with_a_flagged_recording": 2,
+      "women_share_ci": [
+        0.006271972095690403,
+        0.17324478137360572
+      ]
+    },
+    "0.1": {
+      "recordings": 60,
+      "recordings_flagged": 5,
+      "share": 0.08333333333333333,
+      "share_ci_by_woman": [
+        0.017543859649122806,
+        0.15254237288135594
+      ],
+      "women": 39,
+      "women_with_a_flagged_recording": 5,
+      "women_share_ci": [
+        0.04296834300178915,
+        0.2742994104447158
+      ]
+    },
+    "0.2": {
+      "recordings": 60,
+      "recordings_flagged": 12,
+      "share": 0.2,
+      "share_ci_by_woman": [
+        0.1,
+        0.3
+      ],
+      "women": 39,
+      "women_with_a_flagged_recording": 10,
+      "women_share_ci": [
+        0.13037679923558726,
+        0.42127388437856983
+      ]
+    }
+  },
+  "healthy_recordings_flagged_trust_check_passed_only": {
+    "0.05": {
+      "recordings": 48,
+      "flagged": 2
+    },
+    "0.1": {
+      "recordings": 48,
+      "flagged": 4
+    },
+    "0.2": {
+      "recordings": 48,
+      "flagged": 9
+    }
+  },
+  "smallest_p_value_possible": 0.017241379310344827,
+  "detectable_shift": {
+    "a_to_v_peak_ms": {
+      "longer_alpha_0.05": {
+        "smallest_shift_ms_for_50pct": null,
+        "smallest_shift_ms_for_80pct": null
+      },
+      "shorter_alpha_0.05": {
+        "smallest_shift_ms_for_50pct": null,
+        "smallest_shift_ms_for_80pct": null
+      },
+      "longer_alpha_0.1": {
+        "smallest_shift_ms_for_50pct": 90,
+        "smallest_shift_ms_for_80pct": null
+      },
+      "shorter_alpha_0.1": {
+        "smallest_shift_ms_for_50pct": 95,
+        "smallest_shift_ms_for_80pct": 120
+      }
+    },
+    "v_peak_to_closure_ms": {
+      "longer_alpha_0.05": {
+        "smallest_shift_ms_for_50pct": 55,
+        "smallest_shift_ms_for_80pct": 65
+      },
+      "shorter_alpha_0.05": {
+        "smallest_shift_ms_for_50pct": 55,
+        "smallest_shift_ms_for_80pct": 65
+      },
+      "longer_alpha_0.1": {
+        "smallest_shift_ms_for_50pct": 35,
+        "smallest_shift_ms_for_80pct": 45
+      },
+      "shorter_alpha_0.1": {
+        "smallest_shift_ms_for_50pct": 35,
+        "smallest_shift_ms_for_80pct": 45
+      }
+    },
+    "ejection_half_width_ms": {
+      "longer_alpha_0.05": {
+        "smallest_shift_ms_for_50pct": null,
+        "smallest_shift_ms_for_80pct": null
+      },
+      "shorter_alpha_0.05": {
+        "smallest_shift_ms_for_50pct": null,
+        "smallest_shift_ms_for_80pct": null
+      },
+      "longer_alpha_0.1": {
+        "smallest_shift_ms_for_50pct": null,
+        "smallest_shift_ms_for_80pct": null
+      },
+      "shorter_alpha_0.1": {
+        "smallest_shift_ms_for_50pct": null,
+        "smallest_shift_ms_for_80pct": null
+      }
+    }
+  },
+  "statement": "All fetuses are healthy. The numbers describe false alarms and repeatability only; no sensitivity is measured."
+}

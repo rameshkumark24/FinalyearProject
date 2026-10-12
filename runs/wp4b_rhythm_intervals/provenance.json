@@ -1,0 +1,77 @@
+{
+  "run": "wp4b_rhythm_intervals",
+  "description": "Rhythm expert on beat-interval features, NIFEADB, leave-one-subject-out, with controls and the leakage comparison",
+  "created_utc": "2026-10-11T18:17:58+00:00",
+  "script": "scripts/run_wp4b_rhythm_intervals.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "0eb55fa3713f831f8aad9d8da27e59ab24f7498d",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "source_run": "wp4a_nifeadb_beats",
+    "source_code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+    "segment_features": [
+      "hr_bpm",
+      "rr_mad_rel",
+      "succ_rel",
+      "outlier_share",
+      "short_long_share",
+      "long_share",
+      "tracked_raw_gap"
+    ],
+    "record_features": [
+      "hr_bpm_median",
+      "rr_mad_rel_median",
+      "succ_rel_median",
+      "outlier_share_median",
+      "short_long_share_median",
+      "long_share_median",
+      "tracked_raw_gap_median",
+      "outlier_share_p90",
+      "short_long_share_p90"
+    ],
+    "quality_features": [
+      "usable_share",
+      "score_median",
+      "template_corr_median"
+    ],
+    "logistic": "median imputation, standardisation, L2 logistic regression, C=1",
+    "forest": "300 trees, depth 3, at least 2 per leaf",
+    "threshold": 0.5,
+    "permutations": {
+      "logistic": 500,
+      "forest": 50,
+      "single_index": 10000
+    }
+  },
+  "data": {
+    "nifeadb": {
+      "n_files": 52,
+      "total_bytes": 186294562,
+      "manifest_sha256": "6171bc17ae2db8ffb7f9fc42ecd24e7ff9288edf2c7f942105d9a032c4a6a19b"
+    },
+    "beats": {
+      "n_files": 2,
+      "total_bytes": 2053832,
+      "manifest_sha256": "a931135cecbbb020e9a7b777aa91348bfcae9c4ff79463edca3c760262597f85"
+    }
+  },
+  "n_real": 26,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "C:\\Finalyearproject\\scripts\\run_wp4b_rhythm_intervals.py"
+  ]
+}

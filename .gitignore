@@ -42,3 +42,14 @@ Thumbs.db
 logs/
 scratch/
 temp/
+
+# Hand-added datasets (echo images carry patient identifiers) - never commit
+fetaldata/
+# Downloaded model weights and caches
+models_cache/
+# Large intermediate arrays produced by runs (summaries and per-subject CSV/JSON stay in git)
+runs/**/*.npy
+runs/**/*.npz
+runs/**/*.pkl
+# Test and tool caches
+.pytest_cache/

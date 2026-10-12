@@ -1,0 +1,13 @@
+Measure,Direction and alarm level,Shift flagged in half of the recordings (ms),Shift flagged in 80% (ms)
+a_to_v_peak_ms,longer alpha 0.05,not within the range tried,not within the range tried
+a_to_v_peak_ms,shorter alpha 0.05,not within the range tried,not within the range tried
+a_to_v_peak_ms,longer alpha 0.1,90,not within the range tried
+a_to_v_peak_ms,shorter alpha 0.1,95,120
+v_peak_to_closure_ms,longer alpha 0.05,55,65
+v_peak_to_closure_ms,shorter alpha 0.05,55,65
+v_peak_to_closure_ms,longer alpha 0.1,35,45
+v_peak_to_closure_ms,shorter alpha 0.1,35,45
+ejection_half_width_ms,longer alpha 0.05,not within the range tried,not within the range tried
+ejection_half_width_ms,shorter alpha 0.05,not within the range tried,not within the range tried
+ejection_half_width_ms,longer alpha 0.1,not within the range tried,not within the range tried
+ejection_half_width_ms,shorter alpha 0.1,not within the range tried,not within the range tried
