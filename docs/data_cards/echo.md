@@ -26,7 +26,7 @@ Only the project owner, with the guide's name, can send the forms. Until access 
 | Linked paper | none on the record | figshare API record |
 | Ethics statement | none in the record description; to be looked for inside the archive | record description |
 
-**Status: not downloaded.** figshare refused scripted downloads (HTTP 403) on 12 Oct 2026. The file has to be downloaded in a browser and placed at `data/delta/DELTA_Dataset.zip`. Nothing in this project has read it, and no claim about its content beyond the record description is made here. Before any use: verify the MD5, read the archive's own documentation, check the images for remaining identifiers, and run the shortcut audit first.
+**Status: not downloaded.** figshare refused scripted downloads (HTTP 403) on 12 Oct 2026. Later the same day figshare answered 403 to every page from this network, in the project owner's own browser too; the likely cause is the scripted attempts made earlier that day from the same address. No further scripted request is made to figshare. The file has to be downloaded in a normal browser, once figshare answers again or from another network, and placed at `data/delta/DELTA_Dataset.zip`. Nothing in this project has read it, and no claim about its content beyond the record description is made here. Before any use: verify the MD5, read the archive's own documentation, check the images for remaining identifiers, and run the shortcut audit first.
 
 ### What is on disk
 
@@ -53,3 +53,4 @@ Rules for this folder:
 - `sfr/echo/deidentify.py`: keeps the scan, blanks text and overlays; `overlay_only()` produces the complement for the shortcut audit.
 - `sfr/echo/fetalclip.py`: loads the published FetalCLIP weights after a SHA-256 check (CC BY-NC 4.0, research use).
 - Shortcut audit to run first: train the same classifier on (a) de-identified scans and (b) overlay-only images. If (b) predicts the label, the label leaks through calipers and text.
+- `scripts/run_wp5_structure.py` (added 12 Oct 2026): the whole evaluation for any labelled dataset given as an index file (`case, label, subtype, plane, path`). It runs the shortcut audit (overlay-only images, and six numbers that carry no anatomy), the FetalCLIP linear probe with case-level folds, the same network with random weights as control, a split-conformal alarm at the level of the decision rule, and results by plane and by defect subtype. Its statistics are tested on synthetic feature vectors in `tests/test_structure_probe.py`; **it has not been run on any labelled image**. What is still to write when a dataset arrives is the small step that turns the dataset's own folder layout into the index file.
