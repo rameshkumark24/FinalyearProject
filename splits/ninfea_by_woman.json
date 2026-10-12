@@ -1,0 +1,341 @@
+{
+  "dataset": "NInFEA v1.0.0 (PhysioNet, doi:10.13026/c4n5-3b04)",
+  "unit": "woman",
+  "source": "Grouping of the 60 recordings into 39 women and the gestational age (weeks+days) are from Sulas et al., Scientific Data 2021, tables 2 and 3.",
+  "note": "All fetuses are reported healthy. Every analysis that learns or sets anything keeps all recordings of a woman on the same side.",
+  "women": [
+    {
+      "woman": "W01",
+      "records": [
+        1,
+        2,
+        3
+      ],
+      "gestation": "27",
+      "gestation_days": 189
+    },
+    {
+      "woman": "W02",
+      "records": [
+        4,
+        5
+      ],
+      "gestation": "25",
+      "gestation_days": 175
+    },
+    {
+      "woman": "W03",
+      "records": [
+        6,
+        7
+      ],
+      "gestation": "21+1",
+      "gestation_days": 148
+    },
+    {
+      "woman": "W04",
+      "records": [
+        8
+      ],
+      "gestation": "22+4",
+      "gestation_days": 158
+    },
+    {
+      "woman": "W05",
+      "records": [
+        9
+      ],
+      "gestation": "24",
+      "gestation_days": 168
+    },
+    {
+      "woman": "W06",
+      "records": [
+        10,
+        11
+      ],
+      "gestation": "24+4",
+      "gestation_days": 172
+    },
+    {
+      "woman": "W07",
+      "records": [
+        12
+      ],
+      "gestation": "25+4",
+      "gestation_days": 179
+    },
+    {
+      "woman": "W08",
+      "records": [
+        13,
+        14
+      ],
+      "gestation": "21+5",
+      "gestation_days": 152
+    },
+    {
+      "woman": "W09",
+      "records": [
+        15,
+        16
+      ],
+      "gestation": "25+2",
+      "gestation_days": 177
+    },
+    {
+      "woman": "W10",
+      "records": [
+        17
+      ],
+      "gestation": "24",
+      "gestation_days": 168
+    },
+    {
+      "woman": "W11",
+      "records": [
+        18
+      ],
+      "gestation": "26+6",
+      "gestation_days": 188
+    },
+    {
+      "woman": "W12",
+      "records": [
+        19
+      ],
+      "gestation": "22+4",
+      "gestation_days": 158
+    },
+    {
+      "woman": "W13",
+      "records": [
+        20,
+        21
+      ],
+      "gestation": "26+2",
+      "gestation_days": 184
+    },
+    {
+      "woman": "W14",
+      "records": [
+        22
+      ],
+      "gestation": "25+1",
+      "gestation_days": 176
+    },
+    {
+      "woman": "W15",
+      "records": [
+        23
+      ],
+      "gestation": "24+1",
+      "gestation_days": 169
+    },
+    {
+      "woman": "W16",
+      "records": [
+        24
+      ],
+      "gestation": "26+6",
+      "gestation_days": 188
+    },
+    {
+      "woman": "W17",
+      "records": [
+        25
+      ],
+      "gestation": "26+3",
+      "gestation_days": 185
+    },
+    {
+      "woman": "W18",
+      "records": [
+        26
+      ],
+      "gestation": "24+1",
+      "gestation_days": 169
+    },
+    {
+      "woman": "W19",
+      "records": [
+        27
+      ],
+      "gestation": "27+1",
+      "gestation_days": 190
+    },
+    {
+      "woman": "W20",
+      "records": [
+        28,
+        29
+      ],
+      "gestation": "26+6",
+      "gestation_days": 188
+    },
+    {
+      "woman": "W21",
+      "records": [
+        30
+      ],
+      "gestation": "22+3",
+      "gestation_days": 157
+    },
+    {
+      "woman": "W22",
+      "records": [
+        31,
+        32,
+        33
+      ],
+      "gestation": "27+5",
+      "gestation_days": 194
+    },
+    {
+      "woman": "W23",
+      "records": [
+        34
+      ],
+      "gestation": "25",
+      "gestation_days": 175
+    },
+    {
+      "woman": "W24",
+      "records": [
+        35,
+        36
+      ],
+      "gestation": "27",
+      "gestation_days": 189
+    },
+    {
+      "woman": "W25",
+      "records": [
+        37,
+        38
+      ],
+      "gestation": "25+1",
+      "gestation_days": 176
+    },
+    {
+      "woman": "W26",
+      "records": [
+        39
+      ],
+      "gestation": "24",
+      "gestation_days": 168
+    },
+    {
+      "woman": "W27",
+      "records": [
+        40,
+        41
+      ],
+      "gestation": "21+3",
+      "gestation_days": 150
+    },
+    {
+      "woman": "W28",
+      "records": [
+        42
+      ],
+      "gestation": "24+6",
+      "gestation_days": 174
+    },
+    {
+      "woman": "W29",
+      "records": [
+        43,
+        44
+      ],
+      "gestation": "23+4",
+      "gestation_days": 165
+    },
+    {
+      "woman": "W30",
+      "records": [
+        45
+      ],
+      "gestation": "23",
+      "gestation_days": 161
+    },
+    {
+      "woman": "W31",
+      "records": [
+        46
+      ],
+      "gestation": "24+4",
+      "gestation_days": 172
+    },
+    {
+      "woman": "W32",
+      "records": [
+        47,
+        48
+      ],
+      "gestation": "21+1",
+      "gestation_days": 148
+    },
+    {
+      "woman": "W33",
+      "records": [
+        49,
+        50
+      ],
+      "gestation": "22",
+      "gestation_days": 154
+    },
+    {
+      "woman": "W34",
+      "records": [
+        51,
+        52
+      ],
+      "gestation": "24+2",
+      "gestation_days": 170
+    },
+    {
+      "woman": "W35",
+      "records": [
+        53,
+        54
+      ],
+      "gestation": "21",
+      "gestation_days": 147
+    },
+    {
+      "woman": "W36",
+      "records": [
+        55,
+        56
+      ],
+      "gestation": "25",
+      "gestation_days": 175
+    },
+    {
+      "woman": "W37",
+      "records": [
+        57
+      ],
+      "gestation": "23+6",
+      "gestation_days": 167
+    },
+    {
+      "woman": "W38",
+      "records": [
+        58
+      ],
+      "gestation": "23",
+      "gestation_days": 161
+    },
+    {
+      "woman": "W39",
+      "records": [
+        59,
+        60
+      ],
+      "gestation": "27+3",
+      "gestation_days": 192
+    }
+  ]
+}

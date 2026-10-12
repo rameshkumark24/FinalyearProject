@@ -1,0 +1,424 @@
+{
+  "checkpoint": {
+    "claimed_name": "ECGFounder single-lead",
+    "verified": true,
+    "sha256": "f863a38897fb49a27fec7e44008ea3c7bdbd29c77fa4a02ecbb8c56df4f37603",
+    "file": "1_lead_ECGFounder.pth",
+    "bytes": 369807481,
+    "source": "huggingface.co/PKUDigitalHealth/ECGFounder",
+    "licence": "MIT (model card)",
+    "n_parameters": 30807750
+  },
+  "arrhythmia_probe_nifeadb": {
+    "ecgfounder__fetal": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.9523809523809523,
+      "auroc_ci": [
+        0.8579881656804734,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 5.1523942016557364e-05,
+      "threshold": 0.5,
+      "tp": 10,
+      "fn": 2,
+      "tn": 12,
+      "fp": 2,
+      "sensitivity": 0.8333333333333334,
+      "sensitivity_ci": [
+        0.5158622513140327,
+        0.9791374745399076
+      ],
+      "specificity": 0.8571428571428571,
+      "specificity_ci": [
+        0.571870839090301,
+        0.9822054845168084
+      ],
+      "permutation_p": 0.0033222591362126247,
+      "n_permutations": 300,
+      "model": "ecgfounder",
+      "input": "fetal",
+      "windows_per_recording_median": 60,
+      "role": "fetal input"
+    },
+    "ecgfounder__fetal_stretch2": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8869047619047619,
+      "auroc_ci": [
+        0.7261904761904762,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 0.00045409877576215417,
+      "threshold": 0.5,
+      "tp": 10,
+      "fn": 2,
+      "tn": 12,
+      "fp": 2,
+      "sensitivity": 0.8333333333333334,
+      "sensitivity_ci": [
+        0.5158622513140327,
+        0.9791374745399076
+      ],
+      "specificity": 0.8571428571428571,
+      "specificity_ci": [
+        0.571870839090301,
+        0.9822054845168084
+      ],
+      "permutation_p": 0.006644518272425249,
+      "n_permutations": 300,
+      "model": "ecgfounder",
+      "input": "fetal_stretch2",
+      "windows_per_recording_median": 120,
+      "role": "fetal input"
+    },
+    "ecgfounder__abdominal_raw": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.6071428571428571,
+      "auroc_ci": [
+        0.3748511904761905,
+        0.8194444444444444
+      ],
+      "mann_whitney_p_one_sided": 0.1840327531527423,
+      "threshold": 0.5,
+      "tp": 9,
+      "fn": 3,
+      "tn": 7,
+      "fp": 7,
+      "sensitivity": 0.75,
+      "sensitivity_ci": [
+        0.4281415381218108,
+        0.9451393554720072
+      ],
+      "specificity": 0.5,
+      "specificity_ci": [
+        0.23036054144806234,
+        0.7696394585519376
+      ],
+      "permutation_p": 0.13953488372093023,
+      "n_permutations": 300,
+      "model": "ecgfounder",
+      "input": "abdominal_raw",
+      "windows_per_recording_median": 60,
+      "role": "negative control"
+    },
+    "ecgfounder__maternal_chest": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.7023809523809523,
+      "auroc_ci": [
+        0.4749671052631579,
+        0.8909090909090909
+      ],
+      "mann_whitney_p_one_sided": 0.04243937338776718,
+      "threshold": 0.5,
+      "tp": 8,
+      "fn": 4,
+      "tn": 9,
+      "fp": 5,
+      "sensitivity": 0.6666666666666666,
+      "sensitivity_ci": [
+        0.3488755064188155,
+        0.9007539088504167
+      ],
+      "specificity": 0.6428571428571429,
+      "specificity_ci": [
+        0.3513801106159917,
+        0.8724015701408403
+      ],
+      "permutation_p": 0.03322259136212625,
+      "n_permutations": 300,
+      "model": "ecgfounder",
+      "input": "maternal_chest",
+      "windows_per_recording_median": 60,
+      "role": "negative control"
+    },
+    "random_init__fetal": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.7440476190476191,
+      "auroc_ci": [
+        0.5333333333333333,
+        0.9113186813186809
+      ],
+      "mann_whitney_p_one_sided": 0.018621272297989672,
+      "threshold": 0.5,
+      "tp": 7,
+      "fn": 5,
+      "tn": 10,
+      "fp": 4,
+      "sensitivity": 0.5833333333333334,
+      "sensitivity_ci": [
+        0.2766696856821058,
+        0.8483477701915698
+      ],
+      "specificity": 0.7142857142857143,
+      "specificity_ci": [
+        0.41896474281633905,
+        0.9161106816928725
+      ],
+      "permutation_p": 0.03322259136212625,
+      "n_permutations": 300,
+      "model": "random_init",
+      "input": "fetal",
+      "windows_per_recording_median": 60,
+      "role": "fetal input"
+    },
+    "random_init__fetal_stretch2": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8809523809523809,
+      "auroc_ci": [
+        0.7249305555555555,
+        0.9881656804733728
+      ],
+      "mann_whitney_p_one_sided": 0.000545222604436435,
+      "threshold": 0.5,
+      "tp": 7,
+      "fn": 5,
+      "tn": 12,
+      "fp": 2,
+      "sensitivity": 0.5833333333333334,
+      "sensitivity_ci": [
+        0.2766696856821058,
+        0.8483477701915698
+      ],
+      "specificity": 0.8571428571428571,
+      "specificity_ci": [
+        0.571870839090301,
+        0.9822054845168084
+      ],
+      "permutation_p": 0.0033222591362126247,
+      "n_permutations": 300,
+      "model": "random_init",
+      "input": "fetal_stretch2",
+      "windows_per_recording_median": 120,
+      "role": "fetal input"
+    },
+    "random_init__abdominal_raw": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.5178571428571429,
+      "auroc_ci": [
+        0.2777777777777778,
+        0.758174019607843
+      ],
+      "mann_whitney_p_one_sided": 0.4488425729130864,
+      "threshold": 0.5,
+      "tp": 6,
+      "fn": 6,
+      "tn": 8,
+      "fp": 6,
+      "sensitivity": 0.5,
+      "sensitivity_ci": [
+        0.21094463823929668,
+        0.7890553617607033
+      ],
+      "specificity": 0.5714285714285714,
+      "specificity_ci": [
+        0.28860940003830743,
+        0.8233889100178821
+      ],
+      "permutation_p": 0.31893687707641194,
+      "n_permutations": 300,
+      "model": "random_init",
+      "input": "abdominal_raw",
+      "windows_per_recording_median": 60,
+      "role": "negative control"
+    },
+    "random_init__maternal_chest": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.4583333333333333,
+      "auroc_ci": [
+        0.2152529761904762,
+        0.7124203431372549
+      ],
+      "mann_whitney_p_one_sided": 0.6501621871826475,
+      "threshold": 0.5,
+      "tp": 6,
+      "fn": 6,
+      "tn": 8,
+      "fp": 6,
+      "sensitivity": 0.5,
+      "sensitivity_ci": [
+        0.21094463823929668,
+        0.7890553617607033
+      ],
+      "specificity": 0.5714285714285714,
+      "specificity_ci": [
+        0.28860940003830743,
+        0.8233889100178821
+      ],
+      "permutation_p": 0.4684385382059801,
+      "n_permutations": 300,
+      "model": "random_init",
+      "input": "maternal_chest",
+      "windows_per_recording_median": 60,
+      "role": "negative control"
+    }
+  },
+  "fetal_heart_rate_probe_cinc2013": {
+    "ecgfounder__fetal": {
+      "n": 75,
+      "mae_bpm": 4.120006816570685,
+      "mae_ci": [
+        3.1345907981438144,
+        5.2392899425939445
+      ],
+      "mae_of_mean_predictor_bpm": 10.057395030788385,
+      "r2": 0.7527246579731444,
+      "spearman": 0.8756429321792747,
+      "spearman_p": 8.916061946358673e-25,
+      "target_sd_bpm": 12.54959156833135
+    },
+    "ecgfounder__fetal_stretch2": {
+      "n": 75,
+      "mae_bpm": 5.1196277103293735,
+      "mae_ci": [
+        4.008599302638284,
+        6.407247277448735
+      ],
+      "mae_of_mean_predictor_bpm": 10.057395030788385,
+      "r2": 0.6536268924375257,
+      "spearman": 0.8241956197613649,
+      "spearman_p": 1.053799395219954e-19,
+      "target_sd_bpm": 12.54959156833135
+    },
+    "random_init__fetal": {
+      "n": 75,
+      "mae_bpm": 5.19299000673916,
+      "mae_ci": [
+        3.986366729730599,
+        6.508250524614704
+      ],
+      "mae_of_mean_predictor_bpm": 10.057395030788385,
+      "r2": 0.6185564913165125,
+      "spearman": 0.8263582280267195,
+      "spearman_p": 6.986173682716651e-20,
+      "target_sd_bpm": 12.54959156833135
+    },
+    "random_init__fetal_stretch2": {
+      "n": 75,
+      "mae_bpm": 4.191729555316036,
+      "mae_ci": [
+        3.2027046253660507,
+        5.299640051169957
+      ],
+      "mae_of_mean_predictor_bpm": 10.057395030788385,
+      "r2": 0.7496242568007951,
+      "spearman": 0.8756287044933183,
+      "spearman_p": 8.951032689742957e-25,
+      "target_sd_bpm": 12.54959156833135
+    }
+  },
+  "maternal_heart_rate_probe_nifeadb_positive_control": {
+    "ecgfounder": {
+      "n": 26,
+      "mae_bpm": 6.3292458867911945,
+      "mae_ci": [
+        3.6453697823989266,
+        9.29128397090562
+      ],
+      "mae_of_mean_predictor_bpm": 11.208298404144873,
+      "r2": 0.5019435240503924,
+      "spearman": 0.7477339790448327,
+      "spearman_p": 1.1303559105490357e-05,
+      "target_sd_bpm": 13.530043189955713
+    },
+    "random_init": {
+      "n": 26,
+      "mae_bpm": 6.152649257229353,
+      "mae_ci": [
+        3.410328853849833,
+        9.771804910308916
+      ],
+      "mae_of_mean_predictor_bpm": 11.208298404144873,
+      "r2": 0.44001250915663526,
+      "spearman": 0.7533356581811295,
+      "spearman_p": 8.912788571343358e-06,
+      "target_sd_bpm": 13.530043189955713
+    }
+  },
+  "sampling_rate_check_added_after_first_run": {
+    "ecgfounder__fetal": {
+      "auroc_all": 0.9523809523809523,
+      "auroc_without_500hz_recordings": 0.9464285714285714,
+      "n_without": 22,
+      "mean_score_500hz_arrhythmia": 0.9267914802547255,
+      "mean_score_1khz_arrhythmia": 0.7400859937233002,
+      "mean_score_normal": 0.1150779267383256
+    },
+    "ecgfounder__fetal_stretch2": {
+      "auroc_all": 0.8869047619047619,
+      "auroc_without_500hz_recordings": 0.8482142857142857,
+      "n_without": 22,
+      "mean_score_500hz_arrhythmia": 0.9929277263887535,
+      "mean_score_1khz_arrhythmia": 0.746962190587981,
+      "mean_score_normal": 0.17589153808806396
+    },
+    "ecgfounder__abdominal_raw": {
+      "auroc_all": 0.6071428571428571,
+      "auroc_without_500hz_recordings": 0.5625,
+      "n_without": 22,
+      "mean_score_500hz_arrhythmia": 0.8398342707600401,
+      "mean_score_1khz_arrhythmia": 0.6179947280090934,
+      "mean_score_normal": 0.4942129006579154
+    },
+    "ecgfounder__maternal_chest": {
+      "auroc_all": 0.7023809523809523,
+      "auroc_without_500hz_recordings": 0.5982142857142857,
+      "n_without": 22,
+      "mean_score_500hz_arrhythmia": 0.8822474068930868,
+      "mean_score_1khz_arrhythmia": 0.5203950926831862,
+      "mean_score_normal": 0.4080918785488095
+    },
+    "random_init__fetal": {
+      "auroc_all": 0.7440476190476191,
+      "auroc_without_500hz_recordings": 0.6696428571428571,
+      "n_without": 22,
+      "mean_score_500hz_arrhythmia": 0.8667256572514055,
+      "mean_score_1khz_arrhythmia": 0.4567696633543302,
+      "mean_score_normal": 0.29536856175013504
+    },
+    "random_init__fetal_stretch2": {
+      "auroc_all": 0.8809523809523809,
+      "auroc_without_500hz_recordings": 0.9017857142857143,
+      "n_without": 22,
+      "mean_score_500hz_arrhythmia": 0.618716180759606,
+      "mean_score_1khz_arrhythmia": 0.7236523212162305,
+      "mean_score_normal": 0.20363433951181845
+    },
+    "random_init__abdominal_raw": {
+      "auroc_all": 0.5178571428571429,
+      "auroc_without_500hz_recordings": 0.5178571428571429,
+      "n_without": 22,
+      "mean_score_500hz_arrhythmia": 0.4921977311579779,
+      "mean_score_1khz_arrhythmia": 0.510557723657481,
+      "mean_score_normal": 0.48718420130621337
+    },
+    "random_init__maternal_chest": {
+      "auroc_all": 0.4583333333333333,
+      "auroc_without_500hz_recordings": 0.25892857142857145,
+      "n_without": 22,
+      "mean_score_500hz_arrhythmia": 0.8439929489654202,
+      "mean_score_1khz_arrhythmia": 0.2840116383299027,
+      "mean_score_normal": 0.4778121335670953
+    }
+  },
+  "gate_G4": {
+    "checkpoint_hash_matches_published_file": true,
+    "negative_control_rows_present": true,
+    "every_row_has_n_and_interval": true,
+    "passed": true
+  }
+}

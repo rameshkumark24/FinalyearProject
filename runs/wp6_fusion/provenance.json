@@ -1,0 +1,77 @@
+{
+  "run": "wp6_fusion",
+  "description": "Decision rule on the real paired NInFEA cohort, conformal alarms of the experts, and a rule comparison on virtual patients built from real held-out scores",
+  "created_utc": "2026-10-12T04:45:49+00:00",
+  "script": "scripts/run_wp6_fusion.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "0eb55fa3713f831f8aad9d8da27e59ab24f7498d",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "decision": {
+      "alpha": {
+        "structure": 0.05,
+        "function": 0.05,
+        "rhythm": 0.1
+      },
+      "prior": {
+        "structure": 0.009,
+        "function": 0.002,
+        "rhythm": 0.001
+      },
+      "get_test_prior_limit": 0.005
+    },
+    "rhythm_score": "oof_logistic_rhythm",
+    "source_runs": [
+      "wp4b_rhythm_intervals",
+      "wp2b_function_reference",
+      "wp3_trust_check"
+    ],
+    "couplings": [
+      "independent",
+      "tied",
+      "opposed"
+    ],
+    "target_false_referral_rates": [
+      0.1,
+      0.15
+    ],
+    "bootstrap": 500,
+    "priors_are_assumptions": "structure 0.009 from the literature on CHD prevalence; function 0.002 and rhythm 0.001 are assumptions"
+  },
+  "data": {
+    "rhythm": {
+      "n_files": 1,
+      "total_bytes": 4328,
+      "manifest_sha256": "740229f8399ea06521b0c4e4cf04b15f62fee10d2cbe6fc37fa10544a52a4dbf"
+    },
+    "function": {
+      "n_files": 1,
+      "total_bytes": 12523,
+      "manifest_sha256": "681b8ce1a685bbf8b2045a7e4ddad71309ded39bd9480b45d1170a196ba969fc"
+    },
+    "trust": {
+      "n_files": 2,
+      "total_bytes": 212144,
+      "manifest_sha256": "2ad48a0100118306268c53cb355bb4ddf7e70877d663e340da14ece9d8a1d5e3"
+    }
+  },
+  "n_real": 86,
+  "n_synthetic": 10800,
+  "synthetic": true,
+  "synthetic_kind": "virtual patients made by pairing real held-out scores of different people (part C only; coupling stated in every row). Parts A and B use real cases only.",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "C:\\Finalyearproject\\scripts\\run_wp6_fusion.py"
+  ]
+}

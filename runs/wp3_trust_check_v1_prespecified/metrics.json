@@ -1,0 +1,719 @@
+{
+  "rule": {
+    "tau_ms": 10.0,
+    "min_locked_share": 0.5,
+    "max_abs_drift_ms": 2.5,
+    "delay_range_ms": [
+      130.0,
+      275.0
+    ],
+    "min_pairs": 8
+  },
+  "by_split": {
+    "development": {
+      "n_recordings": 23,
+      "n_women": 13,
+      "trusted_recordings": 18,
+      "trusted_share": 0.782608695652174,
+      "trusted_share_ci": [
+        0.5629692737631855,
+        0.9253965923511963
+      ],
+      "women_with_a_trusted_recording": 11,
+      "not_trusted": [
+        {
+          "record": 22,
+          "reasons": "beats not locked; rates drift apart; delay outside the physiological range",
+          "locked_share": 0.12903225806451613,
+          "drift_ms": -79.8169014084502,
+          "ecg_quality": 0.3201756417896848
+        },
+        {
+          "record": 32,
+          "reasons": "beats not locked",
+          "locked_share": 0.4473684210526316,
+          "drift_ms": 1.9436619718308235,
+          "ecg_quality": 0.5405396511508541
+        },
+        {
+          "record": 33,
+          "reasons": "beats not locked; rates drift apart",
+          "locked_share": 0.3829787234042553,
+          "drift_ms": 8.140845070423453,
+          "ecg_quality": 0.5567951298385243
+        },
+        {
+          "record": 59,
+          "reasons": "beats not locked; rates drift apart",
+          "locked_share": 0.3333333333333333,
+          "drift_ms": -3.0281690140845363,
+          "ecg_quality": 0.3422486362884282
+        },
+        {
+          "record": 60,
+          "reasons": "rates drift apart",
+          "locked_share": 0.5324675324675324,
+          "drift_ms": -2.9859154929576803,
+          "ecg_quality": 0.354324955053895
+        }
+      ],
+      "locked_share_median": 0.7734375,
+      "locked_share_min": 0.12903225806451613,
+      "abs_diff_median_ms_median": 4.098591549296593,
+      "auroc_vs_maternal": {
+        "auroc": 0.998109640831758,
+        "ci": [
+          0.9750692520775623,
+          1.0
+        ],
+        "n_pos": 23,
+        "n_neg": 23
+      },
+      "auroc_vs_swap": {
+        "auroc": 0.9601298935594443,
+        "ci": [
+          0.9135814410245373,
+          0.9928191897554985
+        ],
+        "n_pos": 23,
+        "n_neg": 482
+      },
+      "maternal_flagged": {
+        "n": 23,
+        "flagged": 23,
+        "share": 1.0,
+        "ci": [
+          0.8518148710847756,
+          1.0
+        ]
+      },
+      "swap_flagged": {
+        "n": 482,
+        "flagged": 478,
+        "share": 0.991701244813278,
+        "by_rate_gap_bpm": {
+          "0-1": {
+            "n": 15,
+            "flagged": 11,
+            "share": 0.7333333333333333
+          },
+          "1-2": {
+            "n": 16,
+            "flagged": 16,
+            "share": 1.0
+          },
+          "2-4": {
+            "n": 58,
+            "flagged": 58,
+            "share": 1.0
+          },
+          "4-8": {
+            "n": 116,
+            "flagged": 116,
+            "share": 1.0
+          },
+          "8-more": {
+            "n": 277,
+            "flagged": 277,
+            "share": 1.0
+          }
+        }
+      },
+      "perturbations_from_trusted_pairs": {
+        "shift": {
+          "0.05": {
+            "n": 18,
+            "flagged_share": 0.2222222222222222,
+            "locked_share_median": 0.8563034188034189
+          },
+          "0.1": {
+            "n": 18,
+            "flagged_share": 0.8888888888888888,
+            "locked_share_median": 0.8563034188034189
+          },
+          "0.15": {
+            "n": 18,
+            "flagged_share": 1.0,
+            "locked_share_median": 0.8563034188034189
+          },
+          "0.2": {
+            "n": 18,
+            "flagged_share": 1.0,
+            "locked_share_median": 0.8568548387096775
+          },
+          "0.3": {
+            "n": 18,
+            "flagged_share": 0.9444444444444444,
+            "locked_share_median": 0.8568548387096775
+          },
+          "0.5": {
+            "n": 18,
+            "flagged_share": 0.5,
+            "locked_share_median": 0.8296112489660876
+          },
+          "1.0": {
+            "n": 18,
+            "flagged_share": 0.7777777777777778,
+            "locked_share_median": 0.8232758620689655
+          },
+          "2.0": {
+            "n": 18,
+            "flagged_share": 0.7222222222222222,
+            "locked_share_median": 0.7643622200584226
+          }
+        },
+        "drop": {
+          "0.1": {
+            "n": 90,
+            "flagged_share": 0.2777777777777778,
+            "locked_share_median": 0.6822463768115943
+          },
+          "0.2": {
+            "n": 90,
+            "flagged_share": 0.7222222222222222,
+            "locked_share_median": 0.5313725490196078
+          },
+          "0.3": {
+            "n": 90,
+            "flagged_share": 0.9666666666666667,
+            "locked_share_median": 0.3940648723257419
+          },
+          "0.5": {
+            "n": 90,
+            "flagged_share": 1.0,
+            "locked_share_median": 0.2216559891283246
+          }
+        },
+        "jitter": {
+          "2.0": {
+            "n": 90,
+            "flagged_share": 0.022222222222222223,
+            "locked_share_median": 0.8125
+          },
+          "5.0": {
+            "n": 90,
+            "flagged_share": 0.37777777777777777,
+            "locked_share_median": 0.6909090909090909
+          },
+          "10.0": {
+            "n": 90,
+            "flagged_share": 0.9888888888888889,
+            "locked_share_median": 0.43357843137254903
+          },
+          "20.0": {
+            "n": 90,
+            "flagged_share": 1.0,
+            "locked_share_median": 0.23818181818181816
+          }
+        }
+      },
+      "rate_recording_level": {
+        "all": {
+          "n": 23,
+          "bias": 0.6974000976756976,
+          "sd": 3.574926780913581,
+          "loa_low": -6.309456392914921,
+          "loa_high": 7.7042565882663165
+        },
+        "trusted_only": {
+          "n": 18,
+          "bias": 0.17257052096848233,
+          "sd": 0.4611004955287594,
+          "loa_low": -0.7311864502678861,
+          "loa_high": 1.0763274922048507
+        },
+        "by_woman": {
+          "n": 13,
+          "bias": 1.3594339400698787,
+          "sd": 4.284095338543076,
+          "loa_low": -7.037392923474551,
+          "loa_high": 9.756260803614309
+        },
+        "within_5bpm": 21,
+        "within_5bpm_share": 0.9130434782608695,
+        "abs_error_median_bpm": 0.34739254553437604
+      },
+      "beat_level_all_recordings": {
+        "n_pairs": 1485,
+        "abs_diff_median_ms": 3.507042253520609,
+        "share_within_5ms": 0.6175084175084176,
+        "share_within_10ms": 0.7696969696969697,
+        "share_within_20ms": 0.8161616161616162,
+        "diff_percentiles_ms": {
+          "2.5": -82.92535211267626,
+          "25": -4.028169014084426,
+          "50": -0.42253521126411897,
+          "75": 2.830985915494466,
+          "97.5": 66.93380281690042
+        },
+        "rate_limits_all_pairs": {
+          "n": 1485,
+          "bias": 0.9391534706257992,
+          "sd": 21.28878541693628,
+          "loa_low": -40.78686594656931,
+          "loa_high": 42.6651728878209
+        },
+        "share_plausible": 0.9771043771043771,
+        "rate_limits_plausible_pairs": {
+          "n": 1451,
+          "bias": 0.4128320234022763,
+          "sd": 9.637850672205314,
+          "loa_low": -18.477355294120137,
+          "loa_high": 19.303019340924692
+        },
+        "rate_diff_percentiles_plausible_bpm": {
+          "2.5": -15.82547633512625,
+          "50": 0.1372474266101733,
+          "97.5": 21.376301701476102
+        }
+      },
+      "beat_level_trusted_recordings": {
+        "n_pairs": 1241,
+        "abs_diff_median_ms": 2.9436619718303803,
+        "share_within_5ms": 0.6865431103948428,
+        "share_within_10ms": 0.8428686543110395,
+        "share_within_20ms": 0.8847703464947623,
+        "diff_percentiles_ms": {
+          "2.5": -51.50704225352109,
+          "25": -3.2112676056339495,
+          "50": -0.2535211267584714,
+          "75": 2.577464788721784,
+          "97.5": 37.661971830981855
+        },
+        "rate_limits_all_pairs": {
+          "n": 1241,
+          "bias": 0.6987294234882159,
+          "sd": 7.899523447008639,
+          "loa_low": -14.784336532648718,
+          "loa_high": 16.18179537962515
+        },
+        "share_plausible": 0.9854955680902499,
+        "rate_limits_plausible_pairs": {
+          "n": 1223,
+          "bias": 0.5401924769650989,
+          "sd": 5.979058909570387,
+          "loa_low": -11.17876298579286,
+          "loa_high": 12.259147939723059
+        },
+        "rate_diff_percentiles_plausible_bpm": {
+          "2.5": -10.192321581607576,
+          "50": 0.08027522935663,
+          "97.5": 13.517472287042198
+        }
+      },
+      "delay_r_to_closure_ms_trusted": {
+        "n": 18,
+        "median": 208.5316901408485,
+        "min": 156.95774647887316,
+        "max": 240.22535211267558
+      },
+      "cycle_start_ablation": {
+        "closure_click": {
+          "locked_share_median": 0.7734375,
+          "abs_diff_median_ms": 4.098591549296593
+        },
+        "wave_end": {
+          "locked_share_median": 0.5441176470588235,
+          "abs_diff_median_ms": 9.232394366196939
+        },
+        "recordings_where_click_is_better": 21,
+        "n": 23
+      },
+      "orientation": {
+        "known_n": 9,
+        "from_ecg_correct": 9,
+        "from_ecg_ci": [
+          0.6637328831200571,
+          1.0
+        ],
+        "from_doppler_correct": 9,
+        "from_doppler_ci": [
+          0.6637328831200571,
+          1.0
+        ],
+        "unknown_n": 14,
+        "unknown_two_methods_agree": 12,
+        "wrong_from_ecg": [],
+        "wrong_from_doppler": []
+      }
+    },
+    "test": {
+      "n_recordings": 37,
+      "n_women": 26,
+      "trusted_recordings": 28,
+      "trusted_share": 0.7567567567567568,
+      "trusted_share_ci": [
+        0.5880083075760861,
+        0.8822748256928921
+      ],
+      "women_with_a_trusted_recording": 21,
+      "not_trusted": [
+        {
+          "record": 9,
+          "reasons": "beats not locked; rates drift apart",
+          "locked_share": 0.0,
+          "drift_ms": 310.81690140845006,
+          "ecg_quality": 0.1898228125370894
+        },
+        {
+          "record": 12,
+          "reasons": "beats not locked; rates drift apart; delay outside the physiological range",
+          "locked_share": 0.0625,
+          "drift_ms": 95.98591549295764,
+          "ecg_quality": 0.2334808765565866
+        },
+        {
+          "record": 13,
+          "reasons": "beats not locked",
+          "locked_share": 0.42105263157894735,
+          "drift_ms": 0.32394366197152635,
+          "ecg_quality": 0.7086848900522607
+        },
+        {
+          "record": 15,
+          "reasons": "beats not locked",
+          "locked_share": 0.4765625,
+          "drift_ms": -1.2957746478834409,
+          "ecg_quality": 0.6723945271936008
+        },
+        {
+          "record": 16,
+          "reasons": "delay outside the physiological range",
+          "locked_share": 0.7586206896551724,
+          "drift_ms": -1.7746478873235105,
+          "ecg_quality": 0.7131145256566696
+        },
+        {
+          "record": 18,
+          "reasons": "beats not locked; rates drift apart",
+          "locked_share": 0.06451612903225806,
+          "drift_ms": -83.4154929577482,
+          "ecg_quality": 0.17403543042981703
+        },
+        {
+          "record": 21,
+          "reasons": "beats not locked; rates drift apart; delay outside the physiological range",
+          "locked_share": 0.0,
+          "drift_ms": -199.59154929576783,
+          "ecg_quality": 0.5648525188283577
+        },
+        {
+          "record": 38,
+          "reasons": "beats not locked; rates drift apart",
+          "locked_share": 0.0,
+          "drift_ms": -199.19718309859124,
+          "ecg_quality": 0.6819588884237049
+        },
+        {
+          "record": 42,
+          "reasons": "beats not locked",
+          "locked_share": 0.4782608695652174,
+          "drift_ms": 0.6619718309854861,
+          "ecg_quality": 0.5152586184708374
+        }
+      ],
+      "locked_share_median": 0.7586206896551724,
+      "locked_share_min": 0.0,
+      "abs_diff_median_ms_median": 4.281690140844674,
+      "auroc_vs_maternal": {
+        "auroc": 0.9558071585098612,
+        "ci": [
+          0.9021122511869978,
+          1.0
+        ],
+        "n_pos": 37,
+        "n_neg": 37
+      },
+      "auroc_vs_swap": {
+        "auroc": 0.8780509103610881,
+        "ci": [
+          0.7902114709552988,
+          0.949609871351331
+        ],
+        "n_pos": 37,
+        "n_neg": 1238
+      },
+      "maternal_flagged": {
+        "n": 37,
+        "flagged": 37,
+        "share": 1.0,
+        "ci": [
+          0.9051094125850101,
+          1.0
+        ]
+      },
+      "swap_flagged": {
+        "n": 1238,
+        "flagged": 1213,
+        "share": 0.9798061389337641,
+        "by_rate_gap_bpm": {
+          "0-1": {
+            "n": 88,
+            "flagged": 76,
+            "share": 0.8636363636363636
+          },
+          "1-2": {
+            "n": 80,
+            "flagged": 68,
+            "share": 0.85
+          },
+          "2-4": {
+            "n": 152,
+            "flagged": 151,
+            "share": 0.993421052631579
+          },
+          "4-8": {
+            "n": 291,
+            "flagged": 291,
+            "share": 1.0
+          },
+          "8-more": {
+            "n": 627,
+            "flagged": 627,
+            "share": 1.0
+          }
+        }
+      },
+      "perturbations_from_trusted_pairs": {
+        "shift": {
+          "0.05": {
+            "n": 28,
+            "flagged_share": 0.25,
+            "locked_share_median": 0.8916911045943303
+          },
+          "0.1": {
+            "n": 28,
+            "flagged_share": 0.7142857142857143,
+            "locked_share_median": 0.8916911045943303
+          },
+          "0.15": {
+            "n": 28,
+            "flagged_share": 1.0,
+            "locked_share_median": 0.8916911045943303
+          },
+          "0.2": {
+            "n": 28,
+            "flagged_share": 1.0,
+            "locked_share_median": 0.8916911045943303
+          },
+          "0.3": {
+            "n": 28,
+            "flagged_share": 0.8928571428571429,
+            "locked_share_median": 0.8926651305683564
+          },
+          "0.5": {
+            "n": 28,
+            "flagged_share": 0.6428571428571429,
+            "locked_share_median": 0.8402001668056713
+          },
+          "1.0": {
+            "n": 28,
+            "flagged_share": 0.8571428571428571,
+            "locked_share_median": 0.734125636672326
+          },
+          "2.0": {
+            "n": 28,
+            "flagged_share": 0.7142857142857143,
+            "locked_share_median": 0.6797914818101154
+          }
+        },
+        "drop": {
+          "0.1": {
+            "n": 140,
+            "flagged_share": 0.25,
+            "locked_share_median": 0.6841133004926109
+          },
+          "0.2": {
+            "n": 140,
+            "flagged_share": 0.7357142857142858,
+            "locked_share_median": 0.5506895539906104
+          },
+          "0.3": {
+            "n": 140,
+            "flagged_share": 0.9714285714285714,
+            "locked_share_median": 0.40054442932140777
+          },
+          "0.5": {
+            "n": 140,
+            "flagged_share": 1.0,
+            "locked_share_median": 0.20689655172413793
+          }
+        },
+        "jitter": {
+          "2.0": {
+            "n": 140,
+            "flagged_share": 0.03571428571428571,
+            "locked_share_median": 0.8348623853211009
+          },
+          "5.0": {
+            "n": 140,
+            "flagged_share": 0.18571428571428572,
+            "locked_share_median": 0.688864283454603
+          },
+          "10.0": {
+            "n": 140,
+            "flagged_share": 0.8285714285714286,
+            "locked_share_median": 0.44499449944994496
+          },
+          "20.0": {
+            "n": 140,
+            "flagged_share": 1.0,
+            "locked_share_median": 0.2551105548602419
+          }
+        }
+      },
+      "rate_recording_level": {
+        "all": {
+          "n": 37,
+          "bias": 0.24121009710710137,
+          "sd": 16.199275024774195,
+          "loa_low": -31.509368951450323,
+          "loa_high": 31.991789145664523
+        },
+        "trusted_only": {
+          "n": 28,
+          "bias": 0.05596861991512725,
+          "sd": 0.49730792479682506,
+          "loa_low": -0.9187549126866499,
+          "loa_high": 1.0306921525169044
+        },
+        "by_woman": {
+          "n": 26,
+          "bias": -1.5463311124594505,
+          "sd": 15.221532139706245,
+          "loa_low": -31.38053410628369,
+          "loa_high": 28.287871881364786
+        },
+        "within_5bpm": 32,
+        "within_5bpm_share": 0.8648648648648649,
+        "abs_error_median_bpm": 0.4905660377352774
+      },
+      "beat_level_all_recordings": {
+        "n_pairs": 2639,
+        "abs_diff_median_ms": 4.183098591550305,
+        "share_within_5ms": 0.5566502463054187,
+        "share_within_10ms": 0.7146646456991285,
+        "share_within_20ms": 0.7870405456612353,
+        "diff_percentiles_ms": {
+          "2.5": -207.44647887324356,
+          "25": -5.154929577464884,
+          "50": -0.5070422535169428,
+          "75": 3.387323943661702,
+          "97.5": 72.76338028169134
+        },
+        "rate_limits_all_pairs": {
+          "n": 2639,
+          "bias": 4.176194412880073,
+          "sd": 32.22393541880776,
+          "loa_low": -58.98271900798314,
+          "loa_high": 67.3351078337433
+        },
+        "share_plausible": 0.9674118984463812,
+        "rate_limits_plausible_pairs": {
+          "n": 2553,
+          "bias": 3.0252696194566675,
+          "sd": 23.16231048092466,
+          "loa_low": -42.37285892315567,
+          "loa_high": 48.423398162069
+        },
+        "rate_diff_percentiles_plausible_bpm": {
+          "2.5": -17.706915353664613,
+          "50": 0.15602836879423876,
+          "97.5": 50.64238074094844
+        }
+      },
+      "beat_level_trusted_recordings": {
+        "n_pairs": 2175,
+        "abs_diff_median_ms": 3.3098591549292067,
+        "share_within_5ms": 0.64,
+        "share_within_10ms": 0.8105747126436782,
+        "share_within_20ms": 0.871264367816092,
+        "diff_percentiles_ms": {
+          "2.5": -54.75211267605564,
+          "25": -3.3802816901413735,
+          "50": -0.11267605633769051,
+          "75": 3.2042253521105124,
+          "97.5": 51.786619718310455
+        },
+        "rate_limits_all_pairs": {
+          "n": 2175,
+          "bias": 1.6328968901032697,
+          "sd": 29.420156724696685,
+          "loa_low": -56.030610290302235,
+          "loa_high": 59.29640407050877
+        },
+        "share_plausible": 0.9779310344827586,
+        "rate_limits_plausible_pairs": {
+          "n": 2127,
+          "bias": 0.6968378675906124,
+          "sd": 20.87474820474602,
+          "loa_low": -40.21766861371159,
+          "loa_high": 41.61134434889281
+        },
+        "rate_diff_percentiles_plausible_bpm": {
+          "2.5": -13.792819630228589,
+          "50": 0.042691332769919654,
+          "97.5": 15.445555680896696
+        }
+      },
+      "delay_r_to_closure_ms_trusted": {
+        "n": 28,
+        "median": 210.31338028168756,
+        "min": 159.16901408450678,
+        "max": 274.03521126760563
+      },
+      "cycle_start_ablation": {
+        "closure_click": {
+          "locked_share_median": 0.7586206896551724,
+          "abs_diff_median_ms": 4.281690140844674
+        },
+        "wave_end": {
+          "locked_share_median": 0.5714285714285714,
+          "abs_diff_median_ms": 8.295774647885779
+        },
+        "recordings_where_click_is_better": 30,
+        "n": 37
+      },
+      "orientation": {
+        "known_n": 15,
+        "from_ecg_correct": 13,
+        "from_ecg_ci": [
+          0.5953973033966278,
+          0.9834240865599164
+        ],
+        "from_doppler_correct": 14,
+        "from_doppler_ci": [
+          0.6805154334216966,
+          0.9983135697586473
+        ],
+        "unknown_n": 22,
+        "unknown_two_methods_agree": 20,
+        "wrong_from_ecg": [
+          12,
+          21
+        ],
+        "wrong_from_doppler": [
+          12
+        ]
+      }
+    }
+  },
+  "gate_G3": {
+    "rule": "on the test women: Bland-Altman limits of heart rate within +-10 bpm, and AUROC >= 0.90 for maternal substitution",
+    "recording_level_limits_bpm": [
+      -31.509368951450323,
+      31.991789145664523
+    ],
+    "recording_level_passed": false,
+    "beat_level_limits_bpm_trusted_plausible": [
+      -40.21766861371159,
+      41.61134434889281
+    ],
+    "beat_level_passed": false,
+    "auroc_maternal_test": 0.9558071585098612,
+    "auroc_passed": true,
+    "passed": false
+  },
+  "n_perturbed_cases": 2208,
+  "note_on_perturbations": "shift, drop and jitter cases are real beat series altered by a stated rule; maternal and swap cases use unaltered real beat series"
+}

@@ -1,0 +1,5 @@
+# Every run folder records a hash of the exact bytes of the Python files under sfr/
+# (sfr/provenance.py, code_sha256). Git must therefore store and check out these files
+# byte for byte on every platform, with no line-ending conversion, so that anyone who
+# clones the repository can reproduce the hash written in runs/*/provenance.json.
+sfr/**/*.py -text

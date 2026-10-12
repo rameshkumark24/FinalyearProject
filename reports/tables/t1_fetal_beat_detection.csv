@@ -1,0 +1,16 @@
+Pipeline,Split,n,Mean F1 [95% CI],Median F1,F1 >= 0.9,Follows the mother,Median rate error (bpm)
+full,development,25,"0.965 [0.945, 0.983]",0.993,84%,0/25,0.19
+full,test,50,"0.958 [0.915, 0.989]",0.995,92%,0/50,0.07
+full,test without doubted references,43,"0.993 [0.990, 0.995]",0.996,100%,0/43,0.00
+no_tracking,development,25,"0.916 [0.873, 0.957]",0.985,64%,0/25,0.19
+no_tracking,test,50,"0.942 [0.901, 0.975]",0.988,88%,0/50,0.15
+no_tracking,test without doubted references,43,"0.980 [0.967, 0.990]",0.993,95%,0/43,0.15
+no_ica,development,25,"0.963 [0.941, 0.982]",0.993,80%,0/25,0.26
+no_ica,test,50,"0.830 [0.737, 0.907]",0.990,74%,5/50,0.16
+no_ica,test without doubted references,43,"0.857 [0.768, 0.936]",0.993,79%,5/43,0.16
+no_cancellation,development,25,"0.658 [0.543, 0.784]",0.799,40%,2/25,1.85
+no_cancellation,test,50,"0.626 [0.532, 0.719]",0.703,36%,1/50,1.13
+no_cancellation,test without doubted references,43,"0.635 [0.534, 0.737]",0.755,37%,1/43,1.17
+channel_only,development,25,"0.356 [0.238, 0.486]",0.187,20%,19/25,40.21
+channel_only,test,50,"0.280 [0.225, 0.338]",0.186,2%,29/50,49.23
+channel_only,test without doubted references,43,"0.276 [0.225, 0.341]",0.187,2%,25/43,45.76

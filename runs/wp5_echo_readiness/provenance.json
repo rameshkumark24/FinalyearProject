@@ -1,0 +1,50 @@
+{
+  "run": "wp5_echo_readiness",
+  "description": "Structure expert readiness: de-identification tool and FetalCLIP loading on unlabelled frames. No diagnostic result.",
+  "created_utc": "2026-10-12T04:59:28+00:00",
+  "script": "scripts/run_wp5_echo_readiness.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "0eb55fa3713f831f8aad9d8da27e59ab24f7498d",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "frames": "fetaldata FCU folder, unlabelled, identifiers in pixels, read in memory only",
+    "device": "cuda"
+  },
+  "data": {
+    "fcu_frames": {
+      "n_files": 150,
+      "total_bytes": 8686345,
+      "manifest_sha256": "156de6f5899b847ef9a7c2645a978b907628365789bedcfc19ac08b6e9337012"
+    }
+  },
+  "n_real": 150,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [
+    {
+      "claimed_name": "FetalCLIP",
+      "verified": true,
+      "sha256": "90916caa408baf9374ee3f8c1533463331a4ace37a13e61385e782905b35c310",
+      "file": "FetalCLIP_weights.pt",
+      "bytes": 1710766661,
+      "source": "huggingface.co/numansaeed/fetalclip-model",
+      "licence": "CC BY-NC 4.0",
+      "n_parameters": 427647233
+    }
+  ],
+  "seed": null,
+  "argv": [
+    "C:\\Finalyearproject\\scripts\\run_wp5_echo_readiness.py"
+  ]
+}

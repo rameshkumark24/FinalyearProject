@@ -1,0 +1,109 @@
+{
+  "run": "wp2b_function_reference",
+  "description": "Doppler timing measures of the 60 NInFEA strips: repeatability, healthy reference with conformal p-values, detectable shifts",
+  "created_utc": "2026-10-11T18:11:08+00:00",
+  "script": "scripts/run_wp2b_function_reference.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "0eb55fa3713f831f8aad9d8da27e59ab24f7498d",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "cycles": {
+      "click_width": 13,
+      "click_relative": 0.25,
+      "spike_width": 11,
+      "smooth": 15,
+      "floor_s": 0.6,
+      "track_sigma": 4.0,
+      "smoothness": 4.0,
+      "edge_sigma": 1.5,
+      "edge_fraction": 0.4,
+      "click_before": 6,
+      "click_after": 14,
+      "click_accept": 0.3,
+      "use_click_start": true,
+      "use_click_removal": true,
+      "use_floor": true,
+      "use_tracker": true
+    },
+    "trust_run": "wp3_trust_check",
+    "measures": [
+      "cycle_length_ms",
+      "ejection_half_width_ms",
+      "a_to_v_peak_ms",
+      "v_peak_to_closure_ms",
+      "closure_to_a_peak_ms",
+      "a_half_width_ms",
+      "ea_ratio",
+      "e_to_a_ms"
+    ],
+    "reference_measures": {
+      "cycle_length_ms": "gestation_days",
+      "a_to_v_peak_ms": "cycle_length_ms",
+      "v_peak_to_closure_ms": "cycle_length_ms",
+      "ejection_half_width_ms": "cycle_length_ms"
+    },
+    "min_cycles": 8,
+    "alphas": [
+      0.05,
+      0.1,
+      0.2
+    ],
+    "shifts_ms": [
+      5,
+      10,
+      15,
+      20,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50,
+      55,
+      60,
+      65,
+      70,
+      75,
+      80,
+      85,
+      90,
+      95,
+      100,
+      105,
+      110,
+      115,
+      120
+    ]
+  },
+  "data": {
+    "ninfea_strips": {
+      "n_files": 60,
+      "total_bytes": 562487132,
+      "manifest_sha256": "873102dfae84ea72eeddacc3189264150dce7c75b31e5dd495879ccc2420a05e"
+    },
+    "trust": {
+      "n_files": 1,
+      "total_bytes": 14804,
+      "manifest_sha256": "c8885ac749dc81468300bbd6a07775a8b60ad4f066f878b2f1742230b05b0b83"
+    }
+  },
+  "n_real": 60,
+  "n_synthetic": 8640,
+  "synthetic": true,
+  "synthetic_kind": "measured healthy value plus a stated shift of one interval (file detectable_shifts.csv); no image or signal is altered",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "C:\\Finalyearproject\\scripts\\run_wp2b_function_reference.py"
+  ]
+}

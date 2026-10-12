@@ -1,0 +1,4 @@
+Model,Segments of a recording on both sides [95% CI],Recording held out [95% CI],Inflation,Run
+forest on segment features,"0.938 [0.843, 0.987]","0.870 [0.709, 0.967]",0.067,wp4b_rhythm_intervals
+logistic on segment features,"0.890 [0.759, 0.967]","0.788 [0.539, 0.942]",0.102,wp4b_rhythm_intervals
+small CNN on 10-second windows,"0.902 [0.833, 0.945]","0.664 [0.457, 0.839]",0.238,wp4d_cnn

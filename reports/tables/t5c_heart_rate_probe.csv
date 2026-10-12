@@ -1,0 +1,5 @@
+Network / input,Recordings,"Mean abs. error, bpm [95% CI]",Error of predicting the mean,R squared,Spearman
+ecgfounder / fetal,75,"4.12 [3.13, 5.24]",10.06,0.75,0.88
+ecgfounder / fetal_stretch2,75,"5.12 [4.01, 6.41]",10.06,0.65,0.82
+random_init / fetal,75,"5.19 [3.99, 6.51]",10.06,0.62,0.83
+random_init / fetal_stretch2,75,"4.19 [3.20, 5.30]",10.06,0.75,0.88

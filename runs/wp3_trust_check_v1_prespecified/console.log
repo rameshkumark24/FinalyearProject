@@ -1,0 +1,32 @@
+
+== development: 23 recordings, 13 women ==
+trusted 18/23  CI [0.56 0.93]; not trusted: [(22, 'beats not locked; rates drift apart; delay outside the physiological range'), (32, 'beats not locked'), (33, 'beats not locked; rates drift apart'), (59, 'beats not locked; rates drift apart'), (60, 'rates drift apart')]
+locked share median 0.77 (min 0.13); median |interval diff| 4.1 ms
+AUROC vs maternal 0.998 [0.975 1.   ]; vs swap 0.960 [0.914 0.993] (n swaps 482)
+rule: maternal flagged 23/23; swaps flagged 478/482; by rate gap [('0-1', 11, 15), ('1-2', 16, 16), ('2-4', 58, 58), ('4-8', 116, 116), ('8-more', 277, 277)]
+  shift: 0.05: 0.22, 0.1: 0.89, 0.15: 1.00, 0.2: 1.00, 0.3: 0.94, 0.5: 0.50, 1.0: 0.78, 2.0: 0.72
+  drop: 0.1: 0.28, 0.2: 0.72, 0.3: 0.97, 0.5: 1.00
+  jitter: 2.0: 0.02, 5.0: 0.38, 10.0: 0.99, 20.0: 1.00
+rate, recording level: {'all': [0.7, -6.31, 7.7], 'trusted_only': [0.17, -0.73, 1.08], 'by_woman': [1.36, -7.04, 9.76], 'within_5bpm': 21, 'within_5bpm_share': 0.9130434782608695, 'abs_error_median_bpm': 0.34739254553437604}
+beat_level_all_recordings: n 1485, median |d| 3.5 ms, within 10 ms 0.770, limits all [-40.8, 42.7], plausible [-18.5, 19.3] bpm
+beat_level_trusted_recordings: n 1241, median |d| 2.9 ms, within 10 ms 0.843, limits all [-14.8, 16.2], plausible [-11.2, 12.3] bpm
+delay R to closure (trusted): {'n': 18, 'median': 208.5316901408485, 'min': 156.95774647887316, 'max': 240.22535211267558}
+cycle start ablation: {'closure_click': {'locked_share_median': 0.7734375, 'abs_diff_median_ms': 4.098591549296593}, 'wave_end': {'locked_share_median': 0.5441176470588235, 'abs_diff_median_ms': 9.232394366196939}, 'recordings_where_click_is_better': 21, 'n': 23}
+orientation: {'known_n': 9, 'from_ecg_correct': 9, 'from_ecg_ci': [0.6637328831200571, 1.0], 'from_doppler_correct': 9, 'from_doppler_ci': [0.6637328831200571, 1.0], 'unknown_n': 14, 'unknown_two_methods_agree': 12, 'wrong_from_ecg': [], 'wrong_from_doppler': []}
+
+== test: 37 recordings, 26 women ==
+trusted 28/37  CI [0.59 0.88]; not trusted: [(9, 'beats not locked; rates drift apart'), (12, 'beats not locked; rates drift apart; delay outside the physiological range'), (13, 'beats not locked'), (15, 'beats not locked'), (16, 'delay outside the physiological range'), (18, 'beats not locked; rates drift apart'), (21, 'beats not locked; rates drift apart; delay outside the physiological range'), (38, 'beats not locked; rates drift apart'), (42, 'beats not locked')]
+locked share median 0.76 (min 0.00); median |interval diff| 4.3 ms
+AUROC vs maternal 0.956 [0.902 1.   ]; vs swap 0.878 [0.79 0.95] (n swaps 1238)
+rule: maternal flagged 37/37; swaps flagged 1213/1238; by rate gap [('0-1', 76, 88), ('1-2', 68, 80), ('2-4', 151, 152), ('4-8', 291, 291), ('8-more', 627, 627)]
+  shift: 0.05: 0.25, 0.1: 0.71, 0.15: 1.00, 0.2: 1.00, 0.3: 0.89, 0.5: 0.64, 1.0: 0.86, 2.0: 0.71
+  drop: 0.1: 0.25, 0.2: 0.74, 0.3: 0.97, 0.5: 1.00
+  jitter: 2.0: 0.04, 5.0: 0.19, 10.0: 0.83, 20.0: 1.00
+rate, recording level: {'all': [0.24, -31.51, 31.99], 'trusted_only': [0.06, -0.92, 1.03], 'by_woman': [-1.55, -31.38, 28.29], 'within_5bpm': 32, 'within_5bpm_share': 0.8648648648648649, 'abs_error_median_bpm': 0.4905660377352774}
+beat_level_all_recordings: n 2639, median |d| 4.2 ms, within 10 ms 0.715, limits all [-59.0, 67.3], plausible [-42.4, 48.4] bpm
+beat_level_trusted_recordings: n 2175, median |d| 3.3 ms, within 10 ms 0.811, limits all [-56.0, 59.3], plausible [-40.2, 41.6] bpm
+delay R to closure (trusted): {'n': 28, 'median': 210.31338028168756, 'min': 159.16901408450678, 'max': 274.03521126760563}
+cycle start ablation: {'closure_click': {'locked_share_median': 0.7586206896551724, 'abs_diff_median_ms': 4.281690140844674}, 'wave_end': {'locked_share_median': 0.5714285714285714, 'abs_diff_median_ms': 8.295774647885779}, 'recordings_where_click_is_better': 30, 'n': 37}
+orientation: {'known_n': 15, 'from_ecg_correct': 13, 'from_ecg_ci': [0.5953973033966278, 0.9834240865599164], 'from_doppler_correct': 14, 'from_doppler_ci': [0.6805154334216966, 0.9983135697586473], 'unknown_n': 22, 'unknown_two_methods_agree': 20, 'wrong_from_ecg': [12, 21], 'wrong_from_doppler': [12]}
+
+Gate G3: {'rule': 'on the test women: Bland-Altman limits of heart rate within +-10 bpm, and AUROC >= 0.90 for maternal substitution', 'recording_level_limits_bpm': [-31.509368951450323, 31.991789145664523], 'recording_level_passed': False, 'beat_level_limits_bpm_trusted_plausible': [-40.21766861371159, 41.61134434889281], 'beat_level_passed': False, 'auroc_maternal_test': 0.9558071585098612, 'auroc_passed': True, 'passed': False}

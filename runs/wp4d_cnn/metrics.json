@@ -1,0 +1,51 @@
+{
+  "n_windows": 1722,
+  "n_records": 26,
+  "recording_level_leave_one_subject_out": {
+    "n": 26,
+    "n_positive": 12,
+    "n_negative": 14,
+    "auroc": 0.6547619047619048,
+    "auroc_ci": [
+      0.4134985190248348,
+      0.8562101715686274
+    ],
+    "mann_whitney_p_one_sided": 0.09483119988207284,
+    "threshold": 0.5,
+    "tp": 8,
+    "fn": 4,
+    "tn": 8,
+    "fp": 6,
+    "sensitivity": 0.6666666666666666,
+    "sensitivity_ci": [
+      0.3488755064188155,
+      0.9007539088504167
+    ],
+    "specificity": 0.5714285714285714,
+    "specificity_ci": [
+      0.28860940003830743,
+      0.8233889100178821
+    ]
+  },
+  "leakage_comparison_window_level": {
+    "segment_split_auroc": 0.9024374109848868,
+    "segment_split_ci": [
+      0.8326424102106026,
+      0.9445514274443392
+    ],
+    "subject_split_auroc": 0.6641685060310903,
+    "subject_split_ci": [
+      0.456834917496844,
+      0.8393142946692969
+    ],
+    "gap": 0.2382689049537965,
+    "note": "same network and settings; only the split differs. Intervals resample recordings."
+  },
+  "note": "No permutation test with refitting was run for the network (26 trainings per shuffle); the Mann-Whitney p-value of the out-of-fold scores is given instead.",
+  "recording_level_auroc_by_seed": {
+    "0": 0.6547619047619048,
+    "1": 0.6071428571428571,
+    "2": 0.5654761904761905
+  },
+  "reproducibility": "The reported run is the first seed. The other seeds repeat the whole leave-one-subject-out training; the spread across seeds is training noise. GPU training is not bit-reproducible even with a fixed seed."
+}

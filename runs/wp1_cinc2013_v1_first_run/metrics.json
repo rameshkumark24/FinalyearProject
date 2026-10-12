@@ -1,0 +1,671 @@
+{
+  "tolerance_ms": 50.0,
+  "by_config": {
+    "full": {
+      "development": {
+        "n_recordings": 25,
+        "f1_mean": 0.9654719977333468,
+        "f1_mean_ci": [
+          0.9448401672961667,
+          0.9832933155870304
+        ],
+        "f1_median": 0.9927007299270073,
+        "f1_median_ci": [
+          0.9597701149425287,
+          0.9965397923875432
+        ],
+        "f1_min": 0.8382838283828383,
+        "share_f1_at_least_0.9": 0.84,
+        "sensitivity_mean": 0.9647432381853233,
+        "ppv_mean": 0.9662639613463765,
+        "hr_abs_error_median_bpm": 0.1930092065391591,
+        "hr_abs_error_mean_bpm": 0.4944829222428757,
+        "follows_mother_n": 0,
+        "follows_mother_rate": 0.0,
+        "follows_mother_rate_ci": [
+          0.0,
+          0.1371851715307125
+        ],
+        "flagged_failed_n": 0
+      },
+      "test": {
+        "n_recordings": 50,
+        "f1_mean": 0.9581262065272607,
+        "f1_mean_ci": [
+          0.9147205414548132,
+          0.9890471866181385
+        ],
+        "f1_median": 0.9951226688393988,
+        "f1_median_ci": [
+          0.9927532426613455,
+          0.9965470298503433
+        ],
+        "f1_min": 0.24647887323943662,
+        "share_f1_at_least_0.9": 0.92,
+        "sensitivity_mean": 0.9682891311384705,
+        "ppv_mean": 0.9548865040366558,
+        "hr_abs_error_median_bpm": 0.07350130832328716,
+        "hr_abs_error_mean_bpm": 0.4963823341899729,
+        "follows_mother_n": 0,
+        "follows_mother_rate": 0.0,
+        "follows_mother_rate_ci": [
+          0.0,
+          0.07112173646419764
+        ],
+        "flagged_failed_n": 0
+      },
+      "test_without_doubted_references": {
+        "n_recordings": 43,
+        "f1_mean": 0.9928277369935283,
+        "f1_mean_ci": [
+          0.9896456365483521,
+          0.9953759487110558
+        ],
+        "f1_median": 0.9963898916967509,
+        "f1_median_ci": [
+          0.9935064935064936,
+          0.9968253968253968
+        ],
+        "f1_min": 0.9562289562289562,
+        "share_f1_at_least_0.9": 1.0,
+        "sensitivity_mean": 0.9933618195766855,
+        "ppv_mean": 0.9923276276847858,
+        "hr_abs_error_median_bpm": 0.0,
+        "hr_abs_error_mean_bpm": 0.14216559311729948,
+        "follows_mother_n": 0,
+        "follows_mother_rate": 0.0,
+        "follows_mother_rate_ci": [
+          0.0,
+          0.08221112115413848
+        ],
+        "flagged_failed_n": 0
+      },
+      "all": {
+        "n_recordings": 75,
+        "f1_mean": 0.9605748035959559,
+        "f1_mean_ci": [
+          0.9324978935484487,
+          0.9832666259969308
+        ],
+        "f1_median": 0.9940476190476191,
+        "f1_median_ci": [
+          0.9927007299270073,
+          0.99644128113879
+        ],
+        "f1_min": 0.24647887323943662,
+        "share_f1_at_least_0.9": 0.8933333333333333,
+        "sensitivity_mean": 0.9671071668207548,
+        "ppv_mean": 0.9586789898065629,
+        "hr_abs_error_median_bpm": 0.15200802602376484,
+        "hr_abs_error_mean_bpm": 0.4957491968742738,
+        "follows_mother_n": 0,
+        "follows_mother_rate": 0.0,
+        "follows_mother_rate_ci": [
+          0.0,
+          0.047995064055142256
+        ],
+        "flagged_failed_n": 0
+      },
+      "all_without_doubted_references": {
+        "n_recordings": 68,
+        "f1_mean": 0.9827704799125793,
+        "f1_mean_ci": [
+          0.9742828208332495,
+          0.989941052159408
+        ],
+        "f1_median": 0.9961533340237605,
+        "f1_median_ci": [
+          0.993006993006993,
+          0.9965830505312014
+        ],
+        "f1_min": 0.8382838283828383,
+        "share_f1_at_least_0.9": 0.9411764705882353,
+        "sensitivity_mean": 0.9828402823004495,
+        "ppv_mean": 0.9827453974133117,
+        "hr_abs_error_median_bpm": 0.1404316838680728,
+        "hr_abs_error_mean_bpm": 0.271694022942879,
+        "follows_mother_n": 0,
+        "follows_mother_rate": 0.0,
+        "follows_mother_rate_ci": [
+          0.0,
+          0.05280304279363979
+        ],
+        "flagged_failed_n": 0
+      }
+    },
+    "no_tracking": {
+      "development": {
+        "n_recordings": 25,
+        "f1_mean": 0.9164044450641283,
+        "f1_mean_ci": [
+          0.8733868209337582,
+          0.9569268520647977
+        ],
+        "f1_median": 0.9849624060150376,
+        "f1_median_ci": [
+          0.8736462093862816,
+          0.991869918699187
+        ],
+        "f1_min": 0.6896551724137931,
+        "share_f1_at_least_0.9": 0.64,
+        "sensitivity_mean": 0.9116930729977419,
+        "ppv_mean": 0.9213138561594821,
+        "hr_abs_error_median_bpm": 0.1930092065391591,
+        "hr_abs_error_mean_bpm": 0.7297898913912991,
+        "follows_mother_n": 0,
+        "follows_mother_rate": 0.0,
+        "follows_mother_rate_ci": [
+          0.0,
+          0.1371851715307125
+        ],
+        "flagged_failed_n": 0
+      },
+      "test": {
+        "n_recordings": 50,
+        "f1_mean": 0.9422511134030426,
+        "f1_mean_ci": [
+          0.9008877709161482,
+          0.975286420868053
+        ],
+        "f1_median": 0.9884508164078056,
+        "f1_median_ci": [
+          0.9846153846153847,
+          0.993734335839599
+        ],
+        "f1_min": 0.30927835051546393,
+        "share_f1_at_least_0.9": 0.88,
+        "sensitivity_mean": 0.9494971168723748,
+        "ppv_mean": 0.9420209722012001,
+        "hr_abs_error_median_bpm": 0.15200802602376484,
+        "hr_abs_error_mean_bpm": 0.6162346894616502,
+        "follows_mother_n": 0,
+        "follows_mother_rate": 0.0,
+        "follows_mother_rate_ci": [
+          0.0,
+          0.07112173646419764
+        ],
+        "flagged_failed_n": 0
+      },
+      "test_without_doubted_references": {
+        "n_recordings": 43,
+        "f1_mean": 0.9800263761777468,
+        "f1_mean_ci": [
+          0.9665778214006397,
+          0.9899497094674747
+        ],
+        "f1_median": 0.9927536231884058,
+        "f1_median_ci": [
+          0.9855072463768116,
+          0.9962546816479401
+        ],
+        "f1_min": 0.7697368421052632,
+        "share_f1_at_least_0.9": 0.9534883720930233,
+        "sensitivity_mean": 0.9783298383629069,
+        "ppv_mean": 0.9818178979653688,
+        "hr_abs_error_median_bpm": 0.14700261664657432,
+        "hr_abs_error_mean_bpm": 0.17947742580227158,
+        "follows_mother_n": 0,
+        "follows_mother_rate": 0.0,
+        "follows_mother_rate_ci": [
+          0.0,
+          0.08221112115413848
+        ],
+        "flagged_failed_n": 0
+      },
+      "all": {
+        "n_recordings": 75,
+        "f1_mean": 0.9336355572900711,
+        "f1_mean_ci": [
+          0.9043366725832392,
+          0.961011168354433
+        ],
+        "f1_median": 0.9876543209876543,
+        "f1_median_ci": [
+          0.9824561403508771,
+          0.9927536231884058
+        ],
+        "f1_min": 0.30927835051546393,
+        "share_f1_at_least_0.9": 0.8,
+        "sensitivity_mean": 0.9368957689141638,
+        "ppv_mean": 0.9351186001872943,
+        "hr_abs_error_median_bpm": 0.1631973627306138,
+        "hr_abs_error_mean_bpm": 0.6540864234381998,
+        "follows_mother_n": 0,
+        "follows_mother_rate": 0.0,
+        "follows_mother_rate_ci": [
+          0.0,
+          0.047995064055142256
+        ],
+        "flagged_failed_n": 0
+      },
+      "all_without_doubted_references": {
+        "n_recordings": 68,
+        "f1_mean": 0.9566359603271517,
+        "f1_mean_ci": [
+          0.9370808487845752,
+          0.9737253293084386
+        ],
+        "f1_median": 0.9891691104594331,
+        "f1_median_ci": [
+          0.9850185164403547,
+          0.9930795019157088
+        ],
+        "f1_min": 0.6896551724137931,
+        "share_f1_at_least_0.9": 0.8382352941176471,
+        "sensitivity_mean": 0.9538310275668903,
+        "ppv_mean": 0.9595737649484988,
+        "hr_abs_error_median_bpm": 0.15200802602376484,
+        "hr_abs_error_mean_bpm": 0.3817981852100023,
+        "follows_mother_n": 0,
+        "follows_mother_rate": 0.0,
+        "follows_mother_rate_ci": [
+          0.0,
+          0.05280304279363979
+        ],
+        "flagged_failed_n": 0
+      }
+    },
+    "no_ica": {
+      "development": {
+        "n_recordings": 25,
+        "f1_mean": 0.9626959404282229,
+        "f1_mean_ci": [
+          0.940731982928577,
+          0.9823783152620278
+        ],
+        "f1_median": 0.9927007299270073,
+        "f1_median_ci": [
+          0.9770114942528736,
+          0.9961089494163424
+        ],
+        "f1_min": 0.8316831683168316,
+        "share_f1_at_least_0.9": 0.8,
+        "sensitivity_mean": 0.9626622858043709,
+        "ppv_mean": 0.9628091721844301,
+        "hr_abs_error_median_bpm": 0.2642566460546618,
+        "hr_abs_error_mean_bpm": 0.3961812267399955,
+        "follows_mother_n": 0,
+        "follows_mother_rate": 0.0,
+        "follows_mother_rate_ci": [
+          0.0,
+          0.1371851715307125
+        ],
+        "flagged_failed_n": 0
+      },
+      "test": {
+        "n_recordings": 50,
+        "f1_mean": 0.8251376562466554,
+        "f1_mean_ci": [
+          0.730054589503759,
+          0.9049116263878477
+        ],
+        "f1_median": 0.9900179588598879,
+        "f1_median_ci": [
+          0.9747906742851703,
+          0.9930555555555556
+        ],
+        "f1_min": 0.15246636771300448,
+        "share_f1_at_least_0.9": 0.74,
+        "sensitivity_mean": 0.832141900779708,
+        "ppv_mean": 0.8274775376790241,
+        "hr_abs_error_median_bpm": 0.15602084438481256,
+        "hr_abs_error_mean_bpm": 7.208937355872572,
+        "follows_mother_n": 5,
+        "follows_mother_rate": 0.1,
+        "follows_mother_rate_ci": [
+          0.03327509358902247,
+          0.21813536643420225
+        ],
+        "flagged_failed_n": 6
+      },
+      "test_without_doubted_references": {
+        "n_recordings": 43,
+        "f1_mean": 0.8520771662868533,
+        "f1_mean_ci": [
+          0.7606800358572514,
+          0.9344460211273486
+        ],
+        "f1_median": 0.9927536231884058,
+        "f1_median_ci": [
+          0.9856982942430704,
+          0.9939024390243902
+        ],
+        "f1_min": 0.15246636771300448,
+        "share_f1_at_least_0.9": 0.7906976744186046,
+        "sensitivity_mean": 0.8491579291606525,
+        "ppv_mean": 0.8577328782692574,
+        "hr_abs_error_median_bpm": 0.15584294148357003,
+        "hr_abs_error_mean_bpm": 7.20077991355636,
+        "follows_mother_n": 5,
+        "follows_mother_rate": 0.11627906976744186,
+        "follows_mother_rate_ci": [
+          0.038852314778061725,
+          0.2508324253456527
+        ],
+        "flagged_failed_n": 5
+      },
+      "all": {
+        "n_recordings": 75,
+        "f1_mean": 0.8709904176405111,
+        "f1_mean_ci": [
+          0.8095561315931858,
+          0.9266985681092285
+        ],
+        "f1_median": 0.9907120743034056,
+        "f1_median_ci": [
+          0.9830508474576272,
+          0.993103448275862
+        ],
+        "f1_min": 0.15246636771300448,
+        "share_f1_at_least_0.9": 0.76,
+        "sensitivity_mean": 0.875648695787929,
+        "ppv_mean": 0.8725880825141593,
+        "hr_abs_error_median_bpm": 0.17314618154952655,
+        "hr_abs_error_mean_bpm": 4.938018646161713,
+        "follows_mother_n": 5,
+        "follows_mother_rate": 0.06666666666666667,
+        "follows_mother_rate_ci": [
+          0.02199925246979556,
+          0.14876047915778232
+        ],
+        "flagged_failed_n": 6
+      },
+      "all_without_doubted_references": {
+        "n_recordings": 68,
+        "f1_mean": 0.892745833250592,
+        "f1_mean_ci": [
+          0.8315647040092069,
+          0.945059372740163
+        ],
+        "f1_median": 0.9927271765577066,
+        "f1_median_ci": [
+          0.9857142857142858,
+          0.9939042537746806
+        ],
+        "f1_min": 0.15246636771300448,
+        "share_f1_at_least_0.9": 0.7941176470588235,
+        "sensitivity_mean": 0.8908874720443725,
+        "ppv_mean": 0.8963638686792476,
+        "hr_abs_error_median_bpm": 0.18307769404434282,
+        "hr_abs_error_mean_bpm": 4.699089219873874,
+        "follows_mother_n": 5,
+        "follows_mother_rate": 0.07352941176470588,
+        "follows_mother_rate_ci": [
+          0.02430521105066956,
+          0.1633121273456038
+        ],
+        "flagged_failed_n": 5
+      }
+    },
+    "no_cancellation": {
+      "development": {
+        "n_recordings": 25,
+        "f1_mean": 0.6582335796234233,
+        "f1_mean_ci": [
+          0.5430574185344386,
+          0.7841397473759487
+        ],
+        "f1_median": 0.7987220447284346,
+        "f1_median_ci": [
+          0.32950191570881227,
+          0.9923076923076923
+        ],
+        "f1_min": 0.18726591760299627,
+        "share_f1_at_least_0.9": 0.4,
+        "sensitivity_mean": 0.6572583028290712,
+        "ppv_mean": 0.6611067423917389,
+        "hr_abs_error_median_bpm": 1.849894291754751,
+        "hr_abs_error_mean_bpm": 8.469590003010794,
+        "follows_mother_n": 2,
+        "follows_mother_rate": 0.08,
+        "follows_mother_rate_ci": [
+          0.00983959001879751,
+          0.2603058421052141
+        ],
+        "flagged_failed_n": 9
+      },
+      "test": {
+        "n_recordings": 50,
+        "f1_mean": 0.6262217924453687,
+        "f1_mean_ci": [
+          0.5322786078352044,
+          0.7186050583513197
+        ],
+        "f1_median": 0.7025333157408629,
+        "f1_median_ci": [
+          0.31732047159699894,
+          0.8953205454648334
+        ],
+        "f1_min": 0.08092485549132948,
+        "share_f1_at_least_0.9": 0.36,
+        "sensitivity_mean": 0.6234093416502021,
+        "ppv_mean": 0.6326103811651422,
+        "hr_abs_error_median_bpm": 1.1299045559173493,
+        "hr_abs_error_mean_bpm": 5.042610522646968,
+        "follows_mother_n": 1,
+        "follows_mother_rate": 0.02,
+        "follows_mother_rate_ci": [
+          0.000506227983040829,
+          0.10646954571149987
+        ],
+        "flagged_failed_n": 3
+      },
+      "test_without_doubted_references": {
+        "n_recordings": 43,
+        "f1_mean": 0.6353858201063782,
+        "f1_mean_ci": [
+          0.5338496449248653,
+          0.7366337303151108
+        ],
+        "f1_median": 0.7547169811320755,
+        "f1_median_ci": [
+          0.32558139534883723,
+          0.9147286821705426
+        ],
+        "f1_min": 0.16428571428571428,
+        "share_f1_at_least_0.9": 0.37209302325581395,
+        "sensitivity_mean": 0.6291248029626441,
+        "ppv_mean": 0.6438001199432848,
+        "hr_abs_error_median_bpm": 1.1743981209629908,
+        "hr_abs_error_mean_bpm": 4.830304633199609,
+        "follows_mother_n": 1,
+        "follows_mother_rate": 0.023255813953488372,
+        "follows_mother_rate_ci": [
+          0.0005886129315931823,
+          0.12289048270133969
+        ],
+        "flagged_failed_n": 2
+      },
+      "all": {
+        "n_recordings": 75,
+        "f1_mean": 0.6368923881713868,
+        "f1_mean_ci": [
+          0.5634217182133473,
+          0.7114266762784562
+        ],
+        "f1_median": 0.7547169811320755,
+        "f1_median_ci": [
+          0.4392156862745098,
+          0.8805970149253731
+        ],
+        "f1_min": 0.08092485549132948,
+        "share_f1_at_least_0.9": 0.37333333333333335,
+        "sensitivity_mean": 0.6346923287098251,
+        "ppv_mean": 0.6421091682406744,
+        "hr_abs_error_median_bpm": 1.3101867016049766,
+        "hr_abs_error_mean_bpm": 6.184937016101576,
+        "follows_mother_n": 3,
+        "follows_mother_rate": 0.04,
+        "follows_mother_rate_ci": [
+          0.008326165666079395,
+          0.11247682176000984
+        ],
+        "flagged_failed_n": 12
+      },
+      "all_without_doubted_references": {
+        "n_recordings": 68,
+        "f1_mean": 0.6437857316935272,
+        "f1_mean_ci": [
+          0.5657066424187837,
+          0.7226760707649915
+        ],
+        "f1_median": 0.7767195129302551,
+        "f1_median_ci": [
+          0.38989769820971865,
+          0.9009127281820455
+        ],
+        "f1_min": 0.16428571428571428,
+        "share_f1_at_least_0.9": 0.38235294117647056,
+        "sensitivity_mean": 0.639468001442948,
+        "ppv_mean": 0.6501628487846282,
+        "hr_abs_error_median_bpm": 1.3315121392111706,
+        "hr_abs_error_mean_bpm": 6.168277195630192,
+        "follows_mother_n": 3,
+        "follows_mother_rate": 0.04411764705882353,
+        "follows_mother_rate_ci": [
+          0.009192195202787379,
+          0.12356262433177873
+        ],
+        "flagged_failed_n": 11
+      }
+    },
+    "channel_only": {
+      "development": {
+        "n_recordings": 25,
+        "f1_mean": 0.3563987005262545,
+        "f1_mean_ci": [
+          0.23814483952612575,
+          0.4864185938829086
+        ],
+        "f1_median": 0.18723404255319148,
+        "f1_median_ci": [
+          0.17272727272727273,
+          0.22033898305084745
+        ],
+        "f1_min": 0.13026819923371646,
+        "share_f1_at_least_0.9": 0.2,
+        "sensitivity_mean": 0.33233401616270336,
+        "ppv_mean": 0.39257152875251505,
+        "hr_abs_error_median_bpm": 40.20921869892122,
+        "hr_abs_error_mean_bpm": 34.94137483830992,
+        "follows_mother_n": 19,
+        "follows_mother_rate": 0.76,
+        "follows_mother_rate_ci": [
+          0.5487119821833135,
+          0.9064355606682571
+        ],
+        "flagged_failed_n": 19
+      },
+      "test": {
+        "n_recordings": 50,
+        "f1_mean": 0.28033067718731514,
+        "f1_mean_ci": [
+          0.2252924669309504,
+          0.3383637740306077
+        ],
+        "f1_median": 0.18616002762344225,
+        "f1_median_ci": [
+          0.1792452830188679,
+          0.23574144486692014
+        ],
+        "f1_min": 0.07582938388625593,
+        "share_f1_at_least_0.9": 0.02,
+        "sensitivity_mean": 0.26691797792095767,
+        "ppv_mean": 0.3120771672320271,
+        "hr_abs_error_median_bpm": 49.232328490136595,
+        "hr_abs_error_mean_bpm": 44.66795335220592,
+        "follows_mother_n": 29,
+        "follows_mother_rate": 0.58,
+        "follows_mother_rate_ci": [
+          0.4320604350655657,
+          0.7181177588763025
+        ],
+        "flagged_failed_n": 29
+      },
+      "test_without_doubted_references": {
+        "n_recordings": 43,
+        "f1_mean": 0.27594903775394475,
+        "f1_mean_ci": [
+          0.22482169441879327,
+          0.34051517783301255
+        ],
+        "f1_median": 0.18699186991869918,
+        "f1_median_ci": [
+          0.183206106870229,
+          0.23574144486692014
+        ],
+        "f1_min": 0.10762331838565023,
+        "share_f1_at_least_0.9": 0.023255813953488372,
+        "sensitivity_mean": 0.2612042711441882,
+        "ppv_mean": 0.3054416440587803,
+        "hr_abs_error_median_bpm": 45.757907189571654,
+        "hr_abs_error_mean_bpm": 43.71648306649301,
+        "follows_mother_n": 25,
+        "follows_mother_rate": 0.5813953488372093,
+        "follows_mother_rate_ci": [
+          0.42126959652075174,
+          0.7298858772954422
+        ],
+        "flagged_failed_n": 25
+      },
+      "all": {
+        "n_recordings": 75,
+        "f1_mean": 0.3056866849669616,
+        "f1_mean_ci": [
+          0.2514327774102175,
+          0.3655651774973838
+        ],
+        "f1_median": 0.18699186991869918,
+        "f1_median_ci": [
+          0.17777777777777778,
+          0.22033898305084745
+        ],
+        "f1_min": 0.07582938388625593,
+        "share_f1_at_least_0.9": 0.08,
+        "sensitivity_mean": 0.2887233240015395,
+        "ppv_mean": 0.33890862107218983,
+        "hr_abs_error_median_bpm": 44.956184009063634,
+        "hr_abs_error_mean_bpm": 41.42576051424059,
+        "follows_mother_n": 48,
+        "follows_mother_rate": 0.64,
+        "follows_mother_rate_ci": [
+          0.5208984128527685,
+          0.7476776110931875
+        ],
+        "flagged_failed_n": 48
+      },
+      "all_without_doubted_references": {
+        "n_recordings": 68,
+        "f1_mean": 0.3055261196555292,
+        "f1_mean_ci": [
+          0.2458902368405513,
+          0.37044523594017986
+        ],
+        "f1_median": 0.18711295623594532,
+        "f1_median_ci": [
+          0.17851153039832285,
+          0.21743592751158292
+        ],
+        "f1_min": 0.10762331838565023,
+        "share_f1_at_least_0.9": 0.08823529411764706,
+        "sensitivity_mean": 0.2873549126951129,
+        "ppv_mean": 0.3374746899020652,
+        "hr_abs_error_median_bpm": 44.142230699011904,
+        "hr_abs_error_mean_bpm": 40.49034033554334,
+        "follows_mother_n": 44,
+        "follows_mother_rate": 0.6470588235294118,
+        "follows_mother_rate_ci": [
+          0.521698142385042,
+          0.7591615112733705
+        ],
+        "flagged_failed_n": 44
+      }
+    }
+  },
+  "gate_G1": {
+    "rule": "median F1 >= 0.90 and follows-mother rate <= 0.05 on the held-out test recordings",
+    "median_f1_test": 0.9951226688393988,
+    "follows_mother_rate_test": 0.0,
+    "passed": true
+  }
+}

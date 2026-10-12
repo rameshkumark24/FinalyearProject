@@ -1,0 +1,430 @@
+{
+  "dataset": {
+    "n_records": 26,
+    "n_arrhythmia": 12,
+    "n_normal": 14,
+    "n_segments": 296,
+    "n_usable_segments": 288
+  },
+  "recording_level": {
+    "logistic_rhythm": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.7976190476190477,
+      "auroc_ci": [
+        0.5515151515151515,
+        0.9939393939393939
+      ],
+      "mann_whitney_p_one_sided": 0.005441386550500852,
+      "threshold": 0.5,
+      "tp": 7,
+      "fn": 5,
+      "tn": 14,
+      "fp": 0,
+      "sensitivity": 0.5833333333333334,
+      "sensitivity_ci": [
+        0.2766696856821058,
+        0.8483477701915698
+      ],
+      "specificity": 1.0,
+      "specificity_ci": [
+        0.7683642383498834,
+        1.0
+      ],
+      "permutation_p": 0.001996007984031936,
+      "n_permutations": 500,
+      "kind": "leave-one-subject-out"
+    },
+    "forest_rhythm": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.9047619047619048,
+      "auroc_ci": [
+        0.7569196428571429,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 0.00025846623723202347,
+      "threshold": 0.5,
+      "tp": 9,
+      "fn": 3,
+      "tn": 12,
+      "fp": 2,
+      "sensitivity": 0.75,
+      "sensitivity_ci": [
+        0.4281415381218108,
+        0.9451393554720072
+      ],
+      "specificity": 0.8571428571428571,
+      "specificity_ci": [
+        0.571870839090301,
+        0.9822054845168084
+      ],
+      "permutation_p": 0.0196078431372549,
+      "n_permutations": 50,
+      "kind": "leave-one-subject-out"
+    },
+    "logistic_quality_only": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8690476190476191,
+      "auroc_ci": [
+        0.6666666666666666,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 0.0007801753945566115,
+      "threshold": 0.5,
+      "tp": 9,
+      "fn": 3,
+      "tn": 14,
+      "fp": 0,
+      "sensitivity": 0.75,
+      "sensitivity_ci": [
+        0.4281415381218108,
+        0.9451393554720072
+      ],
+      "specificity": 1.0,
+      "specificity_ci": [
+        0.7683642383498834,
+        1.0
+      ],
+      "permutation_p": 0.001996007984031936,
+      "n_permutations": 500,
+      "kind": "leave-one-subject-out",
+      "role": "extractor quality values only; its score includes rhythm regularity, so this is not a neutral control"
+    },
+    "logistic_rhythm_all_segments": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.7916666666666666,
+      "auroc_ci": [
+        0.5485863095238096,
+        0.9861111111111112
+      ],
+      "mann_whitney_p_one_sided": 0.006305477836021722,
+      "threshold": 0.5,
+      "tp": 8,
+      "fn": 4,
+      "tn": 14,
+      "fp": 0,
+      "sensitivity": 0.6666666666666666,
+      "sensitivity_ci": [
+        0.3488755064188155,
+        0.9007539088504167
+      ],
+      "specificity": 1.0,
+      "specificity_ci": [
+        0.7683642383498834,
+        1.0
+      ],
+      "permutation_p": 0.007984031936127744,
+      "n_permutations": 500,
+      "kind": "leave-one-subject-out"
+    },
+    "logistic_rhythm_plus_quality": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.7678571428571429,
+      "auroc_ci": [
+        0.5186600378787879,
+        0.9939393939393939
+      ],
+      "mann_whitney_p_one_sided": 0.011044527943338087,
+      "threshold": 0.5,
+      "tp": 8,
+      "fn": 4,
+      "tn": 14,
+      "fp": 0,
+      "sensitivity": 0.6666666666666666,
+      "sensitivity_ci": [
+        0.3488755064188155,
+        0.9007539088504167
+      ],
+      "specificity": 1.0,
+      "specificity_ci": [
+        0.7683642383498834,
+        1.0
+      ],
+      "permutation_p": 0.00998003992015968,
+      "n_permutations": 500,
+      "kind": "leave-one-subject-out"
+    }
+  },
+  "single_index": {
+    "rr_mad_rel_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8125,
+      "auroc_ci": [
+        0.5952264239028945,
+        0.9738562091503268
+      ],
+      "mann_whitney_p_one_sided": 0.0037308239996780524,
+      "permutation_p": 0.0044995500449955,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "kind": "single pre-specified index, nothing fitted"
+    },
+    "succ_rel_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.9375,
+      "auroc_ci": [
+        0.8249810606060606,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 8.63256321094071e-05,
+      "permutation_p": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "kind": "single pre-specified index, nothing fitted"
+    },
+    "outlier_share_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8898809523809523,
+      "auroc_ci": [
+        0.70625,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 0.00041232928749333677,
+      "permutation_p": 0.00029997000299970003,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "kind": "single pre-specified index, nothing fitted"
+    },
+    "short_long_share_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8273809523809523,
+      "auroc_ci": [
+        0.6531163194444444,
+        0.96875
+      ],
+      "mann_whitney_p_one_sided": 0.0011401151306388714,
+      "permutation_p": 0.0004999500049995,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "kind": "single pre-specified index, nothing fitted"
+    },
+    "long_share_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8363095238095238,
+      "auroc_ci": [
+        0.6249810606060606,
+        0.9851190476190477
+      ],
+      "mann_whitney_p_one_sided": 0.0019187304378251843,
+      "permutation_p": 0.0015998400159984002,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "kind": "single pre-specified index, nothing fitted"
+    },
+    "tracked_raw_gap_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8869047619047619,
+      "auroc_ci": [
+        0.6969561688311688,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 0.0004431273193173501,
+      "permutation_p": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "kind": "single pre-specified index, nothing fitted"
+    },
+    "outlier_share_p90": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.9136904761904762,
+      "auroc_ci": [
+        0.7618930905695611,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 0.0001924758771474964,
+      "permutation_p": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "kind": "single pre-specified index, nothing fitted"
+    },
+    "short_long_share_p90": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8720238095238095,
+      "auroc_ci": [
+        0.6922743055555556,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 0.0007099560273008871,
+      "permutation_p": 0.00029997000299970003,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "kind": "single pre-specified index, nothing fitted"
+    },
+    "hr_bpm_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.31845238095238093,
+      "auroc_ci": [
+        0.11515151515151516,
+        0.5595880018674133
+      ],
+      "mann_whitney_p_one_sided": 0.9446453743756067,
+      "permutation_p": 0.9407059294070593,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "note": "no direction was pre-specified for heart rate; AUROC below 0.5 means arrhythmia recordings are slower",
+      "kind": "single pre-specified index, nothing fitted"
+    },
+    "usable_share_low": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.625,
+      "auroc_ci": [
+        0.5,
+        0.75
+      ],
+      "mann_whitney_p_one_sided": 0.028729508157187066,
+      "permutation_p": 0.07989201079892011,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "role": "share of usable segments (lower = arrhythmia)",
+      "kind": "single pre-specified index, nothing fitted"
+    },
+    "score_median_low": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.9017857142857143,
+      "auroc_ci": [
+        0.7159763313609467,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 0.0002831234483931476,
+      "permutation_p": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "role": "extractor score (lower = arrhythmia); it includes rhythm regularity, so it is not a neutral control",
+      "kind": "single pre-specified index, nothing fitted"
+    },
+    "template_corr_median_low": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.5803571428571429,
+      "auroc_ci": [
+        0.3333333333333333,
+        0.8254674145299143
+      ],
+      "mann_whitney_p_one_sided": 0.2517871103744199,
+      "permutation_p": 0.25007499250074994,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "role": "beat-shape consistency only (lower = arrhythmia): the neutral quality control",
+      "kind": "single pre-specified index, nothing fitted"
+    }
+  },
+  "leakage_comparison": {
+    "n_segments": 288,
+    "n_records": 26,
+    "forest": {
+      "segment_split_auroc": 0.9375723938223938,
+      "segment_split_ci": [
+        0.8426005634304301,
+        0.9867330701037348
+      ],
+      "subject_split_auroc": 0.8700772200772201,
+      "subject_split_ci": [
+        0.7089170285206123,
+        0.9673751941171097
+      ],
+      "gap": 0.06749517374517366,
+      "subject_split_recording_level": {
+        "n": 26,
+        "n_positive": 12,
+        "n_negative": 14,
+        "auroc": 0.8928571428571429,
+        "auroc_ci": [
+          0.7429702909270217,
+          0.9880952380952381
+        ],
+        "mann_whitney_p_one_sided": 0.0003772667149196522,
+        "threshold": 0.5,
+        "tp": 8,
+        "fn": 4,
+        "tn": 13,
+        "fp": 1,
+        "sensitivity": 0.6666666666666666,
+        "sensitivity_ci": [
+          0.3488755064188155,
+          0.9007539088504167
+        ],
+        "specificity": 0.9285714285714286,
+        "specificity_ci": [
+          0.6613155100681788,
+          0.9981932193408746
+        ]
+      }
+    },
+    "logistic": {
+      "segment_split_auroc": 0.8898889961389962,
+      "segment_split_ci": [
+        0.7593199710749693,
+        0.9674621876224619
+      ],
+      "subject_split_auroc": 0.7881756756756757,
+      "subject_split_ci": [
+        0.5386435771889401,
+        0.9418168570533084
+      ],
+      "gap": 0.10171332046332049,
+      "subject_split_recording_level": {
+        "n": 26,
+        "n_positive": 12,
+        "n_negative": 14,
+        "auroc": 0.7976190476190477,
+        "auroc_ci": [
+          0.5534539473684211,
+          0.9878787878787879
+        ],
+        "mann_whitney_p_one_sided": 0.005448177097693718,
+        "threshold": 0.5,
+        "tp": 7,
+        "fn": 5,
+        "tn": 14,
+        "fp": 0,
+        "sensitivity": 0.5833333333333334,
+        "sensitivity_ci": [
+          0.2766696856821058,
+          0.8483477701915698
+        ],
+        "specificity": 1.0,
+        "specificity_ci": [
+          0.7683642383498834,
+          1.0
+        ]
+      }
+    },
+    "note": "segment split = 10-fold over one-minute segments, so segments of a recording fall on both sides; subject split = all segments of a recording held out together. Intervals resample recordings."
+  },
+  "gate_G4_partial": {
+    "negative_control_row_present": true,
+    "note": "the raw-lead control and the checkpoint check belong to run wp4c"
+  }
+}

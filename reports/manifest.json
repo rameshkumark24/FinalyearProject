@@ -1,0 +1,168 @@
+{
+  "outputs": [
+    {
+      "file": "tables/t0_gates.csv",
+      "runs": [
+        "wp1_cinc2013",
+        "wp2_doppler_cycles",
+        "wp3_trust_check",
+        "wp4c_foundation",
+        "wp5_echo_readiness",
+        "wp6_fusion"
+      ]
+    },
+    {
+      "file": "tables/t1_fetal_beat_detection.csv",
+      "runs": [
+        "wp1_cinc2013"
+      ]
+    },
+    {
+      "file": "figures/f1_fetal_beat_detection.png",
+      "runs": [
+        "wp1_cinc2013"
+      ]
+    },
+    {
+      "file": "tables/t2_doppler_cycle_detection.csv",
+      "runs": [
+        "wp2_doppler_cycles"
+      ]
+    },
+    {
+      "file": "figures/f2_doppler_cycle_detection.png",
+      "runs": [
+        "wp2_doppler_cycles"
+      ]
+    },
+    {
+      "file": "tables/t3_trust_check.csv",
+      "runs": [
+        "wp3_trust_check",
+        "wp3_trust_check_v1_prespecified"
+      ]
+    },
+    {
+      "file": "tables/t3b_swap_detection_by_rate_gap.csv",
+      "runs": [
+        "wp3_trust_check"
+      ]
+    },
+    {
+      "file": "tables/t3c_trust_check_perturbations.csv",
+      "runs": [
+        "wp3_trust_check"
+      ]
+    },
+    {
+      "file": "figures/f3_trust_check.png",
+      "runs": [
+        "wp3_trust_check"
+      ]
+    },
+    {
+      "file": "tables/t4_doppler_timing_measures.csv",
+      "runs": [
+        "wp2b_function_reference"
+      ]
+    },
+    {
+      "file": "tables/t4b_healthy_recordings_flagged.csv",
+      "runs": [
+        "wp2b_function_reference"
+      ]
+    },
+    {
+      "file": "tables/t4c_detectable_shift.csv",
+      "runs": [
+        "wp2b_function_reference"
+      ]
+    },
+    {
+      "file": "figures/f4_doppler_measure_repeatability.png",
+      "runs": [
+        "wp2b_function_reference"
+      ]
+    },
+    {
+      "file": "tables/t5_rhythm_expert.csv",
+      "runs": [
+        "wp4b_rhythm_intervals",
+        "wp4c_foundation",
+        "wp4d_cnn"
+      ]
+    },
+    {
+      "file": "tables/t5b_leakage_comparison.csv",
+      "runs": [
+        "wp4b_rhythm_intervals",
+        "wp4d_cnn"
+      ]
+    },
+    {
+      "file": "tables/t5c_heart_rate_probe.csv",
+      "runs": [
+        "wp4c_foundation"
+      ]
+    },
+    {
+      "file": "tables/t5d_sampling_rate_check.csv",
+      "runs": [
+        "wp4c_foundation"
+      ]
+    },
+    {
+      "file": "figures/f5_rhythm_expert.png",
+      "runs": [
+        "wp4b_rhythm_intervals",
+        "wp4c_foundation",
+        "wp4d_cnn"
+      ]
+    },
+    {
+      "file": "RESULTS.md#structure",
+      "runs": [
+        "wp5_echo_readiness"
+      ]
+    },
+    {
+      "file": "tables/t6_conformal_alarms.csv",
+      "runs": [
+        "wp6_fusion"
+      ]
+    },
+    {
+      "file": "tables/t6b_real_paired_cohort.csv",
+      "runs": [
+        "wp6_fusion"
+      ]
+    },
+    {
+      "file": "tables/t6c_rule_comparison_virtual_patients.csv",
+      "runs": [
+        "wp6_fusion"
+      ]
+    },
+    {
+      "file": "figures/f6_fusion_decision.png",
+      "runs": [
+        "wp6_fusion"
+      ]
+    },
+    {
+      "file": "RESULTS.md",
+      "runs": [
+        "wp1_cinc2013",
+        "wp2_doppler_cycles",
+        "wp2b_function_reference",
+        "wp3_trust_check",
+        "wp3_trust_check_v1_prespecified",
+        "wp4b_rhythm_intervals",
+        "wp4c_foundation",
+        "wp4d_cnn",
+        "wp5_echo_readiness",
+        "wp6_fusion"
+      ]
+    }
+  ]
+}

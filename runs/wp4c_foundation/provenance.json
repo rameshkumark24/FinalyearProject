@@ -1,0 +1,83 @@
+{
+  "run": "wp4c_foundation",
+  "description": "Frozen ECGFounder single-lead features on fetal ECG: arrhythmia probe with controls, and heart-rate probes",
+  "created_utc": "2026-10-11T18:18:04+00:00",
+  "script": "scripts/run_wp4c_foundation.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "0eb55fa3713f831f8aad9d8da27e59ab24f7498d",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "source_run": "wp4a_nifeadb_beats",
+    "inputs": [
+      "fetal",
+      "fetal_stretch2",
+      "abdominal_raw",
+      "maternal_chest"
+    ],
+    "probe": "standardise, PCA(8), logistic regression C=1",
+    "rate_probe": "standardise, PCA(8), ridge alpha=1",
+    "permutations": 300,
+    "preprocessing": "official ECGFounder dataset.py: notch 50 Hz, band 0.67-40 Hz, median baseline removal, z-score",
+    "ecg": {
+      "n_components": 3,
+      "max_sources": 8,
+      "n_tracked": 3,
+      "smoothness": 4.0,
+      "min_score": 0.2,
+      "seed": 0
+    },
+    "device": "cuda",
+    "random_init": {
+      "name": "random-init Net1D",
+      "seed": 0,
+      "verified": false
+    }
+  },
+  "data": {
+    "nifeadb": {
+      "n_files": 52,
+      "total_bytes": 186294562,
+      "manifest_sha256": "6171bc17ae2db8ffb7f9fc42ecd24e7ff9288edf2c7f942105d9a032c4a6a19b"
+    },
+    "cinc2013": {
+      "n_files": 225,
+      "total_bytes": 36034682,
+      "manifest_sha256": "612b817290049328f3017e134d16ebbad573d1dbeb0fe31ea6f03889156b7783"
+    },
+    "beats": {
+      "n_files": 1,
+      "total_bytes": 2015456,
+      "manifest_sha256": "f99613445e5f3c370d44d52fc1b9c95f47a76cb547886209095cc6d7118ccd23"
+    }
+  },
+  "n_real": 101,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [
+    {
+      "claimed_name": "ECGFounder single-lead",
+      "verified": true,
+      "sha256": "f863a38897fb49a27fec7e44008ea3c7bdbd29c77fa4a02ecbb8c56df4f37603",
+      "file": "1_lead_ECGFounder.pth",
+      "bytes": 369807481,
+      "source": "huggingface.co/PKUDigitalHealth/ECGFounder",
+      "licence": "MIT (model card)",
+      "n_parameters": 30807750
+    }
+  ],
+  "seed": 0,
+  "argv": [
+    "C:\\Finalyearproject\\scripts\\run_wp4c_foundation.py"
+  ]
+}
