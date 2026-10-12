@@ -4,7 +4,7 @@ Final-year project. Three tests look at three different things in a fetal heart:
 
 | Test | Question | Expert | Real labelled data |
 |---|---|---|---|
-| Fetal echocardiography | Is the structure normal? | structure | **none yet** (Heartbeat and CARDIUM are released on request; the forms have not been sent) |
+| Fetal echocardiography | Is the structure normal? | structure | **none yet** (Heartbeat and CARDIUM are released on request and the forms have not been sent; the open DELTA dataset is not downloaded yet) |
 | Pulsed-wave Doppler | Is the timing of filling and ejection normal? | function | healthy fetuses only (NInFEA) |
 | Non-invasive fetal ECG | Is the rhythm normal? | rhythm | 12 arrhythmia, 14 normal (NIFEADB) |
 
@@ -79,11 +79,15 @@ The annotated Doppler strips (Mendeley Data, doi:10.17632/pg2djw3sjc.1) are expe
 
 ## Data and licences
 
-See `docs/data_cards/`. NInFEA and NIFEADB: Open Data Commons Attribution License v1.0. ECGFounder weights: MIT (model card). FetalCLIP weights: CC BY-NC 4.0 (research use only). No data or weights are in this repository.
+See `docs/data_cards/`. CinC 2013, NInFEA and NIFEADB: Open Data Commons Attribution License v1.0. Annotated Doppler strips: CC BY 4.0. ECGFounder weights: MIT (model card). FetalCLIP weights: CC BY-NC 4.0 (research use only). No data or weights are in this repository.
+
+## Paper
+
+A full paper draft was written from these runs on 12 Oct 2026. It is kept outside this public repository until submission; every number in it is read from `reports/RESULTS.md` and the run folders here.
 
 ## What is not done
 
-- Structure expert on labelled data (waits for access).
+- Structure expert on labelled data. Heartbeat and CARDIUM are released only through their authors' request forms (re-checked 12 Oct 2026). An open alternative with heart-defect labels, DELTA (figshare, doi:10.6084/m9.figshare.32358771, CC BY 4.0), was found the same day and is not downloaded yet; see `docs/data_cards/echo.md`.
 - HuBERT-ECG and ECG-FM (only ECGFounder was run).
 - Arrhythmia timings driving healthy Doppler shapes (planned as a labelled semi-synthetic test).
 - Comparison of the Doppler measures with published reference equations (our measures are read from envelope peaks and clicks and are not the clinical intervals).
