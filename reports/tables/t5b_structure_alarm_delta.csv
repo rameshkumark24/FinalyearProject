@@ -1,0 +1,3 @@
+Evaluation,Alarm level,Abnormal cases caught,Sensitivity,95% CI,Normal cases flagged,False-alarm share,95% CI
+"repeated case-level folds, all cases",0.05,62/133,46.6%,"[0.38, 0.55]",40/619,6.5%,"[0.047, 0.087]"
+"dataset's own partition: fitted on Train, calibrated on Val, judged on Test",0.05,18/30,60.0%,"[0.41, 0.77]",9/124,7.3%,"[0.034, 0.133]"

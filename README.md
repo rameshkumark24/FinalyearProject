@@ -4,7 +4,7 @@ Final-year project. Three tests look at three different things in a fetal heart:
 
 | Test | Question | Expert | Real labelled data |
 |---|---|---|---|
-| Fetal echocardiography | Is the structure normal? | structure | **none yet** (Heartbeat and CARDIUM are released on request and the forms have not been sent; the open DELTA dataset is not downloaded yet) |
+| Fetal echocardiography | Is the structure normal? | structure | 752 cases, 133 with a heart defect (DELTA: open, one centre, released Oct 2026) |
 | Pulsed-wave Doppler | Is the timing of filling and ejection normal? | function | healthy fetuses only (NInFEA) |
 | Non-invasive fetal ECG | Is the rhythm normal? | rhythm | 12 arrhythmia, 14 normal (NIFEADB) |
 
@@ -14,7 +14,7 @@ No public dataset holds all three tests for the same fetus. So the experts are b
 
 - **The repository was rebuilt from 11 October 2026.** The first build (2–4 October) reported numbers that did not come from real computation. It is kept in `archive/first_build_2026-10-02/` with a note; none of its results is valid.
 - **Results live in `reports/RESULTS.md`**, which is generated from the run folders. Nothing in it is typed by hand.
-- **There is no result on heart defects.** The structure expert has no labelled data.
+- **The heart-defect result rests on one open, single-centre dataset (DELTA), and its controls show that part of the label can be read without looking at the heart** (`reports/RESULTS.md`, section 6). Read the structure expert's AUROC as an upper bound, not as screening performance.
 - **There is no measured performance of the fused system on patients.** That needs paired data, which does not exist publicly.
 
 ## Where things stand
@@ -26,8 +26,8 @@ No public dataset holds all three tests for the same fetus. So the experts are b
 | WP3 ECG–Doppler trust check | NInFEA, 13 women for tuning, 26 held out; mismatches built from real signals | G3 **not met** on beat-to-beat agreement; detection of the mother's beats met |
 | WP2b Function expert | Healthy reference from 39 women; false-alarm control; repeatability | no gate; sensitivity cannot be measured |
 | WP4 Rhythm expert | NIFEADB, leave-one-subject-out; interval features, a trained CNN, frozen ECGFounder with its published weights; controls; leakage comparison | G4 met |
-| WP5 Structure expert | De-identification tool and FetalCLIP loading tested on unlabelled frames | G5 cannot be evaluated |
-| WP6 Fusion and decision | Property tests; decision rule on the real paired healthy cohort; rule comparison on virtual patients built from real scores | G6: tests pass |
+| WP5 Structure expert | DELTA, 752 cases: frozen FetalCLIP and a linear probe, case-level folds and the authors' own split; shortcut audit; random-weight control | G5 partly met; the audit finds label information outside the heart |
+| WP6 Fusion and decision | Property tests; decision rule on the real paired healthy cohort; rule comparison on virtual patients built from real scores; with the structure scores, false referrals with three tests | G6: tests pass |
 
 "Not met" and "cannot be evaluated" are results. They are reported, not hidden.
 
@@ -69,7 +69,10 @@ pip install -r requirements.txt
 python scripts/download_ninfea.py             # NInFEA, every file checked against PhysioNet's SHA-256 list
 python scripts/download_models.py             # ECGFounder and FetalCLIP weights, hash checked
 # CinC 2013 set A and NIFEADB go to data/cinc2013/set-a and data/nifeadb (PhysioNet)
-python scripts/run_all.py                     # every run, in order, about two hours on a laptop with a small GPU
+# DELTA (echo): download DELTA_Dataset.zip in a browser from doi:10.6084/m9.figshare.32358771, check its MD5
+# (865d952adc0d8fe2be9df326e46cb763), extract the images and metadata.csv to data/delta/extracted/, then:
+python scripts/make_echo_index_delta.py       # splits/echo_delta_index.csv from the authors' metadata.csv
+python scripts/run_all.py                     # every run, in order, about two and a half hours on a laptop with a small GPU
 python scripts/build_report.py                # reports/RESULTS.md, tables and figures
 python -m sfr.audit                           # provenance and labelling checks
 python -m pytest tests -q
@@ -79,7 +82,7 @@ The annotated Doppler strips (Mendeley Data, doi:10.17632/pg2djw3sjc.1) are expe
 
 ## Data and licences
 
-See `docs/data_cards/`. CinC 2013, NInFEA and NIFEADB: Open Data Commons Attribution License v1.0. Annotated Doppler strips: CC BY 4.0. ECGFounder weights: MIT (model card). FetalCLIP weights: CC BY-NC 4.0 (research use only). No data or weights are in this repository.
+See `docs/data_cards/`. CinC 2013, NInFEA and NIFEADB: Open Data Commons Attribution License v1.0. Annotated Doppler strips: CC BY 4.0. DELTA echo images: CC BY 4.0 (Zhang, Yao, Qian, Ye, figshare, doi:10.6084/m9.figshare.32358771). ECGFounder weights: MIT (model card). FetalCLIP weights: CC BY-NC 4.0 (research use only). No data or weights are in this repository.
 
 ## Paper
 
@@ -87,7 +90,8 @@ A full paper draft was written from these runs on 12 Oct 2026. It is kept outsid
 
 ## What is not done
 
-- Structure expert on labelled data. Heartbeat and CARDIUM are released only through their authors' request forms (re-checked 12 Oct 2026). An open alternative with heart-defect labels, DELTA (figshare, doi:10.6084/m9.figshare.32358771, CC BY 4.0), was found the same day and is not downloaded yet; see `docs/data_cards/echo.md`.
+- Structure expert on a second, independent dataset. It is run on DELTA only (one centre, no external test set). Heartbeat and CARDIUM are released only through their authors' request forms (re-checked 12 Oct 2026) and were not requested; see `docs/data_cards/echo.md`.
+- The sweep videos of DELTA are not used; only the still images are.
 - HuBERT-ECG and ECG-FM (only ECGFounder was run).
 - Arrhythmia timings driving healthy Doppler shapes (planned as a labelled semi-synthetic test).
 - Comparison of the Doppler measures with published reference equations (our measures are read from envelope peaks and clicks and are not the clinical intervals).

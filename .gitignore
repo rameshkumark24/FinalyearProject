@@ -53,3 +53,5 @@ runs/**/*.npz
 runs/**/*.pkl
 # Test and tool caches
 .pytest_cache/
+# Paper draft: kept private until submission (a plagiarism check must not match the paper against its own draft)
+paper/

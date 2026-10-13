@@ -1,4 +1,4 @@
 Expert,Alarm level,Abnormal cases caught,95% CI of sensitivity,Healthy cases flagged,Smallest possible p
 "rhythm (NIFEADB, leave-one-subject-out)",0.1,8/12,"[0.35, 0.90]",1/14,0.067
 "function (NInFEA, leave-one-woman-out)",0.05,no abnormal case,-,2/60,-
-structure,-,no labelled data,-,-,-
+"structure (DELTA, case-level folds)",0.05,62/133,"[0.38, 0.55]",40/619,-
