@@ -1,0 +1,1147 @@
+{
+  "dataset": {
+    "name": "delta",
+    "source": "figshare doi:10.6084/m9.figshare.32358771 (version 2), CC BY 4.0",
+    "images": 3760,
+    "cases": 752,
+    "abnormal_cases": 133,
+    "normal_cases": 619
+  },
+  "probes": {
+    "fetalclip_scan": {
+      "auroc": 0.8276264166069455,
+      "ci": [
+        0.7790773919505191,
+        0.8714822295441526
+      ],
+      "n_abnormal": 133,
+      "n_normal": 619,
+      "p_value": 0.004975124378109453,
+      "p_method": "labels shuffled over cases, probe refitted, 200 permutations"
+    },
+    "fetalclip_overlay_only": {
+      "auroc": 0.7701968977370729,
+      "ci": [
+        0.7200363117753111,
+        0.8209039323092929
+      ],
+      "n_abnormal": 133,
+      "n_normal": 619,
+      "p_value": 0.004975124378109453,
+      "p_method": "labels shuffled over cases, probe refitted, 200 permutations"
+    },
+    "fetalclip_unaltered_image": {
+      "auroc": 0.8284888311246614,
+      "ci": [
+        0.7796725431333679,
+        0.8742379531617259
+      ],
+      "n_abnormal": 133,
+      "n_normal": 619,
+      "p_value": 0.004975124378109453,
+      "p_method": "labels shuffled over cases, probe refitted, 200 permutations"
+    },
+    "no_anatomy_numbers": {
+      "auroc": 0.6187277563861188,
+      "ci": [
+        0.5625379580118666,
+        0.6753112936501035
+      ],
+      "n_abnormal": 133,
+      "n_normal": 619,
+      "p_value": 0.004975124378109453,
+      "p_method": "labels shuffled over cases, probe refitted, 200 permutations"
+    },
+    "random_weights_scan": {
+      "auroc": 0.7326393528247113,
+      "ci": [
+        0.6841240418724716,
+        0.7813585981267507
+      ],
+      "n_abnormal": 133,
+      "n_normal": 619,
+      "p_value": 0.004975124378109453,
+      "p_method": "labels shuffled over cases, probe refitted, 200 permutations"
+    }
+  },
+  "shortcut_audit": {
+    "overlay_only_auroc": 0.7701968977370729,
+    "overlay_only_ci": [
+      0.7200363117753111,
+      0.8209039323092929
+    ],
+    "no_anatomy_numbers_auroc": 0.6187277563861188,
+    "no_anatomy_numbers_ci": [
+      0.5625379580118666,
+      0.6753112936501035
+    ],
+    "reading": "an interval that excludes 0.5 means the label can be read without looking at the heart"
+  },
+  "alarm": {
+    "alpha": 0.05,
+    "sensitivity": {
+      "caught": 62,
+      "n": 133,
+      "share": 0.46616541353383456,
+      "ci": [
+        0.3792415109021964,
+        0.5546291920378923
+      ]
+    },
+    "false_alarms": {
+      "flagged": 40,
+      "n": 619,
+      "share": 0.06462035541195477,
+      "ci": [
+        0.04656342205288964,
+        0.0869580132214595
+      ]
+    },
+    "by_subtype": [
+      {
+        "subtype": "AA",
+        "cases": 17,
+        "caught": 11,
+        "ci": [
+          0.3832836634434029,
+          0.857902516889779
+        ],
+        "too_few_to_interpret": true
+      },
+      {
+        "subtype": "AVSD",
+        "cases": 9,
+        "caught": 3,
+        "ci": [
+          0.0748546314196918,
+          0.7007049437914596
+        ],
+        "too_few_to_interpret": true
+      },
+      {
+        "subtype": "DORV",
+        "cases": 11,
+        "caught": 8,
+        "ci": [
+          0.39025744042757876,
+          0.9397822658270933
+        ],
+        "too_few_to_interpret": true
+      },
+      {
+        "subtype": "HLHS",
+        "cases": 6,
+        "caught": 5,
+        "ci": [
+          0.35876542100232517,
+          0.9957892554855106
+        ],
+        "too_few_to_interpret": true
+      },
+      {
+        "subtype": "HRHS",
+        "cases": 7,
+        "caught": 2,
+        "ci": [
+          0.03669256617608556,
+          0.7095791362626572
+        ],
+        "too_few_to_interpret": true
+      },
+      {
+        "subtype": "PLSVC",
+        "cases": 10,
+        "caught": 4,
+        "ci": [
+          0.12155225811982717,
+          0.7376219233930549
+        ],
+        "too_few_to_interpret": true
+      },
+      {
+        "subtype": "PS",
+        "cases": 8,
+        "caught": 4,
+        "ci": [
+          0.15701277048705797,
+          0.842987229512942
+        ],
+        "too_few_to_interpret": true
+      },
+      {
+        "subtype": "RAA",
+        "cases": 11,
+        "caught": 6,
+        "ci": [
+          0.23379359765934518,
+          0.8325119059362929
+        ],
+        "too_few_to_interpret": true
+      },
+      {
+        "subtype": "SGA",
+        "cases": 12,
+        "caught": 5,
+        "ci": [
+          0.15165222980843016,
+          0.7233303143178942
+        ],
+        "too_few_to_interpret": true
+      },
+      {
+        "subtype": "SV",
+        "cases": 5,
+        "caught": 2,
+        "ci": [
+          0.052744950526316906,
+          0.8533672003653268
+        ],
+        "too_few_to_interpret": true
+      },
+      {
+        "subtype": "TGA",
+        "cases": 4,
+        "caught": 1,
+        "ci": [
+          0.006309463209709865,
+          0.8058795503167565
+        ],
+        "too_few_to_interpret": true
+      },
+      {
+        "subtype": "TOF",
+        "cases": 33,
+        "caught": 11,
+        "ci": [
+          0.1796051349325601,
+          0.5182674724875822
+        ],
+        "too_few_to_interpret": false
+      }
+    ]
+  },
+  "own_partition": {
+    "fetalclip_scan": {
+      "auroc": 0.8776881720430108,
+      "ci": [
+        0.7816114470507608,
+        0.9502756021763544
+      ],
+      "fitted_on_cases": 521,
+      "calibration_normal_cases": 62,
+      "test_abnormal": 30,
+      "test_normal": 124,
+      "alarm": {
+        "alpha": 0.05,
+        "sensitivity": {
+          "caught": 18,
+          "n": 30,
+          "share": 0.6,
+          "ci": [
+            0.4060349300518186,
+            0.7734423511714064
+          ]
+        },
+        "false_alarms": {
+          "flagged": 9,
+          "n": 124,
+          "share": 0.07258064516129033,
+          "ci": [
+            0.03372420997561166,
+            0.133310617774794
+          ]
+        },
+        "by_subtype": [
+          {
+            "subtype": "AA",
+            "cases": 4,
+            "caught": 3,
+            "ci": [
+              0.19412044968324338,
+              0.9936905367902902
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "AVSD",
+            "cases": 2,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.841886116991581
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "DORV",
+            "cases": 3,
+            "caught": 2,
+            "ci": [
+              0.09429932405024609,
+              0.9915962413403874
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "HLHS",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "HRHS",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "PLSVC",
+            "cases": 2,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.841886116991581
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "PS",
+            "cases": 2,
+            "caught": 1,
+            "ci": [
+              0.01257911709342505,
+              0.9874208829065749
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "RAA",
+            "cases": 3,
+            "caught": 2,
+            "ci": [
+              0.09429932405024609,
+              0.9915962413403874
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "SGA",
+            "cases": 3,
+            "caught": 3,
+            "ci": [
+              0.2924017738212866,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "SV",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "TGA",
+            "cases": 1,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.975
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "TOF",
+            "cases": 7,
+            "caught": 4,
+            "ci": [
+              0.184051567640083,
+              0.9010117215574921
+            ],
+            "too_few_to_interpret": true
+          }
+        ]
+      }
+    },
+    "fetalclip_overlay_only": {
+      "auroc": 0.8185483870967742,
+      "ci": [
+        0.7134367596136323,
+        0.906717472979928
+      ],
+      "fitted_on_cases": 521,
+      "calibration_normal_cases": 62,
+      "test_abnormal": 30,
+      "test_normal": 124,
+      "alarm": {
+        "alpha": 0.05,
+        "sensitivity": {
+          "caught": 15,
+          "n": 30,
+          "share": 0.5,
+          "ci": [
+            0.3129702858680275,
+            0.6870297141319724
+          ]
+        },
+        "false_alarms": {
+          "flagged": 3,
+          "n": 124,
+          "share": 0.024193548387096774,
+          "ci": [
+            0.005017353446921379,
+            0.06907613709116538
+          ]
+        },
+        "by_subtype": [
+          {
+            "subtype": "AA",
+            "cases": 4,
+            "caught": 3,
+            "ci": [
+              0.19412044968324338,
+              0.9936905367902902
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "AVSD",
+            "cases": 2,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.841886116991581
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "DORV",
+            "cases": 3,
+            "caught": 1,
+            "ci": [
+              0.008403758659612636,
+              0.9057006759497539
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "HLHS",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "HRHS",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "PLSVC",
+            "cases": 2,
+            "caught": 1,
+            "ci": [
+              0.01257911709342505,
+              0.9874208829065749
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "PS",
+            "cases": 2,
+            "caught": 1,
+            "ci": [
+              0.01257911709342505,
+              0.9874208829065749
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "RAA",
+            "cases": 3,
+            "caught": 2,
+            "ci": [
+              0.09429932405024609,
+              0.9915962413403874
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "SGA",
+            "cases": 3,
+            "caught": 3,
+            "ci": [
+              0.2924017738212866,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "SV",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "TGA",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "TOF",
+            "cases": 7,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.40961639722500337
+            ],
+            "too_few_to_interpret": true
+          }
+        ]
+      }
+    },
+    "fetalclip_unaltered_image": {
+      "auroc": 0.8620967741935484,
+      "ci": [
+        0.7695901968005908,
+        0.9366292488472939
+      ],
+      "fitted_on_cases": 521,
+      "calibration_normal_cases": 62,
+      "test_abnormal": 30,
+      "test_normal": 124,
+      "alarm": {
+        "alpha": 0.05,
+        "sensitivity": {
+          "caught": 16,
+          "n": 30,
+          "share": 0.5333333333333333,
+          "ci": [
+            0.3432552381607341,
+            0.716581920816463
+          ]
+        },
+        "false_alarms": {
+          "flagged": 7,
+          "n": 124,
+          "share": 0.056451612903225805,
+          "ci": [
+            0.02299498642298563,
+            0.11285479537754754
+          ]
+        },
+        "by_subtype": [
+          {
+            "subtype": "AA",
+            "cases": 4,
+            "caught": 3,
+            "ci": [
+              0.19412044968324338,
+              0.9936905367902902
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "AVSD",
+            "cases": 2,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.841886116991581
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "DORV",
+            "cases": 3,
+            "caught": 1,
+            "ci": [
+              0.008403758659612636,
+              0.9057006759497539
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "HLHS",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "HRHS",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "PLSVC",
+            "cases": 2,
+            "caught": 2,
+            "ci": [
+              0.15811388300841897,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "PS",
+            "cases": 2,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.841886116991581
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "RAA",
+            "cases": 3,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.7075982261787133
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "SGA",
+            "cases": 3,
+            "caught": 2,
+            "ci": [
+              0.09429932405024609,
+              0.9915962413403874
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "SV",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "TGA",
+            "cases": 1,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.975
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "TOF",
+            "cases": 7,
+            "caught": 5,
+            "ci": [
+              0.2904208637373427,
+              0.9633074338239145
+            ],
+            "too_few_to_interpret": true
+          }
+        ]
+      }
+    },
+    "no_anatomy_numbers": {
+      "auroc": 0.6795698924731183,
+      "ci": [
+        0.548208780757482,
+        0.8022769240311126
+      ],
+      "fitted_on_cases": 521,
+      "calibration_normal_cases": 62,
+      "test_abnormal": 30,
+      "test_normal": 124,
+      "alarm": {
+        "alpha": 0.05,
+        "sensitivity": {
+          "caught": 7,
+          "n": 30,
+          "share": 0.23333333333333334,
+          "ci": [
+            0.09933786495801972,
+            0.4228365229782194
+          ]
+        },
+        "false_alarms": {
+          "flagged": 3,
+          "n": 124,
+          "share": 0.024193548387096774,
+          "ci": [
+            0.005017353446921379,
+            0.06907613709116538
+          ]
+        },
+        "by_subtype": [
+          {
+            "subtype": "AA",
+            "cases": 4,
+            "caught": 1,
+            "ci": [
+              0.006309463209709865,
+              0.8058795503167565
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "AVSD",
+            "cases": 2,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.841886116991581
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "DORV",
+            "cases": 3,
+            "caught": 1,
+            "ci": [
+              0.008403758659612636,
+              0.9057006759497539
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "HLHS",
+            "cases": 1,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.975
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "HRHS",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "PLSVC",
+            "cases": 2,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.841886116991581
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "PS",
+            "cases": 2,
+            "caught": 1,
+            "ci": [
+              0.01257911709342505,
+              0.9874208829065749
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "RAA",
+            "cases": 3,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.7075982261787133
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "SGA",
+            "cases": 3,
+            "caught": 1,
+            "ci": [
+              0.008403758659612636,
+              0.9057006759497539
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "SV",
+            "cases": 1,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.975
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "TGA",
+            "cases": 1,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.975
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "TOF",
+            "cases": 7,
+            "caught": 2,
+            "ci": [
+              0.03669256617608556,
+              0.7095791362626572
+            ],
+            "too_few_to_interpret": true
+          }
+        ]
+      }
+    },
+    "random_weights_scan": {
+      "auroc": 0.8201612903225807,
+      "ci": [
+        0.7323431035633258,
+        0.8934369202226344
+      ],
+      "fitted_on_cases": 521,
+      "calibration_normal_cases": 62,
+      "test_abnormal": 30,
+      "test_normal": 124,
+      "alarm": {
+        "alpha": 0.05,
+        "sensitivity": {
+          "caught": 11,
+          "n": 30,
+          "share": 0.36666666666666664,
+          "ci": [
+            0.19929862501203452,
+            0.5614401509880425
+          ]
+        },
+        "false_alarms": {
+          "flagged": 8,
+          "n": 124,
+          "share": 0.06451612903225806,
+          "ci": [
+            0.028262605586467142,
+            0.12316664737164229
+          ]
+        },
+        "by_subtype": [
+          {
+            "subtype": "AA",
+            "cases": 4,
+            "caught": 2,
+            "ci": [
+              0.06758598648854294,
+              0.932414013511457
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "AVSD",
+            "cases": 2,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.841886116991581
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "DORV",
+            "cases": 3,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.7075982261787133
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "HLHS",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "HRHS",
+            "cases": 1,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.975
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "PLSVC",
+            "cases": 2,
+            "caught": 1,
+            "ci": [
+              0.01257911709342505,
+              0.9874208829065749
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "PS",
+            "cases": 2,
+            "caught": 1,
+            "ci": [
+              0.01257911709342505,
+              0.9874208829065749
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "RAA",
+            "cases": 3,
+            "caught": 2,
+            "ci": [
+              0.09429932405024609,
+              0.9915962413403874
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "SGA",
+            "cases": 3,
+            "caught": 2,
+            "ci": [
+              0.09429932405024609,
+              0.9915962413403874
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "SV",
+            "cases": 1,
+            "caught": 1,
+            "ci": [
+              0.025,
+              1.0
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "TGA",
+            "cases": 1,
+            "caught": 0,
+            "ci": [
+              0.0,
+              0.975
+            ],
+            "too_few_to_interpret": true
+          },
+          {
+            "subtype": "TOF",
+            "cases": 7,
+            "caught": 1,
+            "ci": [
+              0.0036102968619005837,
+              0.5787231970431952
+            ],
+            "too_few_to_interpret": true
+          }
+        ]
+      }
+    }
+  },
+  "image_size_by_label": [
+    {
+      "size": "1114x766",
+      "normal": 6,
+      "abnormal": 1
+    },
+    {
+      "size": "448x404",
+      "normal": 0,
+      "abnormal": 1
+    },
+    {
+      "size": "642x506",
+      "normal": 112,
+      "abnormal": 11
+    },
+    {
+      "size": "744x658",
+      "normal": 15,
+      "abnormal": 1
+    },
+    {
+      "size": "806x648",
+      "normal": 69,
+      "abnormal": 5
+    },
+    {
+      "size": "900x752",
+      "normal": 417,
+      "abnormal": 114
+    }
+  ],
+  "same_image_size": {
+    "size": "900x752",
+    "cases": 531,
+    "abnormal": 114,
+    "probes": {
+      "fetalclip_scan": {
+        "auroc": 0.8695990575960284,
+        "ci": [
+          0.8253397219561199,
+          0.9105391793031427
+        ],
+        "n_abnormal": 114,
+        "n_normal": 417
+      },
+      "no_anatomy_numbers": {
+        "auroc": 0.6180108544743153,
+        "ci": [
+          0.5555354348312095,
+          0.6765757325746008
+        ],
+        "n_abnormal": 114,
+        "n_normal": 417
+      },
+      "random_weights_scan": {
+        "auroc": 0.7358534225251377,
+        "ci": [
+          0.6782772064860427,
+          0.790669073328372
+        ],
+        "n_abnormal": 114,
+        "n_normal": 417
+      }
+    }
+  },
+  "by_plane": [
+    {
+      "plane": "3VT",
+      "cases": 752,
+      "abnormal": 133,
+      "auroc": 0.796931747786267,
+      "ci": [
+        0.7470179033002091,
+        0.84380316791224
+      ],
+      "n_abnormal": 133,
+      "n_normal": 619
+    },
+    {
+      "plane": "4CH",
+      "cases": 752,
+      "abnormal": 133,
+      "auroc": 0.8352666804329077,
+      "ci": [
+        0.7918278407680543,
+        0.8747937695194139
+      ],
+      "n_abnormal": 133,
+      "n_normal": 619
+    },
+    {
+      "plane": "Abdomen",
+      "cases": 752,
+      "abnormal": 133,
+      "auroc": 0.7708649653212191,
+      "ci": [
+        0.7215866083749343,
+        0.8200595747985937
+      ],
+      "n_abnormal": 133,
+      "n_normal": 619
+    },
+    {
+      "plane": "LVOT",
+      "cases": 752,
+      "abnormal": 133,
+      "auroc": 0.8205206068483001,
+      "ci": [
+        0.772870411895604,
+        0.8642448164259188
+      ],
+      "n_abnormal": 133,
+      "n_normal": 619
+    },
+    {
+      "plane": "RVOT",
+      "cases": 752,
+      "abnormal": 133,
+      "auroc": 0.7780558018633013,
+      "ci": [
+        0.7292168019341775,
+        0.8249859223195681
+      ],
+      "n_abnormal": 133,
+      "n_normal": 619
+    }
+  ],
+  "models": {
+    "published": {
+      "claimed_name": "FetalCLIP",
+      "verified": true,
+      "sha256": "90916caa408baf9374ee3f8c1533463331a4ace37a13e61385e782905b35c310",
+      "file": "FetalCLIP_weights.pt",
+      "bytes": 1710766661,
+      "source": "huggingface.co/numansaeed/fetalclip-model",
+      "licence": "CC BY-NC 4.0",
+      "n_parameters": 427647233
+    },
+    "control": {
+      "name": "random-init network with the FetalCLIP architecture",
+      "seed": 0,
+      "verified": false
+    }
+  },
+  "gate_G5": {
+    "auroc_with_interval": true,
+    "shortcut_audit_reported": true,
+    "reference_model_reproduced": false,
+    "reason": "no released reference model exists for this dataset; the other two parts are reported"
+  },
+  "minutes": 131.40515308380128
+}

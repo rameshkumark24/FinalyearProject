@@ -1,0 +1,71 @@
+{
+  "run": "wp6b_fusion_structure",
+  "description": "Decision rule with the structure expert's real scores: alarms of three experts, false referrals with three tests, and the rule comparison for a structural defect on virtual patients",
+  "created_utc": "2026-10-13T20:19:08+00:00",
+  "script": "scripts/run_wp6b_fusion_structure.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "fa61547aef961ef36901267ba667ab6394a975bb",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "alpha": {
+      "structure": 0.05,
+      "function": 0.05,
+      "rhythm": 0.1
+    },
+    "source_runs": [
+      "wp5_structure_delta",
+      "wp2b_function_reference",
+      "wp4b_rhythm_intervals",
+      "wp6_fusion"
+    ],
+    "rhythm_score": "oof_logistic_rhythm",
+    "couplings": [
+      "independent",
+      "tied",
+      "opposed"
+    ],
+    "target_false_referral_rates": [
+      0.1,
+      0.15
+    ],
+    "bootstrap": 500
+  },
+  "data": {
+    "structure": {
+      "n_files": 1,
+      "total_bytes": 69518,
+      "manifest_sha256": "355ce812fbca1372e3e3819a69912049a2abb528d1d6a239327e9337daaecaaf"
+    },
+    "function": {
+      "n_files": 1,
+      "total_bytes": 12523,
+      "manifest_sha256": "681b8ce1a685bbf8b2045a7e4ddad71309ded39bd9480b45d1170a196ba969fc"
+    },
+    "rhythm": {
+      "n_files": 1,
+      "total_bytes": 4328,
+      "manifest_sha256": "740229f8399ea06521b0c4e4cf04b15f62fee10d2cbe6fc37fa10544a52a4dbf"
+    }
+  },
+  "n_real": 838,
+  "n_synthetic": 272160,
+  "synthetic": true,
+  "synthetic_kind": "virtual patients made by pairing real held-out scores of different people (part C; coupling stated in every row). Parts A and B use real scores only.",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "C:\\Finalyearproject\\scripts\\run_wp6b_fusion_structure.py",
+    "--structure-run",
+    "wp5_structure_delta"
+  ]
+}

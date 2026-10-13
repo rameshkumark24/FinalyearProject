@@ -1,0 +1,117 @@
+{
+  "A_alarms_of_three_experts": {
+    "structure": {
+      "alpha": 0.05,
+      "dataset": "delta",
+      "n_abnormal": 133,
+      "n_normal": 619,
+      "caught": 62,
+      "sensitivity": 0.46616541353383456,
+      "sensitivity_ci": [
+        0.3792415109021964,
+        0.5546291920378923
+      ],
+      "normal_flagged": 40,
+      "false_alarm_rate": 0.06462035541195477,
+      "false_alarm_ci": [
+        0.04656342205288964,
+        0.0869580132214595
+      ]
+    },
+    "function": {
+      "alpha": 0.05,
+      "n_healthy_recordings": 60,
+      "n_women": 39,
+      "flagged": 2,
+      "false_alarm_rate": 0.03333333333333333,
+      "no_abnormal_cases": "sensitivity cannot be measured"
+    },
+    "rhythm": {
+      "alpha": 0.1,
+      "n_arrhythmia": 12,
+      "n_normal": 14,
+      "smallest_possible_p": 0.06666666666666667,
+      "arrhythmia_caught": 8,
+      "sensitivity": 0.6666666666666666,
+      "sensitivity_ci": [
+        0.3488755064188155,
+        0.9007539088504167
+      ],
+      "normal_flagged": 1,
+      "false_alarm_rate": 0.07142857142857142,
+      "false_alarm_ci": [
+        0.0018067806591253865,
+        0.3386844899318212
+      ],
+      "false_alarm_range_of_a_fixed_calibration_set_90pct": [
+        0.003657103191383564,
+        0.19263617565013527
+      ],
+      "other_scores_same_level_not_preselected": {
+        "oof_forest_rhythm": {
+          "arrhythmia_caught": 9,
+          "n_arrhythmia": 12,
+          "sensitivity_ci": [
+            0.4281415381218108,
+            0.9451393554720072
+          ],
+          "normal_flagged": 1,
+          "n_normal": 14
+        },
+        "succ_rel_median": {
+          "arrhythmia_caught": 8,
+          "n_arrhythmia": 12,
+          "sensitivity_ci": [
+            0.3488755064188155,
+            0.9007539088504167
+          ],
+          "normal_flagged": 1,
+          "n_normal": 14
+        },
+        "outlier_share_p90": {
+          "arrhythmia_caught": 8,
+          "n_arrhythmia": 12,
+          "sensitivity_ci": [
+            0.3488755064188155,
+            0.9007539088504167
+          ],
+          "normal_flagged": 1,
+          "n_normal": 14
+        }
+      }
+    },
+    "false_referral_ceiling_three_experts": 0.2
+  },
+  "B_healthy_people_with_three_tests": {
+    "false_alarm_rate_of_each_expert": {
+      "structure": 0.06462035541195477,
+      "function": 0.03333333333333333,
+      "rhythm": 0.07142857142857142
+    },
+    "false_referral_rate_three_tests": {
+      "independent": 0.16038541426263553,
+      "tied": 0.07142857142857142,
+      "alarms_never_overlap": 0.16938226017385952
+    },
+    "ceiling_sum_of_levels": 0.2,
+    "ceiling_respected": {
+      "independent": true,
+      "tied": true,
+      "alarms_never_overlap": true
+    },
+    "note": "healthy scores of three different groups of people combined; the last row is the largest rate any dependence could give"
+  },
+  "C_rule_comparison_structural_defect": {
+    "rows": 12,
+    "structure_run": "wp5_structure_delta"
+  },
+  "hypothesis_H7_structure": {
+    "statement": "with mixed test availability and one threshold, averaging-type rules lose alarms that the OR rule keeps at the same false-referral rate",
+    "rows_checked": 6,
+    "rows_where_mean_rule_has_lower_sensitivity": 6,
+    "rows_where_interval_excludes_zero": 5,
+    "established": false,
+    "both_tests_rows_where_mean_rule_has_lower_sensitivity": 4,
+    "both_tests_rows_where_interval_excludes_zero": 4
+  }
+}

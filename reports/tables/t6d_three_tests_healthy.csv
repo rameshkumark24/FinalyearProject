@@ -1,0 +1,4 @@
+How the three healthy scores are combined,False-referral rate,Ceiling from the alarm levels,Within the ceiling
+independent,16.0%,20%,True
+tied,7.1%,20%,True
+alarms never overlap,16.9%,20%,True

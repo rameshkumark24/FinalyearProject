@@ -7,7 +7,7 @@
         "wp2_doppler_cycles",
         "wp3_trust_check",
         "wp4c_foundation",
-        "wp5_echo_readiness",
+        "wp5_structure_delta",
         "wp6_fusion"
       ]
     },
@@ -122,13 +122,57 @@
     {
       "file": "RESULTS.md#structure",
       "runs": [
-        "wp5_echo_readiness"
+        "wp5_structure_delta",
+        "wp5b_structure_controls_delta"
+      ]
+    },
+    {
+      "file": "tables/t5_structure_probes_delta.csv",
+      "runs": [
+        "wp5_structure_delta"
+      ]
+    },
+    {
+      "file": "tables/t5b_structure_alarm_delta.csv",
+      "runs": [
+        "wp5_structure_delta"
+      ]
+    },
+    {
+      "file": "tables/t5c_structure_subtypes_delta.csv",
+      "runs": [
+        "wp5_structure_delta"
+      ]
+    },
+    {
+      "file": "tables/t5d_structure_planes_delta.csv",
+      "runs": [
+        "wp5_structure_delta"
+      ]
+    },
+    {
+      "file": "tables/t5e_structure_image_sizes_delta.csv",
+      "runs": [
+        "wp5_structure_delta"
+      ]
+    },
+    {
+      "file": "figures/f7_structure_expert_delta.png",
+      "runs": [
+        "wp5_structure_delta"
+      ]
+    },
+    {
+      "file": "tables/t5f_structure_controls_delta.csv",
+      "runs": [
+        "wp5b_structure_controls_delta"
       ]
     },
     {
       "file": "tables/t6_conformal_alarms.csv",
       "runs": [
-        "wp6_fusion"
+        "wp6_fusion",
+        "wp6b_fusion_structure"
       ]
     },
     {
@@ -150,6 +194,18 @@
       ]
     },
     {
+      "file": "tables/t6d_three_tests_healthy.csv",
+      "runs": [
+        "wp6b_fusion_structure"
+      ]
+    },
+    {
+      "file": "tables/t6e_rule_comparison_structural_defect.csv",
+      "runs": [
+        "wp6b_fusion_structure"
+      ]
+    },
+    {
       "file": "RESULTS.md",
       "runs": [
         "wp1_cinc2013",
@@ -160,8 +216,10 @@
         "wp4b_rhythm_intervals",
         "wp4c_foundation",
         "wp4d_cnn",
-        "wp5_echo_readiness",
-        "wp6_fusion"
+        "wp5_structure_delta",
+        "wp5b_structure_controls_delta",
+        "wp6_fusion",
+        "wp6b_fusion_structure"
       ]
     }
   ]

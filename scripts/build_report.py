@@ -345,19 +345,153 @@ def section_wp4() -> str:
     return "\n\n".join(["## 5. Rhythm expert (NIFEADB, 12 arrhythmia and 14 normal)", *notes, text, leak_text, probe_text, check_text, picture])
 
 
-def section_wp5() -> str:
-    run = "wp5_echo_readiness"
+PROBE_NAMES = {
+    "fetalclip_scan": "FetalCLIP, de-identified scan (the structure expert)",
+    "fetalclip_unaltered_image": "FetalCLIP, image as released",
+    "random_weights_scan": "same network with random weights (control)",
+    "fetalclip_overlay_only": "FetalCLIP, overlays only (shortcut audit)",
+    "no_anatomy_numbers": "six numbers without anatomy (shortcut audit)",
+}
+
+
+def structure_runs() -> list[str]:
+    return sorted(path.name for path in RUNS.glob("wp5_structure_*") if (path / "metrics.json").exists())
+
+
+def section_structure(run: str) -> str:
     metrics, _ = load_run(run)
-    clip = metrics["fetalclip"]
-    lines = [f"**{metrics['statement']}**", metrics["blocked"],
-             f"Readiness check on {metrics['frames']} unlabelled frames ({metrics['cases']} folders), read in memory only: the de-identification tool kept a median of "
-             f"{pct(metrics['deidentification']['scan_share_of_frame_median'], 0)} of each frame and blanked everything else; "
-             f"not verified: {metrics['deidentification']['not_verified']}.",
-             f"{clip['checkpoint']['claimed_name']} (SHA-256 {clip['checkpoint']['sha256'][:16]}..., {clip['checkpoint']['n_parameters']:,} parameters, "
-             f"licence {clip['checkpoint']['licence']}) loaded and produced embeddings of shape {clip['embedding_shape']}.",
-             f"Gate G5: **cannot be evaluated** - {metrics['gate_G5']['reason']}."]
-    MANIFEST.append({"file": "RESULTS.md#structure", "runs": [run]})
+    data, own, same, alarm = metrics["dataset"], metrics.get("own_partition") or {}, metrics.get("same_image_size") or {}, metrics["alarm"]
+    name = data["name"]
+
+    def cell(result) -> str:
+        return f"{num(result['auroc'])} {interval(result['ci'])}"
+
+    probe_rows = [[label, cell(metrics["probes"][key]), num(metrics["probes"][key].get("p_value"), 3),
+                   cell(own[key]) if key in own else "-", cell(same["probes"][key]) if key in same.get("probes", {}) else "-"]
+                  for key, label in PROBE_NAMES.items()]
+    probe_text = table(f"t5_structure_probes_{name}",
+                       ["Input to the probe", "AUROC, repeated case-level folds [95% CI]", "p-value (labels shuffled, probe refitted)",
+                        "AUROC on the dataset's own test set [95% CI]", f"AUROC inside the most common image size, {same.get('size', '-')} [95% CI]"],
+                       probe_rows, [run])
+
+    def alarm_row(label: str, entry: dict) -> list:
+        hit, false = entry["sensitivity"], entry["false_alarms"]
+        return [label, entry["alpha"], f"{hit['caught']}/{hit['n']}", pct(hit["share"]), interval(hit["ci"], 2),
+                f"{false['flagged']}/{false['n']}", pct(false["share"]), interval(false["ci"], 3)]
+
+    alarm_rows = [alarm_row("repeated case-level folds, all cases", alarm)]
+    if "fetalclip_scan" in own:
+        alarm_rows.append(alarm_row("dataset's own partition: fitted on Train, calibrated on Val, judged on Test", own["fetalclip_scan"]["alarm"]))
+    alarm_text = table(f"t5b_structure_alarm_{name}",
+                       ["Evaluation", "Alarm level", "Abnormal cases caught", "Sensitivity", "95% CI", "Normal cases flagged", "False-alarm share", "95% CI"],
+                       alarm_rows, [run])
+    subtype_text = table(f"t5c_structure_subtypes_{name}", ["Defect subtype", "Cases", "Caught at the alarm level", "95% CI of the share"],
+                         [[s["subtype"], s["cases"], s["caught"], interval(s["ci"], 2)] for s in alarm["by_subtype"]], [run])
+    plane_text = table(f"t5d_structure_planes_{name}", ["Plane used alone", "Cases", "Abnormal", "AUROC [95% CI]"],
+                       [[p["plane"], p["cases"], p["abnormal"], cell(p) if "auroc" in p else p.get("note", "-")] for p in metrics["by_plane"]], [run])
+    size_text = table(f"t5e_structure_image_sizes_{name}", ["Image size", "Normal cases", "Abnormal cases", "Abnormal share"],
+                      [[s["size"], s["normal"], s["abnormal"], pct(s["abnormal"] / (s["normal"] + s["abnormal"]))] for s in metrics["image_size_by_label"]], [run])
+
+    figure, axes = plt.subplots(1, 2, figsize=(12, 4))
+    keys = list(PROBE_NAMES)
+    values = [metrics["probes"][key]["auroc"] for key in keys]
+    lower = [metrics["probes"][key]["auroc"] - metrics["probes"][key]["ci"][0] for key in keys]
+    upper = [metrics["probes"][key]["ci"][1] - metrics["probes"][key]["auroc"] for key in keys]
+    colours = ["tab:blue", "tab:blue", "tab:gray", "tab:orange", "tab:orange"]
+    axes[0].barh(np.arange(len(keys)), values, xerr=[lower, upper], color=colours, capsize=3)
+    axes[0].axvline(HALF, color="black", linestyle="--", linewidth=1)
+    axes[0].set_yticks(np.arange(len(keys)), ["FetalCLIP\nde-identified scan", "FetalCLIP\nimage as released", "random weights\n(control)",
+                                              "overlays only\n(shortcut audit)", "numbers without anatomy\n(shortcut audit)"])
+    axes[0].invert_yaxis()
+    axes[0].set_xlim(0, 1)
+    axes[0].set_xlabel("AUROC, normal against abnormal (case-level folds, 95% CI)")
+    axes[0].set_title(f"{name.upper()}: {data['abnormal_cases']} abnormal and {data['normal_cases']} normal cases")
+    subtypes = alarm["by_subtype"]
+    axes[1].bar(np.arange(len(subtypes)), [s["caught"] / s["cases"] for s in subtypes], color="tab:blue")
+    for position, s in enumerate(subtypes):
+        axes[1].text(position, s["caught"] / s["cases"], f"{s['caught']}/{s['cases']}", ha="center", va="bottom", fontsize=8)
+    axes[1].set_xticks(np.arange(len(subtypes)), [s["subtype"] for s in subtypes], rotation=45)
+    axes[1].set_ylim(0, 1)
+    axes[1].set_ylabel(f"Share caught at alarm level {alarm['alpha']}")
+    axes[1].set_title("Cases caught, by defect subtype (few cases each)")
+    picture = save(figure, f"f7_structure_expert_{name}", [run])
+
+    controls_text = ""
+    controls_run = f"wp5b_structure_controls_{name}"
+    if (RUNS / controls_run / "metrics.json").exists():
+        controls, _ = load_run(controls_run)
+        diff = controls["A_paired_auroc_differences"]
+        diff_rows = [[PROBE_NAMES[key], num(entry["auroc_control"]), f"{num(entry['difference'])} {interval(entry['ci'])}",
+                      "yes" if entry["interval_excludes_zero"] else "no"] for key, entry in diff.items()]
+        b, c, e = controls["B_overlay_only_inside_one_image_size"], controls["C_alarms_of_expert_and_overlay_probe"], controls["E_plane_without_the_heart"]
+        controls_text = "\n\n".join([
+            "**Checks made after seeing the results above** (run " + controls_run + "): the overlay-only probe scored close to the structure expert, so the gap was measured on the same cases.",
+            table(f"t5f_structure_controls_{name}", ["Control", "AUROC of the control", "Structure expert minus control [95% CI, bootstrap over cases]", "Interval excludes zero"],
+                  diff_rows, [controls_run]),
+            f"Inside the {b['size']} images ({b['cases']} cases, {b['abnormal']} abnormal) the overlay-only probe reached {num(b['overlay_only']['auroc'])} "
+            f"{interval(b['overlay_only']['ci'])} against {num(b['structure_expert_same_cases']['auroc'])} for the structure expert. "
+            f"At the alarm level {c['alpha']}, the structure expert caught {c['caught_by_structure_expert']} of {c['abnormal_cases']} abnormal cases and the overlay-only probe "
+            f"{c['caught_by_overlay_only_probe']}; {c['caught_by_both']} were caught by both and {c['caught_by_structure_expert_only']} by the structure expert alone. "
+            f"The abdominal plane, which does not show the heart, reached {num(e['abdomen']['auroc'])} {interval(e['abdomen']['ci'])} on its own "
+            f"(four-chamber plane {num(e['four_chamber']['auroc'])} {interval(e['four_chamber']['ci'])}).",
+        ])
+
+    record = metrics["models"]["published"]
+    notes = [
+        f"Dataset: {name.upper()} ({data['source']}). {data['images']} still images of {data['cases']} cases: {data['abnormal_cases']} abnormal, {data['normal_cases']} normal. "
+        "All images of a case stay on one side of every split. Probe, folds and alarm level were fixed in the script before any image was processed.",
+        f"Model: {record['claimed_name']} (SHA-256 {record['sha256'][:16]}..., {record['n_parameters']:,} parameters, licence {record['licence']}), frozen; "
+        "control: the same network with random weights.",
+        f"Shortcut audit: {metrics['shortcut_audit']['reading']}. Image size differs between the classes (table below), so the main probes are repeated inside the most common size.",
+        "The subtype table has few cases per row; it is descriptive only.",
+    ]
+    parts = [f"### Labelled data: {name.upper()}", *notes, probe_text, alarm_text, plane_text, subtype_text, size_text]
+    return "\n\n".join(part for part in [*parts, controls_text, picture] if part)
+
+
+def section_wp5() -> str:
+    labelled = structure_runs()
+    controls = [path.name for path in RUNS.glob("wp5b_structure_controls_*") if (path / "metrics.json").exists()]
+    if not labelled:
+        return ("## 6. Structure expert (fetal echo)\n\n"
+                "**No labelled echo data is on disk, so there is no result on heart defects.** See docs/data_cards/echo.md.")
+    MANIFEST.append({"file": "RESULTS.md#structure", "runs": [*labelled, *controls]})
+    lines = ["Gate G5 (the released reference model reproduced; pooled patient-level AUROC with an interval; shortcut audit reported): "
+             "**partly met** - the AUROC with its interval and the shortcut audit are reported; no released reference model exists for the dataset used. "
+             "**The shortcut audit finds label information outside the heart**: probes that see little or no cardiac anatomy separate the classes well above chance (tables below). "
+             "The structure expert's AUROC is therefore an upper bound on what heart structure contributes, not a measure of it.",
+             *[section_structure(name) for name in labelled]]
     return "\n\n".join(["## 6. Structure expert (fetal echo)", *lines])
+
+
+def section_wp6b() -> str:
+    run = "wp6b_fusion_structure"
+    if not (RUNS / run / "metrics.json").exists():
+        return ""
+    metrics, _ = load_run(run)
+    healthy, h7 = metrics["B_healthy_people_with_three_tests"], metrics["hypothesis_H7_structure"]
+    rates, combined = healthy["false_alarm_rate_of_each_expert"], healthy["false_referral_rate_three_tests"]
+    healthy_text = table("t6d_three_tests_healthy", ["How the three healthy scores are combined", "False-referral rate", "Ceiling from the alarm levels", "Within the ceiling"],
+                         [[key.replace("_", " "), pct(value), pct(healthy["ceiling_sum_of_levels"], 0), healthy["ceiling_respected"][key]] for key, value in combined.items()], [run])
+    comparison = read_csv(run, "rule_comparison_structure.csv")
+    names = ["maximum", "noisy_or", "mean", "product_of_experts", "dempster"]
+    rule_rows = [[r["target_false_referral_rate"], r["availability"], r["coupling"], r["n_virtual_abnormal"], r["n_real_scores"]]
+                 + [f"{num(r[f'{n}_sensitivity'], 2)} {interval([r[f'{n}_ci_low'], r[f'{n}_ci_high']], 2)}" for n in names]
+                 + [f"{num(r['max_minus_mean_sensitivity'], 2)} {interval([r['max_minus_mean_ci_low'], r['max_minus_mean_ci_high']], 2)}"]
+                 for r in comparison]
+    rule_text = table("t6e_rule_comparison_structural_defect",
+                      ["Target false-referral rate", "Tests available", "Coupling", "Virtual patients with a defect", "Real scores used"]
+                      + [f"{n.replace('_', ' ')}: sensitivity [95% CI]" for n in names] + ["maximum minus mean [95% CI]"], rule_rows, [run])
+    notes = [
+        "This part uses the structure expert's real scores. Nobody has all three tests, so scores of different people are combined; every such row is a virtual patient.",
+        f"False-alarm rate of each expert on its own healthy cases: structure {pct(rates['structure'])}, function {pct(rates['function'])}, rhythm {pct(rates['rhythm'])}. "
+        "The last row of the first table is the largest false-referral rate that any dependence between the tests could give.",
+        f"Hypothesis H7 for a structural defect ({h7['statement']}): with mixed availability the mean rule had lower sensitivity than the OR rule in "
+        f"{h7['rows_where_mean_rule_has_lower_sensitivity']} of {h7['rows_checked']} rows, and the interval of the difference excluded zero in {h7['rows_where_interval_excludes_zero']} rows. "
+        f"With both tests always done: lower in {h7['both_tests_rows_where_mean_rule_has_lower_sensitivity']} of {h7['rows_checked']} rows, interval excluding zero in "
+        f"{h7['both_tests_rows_where_interval_excludes_zero']}.",
+    ]
+    return "\n\n".join(["## 8. Decision rule with the structure expert's scores", *notes, healthy_text, rule_text])
 
 
 def section_wp6() -> str:
@@ -372,8 +506,15 @@ def section_wp6() -> str:
          f"{function['flagged']}/{function['n_healthy_recordings']}", "-"],
         ["structure", "-", "no labelled data", "-", "-", "-"],
     ]
+    alarm_runs = [run]
+    if (RUNS / "wp6b_fusion_structure" / "metrics.json").exists():
+        structure = load_run("wp6b_fusion_structure")[0]["A_alarms_of_three_experts"]["structure"]
+        alarm_rows[-1] = [f"structure ({structure['dataset'].upper()}, case-level folds)", structure["alpha"],
+                          f"{structure['caught']}/{structure['n_abnormal']}", interval(structure["sensitivity_ci"], 2),
+                          f"{structure['normal_flagged']}/{structure['n_normal']}", "-"]
+        alarm_runs.append("wp6b_fusion_structure")
     alarm_text = table("t6_conformal_alarms", ["Expert", "Alarm level", "Abnormal cases caught", "95% CI of sensitivity",
-                                               "Healthy cases flagged", "Smallest possible p"], alarm_rows, [run])
+                                               "Healthy cases flagged", "Smallest possible p"], alarm_rows, alarm_runs)
     local = b["with_rhythm_score_calibrated_on_ninfea_leave_one_woman_out"]
     cohort_rows = []
     for label, counts, false in (("rhythm expert as fitted on NIFEADB", b["actions_if_echo_were_done_and_normal"], b["false_referrals"]),
@@ -436,20 +577,26 @@ def section_wp6() -> str:
 
 
 def section_gates() -> str:
+    labelled = structure_runs()
     entries = [("G1", "wp1_cinc2013", "gate_G1"), ("G2", "wp2_doppler_cycles", "gate_G2"), ("G3", "wp3_trust_check", "gate_G3"),
-               ("G4", "wp4c_foundation", "gate_G4"), ("G5", "wp5_echo_readiness", "gate_G5"), ("G6", "wp6_fusion", "gate_G6")]
+               ("G4", "wp4c_foundation", "gate_G4"), ("G5", labelled[0] if labelled else None, "gate_G5"), ("G6", "wp6_fusion", "gate_G6")]
     rows = []
     for name, run, key in entries:
+        if run is None:
+            rows.append([name, "cannot be evaluated: no labelled echo data", GATE_RULES.get(name, ""), "-", "-", "-"])
+            continue
         metrics, provenance = load_run(run)
         gate = metrics[key]
         if name == "G6":
             verdict = "decided by the property tests (python -m pytest tests/test_fusion.py)"
+        elif name == "G5" and gate.get("auroc_with_interval"):
+            verdict = "partly met: patient-level AUROC with an interval and the shortcut audit are reported; " + gate["reason"].split(";")[0]
         elif "reason" in gate:
             verdict = "cannot be evaluated: " + gate["reason"]
         else:
             verdict = state(gate.get("passed"))
         rows.append([name, verdict, gate.get("rule", GATE_RULES.get(name, "")), run, provenance["code_sha256"][:12], provenance["created_utc"]])
-    return "## Gates\n\n" + table("t0_gates", ["Gate", "Outcome", "Rule", "Run", "Code hash", "Run time (UTC)"], rows, [e[1] for e in entries])
+    return "## Gates\n\n" + table("t0_gates", ["Gate", "Outcome", "Rule", "Run", "Code hash", "Run time (UTC)"], rows, [e[1] for e in entries if e[1]])
 
 
 def main() -> None:
@@ -458,9 +605,9 @@ def main() -> None:
         "# Results of the rebuild\n\nGenerated by `scripts/build_report.py` from the run folders under `runs/`. "
         "Do not edit by hand: change the analysis, re-run it, and rebuild. Tables are also saved as CSV in `reports/tables/`, "
         "figures in `reports/figures/`, and `reports/manifest.json` lists the runs behind every file.",
-        section_gates(), section_wp1(), section_wp2(), section_wp3(), section_wp2b(), section_wp4(), section_wp5(), section_wp6(),
+        section_gates(), section_wp1(), section_wp2(), section_wp3(), section_wp2b(), section_wp4(), section_wp5(), section_wp6(), section_wp6b(),
     ]
-    (REPORTS / "RESULTS.md").write_text("\n\n".join(parts) + "\n", encoding="utf-8")
+    (REPORTS / "RESULTS.md").write_text("\n\n".join(part for part in parts if part) + "\n", encoding="utf-8")
     MANIFEST.append({"file": "RESULTS.md", "runs": sorted({run for entry in MANIFEST for run in entry["runs"]})})
     (REPORTS / "manifest.json").write_text(json.dumps({"outputs": MANIFEST}, indent=2), encoding="utf-8")
     print(f"wrote {REPORTS / 'RESULTS.md'}, {len([m for m in MANIFEST if m['file'].startswith('tables/')])} tables, "

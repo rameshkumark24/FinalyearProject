@@ -19,6 +19,11 @@ What is computed:
 3. The same network with random weights - the control used for ECGFounder in WP4c.
 4. Alarm at the level used by the decision rule: split-conformal p-values against normal cases
    on which the probe was not fitted.
+5. Two checks added on 12 Oct 2026 after reading the documentation of the first dataset and
+   before any image was processed: (a) if the index has a ``split`` column with Train, Val and
+   Test, the dataset's own partition is also used - probe fitted on Train, alarm calibrated on
+   the normal cases of Val, judged on Test; (b) the main probes are repeated inside the most
+   common image size, because image size can differ between normal and abnormal cases.
 
 Nothing is tuned here: the probe, the folds and the alarm level are fixed in this file, and the
 script is run once per dataset.
@@ -31,12 +36,15 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import multiprocessing
 import sys
 import time
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
 import torch        # must be imported before NumPy/SciPy code runs: the other order crashes on this machine
-import open_clip    # noqa: F401
+if multiprocessing.current_process().name == "MainProcess":    # the image-cleaning workers do not need the model code
+    import open_clip    # noqa: F401
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
@@ -46,7 +54,7 @@ from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from sfr.echo.deidentify import deidentify, overlay_only  # noqa: E402
+from sfr.echo.deidentify import deidentify, to_grey  # noqa: E402
 from sfr.echo.fetalclip import FETALCLIP_CONFIG, embed_images, load_fetalclip  # noqa: E402
 from sfr.eval.stats import auroc, auroc_ci, clopper_pearson  # noqa: E402
 from sfr.fusion.conformal import p_value  # noqa: E402
@@ -73,7 +81,27 @@ def read_index(path: Path) -> list[dict]:
             raise ValueError(f"label must be 0 or 1, found {row['label']!r} for case {row['case']}")
         row.setdefault("subtype", "")
         row.setdefault("plane", "")
+        row.setdefault("split", "")
     return rows
+
+
+def case_attribute(rows: list[dict], cases: list[str], key: str) -> np.ndarray:
+    value = {row["case"]: row.get(key, "") for row in rows}
+    return np.array([value[case] for case in cases])
+
+
+def official_split(x: np.ndarray, y: np.ndarray, split: np.ndarray, subtype: list[str], seed: int = SEED) -> dict:
+    """The dataset's own partition: probe fitted on Train, alarm calibrated on the normal cases of Val, judged on Test."""
+    train, val, test = split == "Train", split == "Val", split == "Test"
+    model = probe(x, seed).fit(x[train], y[train])
+    scores = model.predict_proba(x[test])[:, 1]
+    value, low, high = auroc_ci(y[test], scores, seed=seed)
+    healthy = model.predict_proba(x[val & (y == 0)])[:, 1]
+    p = np.array([p_value(float(score), healthy) for score in scores])
+    return {"auroc": value, "ci": [low, high], "fitted_on_cases": int(train.sum()),
+            "calibration_normal_cases": int((val & (y == 0)).sum()),
+            "test_abnormal": int((y[test] == 1).sum()), "test_normal": int((y[test] == 0).sum()),
+            "alarm": alarm_summary(y[test], p, [kind for kind, use in zip(subtype, test) if use])}
 
 
 def by_case(rows: list[dict], features: np.ndarray, keep: np.ndarray | None = None):
@@ -187,31 +215,69 @@ def random_twin(seed: int, device: str):
     return model, preprocess, twin_record(seed)
 
 
-def load_rgb(path: Path) -> np.ndarray:
+def clean_one(path: str):
+    """One image: the cleaned scan, what the cleaning removed, the image as released, and six numbers without anatomy.
+
+    The removed part is built by the steps of ``sfr.echo.deidentify.overlay_only`` without cleaning
+    the image a second time (tests/test_structure_probe.py checks that the two are identical).
+    """
     from PIL import Image
 
     with Image.open(path) as image:
-        return np.asarray(image.convert("RGB"))
+        rgb = np.asarray(image.convert("RGB"))
+    result = deidentify(rgb)
+    grey = to_grey(rgb)
+    top, bottom, left, right = result.box
+    kept = np.zeros_like(grey)
+    kept[top:bottom, left:right] = result.image
+    removed = grey.copy()
+    removed[kept > 0] = 0
+    numbers = [rgb.shape[1], rgb.shape[0], float(rgb.mean()), result.scan_share,
+               float(result.coloured_removed), float(result.white_strokes_removed)]
+    return result.image, removed, rgb, numbers
 
 
-def embed_dataset(paths: list[Path], device: str, model, preprocess, variants: tuple[str, ...]):
-    """Embeddings of every image for the asked variants, and the numbers that carry no anatomy."""
-    features = {name: [] for name in variants}
-    trivial = []
-    for start in range(0, len(paths), CHUNK):
-        images = [load_rgb(path) for path in paths[start:start + CHUNK]]
-        cleaned = [deidentify(image) for image in images]
-        for image, result in zip(images, cleaned):
-            trivial.append([image.shape[1], image.shape[0], float(image.mean()), result.scan_share,
-                            float(result.coloured_removed), float(result.white_strokes_removed)])
-        stacks = {"scan": [result.image for result in cleaned],
-                  "overlay": [overlay_only(image) for image in images] if "overlay" in variants else [],
-                  "raw": images}
-        for name in variants:
-            features[name].append(embed_images(model, preprocess, stacks[name], device, batch=CHUNK))
-        if (start // CHUNK) % 10 == 0:
-            print(f"  embedded {min(start + CHUNK, len(paths))} of {len(paths)} images", flush=True)
-    return {name: np.concatenate(parts) for name, parts in features.items()}, np.array(trivial)
+def to_model_size(preprocess):
+    """The resizing part of the model's own preprocessing, applied once so that both networks see the same pixels."""
+    from PIL import Image
+
+    steps = []
+    for step in preprocess.transforms:
+        if "ToTensor" in type(step).__name__:
+            break
+        steps.append(step)
+
+    def apply(array: np.ndarray) -> np.ndarray:
+        image = Image.fromarray(np.asarray(array).astype(np.uint8)).convert("RGB")
+        for step in steps:
+            image = step(image)
+        return np.asarray(image)
+
+    return apply, [type(step).__name__ for step in steps]
+
+
+def embed_dataset(paths: list[Path], device: str, model, preprocess, workers: int):
+    """Embeddings of the cleaned scan, the removed overlays and the released image; the resized scans; the six numbers."""
+    resize, steps = to_model_size(preprocess)
+    print(f"  resizing steps taken from the model's preprocessing: {steps}; {workers} cleaning processes", flush=True)
+    features = {"scan": [], "overlay": [], "raw": []}
+    scans, trivial = [], []
+    chunks = [[str(path) for path in paths[start:start + CHUNK]] for start in range(0, len(paths), CHUNK)]
+    with ProcessPoolExecutor(max_workers=workers) as pool:
+        pending = pool.map(clean_one, chunks[0])
+        for index in range(len(chunks)):
+            cleaned = list(pending)
+            if index + 1 < len(chunks):                # clean the next chunk while this one is embedded
+                pending = pool.map(clean_one, chunks[index + 1])
+            stacks = {"scan": [resize(item[0]) for item in cleaned], "overlay": [resize(item[1]) for item in cleaned],
+                      "raw": [resize(item[2]) for item in cleaned]}
+            trivial.extend(item[3] for item in cleaned)
+            scans.extend(stacks["scan"])
+            for name, stack in stacks.items():
+                features[name].append(embed_images(model, preprocess, stack, device, batch=CHUNK))
+            if index % 10 == 0:
+                print(f"  embedded {min((index + 1) * CHUNK, len(paths))} of {len(paths)} images", flush=True)
+    return {name: np.concatenate(parts) for name, parts in features.items()}, np.array(trivial), scans
 
 
 def main() -> None:
@@ -220,6 +286,7 @@ def main() -> None:
     parser.add_argument("--root", required=True, type=Path, help="folder that the index paths are relative to")
     parser.add_argument("--index", required=True, type=Path, help="CSV with case, label, subtype, plane, path")
     parser.add_argument("--source", default="", help="where the dataset comes from (DOI, licence), written to the run")
+    parser.add_argument("--workers", type=int, default=5, help="processes that clean images")
     args = parser.parse_args()
 
     rows = read_index(args.index)
@@ -244,28 +311,44 @@ def main() -> None:
         seed=SEED,
     )
     print(f"{len(rows)} images of {len({row['case'] for row in rows})} cases; embedding with the published weights", flush=True)
-    published, trivial = embed_dataset(paths, device, model, preprocess, ("scan", "overlay", "raw"))
+    published, trivial, scans = embed_dataset(paths, device, model, preprocess, args.workers)
     del model
     if device == "cuda":
         torch.cuda.empty_cache()
     twin, twin_preprocess, control_record = random_twin(SEED, device)
-    print("embedding with random weights", flush=True)
-    untrained, _ = embed_dataset(paths, device, twin, twin_preprocess, ("scan",))
-    del twin
+    print("embedding the same resized scans with random weights", flush=True)
+    untrained = {"scan": embed_images(twin, twin_preprocess, scans, device, batch=CHUNK)}
+    del twin, scans
 
     inputs = {"fetalclip_scan": published["scan"], "fetalclip_overlay_only": published["overlay"],
               "fetalclip_unaltered_image": published["raw"], "no_anatomy_numbers": trivial,
               "random_weights_scan": untrained["scan"]}
     cases, _, y, subtype = by_case(rows, published["scan"])
+    case_x = {name: by_case(rows, features)[1] for name, features in inputs.items()}
     results, scores = {}, {}
-    for name, features in inputs.items():
-        _, x, _, _ = by_case(rows, features)
-        results[name], scores[name] = evaluate(x, y)
+    for name in inputs:
+        results[name], scores[name] = evaluate(case_x[name], y)
         print(name, results[name], flush=True)
 
-    _, x_scan, _, _ = by_case(rows, published["scan"])
+    x_scan = case_x["fetalclip_scan"]
     p = conformal_p_values(x_scan, y)
     alarms = alarm_summary(y, p, subtype)
+
+    split = case_attribute(rows, cases, "split")
+    own_partition = {}
+    if {"Train", "Val", "Test"} <= set(split):
+        own_partition = {name: official_split(case_x[name], y, split, subtype) for name in inputs}
+        print("dataset's own partition:", {name: round(value["auroc"], 3) for name, value in own_partition.items()}, flush=True)
+
+    size = np.array([f"{int(round(width))}x{int(round(height))}" for width, height in case_x["no_anatomy_numbers"][:, :2]])
+    size_table = [{"size": name, "normal": int(((size == name) & (y == 0)).sum()), "abnormal": int(((size == name) & (y == 1)).sum())}
+                  for name in sorted(set(size))]
+    common = max(size_table, key=lambda entry: entry["normal"] + entry["abnormal"])["size"]
+    member = size == common
+    same_size = {"size": common, "cases": int(member.sum()), "abnormal": int((y[member] == 1).sum())}
+    if min((y[member] == 1).sum(), (y[member] == 0).sum()) >= MIN_PER_CLASS:
+        same_size["probes"] = {name: evaluate(case_x[name][member], y[member], with_permutation=False)[0]
+                               for name in ("fetalclip_scan", "no_anatomy_numbers", "random_weights_scan")}
 
     planes = []
     for plane in sorted({row["plane"] for row in rows if row["plane"]}):
@@ -279,11 +362,11 @@ def main() -> None:
         planes.append(entry)
 
     run.write_csv("per_case.csv", [
-        {"case": case, "label": int(label), "subtype": kind, "p_value": float(p_i), "alarm": bool(p_i <= ALPHA),
+        {"case": case, "label": int(label), "subtype": kind, "split": split[i], "image_size": size[i],
+         "p_value": float(p_i), "alarm": bool(p_i <= ALPHA),
          **{f"score_{name}": float(scores[name][i]) for name in inputs}}
         for i, (case, label, kind, p_i) in enumerate(zip(cases, y, subtype, p))])
-    np.savez_compressed(run.path / "embeddings.npz", cases=np.array(cases), labels=y, **{
-        name: by_case(rows, features)[1] for name, features in inputs.items()})
+    np.savez_compressed(run.path / "embeddings.npz", cases=np.array(cases), labels=y, **case_x)
 
     audit_overlay, audit_trivial = results["fetalclip_overlay_only"], results["no_anatomy_numbers"]
     metrics = {
@@ -296,6 +379,9 @@ def main() -> None:
             "reading": "an interval that excludes 0.5 means the label can be read without looking at the heart",
         },
         "alarm": alarms,
+        "own_partition": own_partition,
+        "image_size_by_label": size_table,
+        "same_image_size": same_size,
         "by_plane": planes,
         "models": {"published": record, "control": control_record},
         "gate_G5": {"auroc_with_interval": True, "shortcut_audit_reported": True,

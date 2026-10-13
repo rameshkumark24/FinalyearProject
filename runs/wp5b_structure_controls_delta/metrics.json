@@ -1,0 +1,137 @@
+{
+  "made_after_seeing_results": true,
+  "A_paired_auroc_differences": {
+    "fetalclip_overlay_only": {
+      "auroc_structure_expert": 0.8276264166069455,
+      "auroc_control": 0.7701968977370729,
+      "difference": 0.057429518869872576,
+      "ci": [
+        0.010454339345078782,
+        0.10507126552568614
+      ],
+      "interval_excludes_zero": true
+    },
+    "random_weights_scan": {
+      "auroc_structure_expert": 0.8276264166069455,
+      "auroc_control": 0.7326393528247113,
+      "difference": 0.0949870637822342,
+      "ci": [
+        0.043034901343717284,
+        0.15040128504581732
+      ],
+      "interval_excludes_zero": true
+    },
+    "no_anatomy_numbers": {
+      "auroc_structure_expert": 0.8276264166069455,
+      "auroc_control": 0.6187277563861188,
+      "difference": 0.2088986602208267,
+      "ci": [
+        0.1520577410765944,
+        0.2606742162765895
+      ],
+      "interval_excludes_zero": true
+    },
+    "fetalclip_unaltered_image": {
+      "auroc_structure_expert": 0.8276264166069455,
+      "auroc_control": 0.8284888311246614,
+      "difference": -0.0008624145177159592,
+      "ci": [
+        -0.01982080456092824,
+        0.018750001287592286
+      ],
+      "interval_excludes_zero": false
+    }
+  },
+  "B_overlay_only_inside_one_image_size": {
+    "size": "900x752",
+    "cases": 531,
+    "abnormal": 114,
+    "overlay_only": {
+      "auroc": 0.8156001514577812,
+      "ci": [
+        0.7617907500852202,
+        0.8664398351620559
+      ],
+      "n_abnormal": 114,
+      "n_normal": 417
+    },
+    "structure_expert_same_cases": {
+      "auroc": 0.8695990575960284,
+      "ci": [
+        0.8253397219561199,
+        0.9105391793031427
+      ],
+      "n_abnormal": 114,
+      "n_normal": 417
+    }
+  },
+  "C_alarms_of_expert_and_overlay_probe": {
+    "alpha": 0.05,
+    "abnormal_cases": 133,
+    "caught_by_structure_expert": 62,
+    "caught_by_overlay_only_probe": 60,
+    "caught_by_both": 45,
+    "caught_by_structure_expert_only": 17,
+    "normal_flagged_by_overlay_only_probe": 32,
+    "normal_cases": 619
+  },
+  "D_numbers_without_anatomy_by_label": {
+    "width": {
+      "median_normal": 900.0,
+      "median_abnormal": 900.0,
+      "auroc_alone": 0.5863446985800527
+    },
+    "height": {
+      "median_normal": 752.0,
+      "median_abnormal": 752.0,
+      "auroc_alone": 0.586271818479964
+    },
+    "mean_grey": {
+      "median_normal": 57.685648345153666,
+      "median_abnormal": 60.66068439716313,
+      "auroc_alone": 0.5510464367704399
+    },
+    "scan_share": {
+      "median_normal": 0.6710546690307329,
+      "median_abnormal": 0.7112757092198582,
+      "auroc_alone": 0.6143185103307542
+    },
+    "coloured_removed": {
+      "median_normal": 0.0,
+      "median_abnormal": 0.0,
+      "auroc_alone": 0.48828452391074617
+    },
+    "white_strokes_removed": {
+      "median_normal": 48.0,
+      "median_abnormal": 53.6,
+      "auroc_alone": 0.5282896255177524
+    }
+  },
+  "E_plane_without_the_heart": {
+    "abdomen": {
+      "plane": "Abdomen",
+      "cases": 752,
+      "abnormal": 133,
+      "auroc": 0.7708649653212191,
+      "ci": [
+        0.7215866083749343,
+        0.8200595747985937
+      ],
+      "n_abnormal": 133,
+      "n_normal": 619
+    },
+    "four_chamber": {
+      "plane": "4CH",
+      "cases": 752,
+      "abnormal": 133,
+      "auroc": 0.8352666804329077,
+      "ci": [
+        0.7918278407680543,
+        0.8747937695194139
+      ],
+      "n_abnormal": 133,
+      "n_normal": 619
+    },
+    "note": "the abdominal plane shows the stomach, spine and great vessels below the heart, not the heart itself"
+  }
+}

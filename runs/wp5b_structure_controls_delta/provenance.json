@@ -1,0 +1,47 @@
+{
+  "run": "wp5b_structure_controls_delta",
+  "description": "Checks made after seeing the structure run: paired AUROC differences against the controls, the overlay-only probe inside one image size, and the overlap of alarms",
+  "created_utc": "2026-10-13T20:17:22+00:00",
+  "script": "scripts/run_wp5b_structure_controls.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "fa61547aef961ef36901267ba667ab6394a975bb",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "structure_run": "wp5_structure_delta",
+    "bootstrap": 2000,
+    "made_after_seeing_results": true
+  },
+  "data": {
+    "scores": {
+      "n_files": 1,
+      "total_bytes": 69518,
+      "manifest_sha256": "355ce812fbca1372e3e3819a69912049a2abb528d1d6a239327e9337daaecaaf"
+    },
+    "features": {
+      "n_files": 1,
+      "total_bytes": 11785607,
+      "manifest_sha256": "84d23b7f8a5e1a7d0946ad9cb32ed335298de57faf21b6b29a71839c1aa7775c"
+    }
+  },
+  "n_real": 752,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "C:\\Finalyearproject\\scripts\\run_wp5b_structure_controls.py",
+    "--structure-run",
+    "wp5_structure_delta"
+  ]
+}

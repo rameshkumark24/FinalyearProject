@@ -77,6 +77,29 @@ def test_a_case_with_two_labels_is_refused():
         structure.by_case(rows, np.zeros((2, 2)))
 
 
+def test_cleaning_in_one_pass_gives_the_same_images_as_the_package(tmp_path):
+    from PIL import Image
+
+    from sfr.echo.deidentify import deidentify, overlay_only
+
+    # A synthetic frame: a textured grey disc (the "scan") on black, thin white strokes inside and outside it.
+    rng = np.random.default_rng(5)
+    frame = np.zeros((300, 400, 3), dtype=np.uint8)
+    rows, cols = np.mgrid[:300, :400]
+    disc = (rows - 160) ** 2 + (cols - 200) ** 2 < 110 ** 2
+    frame[disc] = rng.integers(40, 200, size=(int(disc.sum()), 1), dtype=np.uint8)
+    frame[20:23, 30:150] = 255
+    frame[150:152, 150:260] = 255
+    path = tmp_path / "frame.png"
+    Image.fromarray(frame).save(path)
+
+    scan, removed, rgb, numbers = structure.clean_one(str(path))
+    assert np.array_equal(rgb, frame)
+    assert np.array_equal(scan, deidentify(frame).image)
+    assert np.array_equal(removed, overlay_only(frame))
+    assert numbers[:2] == [400, 300]
+
+
 def test_index_with_a_bad_label_is_refused(tmp_path):
     index = tmp_path / "index.csv"
     with index.open("w", newline="", encoding="utf-8") as handle:

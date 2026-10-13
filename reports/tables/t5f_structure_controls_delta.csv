@@ -1,0 +1,5 @@
+Control,AUROC of the control,"Structure expert minus control [95% CI, bootstrap over cases]",Interval excludes zero
+"FetalCLIP, overlays only (shortcut audit)",0.770,"0.057 [0.010, 0.105]",yes
+same network with random weights (control),0.733,"0.095 [0.043, 0.150]",yes
+six numbers without anatomy (shortcut audit),0.619,"0.209 [0.152, 0.261]",yes
+"FetalCLIP, image as released",0.828,"-0.001 [-0.020, 0.019]",no
