@@ -24,7 +24,7 @@ Held-out data unless stated. Every number comes from a run folder; the full tabl
 | ECG–Doppler trust check (NInFEA, 26 test women) | AUROC 0.984 against the mother's beats, 0.919 against another woman's ECG; beat-to-beat limits ±13.3 bpm against a target of ±10 | G3 **not met** (agreement part) |
 | Function expert (60 healthy recordings, 39 women) | 2 of 60 flagged at level 0.05; only the heart rate is clearly repeatable | no gate; sensitivity cannot be measured |
 | Rhythm expert (NIFEADB, leave one subject out) | one interval index AUROC 0.938; frozen ECGFounder 0.952; the same network with random weights up to 0.881 | G4 met |
-| Structure expert (DELTA, case-level folds) | AUROC 0.828 (0.878 on the authors' test split); inputs without the heart also reach 0.62 to 0.77, so this is an upper bound | G5 partly met |
+| Structure expert (DELTA, case-level folds) | AUROC 0.828 (0.878 on the authors' test split); inputs with little or no cardiac anatomy also reach 0.62 to 0.77, so this is an upper bound | G5 partly met |
 | Decision rule | false referrals 10.0% on 60 real healthy ECG–Doppler pairs (ceiling 15%); 7.1% to 16.9% with all three experts' healthy alarm rates combined (ceiling 20%) | G6 met (property tests) |
 
 "Not met" and "partly met" are results. They are reported, not hidden.
