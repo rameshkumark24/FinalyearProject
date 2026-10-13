@@ -55,3 +55,5 @@ runs/**/*.pkl
 .pytest_cache/
 # Paper draft: kept private until submission (a plagiarism check must not match the paper against its own draft)
 paper/
+# Local record of earlier work (first build, audit plan, old Notion export); kept on disk, not in the repository
+archive/

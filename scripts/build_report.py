@@ -450,26 +450,17 @@ def section_structure(run: str) -> str:
 
 
 def section_wp5() -> str:
-    run = "wp5_echo_readiness"
-    metrics, _ = load_run(run)
-    clip = metrics["fetalclip"]
     labelled = structure_runs()
-    readiness = [f"Readiness check on {metrics['frames']} unlabelled frames ({metrics['cases']} folders), read in memory only: the de-identification tool kept a median of "
-                 f"{pct(metrics['deidentification']['scan_share_of_frame_median'], 0)} of each frame and blanked everything else; "
-                 f"not verified: {metrics['deidentification']['not_verified']}.",
-                 f"{clip['checkpoint']['claimed_name']} (SHA-256 {clip['checkpoint']['sha256'][:16]}..., {clip['checkpoint']['n_parameters']:,} parameters, "
-                 f"licence {clip['checkpoint']['licence']}) loaded and produced embeddings of shape {clip['embedding_shape']}."]
     controls = [path.name for path in RUNS.glob("wp5b_structure_controls_*") if (path / "metrics.json").exists()]
-    MANIFEST.append({"file": "RESULTS.md#structure", "runs": [run, *labelled, *controls]})
     if not labelled:
-        lines = [f"**{metrics['statement']}**", metrics["blocked"], *readiness, f"Gate G5: **cannot be evaluated** - {metrics['gate_G5']['reason']}."]
-        return "\n\n".join(["## 6. Structure expert (fetal echo)", *lines])
+        return ("## 6. Structure expert (fetal echo)\n\n"
+                "**No labelled echo data is on disk, so there is no result on heart defects.** See docs/data_cards/echo.md.")
+    MANIFEST.append({"file": "RESULTS.md#structure", "runs": [*labelled, *controls]})
     lines = ["Gate G5 (the released reference model reproduced; pooled patient-level AUROC with an interval; shortcut audit reported): "
              "**partly met** - the AUROC with its interval and the shortcut audit are reported; no released reference model exists for the dataset used. "
              "**The shortcut audit finds label information outside the heart**: probes that see little or no cardiac anatomy separate the classes well above chance (tables below). "
              "The structure expert's AUROC is therefore an upper bound on what heart structure contributes, not a measure of it.",
-             *[section_structure(name) for name in labelled],
-             "### Readiness check made before labelled data was available", *readiness]
+             *[section_structure(name) for name in labelled]]
     return "\n\n".join(["## 6. Structure expert (fetal echo)", *lines])
 
 
@@ -588,9 +579,12 @@ def section_wp6() -> str:
 def section_gates() -> str:
     labelled = structure_runs()
     entries = [("G1", "wp1_cinc2013", "gate_G1"), ("G2", "wp2_doppler_cycles", "gate_G2"), ("G3", "wp3_trust_check", "gate_G3"),
-               ("G4", "wp4c_foundation", "gate_G4"), ("G5", labelled[0] if labelled else "wp5_echo_readiness", "gate_G5"), ("G6", "wp6_fusion", "gate_G6")]
+               ("G4", "wp4c_foundation", "gate_G4"), ("G5", labelled[0] if labelled else None, "gate_G5"), ("G6", "wp6_fusion", "gate_G6")]
     rows = []
     for name, run, key in entries:
+        if run is None:
+            rows.append([name, "cannot be evaluated: no labelled echo data", GATE_RULES.get(name, ""), "-", "-", "-"])
+            continue
         metrics, provenance = load_run(run)
         gate = metrics[key]
         if name == "G6":
@@ -602,7 +596,7 @@ def section_gates() -> str:
         else:
             verdict = state(gate.get("passed"))
         rows.append([name, verdict, gate.get("rule", GATE_RULES.get(name, "")), run, provenance["code_sha256"][:12], provenance["created_utc"]])
-    return "## Gates\n\n" + table("t0_gates", ["Gate", "Outcome", "Rule", "Run", "Code hash", "Run time (UTC)"], rows, [e[1] for e in entries])
+    return "## Gates\n\n" + table("t0_gates", ["Gate", "Outcome", "Rule", "Run", "Code hash", "Run time (UTC)"], rows, [e[1] for e in entries if e[1]])
 
 
 def main() -> None:

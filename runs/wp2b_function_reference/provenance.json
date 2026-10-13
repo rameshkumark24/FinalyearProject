@@ -1,10 +1,10 @@
 {
   "run": "wp2b_function_reference",
   "description": "Doppler timing measures of the 60 NInFEA strips: repeatability, healthy reference with conformal p-values, detectable shifts",
-  "created_utc": "2026-10-11T18:11:08+00:00",
+  "created_utc": "2026-10-13T17:22:09+00:00",
   "script": "scripts/run_wp2b_function_reference.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "0eb55fa3713f831f8aad9d8da27e59ab24f7498d",
+  "git_commit": "fa61547aef961ef36901267ba667ab6394a975bb",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",

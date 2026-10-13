@@ -1,10 +1,10 @@
 {
   "run": "wp5b_structure_controls_delta",
   "description": "Checks made after seeing the structure run: paired AUROC differences against the controls, the overlay-only probe inside one image size, and the overlap of alarms",
-  "created_utc": "2026-10-13T16:39:16+00:00",
+  "created_utc": "2026-10-13T20:17:22+00:00",
   "script": "scripts/run_wp5b_structure_controls.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "5220379c7cebd880535f36eaa1445abe2aa64ec9",
+  "git_commit": "fa61547aef961ef36901267ba667ab6394a975bb",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",
@@ -40,7 +40,7 @@
   "models": [],
   "seed": 0,
   "argv": [
-    "scripts/run_wp5b_structure_controls.py",
+    "C:\\Finalyearproject\\scripts\\run_wp5b_structure_controls.py",
     "--structure-run",
     "wp5_structure_delta"
   ]

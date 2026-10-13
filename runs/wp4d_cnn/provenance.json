@@ -1,10 +1,10 @@
 {
   "run": "wp4d_cnn",
   "description": "Small 1D CNN trained from scratch on extracted fetal ECG windows: leave-one-subject-out result and the segment-split leakage comparison",
-  "created_utc": "2026-10-12T04:19:00+00:00",
+  "created_utc": "2026-10-13T17:58:27+00:00",
   "script": "scripts/run_wp4d_cnn.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "0eb55fa3713f831f8aad9d8da27e59ab24f7498d",
+  "git_commit": "fa61547aef961ef36901267ba667ab6394a975bb",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",

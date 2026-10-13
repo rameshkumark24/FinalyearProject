@@ -1,0 +1,32 @@
+Final re-run check
+==================
+Every analysis was run again from the start with scripts/run_all.py on the final code
+(package hash fe14c714b7e8), from 13 Oct 2026 22:43 to 14 Oct 2026 01:49 local time.
+Its outputs were compared with the previously committed run folders by scripts/compare_runs.py
+(provenance.json, which holds run times, is not compared).
+
+Result: every per-case output and every metric is identical. The only differences are the run
+time of the echo run and its free-text dataset note, which run_all.py writes without the remark
+that the archive's MD5 was verified (the check itself is described in docs/data_cards/echo.md).
+wp5_echo_readiness was removed from the repository before the re-run and is not part of it.
+
+Comparison output:
+
+wp1_cinc2013: identical
+wp1_cinc2013_v1_first_run: identical
+wp2_doppler_cycles: identical
+wp2b_function_reference: identical
+wp3_trust_check: identical
+wp3_trust_check_v1_prespecified: identical
+wp4a_nifeadb_beats: identical
+wp4b_rhythm_intervals: identical
+wp4c_foundation: identical
+wp4d_cnn: identical
+wp5_echo_readiness: not in the current runs folder
+wp5_structure_delta: DIFFERENT
+  metrics.json: 1 values differ; first: .dataset.source 'figshare doi:10.6084/m9.figshare.32358771 (version 2), CC BY' against 'figshare doi:10.6084/m9.figshare.32358771 (version 2), CC BY'
+  metrics.json: 1 run-time values differ (expected)
+wp5b_structure_controls_delta: identical
+wp6_fusion: identical
+wp6b_fusion_structure: identical
+SOME RUNS DIFFER

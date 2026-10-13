@@ -122,7 +122,6 @@
     {
       "file": "RESULTS.md#structure",
       "runs": [
-        "wp5_echo_readiness",
         "wp5_structure_delta",
         "wp5b_structure_controls_delta"
       ]
@@ -217,7 +216,6 @@
         "wp4b_rhythm_intervals",
         "wp4c_foundation",
         "wp4d_cnn",
-        "wp5_echo_readiness",
         "wp5_structure_delta",
         "wp5b_structure_controls_delta",
         "wp6_fusion",

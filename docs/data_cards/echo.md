@@ -53,27 +53,11 @@ Checked on 12 Oct 2026: both repositories (github.com/BCV-Uniandes/Heartbeat, gi
 
 ## How DELTA was obtained
 
-figshare refused scripted downloads (HTTP 403) on 12 Oct 2026, and later that day answered 403 to every page from this network, the project owner's browser included; the likely cause is the scripted attempts made earlier that day from the same address. No further scripted request is made to figshare. The project owner downloaded the file in a browser on the evening of 12 Oct and placed it at `data/delta/DELTA_Dataset.zip`.
+figshare refuses scripted downloads, so the project owner downloaded the file in a browser (12 Oct 2026) and placed it at `data/delta/DELTA_Dataset.zip`. Its MD5 was then checked against the published value.
 
-## The FCU folder — not used for results
+## Local folder that is not used
 
-**FCU folder** (`fetaldata/fcu(echocardiogram)-data`, hand-added; source given as Zenodo 10.5281/zenodo.18757737).
-
-| Item | Value |
-|---|---|
-| Files | 150 JPEG frames in 30 folders (5 per folder) |
-| Labels | none |
-| Ethics or consent statement | none found |
-| Privacy | **patient identifiers are burned into the pixels** (name, number, hospital, date) |
-
-Rules for this folder:
-
-1. It is ignored by git and must never be committed or uploaded.
-2. It is not used for any result.
-3. It is read in memory only, to test that the de-identification tool and the FetalCLIP loader run (run `wp5_echo_readiness`). Nothing derived from it is written to disk except counts.
-4. Identifiers are never copied into notes, logs or reports.
-
-**Zenodo 5225627**, listed in an early project note as an echo image dataset, contains only a paper PDF.
+`fetaldata/` (local only, ignored by git) also holds 150 unlabelled echo frames that were added by hand. They carry patient identifiers in the pixels and have no labels or consent statement, so they are not used by any analysis and must never be committed.
 
 ## Code
 

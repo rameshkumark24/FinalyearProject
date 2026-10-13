@@ -1,7 +1,7 @@
 {
   "dataset": {
     "name": "delta",
-    "source": "figshare doi:10.6084/m9.figshare.32358771 (version 2), CC BY 4.0; archive MD5 865d952adc0d8fe2be9df326e46cb763 verified",
+    "source": "figshare doi:10.6084/m9.figshare.32358771 (version 2), CC BY 4.0",
     "images": 3760,
     "cases": 752,
     "abnormal_cases": 133,
@@ -1143,5 +1143,5 @@
     "reference_model_reproduced": false,
     "reason": "no released reference model exists for this dataset; the other two parts are reported"
   },
-  "minutes": 31.688476582368214
+  "minutes": 131.40515308380128
 }
