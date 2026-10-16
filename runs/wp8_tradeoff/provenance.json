@@ -1,0 +1,110 @@
+{
+  "run": "wp8_tradeoff",
+  "description": "Alarm levels against sensitivity and healthy alarm rate for each expert, and the false-referral ceiling of every combination of levels. A check made after seeing the results.",
+  "created_utc": "2026-10-16T06:01:13+00:00",
+  "script": "scripts/run_wp8_tradeoff.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "b2afc3e1fe69cc282feeb9b2d37c5d43033839a2",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "source_runs": [
+      "wp5_structure_delta",
+      "wp2b_function_reference",
+      "wp4b_rhythm_intervals"
+    ],
+    "rhythm_score": "oof_logistic_rhythm",
+    "levels": {
+      "structure": [
+        0.01,
+        0.02,
+        0.05,
+        0.1,
+        0.15,
+        0.2
+      ],
+      "function": [
+        0.01,
+        0.02,
+        0.05,
+        0.1
+      ],
+      "rhythm": [
+        0.05,
+        0.06666666666666667,
+        0.1,
+        0.15,
+        0.2
+      ]
+    },
+    "curve_levels": [
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05,
+      0.06,
+      0.07,
+      0.08,
+      0.09,
+      0.1,
+      0.11,
+      0.12,
+      0.13,
+      0.14,
+      0.15,
+      0.16,
+      0.17,
+      0.18,
+      0.19,
+      0.2,
+      0.21,
+      0.22,
+      0.23,
+      0.24,
+      0.25,
+      0.26,
+      0.27,
+      0.28,
+      0.29,
+      0.3
+    ],
+    "confidence": 0.95,
+    "made_after_seeing_results": true
+  },
+  "data": {
+    "structure": {
+      "n_files": 1,
+      "total_bytes": 69518,
+      "manifest_sha256": "355ce812fbca1372e3e3819a69912049a2abb528d1d6a239327e9337daaecaaf"
+    },
+    "function": {
+      "n_files": 1,
+      "total_bytes": 12523,
+      "manifest_sha256": "681b8ce1a685bbf8b2045a7e4ddad71309ded39bd9480b45d1170a196ba969fc"
+    },
+    "rhythm": {
+      "n_files": 1,
+      "total_bytes": 4328,
+      "manifest_sha256": "740229f8399ea06521b0c4e4cf04b15f62fee10d2cbe6fc37fa10544a52a4dbf"
+    }
+  },
+  "n_real": 838,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": null,
+  "argv": [
+    "C:\\Finalyearproject\\scripts\\run_wp8_tradeoff.py"
+  ]
+}

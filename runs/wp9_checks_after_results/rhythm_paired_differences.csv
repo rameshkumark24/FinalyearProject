@@ -1,0 +1,13 @@
+subset,first,second,n,difference,ci_low,ci_high,share_above_0,resamples,can_be_ranked,note
+all 26 recordings,oof_ecgfounder__fetal,oof_random_init__fetal_stretch2,26,0.071429,-0.006536,0.184598,0.9405,2000,False,
+all 26 recordings,oof_ecgfounder__fetal,oof_random_init__fetal,26,,,,,,,not recomputed: rounding in the saved file ties scores of the two classes
+all 26 recordings,oof_ecgfounder__fetal,oof_logistic_rhythm,26,0.154762,-0.02382,0.385653,0.9355,2000,False,
+all 26 recordings,oof_logistic_rhythm,succ_rel_median,26,-0.139881,-0.38096,0.032738,0.084,2000,False,
+all 26 recordings,oof_logistic_rhythm,slow_hr_bpm_median,26,0.116071,-0.181818,0.377994,0.795,2000,False,
+all 26 recordings,oof_ecgfounder__fetal,slow_hr_bpm_median,26,0.270833,0.062491,0.520833,0.994,2000,True,
+1 kHz recordings only,oof_ecgfounder__fetal,oof_random_init__fetal_stretch2,22,0.044643,-0.028571,0.140513,0.813,2000,False,
+1 kHz recordings only,oof_ecgfounder__fetal,oof_random_init__fetal,22,,,,,,,not recomputed: rounding in the saved file ties scores of the two classes
+1 kHz recordings only,oof_ecgfounder__fetal,oof_logistic_rhythm,22,0.25,0.0,0.564755,0.9665,2000,False,
+1 kHz recordings only,oof_logistic_rhythm,succ_rel_median,22,-0.209821,-0.544673,0.049629,0.078,2000,False,
+1 kHz recordings only,oof_logistic_rhythm,slow_hr_bpm_median,22,-0.075893,-0.383348,0.160714,0.3115,2000,False,
+1 kHz recordings only,oof_ecgfounder__fetal,slow_hr_bpm_median,22,0.174107,-0.038104,0.476228,0.9075,2000,False,

@@ -1,0 +1,32 @@
+{
+  "made_after_seeing_results": true,
+  "design_levels": {
+    "structure": 0.05,
+    "function": 0.05,
+    "rhythm": 0.1
+  },
+  "design_row": {
+    "structure_level": 0.05,
+    "function_level": 0.05,
+    "rhythm_level": 0.1,
+    "ceiling": 0.2,
+    "healthy_rate_lowest_any_dependence": 0.07142857142857142,
+    "healthy_rate_highest_any_dependence": 0.16938226017385952,
+    "healthy_rate_highest_with_uncertainty": 0.5737601983448953,
+    "structural_defect_sensitivity": 0.46616541353383456,
+    "arrhythmia_sensitivity": 0.6666666666666666,
+    "rhythm_can_alarm": true,
+    "is_the_design": true
+  },
+  "rhythm_smallest_level": {
+    "n_healthy_calibration": 14,
+    "smallest_p_for_a_new_case": 0.06666666666666667,
+    "smallest_p_healthy_leave_one_out": 0.07142857142857142,
+    "effective_level_of_the_design": 0.06666666666666667,
+    "effective_ceiling_of_the_design": 0.16666666666666669,
+    "statement": "with 14 healthy calibration recordings the rhythm expert cannot alarm at a level below 1/15, and its p-values are multiples of 1/15, so the design level 0.10 acts as 1/15 for a new case; in the leave-one-out evaluation each healthy recording is ranked among the other 13, so at 1/15 its measured healthy alarm rate is 0 by construction"
+  },
+  "smallest_p_structure_per_fold": "about 1/125 (calibration normal cases of each fold); see wp5_structure_delta",
+  "caution": "the curves are measured on the evaluation data; choosing a level from them and reporting performance at that level on the same data would be optimistic",
+  "n_designs": 120
+}

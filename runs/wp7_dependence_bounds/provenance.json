@@ -1,0 +1,115 @@
+{
+  "run": "wp7_dependence_bounds",
+  "description": "What the fused system guarantees without paired data: false-referral range for any dependence, with uncertainty; dependence dial; sensitivity floor; precision over a prevalence grid; gate G7. A check made after seeing the results.",
+  "created_utc": "2026-10-16T06:01:04+00:00",
+  "script": "scripts/run_wp7_dependence_bounds.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "b2afc3e1fe69cc282feeb9b2d37c5d43033839a2",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "source_runs": [
+      "wp5_structure_delta",
+      "wp2b_function_reference",
+      "wp4b_rhythm_intervals",
+      "wp6_fusion",
+      "wp6b_fusion_structure"
+    ],
+    "rhythm_score": "oof_logistic_rhythm",
+    "alpha": {
+      "structure": 0.05,
+      "function": 0.05,
+      "rhythm": 0.1
+    },
+    "confidence": 0.95,
+    "calibration_level": 0.9,
+    "rho_grid": [
+      -0.45,
+      -0.4,
+      -0.35,
+      -0.3,
+      -0.25,
+      -0.2,
+      -0.15,
+      -0.1,
+      -0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0
+    ],
+    "prevalence_grid": [
+      0.001,
+      0.002,
+      0.005,
+      0.01,
+      0.02,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "made_after_seeing_results": true
+  },
+  "data": {
+    "structure": {
+      "n_files": 2,
+      "total_bytes": 97012,
+      "manifest_sha256": "a6e8374398427374abc799bd9eb6ff3f7fe01dcac4be45032835f4f025c9bac6"
+    },
+    "function": {
+      "n_files": 1,
+      "total_bytes": 12523,
+      "manifest_sha256": "681b8ce1a685bbf8b2045a7e4ddad71309ded39bd9480b45d1170a196ba969fc"
+    },
+    "rhythm": {
+      "n_files": 1,
+      "total_bytes": 4328,
+      "manifest_sha256": "740229f8399ea06521b0c4e4cf04b15f62fee10d2cbe6fc37fa10544a52a4dbf"
+    },
+    "pairs": {
+      "n_files": 2,
+      "total_bytes": 11080,
+      "manifest_sha256": "677f4e4e9666ea2c6337058886d240b7f4dfe3e928fb9803b2192e932f58de2f"
+    },
+    "fused": {
+      "n_files": 1,
+      "total_bytes": 3559,
+      "manifest_sha256": "b2bf09409d9d783c85f464b3a0073f7c3678cca0e3943883e6078a694dc0b1d7"
+    }
+  },
+  "n_real": 838,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "C:\\Finalyearproject\\scripts\\run_wp7_dependence_bounds.py"
+  ]
+}

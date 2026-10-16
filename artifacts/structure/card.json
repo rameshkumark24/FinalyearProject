@@ -1,0 +1,59 @@
+{
+  "alarm_level": 0.05,
+  "calibration": {
+    "n": 62,
+    "source": "probe scores of the normal Val cases (run wp5_structure_delta, own partition)"
+  },
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "condition": "structural heart defect",
+  "created": "2026-10-16",
+  "dataset": "DELTA (figshare doi:10.6084/m9.figshare.32358771, CC BY 4.0): probe fitted on the Train split (521 cases), calibrated on the normal cases of the Val split",
+  "expert": "structure",
+  "files": {
+    "calibration.npy": "b8e809e7fbab5ce4356daad4d53fe0ab0bafb35acf5fc3120b43d95ab1a117a3",
+    "coef.npy": "9a15437b60ed38a3140ba517cc5e9ca16493d494ece370afa5538561bdb43666",
+    "intercept.npy": "30fa14d34f9304017d368718bc7befd1c75d0eb2bab5850893adfd126a872588",
+    "pca_components.npy": "253d13365fa9435146b68a30211cb45c995727d231ffedb81b3d7aaa0fbb84c6",
+    "pca_mean.npy": "ee598ba5a68580ae604a4e58788c5766e44dd764f69ad3f813c4749fc6614523",
+    "scaler_mean.npy": "4d55b390a733c39899203775003027f7105980d5d35d84a8850ba9e9e83cbc56",
+    "scaler_scale.npy": "a5144999ca924d45984657b1b59c3d7ef3805bf10f29664286f2d4f21d3c3087"
+  },
+  "format": "sfrtool-artifact-1",
+  "intended_input": "a folder with one image of each plane, named Abdomen, 4CH, LVOT, RVOT and 3VT (.jpg, .png or .bmp); every image is cleaned by sfr.echo.deidentify before it is embedded",
+  "known_limits": [
+    "one open dataset from one centre (DELTA); inputs with little or no cardiac anatomy also separate the classes (AUROC 0.619 to 0.770, run wp5_structure_delta), so its performance is an upper bound on what heart structure contributes",
+    "defects caught by image size: 60 of 114 in 900x752; 0 of 11 in 642x506 (run wp9_checks_after_results, cross-validated probe)",
+    "the run computed its embeddings on a GPU; on a CPU they differ in the last digits (tests/test_predict.py checks the agreement)"
+  ],
+  "model": {
+    "file": "FetalCLIP_weights.pt",
+    "licence": "CC BY-NC 4.0",
+    "name": "FetalCLIP",
+    "probe": "standardise, PCA to 32, logistic regression (balanced)",
+    "sha256": "90916caa408baf9374ee3f8c1533463331a4ace37a13e61385e782905b35c310",
+    "source": "huggingface.co/numansaeed/fetalclip-model"
+  },
+  "planes": [
+    "Abdomen",
+    "4CH",
+    "LVOT",
+    "RVOT",
+    "3VT"
+  ],
+  "source_runs": [
+    "wp5_structure_delta"
+  ],
+  "test": "fetal echo",
+  "tool_version": "0.1.0",
+  "verification": {
+    "calibration_normal_cases": 62,
+    "probe_equals_sklearn_max_abs_diff": 6.661338147750939e-16,
+    "published_calibration_normal_cases": 62,
+    "published_test_auroc": 0.8776881720430108,
+    "published_test_defects_caught": 18,
+    "published_test_normal_flagged": 9,
+    "test_auroc": 0.8776881720430108,
+    "test_defects_caught": 18,
+    "test_normal_flagged": 9
+  }
+}

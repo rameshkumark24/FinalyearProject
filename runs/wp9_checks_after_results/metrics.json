@@ -1,0 +1,333 @@
+{
+  "made_after_seeing_results": true,
+  "A_rhythm_1khz_only": {
+    "sampling_rates_from_headers": {
+      "500 Hz": {
+        "arrhythmia": 4,
+        "normal": 0
+      },
+      "1000 Hz": {
+        "arrhythmia": 8,
+        "normal": 14
+      }
+    },
+    "records_500hz": [
+      "ARR_06",
+      "ARR_07",
+      "ARR_08",
+      "ARR_09"
+    ],
+    "scores_not_recomputable_from_saved_files": [
+      "oof_random_init__fetal"
+    ],
+    "table": "rhythm_1khz_only.csv",
+    "note": "same out-of-fold scores as wp4b and wp4c (models fitted on all 26); nothing re-fitted"
+  },
+  "B_rhythm_paired_differences": {
+    "table": "rhythm_paired_differences.csv",
+    "bootstrap": 2000,
+    "rows": [
+      {
+        "subset": "all 26 recordings",
+        "first": "oof_ecgfounder__fetal",
+        "second": "oof_random_init__fetal_stretch2",
+        "n": 26,
+        "difference": 0.0714285714285714,
+        "ci_low": -0.00653594771241828,
+        "ci_high": 0.18459821428571388,
+        "share_above_0": 0.9405,
+        "resamples": 2000,
+        "can_be_ranked": false
+      },
+      {
+        "subset": "all 26 recordings",
+        "first": "oof_ecgfounder__fetal",
+        "second": "oof_random_init__fetal",
+        "n": 26,
+        "note": "not recomputed: rounding in the saved file ties scores of the two classes"
+      },
+      {
+        "subset": "all 26 recordings",
+        "first": "oof_ecgfounder__fetal",
+        "second": "oof_logistic_rhythm",
+        "n": 26,
+        "difference": 0.15476190476190466,
+        "ci_low": -0.023820346320346342,
+        "ci_high": 0.3856530112044816,
+        "share_above_0": 0.9355,
+        "resamples": 2000,
+        "can_be_ranked": false
+      },
+      {
+        "subset": "all 26 recordings",
+        "first": "oof_logistic_rhythm",
+        "second": "succ_rel_median",
+        "n": 26,
+        "difference": -0.13988095238095233,
+        "ci_low": -0.38095982142857143,
+        "ci_high": 0.03273809523809523,
+        "share_above_0": 0.084,
+        "resamples": 2000,
+        "can_be_ranked": false
+      },
+      {
+        "subset": "all 26 recordings",
+        "first": "oof_logistic_rhythm",
+        "second": "slow_hr_bpm_median",
+        "n": 26,
+        "difference": 0.1160714285714286,
+        "ci_low": -0.18181818181818177,
+        "ci_high": 0.3779942413355874,
+        "share_above_0": 0.795,
+        "resamples": 2000,
+        "can_be_ranked": false
+      },
+      {
+        "subset": "all 26 recordings",
+        "first": "oof_ecgfounder__fetal",
+        "second": "slow_hr_bpm_median",
+        "n": 26,
+        "difference": 0.27083333333333326,
+        "ci_low": 0.06249075443786982,
+        "ci_high": 0.5208333333333333,
+        "share_above_0": 0.994,
+        "resamples": 2000,
+        "can_be_ranked": true
+      },
+      {
+        "subset": "1 kHz recordings only",
+        "first": "oof_ecgfounder__fetal",
+        "second": "oof_random_init__fetal_stretch2",
+        "n": 22,
+        "difference": 0.044642857142857095,
+        "ci_low": -0.02857142857142858,
+        "ci_high": 0.14051288283908592,
+        "share_above_0": 0.813,
+        "resamples": 2000,
+        "can_be_ranked": false
+      },
+      {
+        "subset": "1 kHz recordings only",
+        "first": "oof_ecgfounder__fetal",
+        "second": "oof_random_init__fetal",
+        "n": 22,
+        "note": "not recomputed: rounding in the saved file ties scores of the two classes"
+      },
+      {
+        "subset": "1 kHz recordings only",
+        "first": "oof_ecgfounder__fetal",
+        "second": "oof_logistic_rhythm",
+        "n": 22,
+        "difference": 0.25,
+        "ci_low": 0.0,
+        "ci_high": 0.564754901960784,
+        "share_above_0": 0.9665,
+        "resamples": 2000,
+        "can_be_ranked": false
+      },
+      {
+        "subset": "1 kHz recordings only",
+        "first": "oof_logistic_rhythm",
+        "second": "succ_rel_median",
+        "n": 22,
+        "difference": -0.2098214285714286,
+        "ci_low": -0.544672619047619,
+        "ci_high": 0.04962915872006763,
+        "share_above_0": 0.078,
+        "resamples": 2000,
+        "can_be_ranked": false
+      },
+      {
+        "subset": "1 kHz recordings only",
+        "first": "oof_logistic_rhythm",
+        "second": "slow_hr_bpm_median",
+        "n": 22,
+        "difference": -0.0758928571428572,
+        "ci_low": -0.3833482142857143,
+        "ci_high": 0.1607142857142857,
+        "share_above_0": 0.3115,
+        "resamples": 2000,
+        "can_be_ranked": false
+      },
+      {
+        "subset": "1 kHz recordings only",
+        "first": "oof_ecgfounder__fetal",
+        "second": "slow_hr_bpm_median",
+        "n": 22,
+        "difference": 0.1741071428571428,
+        "ci_low": -0.03810439560439558,
+        "ci_high": 0.47622767857142834,
+        "share_above_0": 0.9075,
+        "resamples": 2000,
+        "can_be_ranked": false
+      }
+    ]
+  },
+  "C_trust_check_robust_agreement": {
+    "recordings": 35,
+    "pairs": 2560,
+    "pairs_stored_by_wp3": 2560,
+    "plausible_pairs": 2482,
+    "abs_interval_difference_ms": {
+      "50": 3.7000000000002586,
+      "90": 38.509999999999415,
+      "95": 60.80499999999993
+    },
+    "abs_interval_difference_median_stored_by_wp3_ms": 3.6760563380298095,
+    "abs_rate_difference_bpm_plausible_pairs": {
+      "50": 1.197516534939524,
+      "90": 10.156971071007664,
+      "95": 15.830065148185119
+    },
+    "percentile_limits_bpm_plausible_pairs": [
+      -16.622550506760597,
+      15.479102080847653
+    ],
+    "percentile_limits_stored_by_wp3_bpm": [
+      -16.640740246230102,
+      15.488655660820847
+    ],
+    "classical_limits_bpm_plausible_pairs": {
+      "n": 2482,
+      "bias": -0.020966170867916713,
+      "sd": 6.790576032378437,
+      "loa_low": -13.330495194329654,
+      "loa_high": 13.28856285259382
+    },
+    "share_within_10_bpm_plausible_pairs": 0.8988718775181306,
+    "gate_G3_target_bpm": 10,
+    "note": "beat times were saved rounded to 0.1 ms, so recomputed values can differ from wp3 in the last digit"
+  },
+  "D_subgroups": {
+    "structure_by_image_size": [
+      {
+        "image_size": "900x752",
+        "normal": 417,
+        "normal_flagged": 30,
+        "false_alarm_rate": 0.07194244604316546,
+        "fa_ci_low": 0.04906267107943215,
+        "fa_ci_high": 0.10111144040885832,
+        "abnormal": 114,
+        "abnormal_caught": 60,
+        "sensitivity": 0.5263157894736842,
+        "se_ci_low": 0.4306479543121689,
+        "se_ci_high": 0.6205831422358978
+      },
+      {
+        "image_size": "642x506",
+        "normal": 112,
+        "normal_flagged": 7,
+        "false_alarm_rate": 0.0625,
+        "fa_ci_low": 0.02549509099991495,
+        "fa_ci_high": 0.12453936816055108,
+        "abnormal": 11,
+        "abnormal_caught": 0,
+        "sensitivity": 0.0,
+        "se_ci_low": 0.0,
+        "se_ci_high": 0.28491415291815436
+      },
+      {
+        "image_size": "806x648",
+        "normal": 69,
+        "normal_flagged": 3,
+        "false_alarm_rate": 0.043478260869565216,
+        "fa_ci_low": 0.009057607358815035,
+        "fa_ci_high": 0.1218471493656237,
+        "abnormal": 5,
+        "abnormal_caught": 1,
+        "sensitivity": 0.2,
+        "se_ci_low": 0.0050507633794680575,
+        "se_ci_high": 0.7164179361180893
+      },
+      {
+        "image_size": "744x658",
+        "normal": 15,
+        "normal_flagged": 0,
+        "false_alarm_rate": 0.0,
+        "fa_ci_low": 0.0,
+        "fa_ci_high": 0.21801936091053403,
+        "abnormal": 1,
+        "abnormal_caught": 0,
+        "sensitivity": 0.0,
+        "se_ci_low": 0.0,
+        "se_ci_high": 0.975
+      },
+      {
+        "image_size": "1114x766",
+        "normal": 6,
+        "normal_flagged": 0,
+        "false_alarm_rate": 0.0,
+        "fa_ci_low": 0.0,
+        "fa_ci_high": 0.45925812643990044,
+        "abnormal": 1,
+        "abnormal_caught": 1,
+        "sensitivity": 1.0,
+        "se_ci_low": 0.025,
+        "se_ci_high": 1.0
+      },
+      {
+        "image_size": "448x404",
+        "normal": 0,
+        "normal_flagged": 0,
+        "false_alarm_rate": NaN,
+        "fa_ci_low": NaN,
+        "fa_ci_high": NaN,
+        "abnormal": 1,
+        "abnormal_caught": 0,
+        "sensitivity": 0.0,
+        "se_ci_low": 0.0,
+        "se_ci_high": 0.975
+      }
+    ],
+    "function_by_gestational_age": [
+      {
+        "gestation_weeks": "21+0 to 22+6",
+        "recordings": 15,
+        "women": 9,
+        "flagged": 0,
+        "share": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.21801936091053403
+      },
+      {
+        "gestation_weeks": "23+0 to 24+6",
+        "recordings": 16,
+        "women": 13,
+        "flagged": 1,
+        "share": 0.0625,
+        "ci_low": 0.0015811117227658871,
+        "ci_high": 0.30232073843453194
+      },
+      {
+        "gestation_weeks": "25+0 to 26+6",
+        "recordings": 18,
+        "women": 12,
+        "flagged": 1,
+        "share": 0.05555555555555555,
+        "ci_low": 0.0014055561673694222,
+        "ci_high": 0.27294359967336845
+      },
+      {
+        "gestation_weeks": "27+0 to 28+6",
+        "recordings": 11,
+        "women": 5,
+        "flagged": 0,
+        "share": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.28491415291815436
+      }
+    ],
+    "function_score_and_gestational_age": {
+      "spearman_score_vs_gestation_days": -0.049880413488128446,
+      "p_value": 0.7050740160491882,
+      "n": 60,
+      "note": "repeated recordings of a woman share her gestational age, so the recordings are not independent"
+    },
+    "not_available": "DELTA records neither the device nor the gestational age, and NInFEA was recorded with one device"
+  },
+  "E_structure_missed": {
+    "n_missed": 71,
+    "n_abnormal": 133,
+    "table": "structure_missed_cases.csv"
+  }
+}

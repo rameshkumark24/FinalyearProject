@@ -1,0 +1,13 @@
+Recordings,Scores compared,n,"AUROC difference [95% CI, paired bootstrap]",Can be ranked
+all 26 recordings,oof_ecgfounder__fetal minus oof_random_init__fetal_stretch2,26,"0.071 [-0.007, 0.185]",no
+all 26 recordings,oof_ecgfounder__fetal minus oof_random_init__fetal,26,not recomputed: rounding in the saved file ties scores of the two classes,-
+all 26 recordings,oof_ecgfounder__fetal minus oof_logistic_rhythm,26,"0.155 [-0.024, 0.386]",no
+all 26 recordings,oof_logistic_rhythm minus succ_rel_median,26,"-0.140 [-0.381, 0.033]",no
+all 26 recordings,oof_logistic_rhythm minus slow_hr_bpm_median,26,"0.116 [-0.182, 0.378]",no
+all 26 recordings,oof_ecgfounder__fetal minus slow_hr_bpm_median,26,"0.271 [0.062, 0.521]",yes
+1 kHz recordings only,oof_ecgfounder__fetal minus oof_random_init__fetal_stretch2,22,"0.045 [-0.029, 0.141]",no
+1 kHz recordings only,oof_ecgfounder__fetal minus oof_random_init__fetal,22,not recomputed: rounding in the saved file ties scores of the two classes,-
+1 kHz recordings only,oof_ecgfounder__fetal minus oof_logistic_rhythm,22,"0.250 [0.000, 0.565]",no
+1 kHz recordings only,oof_logistic_rhythm minus succ_rel_median,22,"-0.210 [-0.545, 0.050]",no
+1 kHz recordings only,oof_logistic_rhythm minus slow_hr_bpm_median,22,"-0.076 [-0.383, 0.161]",no
+1 kHz recordings only,oof_ecgfounder__fetal minus slow_hr_bpm_median,22,"0.174 [-0.038, 0.476]",no

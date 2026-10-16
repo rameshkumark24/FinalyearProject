@@ -1,0 +1,52 @@
+{
+  "run": "tool_artifacts",
+  "description": "Artifacts of the one-patient research tool (sfrtool): linear models of the runs refitted on their saved features, each checked against the published numbers before it is written to artifacts/",
+  "created_utc": "2026-10-16T06:02:00+00:00",
+  "script": "scripts/export_artifacts.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "b2afc3e1fe69cc282feeb9b2d37c5d43033839a2",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "artifacts_folder": "artifacts",
+    "tool_version": "0.1.0",
+    "rhythm_score": "oof_logistic_rhythm",
+    "structure_probe_components": 32,
+    "seed": 0
+  },
+  "data": {
+    "rhythm": {
+      "n_files": 3,
+      "total_bytes": 206789,
+      "manifest_sha256": "c4842c66931965ea302cbba4385e5e662a09814ba5dbccdd6e960a134c816106"
+    },
+    "function": {
+      "n_files": 1,
+      "total_bytes": 12523,
+      "manifest_sha256": "681b8ce1a685bbf8b2045a7e4ddad71309ded39bd9480b45d1170a196ba969fc"
+    },
+    "structure": {
+      "n_files": 2,
+      "total_bytes": 12103668,
+      "manifest_sha256": "590671c82b8574478bdaeaa2d5cbba569d336ac3a27928bb6922a916afd2ec60"
+    }
+  },
+  "n_real": 838,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "scripts/export_artifacts.py"
+  ]
+}

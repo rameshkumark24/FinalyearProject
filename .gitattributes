@@ -3,3 +3,7 @@
 # byte for byte on every platform, with no line-ending conversion, so that anyone who
 # clones the repository can reproduce the hash written in runs/*/provenance.json.
 sfr/**/*.py -text
+# The one-patient tool reports a hash of its own code and of each artifact card; keep their bytes as written
+sfrtool/**/*.py -text
+scripts/predict_patient.py -text
+artifacts/** -text
