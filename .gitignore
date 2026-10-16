@@ -57,3 +57,13 @@ runs/**/*.pkl
 paper/
 # Local record of earlier work (first build, audit plan, old Notion export); kept on disk, not in the repository
 archive/
+# One-patient research tool: patient files and results never enter git (scripts/predict_patient.py
+# refuses to write a result anywhere else inside the repository). The small expert artifacts in
+# artifacts/ are committed; any large file placed there is not.
+patients/
+tool_results/
+artifacts/**/*.npz
+artifacts/**/*.pt
+artifacts/**/*.jpg
+artifacts/**/*.png
+artifacts/**/*.bmp

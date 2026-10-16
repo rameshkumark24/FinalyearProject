@@ -30,9 +30,13 @@ STEPS = [
     ("wp5b", "run_wp5b_structure_controls.py", "wp5b_structure_controls_delta", None),
     ("wp6", "run_wp6_fusion.py", "wp6_fusion", "gate_G6"),
     ("wp6b", "run_wp6b_fusion_structure.py", "wp6b_fusion_structure", None),
+    # Checks added after seeing the results (16 October 2026); they read saved outputs only.
+    ("wp7", "run_wp7_dependence_bounds.py", "wp7_dependence_bounds", "gate_G7"),
+    ("wp8", "run_wp8_tradeoff.py", "wp8_tradeoff", None),
+    ("wp9", "run_wp9_checks_after_results.py", "wp9_checks_after_results", None),
 ]
-# The three steps that need the DELTA echo dataset (see docs/data_cards/echo.md). They are skipped,
-# with a note, when the extracted dataset or the structure run is not there.
+# The steps that need the DELTA echo dataset (see docs/data_cards/echo.md) or its structure run. They
+# are skipped, with a note, when the extracted dataset or the structure run is not there.
 DELTA_ROOT = ROOT / "data" / "delta" / "extracted"
 ARGUMENTS = {
     "wp5s": ["--name", "delta", "--root", str(DELTA_ROOT), "--index", str(ROOT / "splits" / "echo_delta_index.csv"),
@@ -42,7 +46,10 @@ ARGUMENTS = {
 }
 NEEDS = {"wp5s": DELTA_ROOT / "DELTA_Dataset" / "metadata.csv",
          "wp5b": ROOT / "runs" / "wp5_structure_delta" / "metrics.json",
-         "wp6b": ROOT / "runs" / "wp5_structure_delta" / "metrics.json"}
+         "wp6b": ROOT / "runs" / "wp5_structure_delta" / "metrics.json",
+         "wp7": ROOT / "runs" / "wp6b_fusion_structure" / "metrics.json",
+         "wp8": ROOT / "runs" / "wp5_structure_delta" / "metrics.json",
+         "wp9": ROOT / "runs" / "wp5_structure_delta" / "metrics.json"}
 
 
 def main() -> int:
@@ -71,7 +78,10 @@ def main() -> int:
         if gate is None or not metrics_file.exists():
             continue
         entry = json.loads(metrics_file.read_text(encoding="utf-8")).get(gate, {})
-        if entry.get("passed") is True:
+        if "passed_at_measured_rates" in entry:
+            state = (("MET" if entry["passed_at_measured_rates"] else "NOT MET") + " at the measured rates, "
+                     + ("MET" if entry["passed_with_uncertainty"] else "NOT MET") + " with uncertainty (defined after seeing the results)")
+        elif entry.get("passed") is True:
             state = "MET"
         elif entry.get("auroc_with_interval"):
             state = "PARTLY MET (" + entry["reason"] + ")"

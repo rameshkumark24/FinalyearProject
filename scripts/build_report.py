@@ -29,6 +29,7 @@ from sfr.provenance import load_run  # noqa: E402
 TABLES, FIGURES = REPORTS / "tables", REPORTS / "figures"
 HALF = 1 / 2
 THIRD = 1 / 3
+BOUNDS_RUN, TRADEOFF_RUN, CHECKS_RUN = "wp7_dependence_bounds", "wp8_tradeoff", "wp9_checks_after_results"
 MANIFEST: list[dict] = []
 GATE_RULES = {
     "G4": "every row has n, an interval and a run folder; the checkpoint hash matches the published file; the negative-control rows are present",
@@ -206,6 +207,20 @@ def section_wp3() -> str:
         f"Display orientation where it is known (held-out, n = {orientation['known_n']}): from the ECG {orientation['from_ecg_correct']} correct, "
         f"from the Doppler alone {orientation['from_doppler_correct']} correct; the two methods agree on {orientation['unknown_two_methods_agree']} of {orientation['unknown_n']} strips of unknown orientation.",
     ]
+    if (RUNS / CHECKS_RUN / "metrics.json").exists():
+        robust = load_run(CHECKS_RUN)[0]["C_trust_check_robust_agreement"]
+        limits = beat["rate_diff_percentiles_plausible_bpm"]
+        classical = beat["rate_limits_plausible_pairs"]
+        target = robust["gate_G3_target_bpm"]
+        notes.append(
+            f"Robust agreement, added after seeing the result (run {CHECKS_RUN}, recomputed from the beat times saved by this run): of the same "
+            f"{robust['pairs']} beat pairs, the absolute interval difference has median {num(robust['abs_interval_difference_ms']['50'], 1)} ms, "
+            f"90th percentile {num(robust['abs_interval_difference_ms']['90'], 1)} ms and 95th percentile {num(robust['abs_interval_difference_ms']['95'], 1)} ms. "
+            f"On the {robust['plausible_pairs']} plausible pairs the absolute rate difference has median {num(robust['abs_rate_difference_bpm_plausible_pairs']['50'], 1)} bpm, "
+            f"90th percentile {num(robust['abs_rate_difference_bpm_plausible_pairs']['90'], 1)} bpm and 95th percentile "
+            f"{num(robust['abs_rate_difference_bpm_plausible_pairs']['95'], 1)} bpm; {pct(robust['share_within_10_bpm_plausible_pairs'])} lie within "
+            f"±{target} bpm. Percentile limits of agreement (2.5th to 97.5th percentile, this run): {interval([limits['2.5'], limits['97.5']], 1)} bpm, "
+            f"wider than the classical limits {interval([classical['loa_low'], classical['loa_high']], 1)} bpm. Gate G3 keeps its pre-specified rule and stays not met.")
     recordings = [r for r in read_csv(run, "per_recording.csv") if r["split"] == "test"]
     swaps = [r for r in read_csv(run, "swaps.csv") if r["split"] == "test"]
     figure, axes = plt.subplots(1, 2, figsize=(11, 4))
@@ -342,7 +357,38 @@ def section_wp4() -> str:
     axis.set_xlabel("AUROC with 95% CI: arrhythmia against normal rhythm, 26 subjects,\neach scored by a model that never saw it")
     axis.set_title("Rhythm expert and controls (NIFEADB)")
     picture = save(figure, "f5_rhythm_expert", [intervals, foundation, cnn])
-    return "\n\n".join(["## 5. Rhythm expert (NIFEADB, 12 arrhythmia and 14 normal)", *notes, text, leak_text, probe_text, check_text, picture])
+    extra = []
+    if (RUNS / CHECKS_RUN / "metrics.json").exists():
+        checks = load_run(CHECKS_RUN)[0]
+        rows_1k = read_csv(CHECKS_RUN, "rhythm_1khz_only.csv")
+        khz_rows = []
+        for r in rows_1k:
+            if r["exact_from_saved_file"] == "True":
+                khz_rows.append([r["description"], f"{num(r['auroc_all'])} {interval([r['ci_all_low'], r['ci_all_high']])}",
+                                 f"{num(r['auroc_1khz'])} {interval([r['ci_1khz_low'], r['ci_1khz_high']])}", f"{r['n_1khz']} ({r['arrhythmia_1khz']} arrhythmia)"])
+            else:
+                khz_rows.append([r["description"], f"{num(r['published_auroc_all'])} (published)", "not recomputed: " + r["note"].split(": ")[-1], "-"])
+        rates = checks["A_rhythm_1khz_only"]["sampling_rates_from_headers"]
+        extra.append(
+            "**Recordings sampled at 1 kHz only (added after seeing the results, run " + CHECKS_RUN + ").** Sampling rates read from the record headers: "
+            + "; ".join(f"{fs}: {v['arrhythmia']} arrhythmia, {v['normal']} normal" for fs, v in rates.items())
+            + ". The same out-of-fold scores are evaluated without the 500 Hz recordings, with a bootstrap interval over subjects; nothing is re-fitted. "
+            "The saved per-record files hold scores rounded to 6 decimals; a score is recomputed only if its AUROC over all 26 recordings equals the published value exactly.")
+        extra.append(table("t5e_rhythm_1khz_only", ["Score", "AUROC, all 26 [95% CI]", "AUROC, 1 kHz only [95% CI]", "Recordings (1 kHz)"], khz_rows, [CHECKS_RUN]))
+        pairs = {(p["subset"], p["first"], p["second"]): p for p in checks["B_rhythm_paired_differences"]["rows"]}
+        founder, twin = m_found["arrhythmia_probe_nifeadb"]["ecgfounder__fetal"], m_found["arrhythmia_probe_nifeadb"]["random_init__fetal_stretch2"]
+        both = pairs[("all 26 recordings", "oof_ecgfounder__fetal", "oof_random_init__fetal_stretch2")]
+        expert_1k = next(r for r in rows_1k if r["score"] == "oof_logistic_rhythm")
+        extra.append(
+            f"The network with random weights (stretched fetal input, {num(twin['auroc'])} {interval(twin['auroc_ci'])}) overlaps the interval of ECGFounder "
+            f"({num(founder['auroc'])} {interval(founder['auroc_ci'])}); their paired difference is {num(both['difference'])} {interval([both['ci_low'], both['ci_high']])} "
+            f"(run {CHECKS_RUN}, added after seeing the results), "
+            + ("so the two cannot be ranked. " if not both["can_be_ranked"] else "so ECGFounder ranks above it. ")
+            + f"On the 1 kHz recordings the rhythm expert fixed in the plan reaches {num(expert_1k['auroc_1khz'])} "
+            f"{interval([expert_1k['ci_1khz_low'], expert_1k['ci_1khz_high']])}"
+            + ("; the interval includes chance, so part of its AUROC on all 26 recordings may come from the sampling rate."
+               if float(expert_1k["ci_1khz_low"]) <= HALF else "; the interval excludes chance."))
+    return "\n\n".join(["## 5. Rhythm expert (NIFEADB, 12 arrhythmia and 14 normal)", *notes, text, leak_text, probe_text, check_text, *extra, picture])
 
 
 PROBE_NAMES = {
@@ -576,10 +622,234 @@ def section_wp6() -> str:
     return "\n\n".join(["## 7. Fusion and decision", *notes, alarm_text, cohort_text, rule_text, picture])
 
 
+def pct_interval(pair, digits: int = 1) -> str:
+    return f"[{pct(float(pair[0]), digits)}, {pct(float(pair[1]), digits)}]"
+
+
+def levels_text(values: dict) -> str:
+    return ", ".join(f"{name} {value}" for name, value in values.items())
+
+
+def yes(value) -> str:
+    return "yes" if str(value) == "True" else "no"
+
+
+def section_guarantees() -> str:
+    if not (RUNS / BOUNDS_RUN / "metrics.json").exists():
+        return ""
+    metrics, _ = load_run(BOUNDS_RUN)
+    gate = metrics["gate_G7"]
+    range_rows = []
+    for r in read_csv(BOUNDS_RUN, "dependence_ranges.csv"):
+        measured = "-" if r["measured_joint_rate"] == "" else f"{pct(float(r['measured_joint_rate']))} {pct_interval(json.loads(r['measured_joint_ci']))}"
+        range_rows.append([r["combination"], r["people"], r["experts"], pct(float(r["ceiling"]), 0),
+                           pct_interval([r["lowest_rate_any_dependence"], r["highest_rate_any_dependence"]]), pct(float(r["rate_if_independent"])),
+                           pct_interval([r["lowest_with_uncertainty"], r["highest_with_uncertainty"]]), measured,
+                           f"{yes(r['inside_ceiling_at_measured_rates'])} / {yes(r['inside_ceiling_with_uncertainty'])}"])
+    range_text = table("t9_false_referral_range_any_dependence",
+                       ["Combination", "People", "Alarms on healthy cases (each expert)", "Ceiling (sum of levels)", "Range for any dependence",
+                        "If independent", "Range with uncertainty", "Measured on the same fetuses [95% CI]", "Inside the ceiling: measured rates / with uncertainty"],
+                       range_rows, [BOUNDS_RUN])
+    calibration_rows = [[c["expert"], c["calibration_set"], c["n_healthy"], c["alarm_level"], num(c["smallest_possible_p"], 3),
+                         pct_interval([c["range_low"], c["range_high"]])] for c in metrics["realised_rate_with_a_fixed_calibration_set"]]
+    calibration_text = table("t9b_realised_rate_fixed_calibration",
+                             ["Expert", "Healthy calibration cases", "n", "Alarm level", "Smallest possible p", "Realised false-alarm rate (90% range)"],
+                             calibration_rows, [BOUNDS_RUN])
+    floor_rows = [[f["finding"], f["expert"], f"{f['caught']}/{f['n']}" if f["n"] != "" else "-",
+                   f"{pct(f['sensitivity_floor'])} {pct_interval([f['ci_low'], f['ci_high']])}" if f["n"] != "" else "cannot be measured",
+                   f["dataset"], f["note"]] for f in metrics["sensitivity_floor"]]
+    floor_text = table("t9c_sensitivity_floor", ["Finding", "Expert", "Caught", "Sensitivity of the rule is at least [95% CI]", "Dataset", "Note"],
+                       floor_rows, [BOUNDS_RUN])
+    grid = read_csv(BOUNDS_RUN, "precision_grid.csv")
+    findings = list(dict.fromkeys(r["finding"] for r in grid))
+    scenarios = (("precision_alarms_tied", "alarms tied"), ("precision_independent", "independent"),
+                 ("precision_alarms_never_together", "alarms never together"), ("precision_pessimistic", "pessimistic"))
+    precision_rows = []
+    for prevalence in dict.fromkeys(r["prevalence"] for r in grid):
+        cells = [pct(float(prevalence))]
+        for finding in findings:
+            row = next(r for r in grid if r["finding"] == finding and r["prevalence"] == prevalence)
+            cells += [pct(float(row[key])) for key, _ in scenarios]
+        precision_rows.append(cells)
+    precision_text = table("t9d_precision_by_prevalence", ["Prevalence"] + [f"{finding}: {label}" for finding in findings for _, label in scenarios],
+                           precision_rows, [BOUNDS_RUN])
+    priors = metrics["priors"]
+    notes = [
+        "Added after seeing the results (runs " + BOUNDS_RUN + " and " + TRADEOFF_RUN + "); nothing is fitted. Two guarantees of the decision rule hold "
+        "without any paired patient, for any dependence between the tests, and are checked by property tests (tests/test_guarantees.py, tests/test_fusion.py): "
+        "(1) the share of healthy fetuses referred is at most the sum of the alarm levels of the experts used; (2) a fetus whose finding makes its expert "
+        "alarm is always referred, so the rule detects each finding at least as often as the expert that looks for it.",
+        f"Gate G7, defined {gate['defined']}: {gate['rule']}. At the measured rates **{state(gate['passed_at_measured_rates'])}**, range "
+        f"{pct_interval(gate['range_at_measured_rates'])} against a ceiling of {pct(gate['ceiling'], 0)}; with uncertainty **{state(gate['passed_with_uncertainty'])}**, "
+        f"range {pct_interval(gate['range_with_uncertainty'])} ({gate['uncertainty']}). Upper limit of each rate: "
+        + ", ".join(f"{name} {pct(value)}" for name, value in gate["upper_limits_each"].items()) + ".",
+        "Rows that combine different groups of people bound a fetus that nobody has examined with all three tests; only the ECG-Doppler rows are measured on "
+        "the same fetuses. The range holds only if each expert's rate holds where it is used: the rhythm expert calibrated on another device referred far more "
+        "healthy fetuses than its level (fourth row).",
+        f"Not measured: {metrics['not_measured']}.",
+        f"Priors used by the decision rule: {levels_text(priors['values'])}; {priors['status']}. Precision of a referral is therefore shown over a grid of prevalences. "
+        "It uses the expert's own sensitivity (a floor for the rule) and the healthy false-referral rate of the first row; "
+        "'pessimistic' combines the lower 95% limit of the sensitivity with the upper end of the range with uncertainty.",
+    ]
+    dial = read_csv(BOUNDS_RUN, "dependence_dial.csv")
+    rho = np.array([float(r["rho"]) for r in dial])
+    figure, axis = plt.subplots(figsize=(8, 5))
+    axis.plot(rho, [float(r["rate_at_measured_rates"]) for r in dial], marker="o", markersize=3, color="tab:blue", label="dial, measured rates")
+    axis.plot(rho, [float(r["rate_at_upper_limits"]) for r in dial], linestyle="--", color="tab:purple", label="dial, upper limit of each rate")
+    low, high = gate["range_at_measured_rates"]
+    axis.axhline(low, color="tab:green", linewidth=1, label=f"lowest rate, any dependence ({pct(low)})")
+    axis.axhline(high, color="tab:orange", linewidth=1, label=f"highest rate, any dependence ({pct(high)})")
+    axis.axhline(gate["ceiling"], color="black", linestyle=":", label=f"design ceiling ({pct(gate['ceiling'], 0)})")
+    axis.axhline(gate["range_with_uncertainty"][1], color="tab:red", linestyle="-.", linewidth=1,
+                 label=f"highest rate with uncertainty ({pct(gate['range_with_uncertainty'][1])})")
+    axis.set_xlabel("Correlation shared by every pair of experts (Gaussian copula; 0 = independent, 1 = tied)")
+    axis.set_ylabel("Share of healthy fetuses referred")
+    axis.set_title("False referrals of three experts under different dependence")
+    axis.legend(fontsize=7)
+    picture = save(figure, "f8_dependence_dial", [BOUNDS_RUN])
+    parts = ["## 9. What the fused system guarantees without paired data", *notes, range_text, calibration_text, floor_text, precision_text, picture]
+
+    if (RUNS / TRADEOFF_RUN / "metrics.json").exists():
+        trade, provenance = load_run(TRADEOFF_RUN)
+        levels = provenance["config"]["levels"]
+        curves = read_csv(TRADEOFF_RUN, "expert_curves.csv")
+        level_rows = []
+        for r in curves:
+            if not any(np.isclose(float(r["alarm_level"]), level) for level in levels[r["expert"]]):
+                continue
+            level_rows.append([r["expert"], num(r["alarm_level"], 3), f"{r['healthy_flagged']}/{r['healthy_n']}",
+                               f"{pct(float(r['healthy_rate']))} {pct_interval([r['healthy_ci_low'], r['healthy_ci_high']])}",
+                               f"{r['finding_caught']}/{r['finding_n']}" if r["finding_n"] else "-",
+                               f"{pct(float(r['sensitivity']))} {pct_interval([r['sensitivity_ci_low'], r['sensitivity_ci_high']])}" if r["finding_n"] else "no abnormal cases"])
+        level_text = table("t9e_alarm_levels", ["Expert", "Alarm level", "Healthy flagged", "Healthy alarm rate [95% CI]", "Abnormal caught", "Sensitivity [95% CI]"],
+                           level_rows, [TRADEOFF_RUN])
+        design, smallest = trade["design_row"], trade["rhythm_smallest_level"]
+        parts += [
+            "**Alarm levels against sensitivity (run " + TRADEOFF_RUN + ", added after seeing the results).** " + trade["caution"].capitalize() + ". "
+            f"The full grid of {trade['n_designs']} combinations of levels is in runs/{TRADEOFF_RUN}/designs.csv. At the design levels "
+            f"({levels_text(trade['design_levels'])}) the ceiling is {pct(design['ceiling'], 0)}, the healthy range for any dependence "
+            f"{pct_interval([design['healthy_rate_lowest_any_dependence'], design['healthy_rate_highest_any_dependence']])}, and the sensitivity "
+            f"{pct(design['structural_defect_sensitivity'])} for a structural defect and {pct(design['arrhythmia_sensitivity'])} for an arrhythmia.",
+            f"Rhythm expert: with {smallest['n_healthy_calibration']} healthy calibration recordings its p-values are multiples of "
+            f"1/{smallest['n_healthy_calibration'] + 1}, so it cannot alarm below {num(smallest['smallest_p_for_a_new_case'], 3)}, and the design level "
+            f"{trade['design_levels']['rhythm']} acts as {num(smallest['effective_level_of_the_design'], 3)}: the ceiling the design actually guarantees is "
+            f"{pct(smallest['effective_ceiling_of_the_design'])}, not {pct(design['ceiling'], 0)}. In the leave-one-out evaluation each healthy recording is "
+            f"ranked among the other {smallest['n_healthy_calibration'] - 1}, so at {num(smallest['smallest_p_for_a_new_case'], 3)} its measured healthy alarm "
+            "rate is 0 by construction (table below).",
+            level_text,
+        ]
+        figure, axes = plt.subplots(1, 2, figsize=(12, 5))
+        for expert, colour in (("structure", "tab:blue"), ("rhythm", "tab:orange"), ("function", "tab:green")):
+            rows = [r for r in curves if r["expert"] == expert]
+            x = [float(r["alarm_level"]) for r in rows]
+            if rows[0]["finding_n"]:
+                axes[0].plot(x, [float(r["sensitivity"]) for r in rows], color=colour, label=f"{expert}: sensitivity")
+            axes[0].plot(x, [float(r["healthy_rate"]) for r in rows], color=colour, linestyle="--", label=f"{expert}: healthy alarm rate")
+        axes[0].axvline(smallest["smallest_p_for_a_new_case"], color="grey", linestyle=":", label="smallest rhythm level that can alarm")
+        axes[0].set_xlabel("Alarm level of the expert")
+        axes[0].set_ylabel("Share")
+        axes[0].set_title("What each alarm level buys")
+        axes[0].legend(fontsize=7)
+        designs = read_csv(TRADEOFF_RUN, "designs.csv")
+        ceiling = [float(r["ceiling"]) for r in designs]
+        axes[1].scatter(ceiling, [float(r["structural_defect_sensitivity"]) for r in designs], s=12, label="structural defect (structure expert)")
+        axes[1].scatter(ceiling, [float(r["arrhythmia_sensitivity"]) for r in designs], s=12, marker="^", label="arrhythmia (rhythm expert)")
+        axes[1].scatter([design["ceiling"]] * 2, [design["structural_defect_sensitivity"], design["arrhythmia_sensitivity"]], s=90, marker="*",
+                        color="black", label="design levels")
+        axes[1].set_xlabel("False-referral ceiling (sum of the three alarm levels)")
+        axes[1].set_ylabel("Sensitivity (floor for the rule)")
+        axes[1].set_title("Ceiling against sensitivity, every combination of levels")
+        axes[1].legend(fontsize=7)
+        parts.append(save(figure, "f9_ceiling_against_sensitivity", [TRADEOFF_RUN]))
+    return "\n\n".join(parts)
+
+
+def section_checks() -> str:
+    if not (RUNS / CHECKS_RUN / "metrics.json").exists():
+        return ""
+    metrics, _ = load_run(CHECKS_RUN)
+    subgroups = metrics["D_subgroups"]
+    size_rows = [[r["image_size"], f"{r['normal_flagged']}/{r['normal']}",
+                  pct_interval([r["fa_ci_low"], r["fa_ci_high"]]) if r["normal"] else "-",
+                  f"{r['abnormal_caught']}/{r['abnormal']}", pct_interval([r["se_ci_low"], r["se_ci_high"]]) if r["abnormal"] else "-"]
+                 for r in subgroups["structure_by_image_size"]]
+    size_text = table("t10_structure_by_image_size", ["Image size", "Normal cases flagged", "95% CI", "Defects caught", "95% CI"], size_rows, [CHECKS_RUN])
+    week_rows = [[r["gestation_weeks"], r["recordings"], r["women"], r["flagged"], pct_interval([r["ci_low"], r["ci_high"]])]
+                 for r in subgroups["function_by_gestational_age"]]
+    week_text = table("t10b_function_by_gestational_age", ["Gestational age (weeks+days)", "Recordings", "Women", "Flagged", "95% CI of the share"],
+                      week_rows, [CHECKS_RUN])
+    pair_rows = []
+    for p in metrics["B_rhythm_paired_differences"]["rows"]:
+        if "difference" in p:
+            pair_rows.append([p["subset"], f"{p['first']} minus {p['second']}", p["n"], f"{num(p['difference'])} {interval([p['ci_low'], p['ci_high']])}",
+                              "yes" if p["can_be_ranked"] else "no"])
+        else:
+            pair_rows.append([p["subset"], f"{p['first']} minus {p['second']}", p["n"], p["note"], "-"])
+    pair_text = table("t10c_rhythm_paired_differences", ["Recordings", "Scores compared", "n", "AUROC difference [95% CI, paired bootstrap]", "Can be ranked"],
+                      pair_rows, [CHECKS_RUN])
+    correlation, missed = subgroups["function_score_and_gestational_age"], metrics["E_structure_missed"]
+    notes = [
+        "Added after seeing the results (run " + CHECKS_RUN + "). Every number re-summarises saved per-case outputs; nothing is re-fitted, and the p-values "
+        "and intervals are not corrected for the number of checks.",
+        f"Structure expert by image size, at its alarm level. {subgroups['not_available'].capitalize()}; image size is the only acquisition variable that can be checked.",
+        f"Function expert by gestational age: Spearman correlation of its score with gestational age {num(correlation['spearman_score_vs_gestation_days'], 2)} "
+        f"(p = {num(correlation['p_value'], 2)}, {correlation['n']} recordings; {correlation['note']}).",
+        "Rhythm scores compared on the same subjects. 'slow_hr_bpm_median' is heart rate alone with lower values counted as arrhythmia, the direction seen "
+        "in the data (section 5); choosing it after seeing the data favours this baseline.",
+        f"Structural defects missed at the alarm level: {missed['n_missed']} of {missed['n_abnormal']}; their case identifiers (of the public dataset) are in "
+        f"runs/{CHECKS_RUN}/structure_missed_cases.csv, and section 6 gives the share caught by defect type.",
+    ]
+    return "\n\n".join(["## 10. Checks made after seeing the results", *notes, size_text, week_text, pair_text])
+
+
+def section_threats() -> str:
+    needed = [BOUNDS_RUN, TRADEOFF_RUN, CHECKS_RUN, "wp6_fusion", "wp3_trust_check"]
+    labelled = structure_runs()
+    if not labelled or not all((RUNS / run / "metrics.json").exists() for run in needed):
+        return ""
+    structure, _ = load_run(labelled[0])
+    bounds, trade, checks = load_run(BOUNDS_RUN)[0], load_run(TRADEOFF_RUN)[0], load_run(CHECKS_RUN)[0]
+    fusion, trust = load_run("wp6_fusion")[0], load_run("wp3_trust_check")[0]
+    probes = structure["probes"]
+    controls = [probes[name]["auroc"] for name in ("no_anatomy_numbers", "fetalclip_overlay_only")]
+    sizes = [r for r in checks["D_subgroups"]["structure_by_image_size"] if r["abnormal"] >= 10]
+    expert_1k = next(r for r in read_csv(CHECKS_RUN, "rhythm_1khz_only.csv") if r["score"] == "oof_logistic_rhythm")
+    cohort = fusion["B_real_paired_cohort"]
+    local = cohort["with_rhythm_score_calibrated_on_ninfea_leave_one_woman_out"]["false_referrals"]
+    rhythm_range = next(c for c in bounds["realised_rate_with_a_fixed_calibration_set"] if c["expert"].startswith("rhythm, calibrated on NIFEADB"))
+    gate, g3 = bounds["gate_G7"], trust["gate_G3"]
+    beat = trust["by_split"]["test"]["beat_level_ecg_quality_passed_recordings"]["rate_diff_percentiles_plausible_bpm"]
+    items = [
+        "1. **Checks made after seeing the results.** Sections 9 and 10, gate G7 and the added rows in sections 3 and 5 were defined after the results were "
+        "known. They re-summarise saved outputs; their intervals are not corrected for the number of checks.",
+        f"2. **One dataset per expert.** Structure: {structure['dataset']['name'].upper()} ({structure['dataset']['cases']} cases, one centre); rhythm: NIFEADB "
+        f"(26 recordings); function: NInFEA (healthy only). No result has been repeated on a second dataset.",
+        f"3. **Acquisition can carry the label.** In DELTA, inputs with little or no cardiac anatomy reached AUROC {num(min(controls))} to {num(max(controls))}, and the "
+        "structure expert caught " + "; ".join(f"{r['abnormal_caught']} of {r['abnormal']} defects in {r['image_size']} images" for r in sizes)
+        + f". In NIFEADB every 500 Hz recording is an arrhythmia; on the 1 kHz recordings the rhythm expert reaches {num(expert_1k['auroc_1khz'])} "
+        f"{interval([expert_1k['ci_1khz_low'], expert_1k['ci_1khz_high']])}.",
+        f"4. **Calibration does not travel.** Calibrated on NIFEADB, the rhythm expert referred {pct(cohort['false_referrals']['share'])} of the healthy NInFEA "
+        f"fetuses; calibrated on NInFEA, {pct(local['share'])}. The false-referral guarantee holds only for experts calibrated on healthy cases from the setting of use.",
+        f"5. **Small samples.** With {rhythm_range['n_healthy']} healthy calibration recordings the rhythm expert's realised false-alarm rate lies between "
+        f"{pct(rhythm_range['range_low'])} and {pct(rhythm_range['range_high'])} (90% range), and the false-referral range for any dependence widens to "
+        f"{pct_interval(gate['range_with_uncertainty'])} with uncertainty (gate G7).",
+        "6. **No abnormal Doppler recordings.** The function expert's sensitivity is unknown; the shifts it could flag come from simulation (section 4).",
+        f"7. **No paired patients.** {bounds['not_measured'].capitalize()} are not measured. Only the ECG-Doppler pair was measured on the same fetuses (60 healthy recordings).",
+        f"8. **ECG-Doppler agreement.** Gate G3 is not met: classical limits {interval(g3['beat_level_limits_bpm'], 1)} bpm, percentile limits "
+        f"{interval([beat['2.5'], beat['97.5']], 1)} bpm.",
+        f"9. **Assumed priors.** {bounds['priors']['status'].capitalize()}; precision is shown over a grid of prevalences (section 9).",
+        f"10. **Discrete p-values.** With few calibration cases an alarm level acts as the next lower attainable p-value; for the rhythm expert the level "
+        f"{trade['design_levels']['rhythm']} acts as {num(trade['rhythm_smallest_level']['effective_level_of_the_design'], 3)}.",
+    ]
+    return "\n\n".join(["## 11. Threats to validity", "\n".join(items)])
+
+
 def section_gates() -> str:
     labelled = structure_runs()
     entries = [("G1", "wp1_cinc2013", "gate_G1"), ("G2", "wp2_doppler_cycles", "gate_G2"), ("G3", "wp3_trust_check", "gate_G3"),
                ("G4", "wp4c_foundation", "gate_G4"), ("G5", labelled[0] if labelled else None, "gate_G5"), ("G6", "wp6_fusion", "gate_G6")]
+    if (RUNS / BOUNDS_RUN / "metrics.json").exists():
+        entries.append(("G7", BOUNDS_RUN, "gate_G7"))
     rows = []
     for name, run, key in entries:
         if run is None:
@@ -589,6 +859,9 @@ def section_gates() -> str:
         gate = metrics[key]
         if name == "G6":
             verdict = "decided by the property tests (python -m pytest tests/test_fusion.py)"
+        elif name == "G7":
+            verdict = (f"at the measured rates {state(gate['passed_at_measured_rates'])} ({pct_interval(gate['range_at_measured_rates'])}); "
+                       f"with uncertainty {state(gate['passed_with_uncertainty'])} ({pct_interval(gate['range_with_uncertainty'])}); gate defined after seeing the results")
         elif name == "G5" and gate.get("auroc_with_interval"):
             verdict = "partly met: patient-level AUROC with an interval and the shortcut audit are reported; " + gate["reason"].split(";")[0]
         elif "reason" in gate:
@@ -606,6 +879,7 @@ def main() -> None:
         "Do not edit by hand: change the analysis, re-run it, and rebuild. Tables are also saved as CSV in `reports/tables/`, "
         "figures in `reports/figures/`, and `reports/manifest.json` lists the runs behind every file.",
         section_gates(), section_wp1(), section_wp2(), section_wp3(), section_wp2b(), section_wp4(), section_wp5(), section_wp6(), section_wp6b(),
+        section_guarantees(), section_checks(), section_threats(),
     ]
     (REPORTS / "RESULTS.md").write_text("\n\n".join(part for part in parts if part) + "\n", encoding="utf-8")
     MANIFEST.append({"file": "RESULTS.md", "runs": sorted({run for entry in MANIFEST for run in entry["runs"]})})
