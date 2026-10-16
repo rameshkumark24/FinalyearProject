@@ -1,0 +1,51 @@
+{
+  "alarm_level": 0.05,
+  "calibration": {
+    "n": 60,
+    "source": "leave-one-woman-out scores of the healthy recordings (run wp2b_function_reference)"
+  },
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "condition": "Doppler timing",
+  "covariates": {
+    "a_to_v_peak_ms": "cycle_length_ms",
+    "cycle_length_ms": "gestation_days",
+    "ejection_half_width_ms": "cycle_length_ms",
+    "v_peak_to_closure_ms": "cycle_length_ms"
+  },
+  "created": "2026-10-16",
+  "dataset": "NInFEA (PhysioNet, ODC-By 1.0): 60 healthy recordings of 39 women, weeks 21 to 27",
+  "expert": "function",
+  "files": {
+    "calibration.npy": "dda8f7fce2750b16a3b9a63be0188c6714d141f14f92b20f636c12ebf21c3364",
+    "gestation_days_range.npy": "27989b6119ed236f881f860da496600065d8911a2b78cf24d5a9df6a59a873e7",
+    "intercept.npy": "cdf8d8ecbfe5c952cd0a26a5db9bb0b728bfe3a5faa895117abbebde4d6489d6",
+    "sd.npy": "3b39e040ea3fa4765dff74bacafbbbca00398857b04e0bd396c87cb3a4cf1bed",
+    "slope.npy": "214237ec9a9327ca5ed6a738e12a0174363e7eb860b2d6e8ecd271228161be4f"
+  },
+  "format": "sfrtool-artifact-1",
+  "intended_input": "pulsed-wave Doppler strip image at 284 columns per second (NInFEA format) and the gestational age; the reference covers 21+0 to 27+5 weeks",
+  "known_limits": [
+    "healthy recordings only: its sensitivity for abnormal timing is unknown",
+    "one dataset, one device; only the heart rate measure is clearly repeatable (run wp2b)"
+  ],
+  "measures": [
+    "cycle_length_ms",
+    "a_to_v_peak_ms",
+    "v_peak_to_closure_ms",
+    "ejection_half_width_ms"
+  ],
+  "model": {
+    "name": "healthy reference lines (sfr.doppler.reference)",
+    "sha256": null
+  },
+  "source_runs": [
+    "wp2b_function_reference"
+  ],
+  "test": "pulsed-wave Doppler",
+  "tool_version": "0.1.0",
+  "verification": {
+    "loo_p_values_of_wp2b_reproduced_max_abs_diff": 4.827586206346268e-07,
+    "loo_scores_of_wp2b_reproduced_max_abs_diff": 4.947213543271545e-07,
+    "recordings": 60
+  }
+}

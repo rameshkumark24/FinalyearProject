@@ -1,0 +1,318 @@
+{
+  "made_after_seeing_results": true,
+  "inputs_recounted_from_per_case_files_and_checked": true,
+  "alarm_levels": {
+    "structure": 0.05,
+    "function": 0.05,
+    "rhythm": 0.1
+  },
+  "ranges": [
+    {
+      "combination": "three experts, each at its rate on its own healthy data",
+      "people": "three different groups combined",
+      "experts": "structure (DELTA) 40/619; function (NInFEA) 2/60; rhythm (NIFEADB) 1/14",
+      "ceiling": 0.2,
+      "lowest_rate_any_dependence": 0.07142857142857142,
+      "rate_if_independent": 0.16038541426263553,
+      "highest_rate_any_dependence": 0.16938226017385952,
+      "lowest_with_uncertainty": 0.04522782471261348,
+      "highest_with_uncertainty": 0.5737601983448953,
+      "one_sided_level_each": 0.9833333333333333,
+      "inside_ceiling_at_measured_rates": true,
+      "inside_ceiling_with_uncertainty": false,
+      "measured_joint_rate": "",
+      "measured_joint_ci": "",
+      "measured_inside_range": "",
+      "limits_each": [
+        [
+          0.04522782471261348,
+          0.0889520881917989
+        ],
+        [
+          0.0032672723431128284,
+          0.12317061504704606
+        ],
+        [
+          0.001199788129179141,
+          0.3616374951060504
+        ]
+      ]
+    },
+    {
+      "combination": "three experts, rhythm calibrated on healthy NInFEA (leave one woman out)",
+      "people": "three different groups combined",
+      "experts": "structure (DELTA) 40/619; function (NInFEA) 2/60; rhythm, local calibration (NInFEA, readable ECG) 5/57",
+      "ceiling": 0.2,
+      "lowest_rate_any_dependence": 0.08771929824561403,
+      "rate_if_independent": 0.17511549471416832,
+      "highest_rate_any_dependence": 0.18567298699090212,
+      "lowest_with_uncertainty": 0.04522782471261348,
+      "highest_with_uncertainty": 0.41463411174238607,
+      "one_sided_level_each": 0.9833333333333333,
+      "inside_ceiling_at_measured_rates": true,
+      "inside_ceiling_with_uncertainty": false,
+      "measured_joint_rate": "",
+      "measured_joint_ci": "",
+      "measured_inside_range": "",
+      "limits_each": [
+        [
+          0.04522782471261348,
+          0.0889520881917989
+        ],
+        [
+          0.0032672723431128284,
+          0.12317061504704606
+        ],
+        [
+          0.026170992751464117,
+          0.20251140850354113
+        ]
+      ]
+    },
+    {
+      "combination": "ECG and Doppler of the same fetuses, rhythm calibrated on NInFEA",
+      "people": "the same 60 recordings (real pairs)",
+      "experts": "function 2/60; rhythm, local calibration 5/60",
+      "ceiling": 0.15000000000000002,
+      "lowest_rate_any_dependence": 0.08333333333333333,
+      "rate_if_independent": 0.11388888888888893,
+      "highest_rate_any_dependence": 0.11666666666666667,
+      "lowest_with_uncertainty": 0.027613310337426415,
+      "highest_with_uncertainty": 0.29913882779583745,
+      "one_sided_level_each": 0.975,
+      "inside_ceiling_at_measured_rates": true,
+      "inside_ceiling_with_uncertainty": false,
+      "measured_joint_rate": 0.1,
+      "measured_joint_ci": "[0.0376, 0.2051]",
+      "measured_inside_range": true,
+      "limits_each": [
+        [
+          0.004062624642093498,
+          0.11528104441925167
+        ],
+        [
+          0.027613310337426415,
+          0.1838577833765858
+        ]
+      ]
+    },
+    {
+      "combination": "ECG and Doppler of the same fetuses, rhythm calibrated on NIFEADB (another device)",
+      "people": "the same 60 recordings (real pairs)",
+      "experts": "function 2/60; rhythm, calibrated on NIFEADB 30/60",
+      "ceiling": 0.15000000000000002,
+      "lowest_rate_any_dependence": 0.5,
+      "rate_if_independent": 0.5166666666666666,
+      "highest_rate_any_dependence": 0.5333333333333333,
+      "lowest_with_uncertainty": 0.368062031942437,
+      "highest_with_uncertainty": 0.7472190124768147,
+      "one_sided_level_each": 0.975,
+      "inside_ceiling_at_measured_rates": false,
+      "inside_ceiling_with_uncertainty": false,
+      "measured_joint_rate": 0.5166666666666667,
+      "measured_joint_ci": "[0.3839, 0.6477]",
+      "measured_inside_range": true,
+      "limits_each": [
+        [
+          0.004062624642093498,
+          0.11528104441925167
+        ],
+        [
+          0.368062031942437,
+          0.631937968057563
+        ]
+      ]
+    },
+    {
+      "combination": "echo, plus the ECG-Doppler pair as measured on real pairs (local calibration)",
+      "people": "two different groups combined",
+      "experts": "structure (DELTA) 40/619; ECG-Doppler pair, measured 6/60",
+      "ceiling": 0.2,
+      "lowest_rate_any_dependence": 0.1,
+      "rate_if_independent": 0.15815831987075923,
+      "highest_rate_any_dependence": 0.16462035541195477,
+      "lowest_with_uncertainty": 0.046563422052889644,
+      "highest_with_uncertainty": 0.2920157499295234,
+      "one_sided_level_each": 0.975,
+      "inside_ceiling_at_measured_rates": true,
+      "inside_ceiling_with_uncertainty": false,
+      "measured_joint_rate": "",
+      "measured_joint_ci": "",
+      "measured_inside_range": "",
+      "limits_each": [
+        [
+          0.046563422052889644,
+          0.0869580132214595
+        ],
+        [
+          0.037591269108566035,
+          0.2050577367080639
+        ]
+      ]
+    }
+  ],
+  "realised_rate_with_a_fixed_calibration_set": [
+    {
+      "expert": "structure",
+      "calibration_set": "normal cases of the DELTA Val split",
+      "n_healthy": 62,
+      "alarm_level": 0.05,
+      "smallest_possible_p": 0.015873015873015872,
+      "range_low": 0.013316761214819683,
+      "range_high": 0.0980836815921006,
+      "level": 0.9
+    },
+    {
+      "expert": "function",
+      "calibration_set": "healthy NInFEA recordings",
+      "n_healthy": 60,
+      "alarm_level": 0.05,
+      "smallest_possible_p": 0.01639344262295082,
+      "range_low": 0.01376515756828304,
+      "range_high": 0.10123589492416166,
+      "level": 0.9
+    },
+    {
+      "expert": "rhythm, calibrated on NIFEADB",
+      "calibration_set": "normal NIFEADB recordings",
+      "n_healthy": 14,
+      "alarm_level": 0.1,
+      "smallest_possible_p": 0.06666666666666667,
+      "range_low": 0.003657103191383564,
+      "range_high": 0.19263617565013527,
+      "level": 0.9
+    },
+    {
+      "expert": "rhythm, calibrated on NInFEA",
+      "calibration_set": "healthy NInFEA recordings with a readable ECG",
+      "n_healthy": 57,
+      "alarm_level": 0.1,
+      "smallest_possible_p": 0.017241379310344827,
+      "range_low": 0.03520211437149113,
+      "range_high": 0.15343369092729056,
+      "level": 0.9
+    }
+  ],
+  "sensitivity_floor": [
+    {
+      "finding": "structural heart defect",
+      "expert": "structure",
+      "caught": 62,
+      "n": 133,
+      "sensitivity_floor": 0.46616541353383456,
+      "ci_low": 0.3792415109021964,
+      "ci_high": 0.5546291920378923,
+      "dataset": "DELTA, case-level folds",
+      "note": "inputs with little or no cardiac anatomy also separate the classes; an upper bound on what heart structure contributes"
+    },
+    {
+      "finding": "arrhythmia",
+      "expert": "rhythm",
+      "caught": 8,
+      "n": 12,
+      "sensitivity_floor": 0.6666666666666666,
+      "ci_low": 0.3488755064188155,
+      "ci_high": 0.9007539088504167,
+      "dataset": "NIFEADB, leave one subject out",
+      "note": "the four recordings sampled at 500 Hz are all arrhythmia"
+    },
+    {
+      "finding": "abnormal Doppler timing",
+      "expert": "function",
+      "caught": "",
+      "n": "",
+      "sensitivity_floor": "",
+      "ci_low": "",
+      "ci_high": "",
+      "dataset": "NInFEA (healthy only)",
+      "note": "no abnormal cases: cannot be measured"
+    }
+  ],
+  "dependence_dial": {
+    "model": "Gaussian copula, one correlation shared by every pair of experts; an illustration, not data",
+    "rates": [
+      0.06462035541195477,
+      0.03333333333333333,
+      0.07142857142857142
+    ],
+    "upper_limit_rates": [
+      0.0889520881917989,
+      0.12317061504704606,
+      0.3616374951060504
+    ],
+    "rho_grid": [
+      -0.45,
+      -0.4,
+      -0.35,
+      -0.3,
+      -0.25,
+      -0.2,
+      -0.15,
+      -0.1,
+      -0.05,
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0
+    ],
+    "rate_at_rho_0": 0.1603854142626352,
+    "rate_at_rho_1": 0.07142857142857142
+  },
+  "priors": {
+    "values": {
+      "structure": 0.009,
+      "function": 0.002,
+      "rhythm": 0.001
+    },
+    "status": "the function and rhythm priors are assumptions without a cited source",
+    "prevalence_grid": [
+      0.001,
+      0.002,
+      0.005,
+      0.01,
+      0.02,
+      0.05,
+      0.1,
+      0.2
+    ]
+  },
+  "gate_G7": {
+    "rule": "the false-referral range for any dependence lies inside the design ceiling (sum of the alarm levels); three experts, each at its alarm rate on its own healthy data",
+    "defined": "after seeing the results (16 October 2026)",
+    "ceiling": 0.2,
+    "range_at_measured_rates": [
+      0.07142857142857142,
+      0.16938226017385952
+    ],
+    "passed_at_measured_rates": true,
+    "range_with_uncertainty": [
+      0.04522782471261348,
+      0.5737601983448953
+    ],
+    "uncertainty": "one-sided Clopper-Pearson limit of each rate at level 0.9833, Bonferroni over the three rates, so the range holds with at least 95% confidence for all of them together",
+    "passed_with_uncertainty": false,
+    "upper_limits_each": {
+      "structure (DELTA)": 0.0889520881917989,
+      "function (NInFEA)": 0.12317061504704606,
+      "rhythm (NIFEADB)": 0.3616374951060504
+    }
+  },
+  "not_measured": "the sensitivity gained by combining experts, and any rate on fetuses that had all three tests"
+}

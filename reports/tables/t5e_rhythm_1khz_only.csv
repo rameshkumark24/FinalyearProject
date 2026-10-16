@@ -1,0 +1,11 @@
+Score,"AUROC, all 26 [95% CI]","AUROC, 1 kHz only [95% CI]",Recordings (1 kHz)
+"rhythm expert: interval features, logistic","0.798 [0.552, 0.994]","0.696 [0.347, 0.981]",22 (8 arrhythmia)
+"interval features, random forest","0.905 [0.757, 1.000]","0.857 [0.653, 1.000]",22 (8 arrhythmia)
+single index: successive interval change,"0.938 [0.825, 1.000]","0.906 [0.750, 1.000]",22 (8 arrhythmia)
+baseline: heart rate only (higher = arrhythmia),"0.318 [0.115, 0.560]","0.228 [0.018, 0.514]",22 (8 arrhythmia)
+"baseline: heart rate only, lower = arrhythmia (direction chosen after seeing the data)","0.682 [0.440, 0.885]","0.772 [0.486, 0.982]",22 (8 arrhythmia)
+"ECGFounder, fetal input","0.952 [0.858, 1.000]","0.946 [0.833, 1.000]",22 (8 arrhythmia)
+"ECGFounder, fetal input stretched","0.887 [0.726, 1.000]","0.848 [0.616, 1.000]",22 (8 arrhythmia)
+"random weights, fetal input",0.744 (published),not recomputed: rounding in the saved file ties scores of the two classes,-
+"random weights, fetal input stretched","0.881 [0.725, 0.988]","0.902 [0.750, 1.000]",22 (8 arrhythmia)
+"ECGFounder, mother's chest lead (control)","0.702 [0.475, 0.891]","0.598 [0.342, 0.838]",22 (8 arrhythmia)

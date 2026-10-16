@@ -1,0 +1,11 @@
+score,description,run,published_auroc_all,exact_from_saved_file,n_all,auroc_all,ci_all_low,ci_all_high,n_1khz,arrhythmia_1khz,auroc_1khz,ci_1khz_low,ci_1khz_high,note
+oof_logistic_rhythm,"rhythm expert: interval features, logistic",wp4b_rhythm_intervals,0.797619,True,26,0.797619,0.551515,0.993939,22,8,0.696429,0.347024,0.980982,
+oof_forest_rhythm,"interval features, random forest",wp4b_rhythm_intervals,0.904762,True,26,0.904762,0.75692,1.0,22,8,0.857143,0.65289,1.0,
+succ_rel_median,single index: successive interval change,wp4b_rhythm_intervals,0.9375,True,26,0.9375,0.824981,1.0,22,8,0.90625,0.749888,1.0,
+hr_bpm_median,baseline: heart rate only (higher = arrhythmia),wp4b_rhythm_intervals,0.318452,True,26,0.318452,0.115152,0.559588,22,8,0.227679,0.017857,0.513899,
+slow_hr_bpm_median,"baseline: heart rate only, lower = arrhythmia (direction chosen after seeing the data)",derived,0.681548,True,26,0.681548,0.440412,0.884848,22,8,0.772321,0.486101,0.982143,
+oof_ecgfounder__fetal,"ECGFounder, fetal input",wp4c_foundation,0.952381,True,26,0.952381,0.857988,1.0,22,8,0.946429,0.833226,1.0,
+oof_ecgfounder__fetal_stretch2,"ECGFounder, fetal input stretched",wp4c_foundation,0.886905,True,26,0.886905,0.72619,1.0,22,8,0.848214,0.616054,1.0,
+oof_random_init__fetal,"random weights, fetal input",wp4c_foundation,0.744048,False,,,,,,,,,,not recomputed: rounding in the saved file ties scores of the two classes
+oof_random_init__fetal_stretch2,"random weights, fetal input stretched",wp4c_foundation,0.880952,True,26,0.880952,0.724931,0.988166,22,8,0.901786,0.75,1.0,
+oof_ecgfounder__maternal_chest,"ECGFounder, mother's chest lead (control)",wp4c_foundation,0.702381,True,26,0.702381,0.474967,0.890909,22,8,0.598214,0.341863,0.838125,

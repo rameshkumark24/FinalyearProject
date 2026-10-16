@@ -1,0 +1,4 @@
+finding,expert,caught,n,sensitivity_floor,ci_low,ci_high,dataset,note
+structural heart defect,structure,62,133,0.466165,0.379242,0.554629,"DELTA, case-level folds",inputs with little or no cardiac anatomy also separate the classes; an upper bound on what heart structure contributes
+arrhythmia,rhythm,8,12,0.666667,0.348876,0.900754,"NIFEADB, leave one subject out",the four recordings sampled at 500 Hz are all arrhythmia
+abnormal Doppler timing,function,,,,,,NInFEA (healthy only),no abnormal cases: cannot be measured

@@ -1,0 +1,35 @@
+{
+  "artifacts": {
+    "rhythm": {
+      "exported": true,
+      "cases": 26,
+      "training_scores_equal_sklearn_max_abs_diff": 8.326672684688674e-17,
+      "ninfea_scores_of_wp6_reproduced_max_abs_diff": 4.989008110523052e-07,
+      "ninfea_recordings_checked": 57,
+      "ninfea_p_values_of_wp6_reproduced_max_abs_diff": 3.33333333379926e-07,
+      "sha256": "7ff4f96254f606f9a9390fec9d69a9fd8a898219d82e4d9f1151235bf11de8e2"
+    },
+    "function": {
+      "exported": true,
+      "cases": 60,
+      "loo_scores_of_wp2b_reproduced_max_abs_diff": 4.947213543271545e-07,
+      "loo_p_values_of_wp2b_reproduced_max_abs_diff": 4.827586206346268e-07,
+      "recordings": 60,
+      "sha256": "dc53feaea09d39ddbfb0cbe0ee20b9a7df30c54b087490b3c10e2b1288845219"
+    },
+    "structure": {
+      "exported": true,
+      "cases": 752,
+      "test_auroc": 0.8776881720430108,
+      "published_test_auroc": 0.8776881720430108,
+      "probe_equals_sklearn_max_abs_diff": 6.661338147750939e-16,
+      "calibration_normal_cases": 62,
+      "published_calibration_normal_cases": 62,
+      "test_defects_caught": 18,
+      "published_test_defects_caught": 18,
+      "test_normal_flagged": 9,
+      "published_test_normal_flagged": 9,
+      "sha256": "40119821220e56c2e93463352c9713ed88fb67e9329fffc6d71966a9852390a8"
+    }
+  }
+}

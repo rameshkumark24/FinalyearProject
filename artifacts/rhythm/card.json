@@ -1,0 +1,72 @@
+{
+  "alarm_level": 0.1,
+  "calibration_sets": {
+    "ninfea": {
+      "array": "calibration_ninfea",
+      "n": 57,
+      "setting": "ninfea",
+      "source": "scores of the healthy NInFEA recordings with a readable ECG (run wp6_fusion)"
+    },
+    "published": {
+      "array": "calibration_published",
+      "n": 14,
+      "setting": "nifeadb",
+      "source": "out-of-fold scores of the normal NIFEADB recordings (run wp4b_rhythm_intervals)"
+    }
+  },
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "condition": "rhythm disturbance",
+  "created": "2026-10-16",
+  "dataset": "NIFEADB (PhysioNet, ODC-By 1.0): 12 arrhythmia and 14 normal-rhythm recordings",
+  "expert": "rhythm",
+  "features": [
+    "hr_bpm_median",
+    "rr_mad_rel_median",
+    "succ_rel_median",
+    "outlier_share_median",
+    "short_long_share_median",
+    "long_share_median",
+    "tracked_raw_gap_median",
+    "outlier_share_p90",
+    "short_long_share_p90"
+  ],
+  "files": {
+    "calibration_ninfea.npy": "52dfbdbe9941c4cce3b19dce5bcb9618d529a91e82bb2770fde4641e9f82c3ef",
+    "calibration_published.npy": "b52a6896cd48a8055165e2211868297af970feb331c84a20b983646955ff3ea0",
+    "coef.npy": "3b1f834d014fd7e838a3618e868fb55cd4cdd88a3371cf1faab20573c3b8c19a",
+    "imputer_median.npy": "f92f7dbc9801856e57484862d4a7962ecc28db5e9fd26bbadf2a98f2459379f6",
+    "intercept.npy": "9dbd1fc65ca21ffd88524be11ed3aa11bd43a99a6e02e0c42af059af4db6e095",
+    "scaler_mean.npy": "5a9f66d3570e7e1eea099dca54de6d42b22630962ed15ed4c7386d81e46e928f",
+    "scaler_scale.npy": "45b89243029d88f7802d3c234dcef33d43e81ded6636b5ef02d600ec31bdb6ba"
+  },
+  "format": "sfrtool-artifact-1",
+  "intended_input": "WFDB record (.hea and .dat) in the NInFEA layout (24 abdominal channels uni_abd1-24, thoracic leads bi_tho1-3; whole record, as run wp3) or the NIFEADB layout (channel ECG from the chest, then Abdomen_1...; 60-second segments, as run wp4a)",
+  "known_limits": [
+    "fitted on 26 NIFEADB recordings of one dataset (12 arrhythmia, 14 normal); later gestation than NInFEA",
+    "calibrated on NIFEADB, it referred 51.7% of 60 healthy NInFEA recordings; calibrated on healthy NInFEA recordings of other women, 10.0% (run wp6_fusion)",
+    "with 14 healthy calibration recordings the smallest possible p-value is 0.067; the alarm level 0.1 acts as that value",
+    "the four 500 Hz NIFEADB recordings are all arrhythmia; on the 1 kHz recordings its AUROC is 0.696 [0.347, 0.981] (run wp9_checks_after_results)"
+  ],
+  "model": {
+    "name": "logistic regression on fetal interval features (sfr.rhythm.evaluate.logistic)",
+    "sha256": null
+  },
+  "source_runs": [
+    "wp4b_rhythm_intervals",
+    "wp6_fusion",
+    "wp3_trust_check"
+  ],
+  "test": "fetal ECG",
+  "tool_version": "0.1.0",
+  "transport": {
+    "false_referral_share_on_ninfea_with_ninfea_calibration": 0.1,
+    "false_referral_share_on_ninfea_with_published_calibration": 0.5166666666666667,
+    "run": "wp6_fusion"
+  },
+  "verification": {
+    "ninfea_p_values_of_wp6_reproduced_max_abs_diff": 3.33333333379926e-07,
+    "ninfea_recordings_checked": 57,
+    "ninfea_scores_of_wp6_reproduced_max_abs_diff": 4.989008110523052e-07,
+    "training_scores_equal_sklearn_max_abs_diff": 8.326672684688674e-17
+  }
+}

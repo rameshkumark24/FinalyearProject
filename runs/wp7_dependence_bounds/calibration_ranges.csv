@@ -1,0 +1,5 @@
+expert,calibration_set,n_healthy,alarm_level,smallest_possible_p,range_low,range_high,level
+structure,normal cases of the DELTA Val split,62,0.05,0.015873,0.013317,0.098084,0.9
+function,healthy NInFEA recordings,60,0.05,0.016393,0.013765,0.101236,0.9
+"rhythm, calibrated on NIFEADB",normal NIFEADB recordings,14,0.1,0.066667,0.003657,0.192636,0.9
+"rhythm, calibrated on NInFEA",healthy NInFEA recordings with a readable ECG,57,0.1,0.017241,0.035202,0.153434,0.9

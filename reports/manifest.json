@@ -8,7 +8,8 @@
         "wp3_trust_check",
         "wp4c_foundation",
         "wp5_structure_delta",
-        "wp6_fusion"
+        "wp6_fusion",
+        "wp7_dependence_bounds"
       ]
     },
     {
@@ -120,6 +121,12 @@
       ]
     },
     {
+      "file": "tables/t5e_rhythm_1khz_only.csv",
+      "runs": [
+        "wp9_checks_after_results"
+      ]
+    },
+    {
       "file": "RESULTS.md#structure",
       "runs": [
         "wp5_structure_delta",
@@ -206,6 +213,66 @@
       ]
     },
     {
+      "file": "tables/t9_false_referral_range_any_dependence.csv",
+      "runs": [
+        "wp7_dependence_bounds"
+      ]
+    },
+    {
+      "file": "tables/t9b_realised_rate_fixed_calibration.csv",
+      "runs": [
+        "wp7_dependence_bounds"
+      ]
+    },
+    {
+      "file": "tables/t9c_sensitivity_floor.csv",
+      "runs": [
+        "wp7_dependence_bounds"
+      ]
+    },
+    {
+      "file": "tables/t9d_precision_by_prevalence.csv",
+      "runs": [
+        "wp7_dependence_bounds"
+      ]
+    },
+    {
+      "file": "figures/f8_dependence_dial.png",
+      "runs": [
+        "wp7_dependence_bounds"
+      ]
+    },
+    {
+      "file": "tables/t9e_alarm_levels.csv",
+      "runs": [
+        "wp8_tradeoff"
+      ]
+    },
+    {
+      "file": "figures/f9_ceiling_against_sensitivity.png",
+      "runs": [
+        "wp8_tradeoff"
+      ]
+    },
+    {
+      "file": "tables/t10_structure_by_image_size.csv",
+      "runs": [
+        "wp9_checks_after_results"
+      ]
+    },
+    {
+      "file": "tables/t10b_function_by_gestational_age.csv",
+      "runs": [
+        "wp9_checks_after_results"
+      ]
+    },
+    {
+      "file": "tables/t10c_rhythm_paired_differences.csv",
+      "runs": [
+        "wp9_checks_after_results"
+      ]
+    },
+    {
       "file": "RESULTS.md",
       "runs": [
         "wp1_cinc2013",
@@ -219,7 +286,10 @@
         "wp5_structure_delta",
         "wp5b_structure_controls_delta",
         "wp6_fusion",
-        "wp6b_fusion_structure"
+        "wp6b_fusion_structure",
+        "wp7_dependence_bounds",
+        "wp8_tradeoff",
+        "wp9_checks_after_results"
       ]
     }
   ]

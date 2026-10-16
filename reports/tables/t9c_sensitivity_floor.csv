@@ -1,0 +1,4 @@
+Finding,Expert,Caught,Sensitivity of the rule is at least [95% CI],Dataset,Note
+structural heart defect,structure,62/133,"46.6% [37.9%, 55.5%]","DELTA, case-level folds",inputs with little or no cardiac anatomy also separate the classes; an upper bound on what heart structure contributes
+arrhythmia,rhythm,8/12,"66.7% [34.9%, 90.1%]","NIFEADB, leave one subject out",the four recordings sampled at 500 Hz are all arrhythmia
+abnormal Doppler timing,function,-,cannot be measured,NInFEA (healthy only),no abnormal cases: cannot be measured
