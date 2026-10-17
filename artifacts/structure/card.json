@@ -6,7 +6,7 @@
   },
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
   "condition": "structural heart defect",
-  "created": "2026-10-16",
+  "created": "2026-10-17",
   "dataset": "DELTA (figshare doi:10.6084/m9.figshare.32358771, CC BY 4.0): probe fitted on the Train split (521 cases), calibrated on the normal cases of the Val split",
   "expert": "structure",
   "files": {

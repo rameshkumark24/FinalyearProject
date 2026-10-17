@@ -1,10 +1,10 @@
 {
   "run": "wp6_fusion",
   "description": "Decision rule on the real paired NInFEA cohort, conformal alarms of the experts, and a rule comparison on virtual patients built from real held-out scores",
-  "created_utc": "2026-10-13T20:18:19+00:00",
+  "created_utc": "2026-10-17T05:30:55+00:00",
   "script": "scripts/run_wp6_fusion.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "fa61547aef961ef36901267ba667ab6394a975bb",
+  "git_commit": "5e9fd9a7b28c1873f4e62f0eb36c8a0517a400c9",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",

@@ -1,10 +1,10 @@
 {
   "run": "wp2_doppler_cycles",
   "description": "Cardiac-cycle start detection on 43 annotated fetal Doppler strips: frozen detector and four ablations",
-  "created_utc": "2026-10-13T17:18:44+00:00",
+  "created_utc": "2026-10-17T04:08:38+00:00",
   "script": "scripts/run_wp2_doppler_cycles.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "fa61547aef961ef36901267ba667ab6394a975bb",
+  "git_commit": "5e9fd9a7b28c1873f4e62f0eb36c8a0517a400c9",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",
