@@ -1,10 +1,10 @@
 {
   "run": "tool_artifacts",
   "description": "Artifacts of the one-patient research tool (sfrtool): linear models of the runs refitted on their saved features, each checked against the published numbers before it is written to artifacts/",
-  "created_utc": "2026-10-16T06:02:00+00:00",
+  "created_utc": "2026-10-17T05:32:55+00:00",
   "script": "scripts/export_artifacts.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "b2afc3e1fe69cc282feeb9b2d37c5d43033839a2",
+  "git_commit": "5e9fd9a7b28c1873f4e62f0eb36c8a0517a400c9",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",
@@ -47,6 +47,6 @@
   "models": [],
   "seed": 0,
   "argv": [
-    "scripts/export_artifacts.py"
+    "C:\\Finalyearproject\\scripts\\export_artifacts.py"
   ]
 }
