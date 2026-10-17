@@ -34,6 +34,8 @@ STEPS = [
     ("wp7", "run_wp7_dependence_bounds.py", "wp7_dependence_bounds", "gate_G7"),
     ("wp8", "run_wp8_tradeoff.py", "wp8_tradeoff", None),
     ("wp9", "run_wp9_checks_after_results.py", "wp9_checks_after_results", None),
+    # Artifacts of the one-patient research tool, each refit checked against its run.
+    ("tool", "export_artifacts.py", "tool_artifacts", None),
 ]
 # The steps that need the DELTA echo dataset (see docs/data_cards/echo.md) or its structure run. They
 # are skipped, with a note, when the extracted dataset or the structure run is not there.
