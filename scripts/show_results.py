@@ -93,7 +93,38 @@ def main() -> None:
           f"{pct(g7['range_at_measured_rates'][1])} (ceiling {pct(g7['ceiling'])})")
     print(f"  with the uncertainty of each expert's rate:            {pct(g7['range_with_uncertainty'][0])} to {pct(g7['range_with_uncertainty'][1])}")
     print(f"  ceiling the design actually guarantees:                {pct(m('wp8_tradeoff')['rhythm_smallest_level']['effective_ceiling_of_the_design'])}")
-    print("  not measured: the sensitivity gained by combining experts, and any rate on patients with all three tests")
+    print("  not measured: any rate on patients with all three tests")
+    print("  these are standard bounds (union / Frechet), not new methods: docs/positioning.md")
+    print("  combining tests widens what is checked and adds false referrals; it does not detect any one condition better")
+
+    if (RUNS / "wp10_allocation" / "metrics.json").exists():
+        section("Checks requested in the review of 20 Oct 2026 (made after seeing the results)")
+        rate = m("wp4e_rhythm_500hz")
+        c = rate["comparison_with_original"]["logistic_rhythm"]
+        w = rate["without_native_500hz_recordings"]["logistic_rhythm"]
+        print(f"  rhythm expert, every recording at 500 Hz: AUROC {c['auroc_500hz']:.3f} {ci(c['auroc_500hz_ci'])}; "
+              f"22 recordings from one setting {w['auroc']:.3f} {ci(w['auroc_ci'])}")
+        print(f"  mother's chest lead (no fetal signal) still scores {rate['recording_level']['ecgfounder__maternal_chest']['auroc']:.3f}: "
+              "the four 500 Hz recordings differ in another way")
+        flag = m("wp5c_structure_by_size")["flag_642x506"]
+        print(f"  structure expert in 642x506 images: AUROC {flag['auroc']:.3f} {ci(flag['auroc_ci'])}, caught "
+              f"{flag['group_conditional_caught']} of {flag['n_abnormal']} with in-group calibration")
+        trust = m("wp3b_trust_baselines")["by_women"]["test"]
+        print(f"  trust check vs mother's beats: locked share {trust['maternal_substitution']['locked_share']['auroc']:.3f}, "
+              f"heart rate alone {trust['maternal_substitution']['heart_rate_only']['auroc']:.3f}")
+        print(f"  trust check vs another woman's ECG: locked share {trust['swap']['locked_share']['auroc']:.3f}, "
+              f"beat-train cross-correlation {trust['swap']['cross_correlation']['auroc']:.3f}")
+        transfer = m("wp13_calibration_transfer")
+        print(f"  rhythm false alarms carried over from NIFEADB: {pct(transfer['transported']['false_alarm_rate'])}; local calibration holds from "
+              f"{transfer['smallest_calibration_that_holds']['local']}")
+        allocation = m("wp10_allocation")
+        key = "optimised (same ceiling) - design shares"
+        sel = allocation["selection_on_one_half_valued_on_the_other_at_design_budget"]
+        design = allocation["at_design_budget_base_prevalence"]["design shares"]
+        print(f"  per 1000 screened at the assumed priors: {design['true_referrals_per_1000']:.2f} true referrals, up to "
+              f"{design['false_referrals_per_1000_ceiling']:.0f} false referrals (ceiling)")
+        print(f"  re-splitting the same ceiling: {sel[key + ' mean per 1000']:+.2f} true referrals per 1000 "
+              f"[{sel[key + ' interval low']:+.2f}, {sel[key + ' interval high']:+.2f}] (chosen on half the people, valued on the other)")
     print("\n" + LINE)
     print(" Full tables and figures: reports/RESULTS.md")
     print(LINE)

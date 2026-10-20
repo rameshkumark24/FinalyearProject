@@ -33,7 +33,8 @@ from pathlib import Path
 import numpy as np
 from scipy import stats
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
 
 from sfr.provenance import Run  # noqa: E402
 from sfrtool.allocation import effective_level  # noqa: E402
@@ -133,7 +134,9 @@ def main() -> None:
                       "C": {"deltas": list(DELTAS), "calibration_n": SHIFT_N, "sets": SHIFT_SETS, "test": SHIFT_TEST},
                       "D": {"group_shift_sd": GROUP_SHIFT, "group_share": GROUP_SHARE, "sizes": list(GROUP_SIZES), "sets": GROUP_SETS,
                             "test": GROUP_TEST}},
-              inputs={}, n_real=0, n_synthetic=N_SETS * len(SIZES) * len(LEVELS) * 2,
+              inputs={"code_under_test": [ROOT / "sfr" / "fusion" / "conformal.py", ROOT / "sfrtool" / "allocation.py",
+                                          ROOT / "sfrtool" / "conformal_groups.py"]},
+              n_real=0, n_synthetic=N_SETS * len(SIZES) * len(LEVELS) * 2,
               synthetic_kind="simulated healthy scores (normal or Student t) and simulated alarms; no patient data", seed=SEED)
     rng = np.random.default_rng(SEED)
     a, b, c, d = part_a(rng), part_b(rng), part_c(rng), part_d(rng)
