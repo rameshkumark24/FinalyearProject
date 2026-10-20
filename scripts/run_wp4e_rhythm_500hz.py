@@ -50,7 +50,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from sfr.data import nifeadb  # noqa: E402
 from sfr.ecg.extract import extract_fetal_ecg  # noqa: E402
-from sfr.eval.stats import auroc  # noqa: E402
+from sfr.eval.stats import auroc, auroc_ci  # noqa: E402
 from sfr.paths import RUNS  # noqa: E402
 from sfr.provenance import Run, load_run  # noqa: E402
 from sfr.rhythm.evaluate import evaluate, logistic, single_index  # noqa: E402
@@ -152,7 +152,7 @@ def main() -> None:
                 "device": device, "random_init": untrained_record},
         inputs={"nifeadb": [p for name in records for p in nifeadb.record_files(name)],
                 "original_scores": [RUNS / INTERVALS_RUN / "per_record_scores.csv", RUNS / FOUNDATION_RUN / "per_record_scores.csv",
-                                    RUNS / BEATS_RUN / "beats.json"]},
+                                    RUNS / BEATS_RUN / "beats.json", RUNS / FOUNDATION_RUN / "record_embeddings.npz"]},
         n_real=len(records),
         models=[founder_record],
         seed=SEED,
@@ -249,8 +249,16 @@ def main() -> None:
 
     # ---- without the four natively 500 Hz recordings (no refitting) -------------------------------
     native = np.array([name in NATIVE_500_HZ for name in records])
-    without_native = {key: {"auroc": auroc(y[~native], scores[~native]), "n": int((~native).sum()),
-                            "n_arrhythmia": int(y[~native].sum())} for key, scores in oof.items()}
+    without_native = {}
+    for key, scores in oof.items():
+        value, low, high = auroc_ci(y[~native], scores[~native], seed=SEED)
+        without_native[key] = {"auroc": value, "auroc_ci": [low, high], "n": int((~native).sum()), "n_arrhythmia": int(y[~native].sum())}
+
+    # The two control inputs already reached the network at 500 Hz in wp4c (its to_model_rate uses the same
+    # resample_poly step), so their embeddings should be unchanged here; checked against wp4c's saved embeddings.
+    saved = np.load(RUNS / FOUNDATION_RUN / "record_embeddings.npz")
+    controls_unchanged = {f"{m}__{k}": bool(np.allclose(np.array(embeddings[m][k]), saved[f"nifeadb__{m}__{k}"], atol=1e-5))
+                          for m in models for k in ("abdominal_raw", "maternal_chest")}
 
     # ---- paired differences against the original runs -----------------------------------------------
     published = {"logistic_rhythm": intervals_metrics["recording_level"]["logistic_rhythm"]["auroc"],
@@ -278,16 +286,20 @@ def main() -> None:
         "recording_level": results, "single_index": single,
         "without_native_500hz_recordings": without_native,
         "comparison_with_original": comparison,
+        "control_inputs_unchanged_from_wp4c": controls_unchanged,
         "made_after_seeing_results": True,
-        "reading": ("If the interval expert's AUROC holds after the common 500 Hz step and the maternal-chest control drops "
-                    "towards 0.5, the sampling rate was not what the expert used; if the AUROC drops, it was."),
+        "reading": ("If the interval expert's AUROC holds after the common 500 Hz step, the sampling rate itself was not what it used. "
+                    "The control inputs reached the network at 500 Hz already in wp4c, so a control above chance points to another "
+                    "difference of the four natively 500 Hz recordings (all arrhythmia): their recording setting, which resampling "
+                    "cannot remove. Only recordings of both classes from one setting can separate rhythm from setting."),
     }
     run.finish(metrics)
 
     print("\nRecording level, leave-one-subject-out, all recordings at 500 Hz")
     for key, r in results.items():
+        w = without_native[key]
         print(f"  {key:30s} AUROC {r['auroc']:.3f} [{r['auroc_ci'][0]:.3f}, {r['auroc_ci'][1]:.3f}]  p {r['permutation_p']:.4f}"
-              f"  without ARR_06-09 {without_native[key]['auroc']:.3f}")
+              f"  without ARR_06-09 {w['auroc']:.3f} [{w['auroc_ci'][0]:.3f}, {w['auroc_ci'][1]:.3f}]")
     print("Single indices (nothing fitted)")
     for key, r in single.items():
         print(f"  {key:30s} AUROC {r['auroc']:.3f} [{r['auroc_ci'][0]:.3f}, {r['auroc_ci'][1]:.3f}]")
@@ -297,6 +309,7 @@ def main() -> None:
         text = f"{diff['difference']:+.3f} [{diff['ci'][0]:+.3f}, {diff['ci'][1]:+.3f}]" if diff else "not compared (original not reproduced)"
         print(f"  {key:30s} original {c['original_auroc_published']:.3f}  500 Hz {c['auroc_500hz']:.3f}  difference {text}")
     print("Native 500 Hz recordings unchanged:", identical_native)
+    print("Control inputs unchanged from wp4c:", controls_unchanged)
 
 
 if __name__ == "__main__":
