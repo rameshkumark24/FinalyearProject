@@ -1,0 +1,31 @@
+{
+  "made_after_seeing_results": true,
+  "synthetic_only": true,
+  "a_mean_rate_never_above_effective_level_by_more_than_3_se": true,
+  "a_largest_gap_between_simulated_and_beta_percentiles": 0.007374249272377981,
+  "b_every_dependence_inside_the_range": true,
+  "b_ends_reached": {
+    "lower": 0.067155,
+    "upper": 0.167195,
+    "range": [
+      0.06666666666666667,
+      0.16666666666666669
+    ]
+  },
+  "c_every_shift_within_level_plus_ks": true,
+  "d_group_conditional_rates": {
+    "40|marginal|main (70%)": 0.017666791308123337,
+    "40|marginal|shifted (30%)": 0.1221651234587077,
+    "40|group-conditional|main (70%)": 0.03317271909708724,
+    "40|group-conditional|shifted (30%)": 0.0007117634448416886,
+    "100|marginal|main (70%)": 0.016679728979644586,
+    "100|marginal|shifted (30%)": 0.12341943697911695,
+    "100|group-conditional|main (70%)": 0.042423361513302706,
+    "100|group-conditional|shifted (30%)": 0.03245311561727489,
+    "400|marginal|main (70%)": 0.01646737268766671,
+    "400|marginal|shifted (30%)": 0.12750400926097147,
+    "400|group-conditional|main (70%)": 0.04831891536755419,
+    "400|group-conditional|shifted (30%)": 0.04586736651257291
+  },
+  "reading": "each part reproduces a standard result; none is a contribution of this project"
+}

@@ -1,0 +1,280 @@
+{
+  "made_after_seeing_results": true,
+  "n_recordings_readable": 57,
+  "n_women_readable": 37,
+  "transported": {
+    "calibration": "14 healthy NIFEADB recordings",
+    "false_alarm_rate": 0.5263157894736842,
+    "flagged": 30,
+    "n": 57,
+    "effective_level": 0.06666666666666667
+  },
+  "local_leave_one_woman_out": {
+    "false_alarm_rate": 0.08771929824561403,
+    "flagged": 5,
+    "n": 57
+  },
+  "curve": [
+    {
+      "calibration_women": 1,
+      "calibration_recordings_median": 1.0,
+      "calibration_recordings_min": 1,
+      "calibration_recordings_max": 3,
+      "effective_level_at_median_size": 0.0,
+      "can_alarm_in_every_draw": false,
+      "beta_range_90_at_median_size": [
+        0.0,
+        0.0
+      ],
+      "local_mean": 0.0,
+      "local_p5": 0.0,
+      "local_p95": 0.0,
+      "local_holds": false,
+      "pooled_mean": 0.3726782828282828,
+      "pooled_p5": 0.01818181818181818,
+      "pooled_p95": 0.5454545454545454,
+      "pooled_holds": false
+    },
+    {
+      "calibration_women": 2,
+      "calibration_recordings_median": 3.0,
+      "calibration_recordings_min": 2,
+      "calibration_recordings_max": 5,
+      "effective_level_at_median_size": 0.0,
+      "can_alarm_in_every_draw": false,
+      "beta_range_90_at_median_size": [
+        0.0,
+        0.0
+      ],
+      "local_mean": 0.0,
+      "local_p5": 0.0,
+      "local_p95": 0.0,
+      "local_holds": false,
+      "pooled_mean": 0.28166904946904947,
+      "pooled_p5": 0.018518518518518517,
+      "pooled_p95": 0.5555555555555556,
+      "pooled_holds": false
+    },
+    {
+      "calibration_women": 3,
+      "calibration_recordings_median": 5.0,
+      "calibration_recordings_min": 3,
+      "calibration_recordings_max": 7,
+      "effective_level_at_median_size": 0.0,
+      "can_alarm_in_every_draw": false,
+      "beta_range_90_at_median_size": [
+        0.0,
+        0.0
+      ],
+      "local_mean": 0.0,
+      "local_p5": 0.0,
+      "local_p95": 0.0,
+      "local_holds": false,
+      "pooled_mean": 0.2641135552456751,
+      "pooled_p5": 0.0,
+      "pooled_p95": 0.5660377358490566,
+      "pooled_holds": false
+    },
+    {
+      "calibration_women": 4,
+      "calibration_recordings_median": 6.0,
+      "calibration_recordings_min": 4,
+      "calibration_recordings_max": 9,
+      "effective_level_at_median_size": 0.0,
+      "can_alarm_in_every_draw": false,
+      "beta_range_90_at_median_size": [
+        0.0,
+        0.0
+      ],
+      "local_mean": 0.002916666666666667,
+      "local_p5": 0.0,
+      "local_p95": 0.0,
+      "local_holds": false,
+      "pooled_mean": 0.29205166908563135,
+      "pooled_p5": 0.038461538461538464,
+      "pooled_p95": 0.5686274509803921,
+      "pooled_holds": false
+    },
+    {
+      "calibration_women": 6,
+      "calibration_recordings_median": 9.0,
+      "calibration_recordings_min": 6,
+      "calibration_recordings_max": 13,
+      "effective_level_at_median_size": 0.1,
+      "can_alarm_in_every_draw": false,
+      "beta_range_90_at_median_size": [
+        0.005683044988048047,
+        0.2831288355631134
+      ],
+      "local_mean": 0.06440047748530633,
+      "local_p5": 0.0,
+      "local_p95": 0.2765957446808511,
+      "local_holds": false,
+      "pooled_mean": 0.19487473425851712,
+      "pooled_p5": 0.02040816326530612,
+      "pooled_p95": 0.56,
+      "pooled_holds": false
+    },
+    {
+      "calibration_women": 8,
+      "calibration_recordings_median": 12.0,
+      "calibration_recordings_min": 8,
+      "calibration_recordings_max": 17,
+      "effective_level_at_median_size": 0.07692307692307693,
+      "can_alarm_in_every_draw": false,
+      "beta_range_90_at_median_size": [
+        0.004265318777560665,
+        0.22092219194555585
+      ],
+      "local_mean": 0.08192921499391698,
+      "local_p5": 0.0,
+      "local_p95": 0.23283499446290118,
+      "local_holds": false,
+      "pooled_mean": 0.15962482746217282,
+      "pooled_p5": 0.021739130434782608,
+      "pooled_p95": 0.425531914893617,
+      "pooled_holds": false
+    },
+    {
+      "calibration_women": 10,
+      "calibration_recordings_median": 15.0,
+      "calibration_recordings_min": 11,
+      "calibration_recordings_max": 20,
+      "effective_level_at_median_size": 0.0625,
+      "can_alarm_in_every_draw": true,
+      "beta_range_90_at_median_size": [
+        0.003413712946590341,
+        0.18103627252208462
+      ],
+      "local_mean": 0.07140139112835207,
+      "local_p5": 0.0,
+      "local_p95": 0.2145470383275259,
+      "local_holds": true,
+      "pooled_mean": 0.16197792000093386,
+      "pooled_p5": 0.023255813953488372,
+      "pooled_p95": 0.375,
+      "pooled_holds": false
+    },
+    {
+      "calibration_women": 13,
+      "calibration_recordings_median": 20.0,
+      "calibration_recordings_min": 16,
+      "calibration_recordings_max": 26,
+      "effective_level_at_median_size": 0.09523809523809523,
+      "can_alarm_in_every_draw": true,
+      "beta_range_90_at_median_size": [
+        0.01806520308541863,
+        0.21610616420684728
+      ],
+      "local_mean": 0.08894287770870482,
+      "local_p5": 0.0,
+      "local_p95": 0.24324324324324326,
+      "local_holds": true,
+      "pooled_mean": 0.14521602868672714,
+      "pooled_p5": 0.02631578947368421,
+      "pooled_p95": 0.35135135135135137,
+      "pooled_holds": true
+    },
+    {
+      "calibration_women": 16,
+      "calibration_recordings_median": 25.0,
+      "calibration_recordings_min": 20,
+      "calibration_recordings_max": 30,
+      "effective_level_at_median_size": 0.07692307692307693,
+      "can_alarm_in_every_draw": true,
+      "beta_range_90_at_median_size": [
+        0.014403197979173655,
+        0.17612071060451798
+      ],
+      "local_mean": 0.08720411827311242,
+      "local_p5": 0.0,
+      "local_p95": 0.22580645161290322,
+      "local_holds": true,
+      "pooled_mean": 0.14122420251088294,
+      "pooled_p5": 0.0,
+      "pooled_p95": 0.3333333333333333,
+      "pooled_holds": true
+    },
+    {
+      "calibration_women": 20,
+      "calibration_recordings_median": 31.0,
+      "calibration_recordings_min": 26,
+      "calibration_recordings_max": 36,
+      "effective_level_at_median_size": 0.09375,
+      "can_alarm_in_every_draw": true,
+      "beta_range_90_at_median_size": [
+        0.026900119691149145,
+        0.1894644674255387
+      ],
+      "local_mean": 0.08621299829611044,
+      "local_p5": 0.0,
+      "local_p95": 0.23076923076923078,
+      "local_holds": true,
+      "pooled_mean": 0.11752567567091388,
+      "pooled_p5": 0.0,
+      "pooled_p95": 0.28,
+      "pooled_holds": true
+    },
+    {
+      "calibration_women": 25,
+      "calibration_recordings_median": 39.0,
+      "calibration_recordings_min": 34,
+      "calibration_recordings_max": 43,
+      "effective_level_at_median_size": 0.1,
+      "can_alarm_in_every_draw": true,
+      "beta_range_90_at_median_size": [
+        0.03579928754212988,
+        0.18697950510045896
+      ],
+      "local_mean": 0.09524923786933814,
+      "local_p5": 0.0,
+      "local_p95": 0.2777777777777778,
+      "local_holds": true,
+      "pooled_mean": 0.12878544926118285,
+      "pooled_p5": 0.0,
+      "pooled_p95": 0.3333333333333333,
+      "pooled_holds": true
+    },
+    {
+      "calibration_women": 30,
+      "calibration_recordings_median": 46.0,
+      "calibration_recordings_min": 42,
+      "calibration_recordings_max": 50,
+      "effective_level_at_median_size": 0.0851063829787234,
+      "can_alarm_in_every_draw": true,
+      "beta_range_90_at_median_size": [
+        0.030249185183047807,
+        0.16002227798237126
+      ],
+      "local_mean": 0.08954789654789655,
+      "local_p5": 0.0,
+      "local_p95": 0.3,
+      "local_holds": true,
+      "pooled_mean": 0.12783170163170163,
+      "pooled_p5": 0.0,
+      "pooled_p95": 0.3654545454545438,
+      "pooled_holds": true
+    }
+  ],
+  "smallest_calibration_that_holds": {
+    "local": {
+      "calibration_women": 10,
+      "calibration_recordings_median": 15.0
+    },
+    "pooled": {
+      "calibration_women": 13,
+      "calibration_recordings_median": 20.0
+    }
+  },
+  "shift": {
+    "distance": 0.5263157894736842,
+    "ci": [
+      0.38181818181818183,
+      0.6764791982366717
+    ],
+    "auroc_ninfea_above_nifeadb": 0.6629072681704261,
+    "observed_excess_false_alarms": 0.45964912280701753,
+    "bound_note": "at a fixed threshold, false alarms on the new data exceed those on the calibration data by at most the KS distance"
+  },
+  "scope": "one device pair (NIFEADB to NInFEA), 57 readable recordings of 37 healthy fetuses; sensitivity after local calibration is unknown because NInFEA has no arrhythmia"
+}

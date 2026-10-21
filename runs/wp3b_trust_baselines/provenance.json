@@ -1,0 +1,55 @@
+{
+  "run": "wp3b_trust_baselines",
+  "description": "Heart-rate-only and pulse-train cross-correlation baselines for the ECG-Doppler trust check (check made after seeing the results)",
+  "created_utc": "2026-10-20T05:24:56+00:00",
+  "script": "scripts/run_wp3b_trust_baselines.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "be7cc95c943433e7c04ded41b3b12808ca493a7c",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "made_after_seeing_results": true,
+    "requested_by": "review of 20 Oct 2026",
+    "source_run": "wp3_trust_check",
+    "heart_rate_baseline": "minus |ECG rate - Doppler rate|; maternal rate from the extractor for the mother's beats",
+    "cross_correlation": {
+      "pulse_sd_ms": 10.0,
+      "lags_ms": [
+        -400,
+        400
+      ],
+      "sampling": "1 ms",
+      "events": "detected ECG beats and Doppler cycle starts saved by wp3"
+    },
+    "bootstrap": {
+      "resamples": 2000,
+      "unit": "woman",
+      "seed": 0
+    }
+  },
+  "data": {
+    "wp3": {
+      "n_files": 3,
+      "total_bytes": 340190,
+      "manifest_sha256": "247b51d48e934fa820670eb1d2d4faf8aff4fb4791c64c371fc9370180bba725"
+    }
+  },
+  "n_real": 60,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "scripts/run_wp3b_trust_baselines.py"
+  ]
+}

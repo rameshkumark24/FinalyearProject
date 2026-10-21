@@ -1,0 +1,57 @@
+{
+  "run": "wp5c_structure_by_size",
+  "description": "Structure expert by image size with alarms calibrated inside each size group (group-conditional conformal), from the saved embeddings. A check made after seeing the results.",
+  "created_utc": "2026-10-20T05:24:46+00:00",
+  "script": "scripts/run_wp5c_structure_by_size.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "be7cc95c943433e7c04ded41b3b12808ca493a7c",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "made_after_seeing_results": true,
+    "requested_by": "review of 20 Oct 2026",
+    "source_run": "wp5_structure_delta",
+    "features": "fetalclip_scan",
+    "groups": [
+      "900x752",
+      "642x506",
+      "806x648",
+      "other sizes"
+    ],
+    "alpha": 0.05,
+    "folds": "stratified 5-fold, seed 0, calibration share 0.25 (as in wp5)",
+    "probe": "standardise, PCA(32), logistic regression C=1 balanced (as in wp5)",
+    "minimum_calibration_normals_to_alarm": 19,
+    "auroc": "run wp5's cross-validated scores, bootstrap over cases, 2000 resamples, seed 0"
+  },
+  "data": {
+    "embeddings": {
+      "n_files": 1,
+      "total_bytes": 11785607,
+      "manifest_sha256": "84d23b7f8a5e1a7d0946ad9cb32ed335298de57faf21b6b29a71839c1aa7775c"
+    },
+    "per_case": {
+      "n_files": 1,
+      "total_bytes": 69518,
+      "manifest_sha256": "355ce812fbca1372e3e3819a69912049a2abb528d1d6a239327e9337daaecaaf"
+    }
+  },
+  "n_real": 752,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "scripts/run_wp5c_structure_by_size.py"
+  ]
+}

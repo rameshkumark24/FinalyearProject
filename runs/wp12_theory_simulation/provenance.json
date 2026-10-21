@@ -1,0 +1,94 @@
+{
+  "run": "wp12_theory_simulation",
+  "description": "Simulation of the standard guarantees used by the decision rule: conformal validity and the Beta law, the union bound and its ends, false alarms under shift, group-conditional calibration (synthetic data)",
+  "created_utc": "2026-10-20T05:42:24+00:00",
+  "script": "scripts/run_wp12_theory_simulation.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "a60942c8542fc21ce06ab559436dee307a169693",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "made_after_seeing_results": true,
+    "requested_by": "review of 20 Oct 2026",
+    "A": {
+      "sizes": [
+        14,
+        19,
+        60,
+        125,
+        619
+      ],
+      "levels": [
+        0.05,
+        0.1
+      ],
+      "sets": 2000,
+      "test": 2000
+    },
+    "B": {
+      "rates": [
+        0.05,
+        0.05,
+        0.06666666666666667
+      ],
+      "rho": [
+        -0.45,
+        -0.25,
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "people": 200000
+    },
+    "C": {
+      "deltas": [
+        0.0,
+        0.25,
+        0.5,
+        1.0,
+        1.5
+      ],
+      "calibration_n": 60,
+      "sets": 500,
+      "test": 5000
+    },
+    "D": {
+      "group_shift_sd": 1.0,
+      "group_share": 0.3,
+      "sizes": [
+        40,
+        100,
+        400
+      ],
+      "sets": 1000,
+      "test": 4000
+    }
+  },
+  "data": {
+    "code_under_test": {
+      "n_files": 3,
+      "total_bytes": 16069,
+      "manifest_sha256": "1231f2d31a70ec583e8222e05d053ce563784ec41d8cdadd2162e49f166c9f55"
+    }
+  },
+  "n_real": 0,
+  "n_synthetic": 40000,
+  "synthetic": true,
+  "synthetic_kind": "simulated healthy scores (normal or Student t) and simulated alarms; no patient data",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "scripts/run_wp12_theory_simulation.py"
+  ]
+}

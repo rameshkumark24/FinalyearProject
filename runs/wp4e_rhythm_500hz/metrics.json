@@ -1,0 +1,577 @@
+{
+  "dataset": {
+    "n_records": 26,
+    "n_arrhythmia": 12,
+    "n_normal": 14,
+    "n_segments": 296,
+    "n_usable_segments": 288,
+    "n_usable_segments_original": 288,
+    "resampled_to_500hz": 22
+  },
+  "native_500hz_recordings_beats_identical_to_wp4a": {
+    "ARR_06": true,
+    "ARR_07": true,
+    "ARR_08": true,
+    "ARR_09": true
+  },
+  "recording_level": {
+    "logistic_rhythm": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8095238095238095,
+      "auroc_ci": [
+        0.5812157914201184,
+        0.9939393939393939
+      ],
+      "mann_whitney_p_one_sided": 0.0040380196748469495,
+      "threshold": 0.5,
+      "tp": 7,
+      "fn": 5,
+      "tn": 14,
+      "fp": 0,
+      "sensitivity": 0.5833333333333334,
+      "sensitivity_ci": [
+        0.2766696856821058,
+        0.8483477701915698
+      ],
+      "specificity": 1.0,
+      "specificity_ci": [
+        0.7683642383498834,
+        1.0
+      ],
+      "permutation_p": 0.001996007984031936,
+      "n_permutations": 500
+    },
+    "ecgfounder__fetal": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.9285714285714286,
+      "auroc_ci": [
+        0.8035714285714286,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 0.0001177363839459269,
+      "threshold": 0.5,
+      "tp": 10,
+      "fn": 2,
+      "tn": 12,
+      "fp": 2,
+      "sensitivity": 0.8333333333333334,
+      "sensitivity_ci": [
+        0.5158622513140327,
+        0.9791374745399076
+      ],
+      "specificity": 0.8571428571428571,
+      "specificity_ci": [
+        0.571870839090301,
+        0.9822054845168084
+      ],
+      "permutation_p": 0.0033222591362126247,
+      "n_permutations": 300,
+      "model": "ecgfounder",
+      "input": "fetal",
+      "role": "fetal input"
+    },
+    "ecgfounder__fetal_stretch2": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8928571428571429,
+      "auroc_ci": [
+        0.7360515285996055,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 0.0003772667149196522,
+      "threshold": 0.5,
+      "tp": 10,
+      "fn": 2,
+      "tn": 12,
+      "fp": 2,
+      "sensitivity": 0.8333333333333334,
+      "sensitivity_ci": [
+        0.5158622513140327,
+        0.9791374745399076
+      ],
+      "specificity": 0.8571428571428571,
+      "specificity_ci": [
+        0.571870839090301,
+        0.9822054845168084
+      ],
+      "permutation_p": 0.006644518272425249,
+      "n_permutations": 300,
+      "model": "ecgfounder",
+      "input": "fetal_stretch2",
+      "role": "fetal input"
+    },
+    "ecgfounder__abdominal_raw": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.6071428571428571,
+      "auroc_ci": [
+        0.3748511904761905,
+        0.8194444444444444
+      ],
+      "mann_whitney_p_one_sided": 0.1840327531527423,
+      "threshold": 0.5,
+      "tp": 9,
+      "fn": 3,
+      "tn": 7,
+      "fp": 7,
+      "sensitivity": 0.75,
+      "sensitivity_ci": [
+        0.4281415381218108,
+        0.9451393554720072
+      ],
+      "specificity": 0.5,
+      "specificity_ci": [
+        0.23036054144806234,
+        0.7696394585519376
+      ],
+      "permutation_p": 0.1362126245847176,
+      "n_permutations": 300,
+      "model": "ecgfounder",
+      "input": "abdominal_raw",
+      "role": "negative control"
+    },
+    "ecgfounder__maternal_chest": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.7023809523809523,
+      "auroc_ci": [
+        0.4749671052631579,
+        0.8909090909090909
+      ],
+      "mann_whitney_p_one_sided": 0.04243937338776718,
+      "threshold": 0.5,
+      "tp": 8,
+      "fn": 4,
+      "tn": 9,
+      "fp": 5,
+      "sensitivity": 0.6666666666666666,
+      "sensitivity_ci": [
+        0.3488755064188155,
+        0.9007539088504167
+      ],
+      "specificity": 0.6428571428571429,
+      "specificity_ci": [
+        0.3513801106159917,
+        0.8724015701408403
+      ],
+      "permutation_p": 0.03322259136212625,
+      "n_permutations": 300,
+      "model": "ecgfounder",
+      "input": "maternal_chest",
+      "role": "negative control"
+    },
+    "random_init__fetal": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.7083333333333334,
+      "auroc_ci": [
+        0.48870614035087717,
+        0.897030661646046
+      ],
+      "mann_whitney_p_one_sided": 0.03799118928858446,
+      "threshold": 0.5,
+      "tp": 6,
+      "fn": 6,
+      "tn": 9,
+      "fp": 5,
+      "sensitivity": 0.5,
+      "sensitivity_ci": [
+        0.21094463823929668,
+        0.7890553617607033
+      ],
+      "specificity": 0.6428571428571429,
+      "specificity_ci": [
+        0.3513801106159917,
+        0.8724015701408403
+      ],
+      "permutation_p": 0.06312292358803986,
+      "n_permutations": 300,
+      "model": "random_init",
+      "input": "fetal",
+      "role": "fetal input"
+    },
+    "random_init__fetal_stretch2": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8809523809523809,
+      "auroc_ci": [
+        0.7218934911242604,
+        0.9881656804733728
+      ],
+      "mann_whitney_p_one_sided": 0.000545222604436435,
+      "threshold": 0.5,
+      "tp": 8,
+      "fn": 4,
+      "tn": 12,
+      "fp": 2,
+      "sensitivity": 0.6666666666666666,
+      "sensitivity_ci": [
+        0.3488755064188155,
+        0.9007539088504167
+      ],
+      "specificity": 0.8571428571428571,
+      "specificity_ci": [
+        0.571870839090301,
+        0.9822054845168084
+      ],
+      "permutation_p": 0.0033222591362126247,
+      "n_permutations": 300,
+      "model": "random_init",
+      "input": "fetal_stretch2",
+      "role": "fetal input"
+    },
+    "random_init__abdominal_raw": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.5178571428571429,
+      "auroc_ci": [
+        0.2777777777777778,
+        0.758174019607843
+      ],
+      "mann_whitney_p_one_sided": 0.4488425729130864,
+      "threshold": 0.5,
+      "tp": 6,
+      "fn": 6,
+      "tn": 8,
+      "fp": 6,
+      "sensitivity": 0.5,
+      "sensitivity_ci": [
+        0.21094463823929668,
+        0.7890553617607033
+      ],
+      "specificity": 0.5714285714285714,
+      "specificity_ci": [
+        0.28860940003830743,
+        0.8233889100178821
+      ],
+      "permutation_p": 0.31561461794019935,
+      "n_permutations": 300,
+      "model": "random_init",
+      "input": "abdominal_raw",
+      "role": "negative control"
+    },
+    "random_init__maternal_chest": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.4583333333333333,
+      "auroc_ci": [
+        0.2152529761904762,
+        0.7124203431372549
+      ],
+      "mann_whitney_p_one_sided": 0.6501621871826475,
+      "threshold": 0.5,
+      "tp": 6,
+      "fn": 6,
+      "tn": 8,
+      "fp": 6,
+      "sensitivity": 0.5,
+      "sensitivity_ci": [
+        0.21094463823929668,
+        0.7890553617607033
+      ],
+      "specificity": 0.5714285714285714,
+      "specificity_ci": [
+        0.28860940003830743,
+        0.8233889100178821
+      ],
+      "permutation_p": 0.4684385382059801,
+      "n_permutations": 300,
+      "model": "random_init",
+      "input": "maternal_chest",
+      "role": "negative control"
+    }
+  },
+  "single_index": {
+    "rr_mad_rel_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8125,
+      "auroc_ci": [
+        0.5952264239028945,
+        0.9738562091503268
+      ],
+      "mann_whitney_p_one_sided": 0.0037308239996780524,
+      "permutation_p": 0.0044995500449955,
+      "n_permutations": 10000,
+      "n_missing": 0
+    },
+    "succ_rel_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.9434523809523809,
+      "auroc_ci": [
+        0.836235119047619,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 7.020321310463403e-05,
+      "permutation_p": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "n_missing": 0
+    },
+    "outlier_share_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8898809523809523,
+      "auroc_ci": [
+        0.7100591715976331,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 0.00041232928749333677,
+      "permutation_p": 0.00029997000299970003,
+      "n_permutations": 10000,
+      "n_missing": 0
+    },
+    "short_long_share_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8273809523809523,
+      "auroc_ci": [
+        0.6531163194444444,
+        0.96875
+      ],
+      "mann_whitney_p_one_sided": 0.0011401151306388714,
+      "permutation_p": 0.0004999500049995,
+      "n_permutations": 10000,
+      "n_missing": 0
+    },
+    "long_share_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.8482142857142857,
+      "auroc_ci": [
+        0.6499702380952381,
+        0.9851190476190477
+      ],
+      "mann_whitney_p_one_sided": 0.0013979207542245337,
+      "permutation_p": 0.0012998700129987,
+      "n_permutations": 10000,
+      "n_missing": 0
+    },
+    "tracked_raw_gap_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.9077380952380952,
+      "auroc_ci": [
+        0.7514423076923077,
+        1.0
+      ],
+      "mann_whitney_p_one_sided": 0.00023164024442908163,
+      "permutation_p": 9.999000099990002e-05,
+      "n_permutations": 10000,
+      "n_missing": 0
+    },
+    "hr_bpm_median": {
+      "n": 26,
+      "n_positive": 12,
+      "n_negative": 14,
+      "auroc": 0.3244047619047619,
+      "auroc_ci": [
+        0.1180453431372549,
+        0.5636363636363636
+      ],
+      "mann_whitney_p_one_sided": 0.9386526771671315,
+      "permutation_p": 0.9334066593340666,
+      "n_permutations": 10000,
+      "n_missing": 0,
+      "note": "no direction was pre-specified for heart rate; below 0.5 means arrhythmia recordings are slower"
+    }
+  },
+  "without_native_500hz_recordings": {
+    "logistic_rhythm": {
+      "auroc": 0.7142857142857143,
+      "auroc_ci": [
+        0.375,
+        0.9809821428571427
+      ],
+      "n": 22,
+      "n_arrhythmia": 8
+    },
+    "ecgfounder__fetal": {
+      "auroc": 0.9107142857142857,
+      "auroc_ci": [
+        0.7411738445378152,
+        1.0
+      ],
+      "n": 22,
+      "n_arrhythmia": 8
+    },
+    "ecgfounder__fetal_stretch2": {
+      "auroc": 0.8571428571428571,
+      "auroc_ci": [
+        0.640952380952381,
+        1.0
+      ],
+      "n": 22,
+      "n_arrhythmia": 8
+    },
+    "ecgfounder__abdominal_raw": {
+      "auroc": 0.5625,
+      "auroc_ci": [
+        0.3125,
+        0.8125
+      ],
+      "n": 22,
+      "n_arrhythmia": 8
+    },
+    "ecgfounder__maternal_chest": {
+      "auroc": 0.5982142857142857,
+      "auroc_ci": [
+        0.3418627450980392,
+        0.8381249999999999
+      ],
+      "n": 22,
+      "n_arrhythmia": 8
+    },
+    "random_init__fetal": {
+      "auroc": 0.6339285714285714,
+      "auroc_ci": [
+        0.38392857142857145,
+        0.875
+      ],
+      "n": 22,
+      "n_arrhythmia": 8
+    },
+    "random_init__fetal_stretch2": {
+      "auroc": 0.8928571428571429,
+      "auroc_ci": [
+        0.739514802631579,
+        1.0
+      ],
+      "n": 22,
+      "n_arrhythmia": 8
+    },
+    "random_init__abdominal_raw": {
+      "auroc": 0.5178571428571429,
+      "auroc_ci": [
+        0.20949404761904764,
+        0.8
+      ],
+      "n": 22,
+      "n_arrhythmia": 8
+    },
+    "random_init__maternal_chest": {
+      "auroc": 0.25892857142857145,
+      "auroc_ci": [
+        0.023529411764705882,
+        0.5529411764705883
+      ],
+      "n": 22,
+      "n_arrhythmia": 8
+    }
+  },
+  "comparison_with_original": {
+    "logistic_rhythm": {
+      "original_run": "wp4b_rhythm_intervals",
+      "original_auroc_published": 0.7976190476190477,
+      "original_auroc_from_saved_scores": 0.7976190476190477,
+      "reproduced": true,
+      "auroc_500hz": 0.8095238095238095,
+      "auroc_500hz_ci": [
+        0.5812157914201184,
+        0.9939393939393939
+      ],
+      "paired_difference_500hz_minus_original": {
+        "difference": 0.011904761904761862,
+        "ci": [
+          0.0,
+          0.0535714285714286
+        ],
+        "share_of_resamples_above_0": 0.556,
+        "n_resamples": 2000,
+        "can_be_ranked": false
+      },
+      "original_without_native_500hz": 0.6964285714285714
+    },
+    "ecgfounder__fetal": {
+      "original_run": "wp4c_foundation",
+      "original_auroc_published": 0.9523809523809523,
+      "original_auroc_from_saved_scores": 0.9523809523809523,
+      "reproduced": true,
+      "auroc_500hz": 0.9285714285714286,
+      "auroc_500hz_ci": [
+        0.8035714285714286,
+        1.0
+      ],
+      "paired_difference_500hz_minus_original": {
+        "difference": -0.023809523809523725,
+        "ci": [
+          -0.09150326797385622,
+          0.0
+        ],
+        "share_of_resamples_above_0": 0.0,
+        "n_resamples": 2000,
+        "can_be_ranked": false
+      },
+      "original_without_native_500hz": 0.9464285714285714
+    },
+    "random_init__fetal": {
+      "original_run": "wp4c_foundation",
+      "original_auroc_published": 0.7440476190476191,
+      "original_auroc_from_saved_scores": 0.7380952380952381,
+      "reproduced": false,
+      "auroc_500hz": 0.7083333333333334,
+      "auroc_500hz_ci": [
+        0.48870614035087717,
+        0.897030661646046
+      ]
+    },
+    "ecgfounder__maternal_chest": {
+      "original_run": "wp4c_foundation",
+      "original_auroc_published": 0.7023809523809523,
+      "original_auroc_from_saved_scores": 0.7023809523809523,
+      "reproduced": true,
+      "auroc_500hz": 0.7023809523809523,
+      "auroc_500hz_ci": [
+        0.4749671052631579,
+        0.8909090909090909
+      ],
+      "paired_difference_500hz_minus_original": {
+        "difference": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "share_of_resamples_above_0": 0.0,
+        "n_resamples": 2000,
+        "can_be_ranked": false
+      },
+      "original_without_native_500hz": 0.5982142857142857
+    },
+    "ecgfounder__abdominal_raw": {
+      "original_run": "wp4c_foundation",
+      "original_auroc_published": 0.6071428571428571,
+      "original_auroc_from_saved_scores": 0.6130952380952381,
+      "reproduced": false,
+      "auroc_500hz": 0.6071428571428571,
+      "auroc_500hz_ci": [
+        0.3748511904761905,
+        0.8194444444444444
+      ]
+    }
+  },
+  "control_inputs_unchanged_from_wp4c": {
+    "ecgfounder__abdominal_raw": false,
+    "ecgfounder__maternal_chest": false,
+    "random_init__abdominal_raw": false,
+    "random_init__maternal_chest": false
+  },
+  "made_after_seeing_results": true,
+  "reading": "If the interval expert's AUROC holds after the common 500 Hz step, the sampling rate itself was not what it used. The control inputs reached the network at 500 Hz already in wp4c, so a control above chance points to another difference of the four natively 500 Hz recordings (all arrhythmia): their recording setting, which resampling cannot remove. Only recordings of both classes from one setting can separate rhythm from setting."
+}

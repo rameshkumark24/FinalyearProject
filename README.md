@@ -11,9 +11,22 @@ Three tests show three different things about a fetal heart:
 | Pulsed-wave Doppler | Is the timing of filling and ejection normal? | function | healthy fetuses only (NInFEA) |
 | Non-invasive fetal ECG | Is the rhythm normal? | rhythm | 12 arrhythmia, 14 normal rhythm (NIFEADB) |
 
-No public dataset holds all three tests for the same fetus. Each test therefore gets its own expert, built on its own public data, and the experts are joined by a decision rule whose false-referral ceiling holds without any paired patient. Where ECG and Doppler were recorded together (NInFEA), a trust check verifies beat by beat that both show the same heart.
+No public dataset holds all three tests for the same fetus. Each test therefore gets its own expert, built on its own public data, and the experts are joined by a standard any-alarm rule: refer if any expert alarms. Its false-referral ceiling, the sum of the alarm levels, is the textbook union (Bonferroni) bound and needs no paired patient; what this project adds is evidence about when that ceiling holds in practice (`docs/positioning.md`). Where ECG and Doppler were recorded together (NInFEA), a trust check verifies beat by beat that both follow the same heart.
 
-## Main results
+## Limits first
+
+Every number below comes from a run folder; `reports/RESULTS.md` opens with a claim ledger that lists every claim, how it was tested, and what would overturn it.
+
+- **Most referrals would be false.** At the decision rule's priors (structure 0.009; the function and rhythm priors are assumptions), the design levels give about 4.9 true referrals (structural defects and arrhythmias; the function expert's sensitivity is unknown) and up to 165 false referrals per 1000 people screened (64 to 97 at the measured healthy rates), roughly 34 false referrals for each true one at the ceiling (run `wp10_allocation`; `docs/clinical_context.md`).
+- **The echo result is an upper bound.** Inputs with little or no heart anatomy also separate the classes, and among the 642x506 images the structure expert's AUROC is 0.527 [0.283, 0.761] with 0 of 11 defects caught (runs `wp5b`, `wp5c`).
+- **Calibration does not travel between devices.** Calibrated on NIFEADB, the rhythm expert flagged 52.6% of the readable healthy NInFEA recordings; calibrated on healthy NInFEA recordings of other women, the ECG-Doppler pair referred 10.0%. Local calibration held from about 10 women (15 recordings) on this one device pair (runs `wp6_fusion`, `wp13_calibration_transfer`).
+- **No external validation.** No expert has been tested on a second dataset. The analysis for a second echo dataset is fixed in advance (`docs/preregistration_external_echo.md`, `scripts/run_wp11_external_echo.py`), but Heartbeat and CARDIUM have not been requested yet.
+- **The rhythm expert is a feasibility result on 26 recordings.** With every recording brought to 500 Hz it reaches 0.810 [0.581, 0.994], and 0.714 [0.375, 0.981] on the 22 recordings from one setting; the mother's chest lead, which holds no fetal signal, still scores 0.702, so the four recordings sampled at 500 Hz (all arrhythmia) differ in another way (run `wp4e_rhythm_500hz`).
+- **The trust check is a consistency check, and simple baselines nearly match it.** Heart rate alone separates the mother's beats with AUROC 0.966 (locked share 0.984); on swapped pairs a cross-correlation of the beat trains reaches 0.977 against 0.919 (run `wp3b_trust_baselines`). Its agreement gate G3 is not met.
+- **Re-splitting the ceiling between the experts gains little.** Levels chosen on half the people and valued on the other half changed true referrals by +0.23 per 1000 [-0.26, +0.71]; the method is an established one (Rubin, Dudoit and van der Laan 2006).
+- **Nothing is measured on patients who had all three tests.** That needs paired hospital data.
+
+## Component results
 
 Held-out data unless stated. Every number comes from a run folder; the full tables are in `reports/RESULTS.md`.
 
@@ -26,27 +39,27 @@ Held-out data unless stated. Every number comes from a run folder; the full tabl
 | Rhythm expert (NIFEADB, leave one subject out) | one interval index AUROC 0.938; frozen ECGFounder 0.952; the same network with random weights up to 0.881, and the two cannot be ranked; the logistic expert 0.798, but 0.696 [0.347, 0.981] on the 22 recordings sampled at 1 kHz | G4 met |
 | Structure expert (DELTA, case-level folds) | AUROC 0.828 (0.878 on the authors' test split); inputs with little or no cardiac anatomy also reach 0.62 to 0.77, so this is an upper bound; defects were caught in 60 of 114 cases imaged at 900x752 but in 0 of 11 at 642x506 | G5 partly met |
 | Decision rule | false referrals 10.0% on 60 real healthy ECG–Doppler pairs (ceiling 15%); 7.1% to 16.9% with all three experts' healthy alarm rates combined (ceiling 20%) | G6 met (property tests) |
-| Guarantees without paired data (added after seeing the results) | false referrals 7.1% to 16.9% for any dependence between the tests; 4.5% to 57.4% once the uncertainty of each expert's rate is included; on the 60 real ECG–Doppler pairs the measured 10.0% lies inside its predicted range (8.3% to 11.7%) | G7 met at the measured rates, NOT met with uncertainty |
+| Standard bounds without paired data (added after seeing the results) | false referrals 7.1% to 16.9% for any dependence between the tests; 4.5% to 57.4% once the uncertainty of each expert's rate is included; on the 60 real ECG–Doppler pairs the measured 10.0% lies inside its predicted range (8.3% to 11.7%) | G7 met at the measured rates, NOT met with uncertainty |
 
 "Not met" and "partly met" are results. They are reported, not hidden.
 
-## What is guaranteed without paired data
+## What the standard bounds give without paired data
 
-Two properties of the decision rule hold for any dependence between the three tests, so they need no patient who had all three. Property tests check them for independent, tied and opposed experts, for alarms that never come together, for random correlations and for conformal p-values from small calibration sets (`tests/test_guarantees.py`, `tests/test_fusion.py`).
+Two properties of the any-alarm rule hold for any dependence between the three tests, so they need no patient who had all three. Both are standard, not contributions of this project: the first is the union (Bonferroni) bound, the second follows from the rule itself. Property tests check them for independent, tied and opposed experts, for alarms that never come together, for random correlations and for conformal p-values from small calibration sets (`tests/test_guarantees.py`, `tests/test_fusion.py`).
 
 1. **False referrals.** The share of healthy fetuses referred is at most the sum of the alarm levels of the experts used: 20% with three tests, 15% with the ECG and the Doppler. This holds only when every expert is calibrated on healthy cases from the setting where it is used: the rhythm expert calibrated on NIFEADB referred 51.7% of the healthy NInFEA fetuses.
-2. **Sensitivity.** A fetus whose finding makes its expert alarm is always referred, because no other result can cancel an alarm. For each finding the rule is at least as sensitive as the expert that looks for it.
+2. **No alarm is cancelled.** A fetus whose finding makes its expert alarm is always referred. This only restates each expert's own sensitivity: combining tests widens which conditions are checked and adds false referrals, but it does not make any single condition easier to detect.
 
 With each expert's alarm rate measured on its own healthy data, the false-referral rate lies between 7.1% and 16.9% for any dependence (run `wp7_dependence_bounds`). These rates rest on small samples: with their uncertainty the range widens to 4.5% to 57.4%, mostly because the rhythm expert is calibrated on 14 healthy recordings. With so few, its p-values are multiples of 1/15, so its level of 0.10 acts as 1/15 and the design's ceiling is in fact 16.7% (run `wp8_tradeoff`).
 
-The sensitivity gained by combining experts, and any rate on patients who had all three tests, are not measured.
+Any rate on patients who had all three tests is not measured.
 
 ## Read this first
 
 - **Results live in `reports/RESULTS.md`**, which `scripts/build_report.py` generates from the run folders. Nothing in it is typed by hand.
 - **The heart-defect result rests on one open, single-centre dataset (DELTA), and its controls show that part of the label can be read from images without the heart** (`reports/RESULTS.md`, section 6). Read the structure expert's AUROC as an upper bound, not as screening performance.
 - **There is no measured performance of the fused system on patients.** That needs paired data, which does not exist publicly.
-- **Sections 9 to 11 of the report were added after the results were known** (16 October 2026, in answer to a review): bounds for any dependence, alarm levels against sensitivity, subgroups, baselines, and threats to validity. They re-summarise saved outputs; nothing in them was re-fitted, and they are labelled as checks made after seeing the results.
+- **Sections 9 to 12 of the report were added after the results were known** (16 and 20 October 2026, in answer to two reviews): bounds for any dependence, alarm levels against sensitivity, subgroups, baselines, the rhythm check at 500 Hz, group-conditional echo calibration, trust-check baselines, calibration transfer, budget allocation, and threats to validity. They refit nothing but linear probes, are labelled as checks made after seeing the results, and their intervals are not corrected for the number of checks: read them as exploratory only.
 - **The code was rebuilt from 11 October 2026.** An earlier build (2–4 October) reported numbers that did not come from real computation. It is no longer part of this repository; it remains in the git history, and none of its numbers is valid.
 
 ## Rules that keep results honest
@@ -78,21 +91,23 @@ scripts/        one script per run, run_all.py, build_report.py, export_artifact
 splits/         development and test definitions, and the DELTA image index
 runs/           one folder per run (large arrays are not committed)
 reports/        RESULTS.md, tables/, figures/, manifest.json - all generated
-docs/           data cards (licence, counts, known problems), inference notes, analysis notes
+docs/           positioning (what is standard, what is new), related work, clinical context, preregistration of the external
+                echo test, theory notes, data cards, inference notes, analysis notes
 tests/          property tests of the decision rule and its guarantees, tests of the evaluation code and of the tool, tests on real recordings
 ```
 
 ## Reproduce
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt               # or requirements-lock.txt for the exact versions of the committed runs
 python scripts/download_ninfea.py             # NInFEA, every file checked against PhysioNet's SHA-256 list
 python scripts/download_models.py             # ECGFounder and FetalCLIP weights, hash checked
 # CinC 2013 set A and NIFEADB go to data/cinc2013/set-a and data/nifeadb (PhysioNet)
 # DELTA (echo): download DELTA_Dataset.zip in a browser from doi:10.6084/m9.figshare.32358771, check its MD5
 # (865d952adc0d8fe2be9df326e46cb763), extract the images and metadata.csv to data/delta/extracted/, then:
 python scripts/make_echo_index_delta.py       # splits/echo_delta_index.csv from the authors' metadata.csv
-python scripts/run_all.py                     # every run, in order, about two and a half hours on a laptop with a small GPU
+python scripts/run_all.py --list              # every step and what it needs (data, weights, GPU)
+python scripts/run_all.py                     # every run, in order, about three hours on a laptop with a small GPU
 python scripts/export_artifacts.py            # artifacts/ for the one-patient tool, each refit checked against its run
 python scripts/build_report.py                # reports/RESULTS.md, tables and figures
 python -m sfr.audit                           # provenance and labelling checks
@@ -142,12 +157,14 @@ See `docs/data_cards/`. CinC 2013, NInFEA and NIFEADB: Open Data Commons Attribu
 
 ## Paper
 
-The paper (draft 2, 13 October 2026) was written from these runs. It is kept outside this public repository until it is submitted.
+The paper (final draft, revised 20 October 2026) was written from these runs. It is kept outside this public repository until it is submitted.
 
 ## Not done
 
-- The structure expert on a second, independent echo dataset. Heartbeat and CARDIUM are released only through their authors' request forms and were not requested; the DELTA sweep videos are not used.
+- The structure expert on a second, independent echo dataset. Heartbeat and CARDIUM are released only through their authors' request forms and were not requested; the analysis is fixed in advance and its script is ready. The DELTA sweep videos are not used.
 - Other ECG foundation models (HuBERT-ECG, ECG-FM); only ECGFounder was run.
 - A labelled semi-synthetic test of the Doppler measures, and a comparison with published Doppler reference ranges.
 - End-to-end clinical validation: any test of the fused decision, or of the one-patient research tool, on patients who had all three tests. It needs paired hospital data (Phase II).
 - A cited prevalence for the priors of function and rhythm findings; they are assumptions (`docs/analysis_notes.md` lists where a cited value would go).
+- A licence for the code and a citation file (CITATION.cff): both are decisions for the team (licence, authorship and order).
+- Review by a clinician; the questions are in `docs/clinical_context.md`.

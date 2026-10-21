@@ -1,6 +1,25 @@
 {
   "outputs": [
     {
+      "file": "tables/t00_claim_ledger.csv",
+      "runs": [
+        "wp10_allocation",
+        "wp13_calibration_transfer",
+        "wp1_cinc2013",
+        "wp2_doppler_cycles",
+        "wp2b_function_reference",
+        "wp3_trust_check",
+        "wp3b_trust_baselines",
+        "wp4b_rhythm_intervals",
+        "wp4e_rhythm_500hz",
+        "wp5_structure_delta",
+        "wp5c_structure_by_size",
+        "wp6_fusion",
+        "wp7_dependence_bounds",
+        "wp8_tradeoff"
+      ]
+    },
+    {
       "file": "tables/t0_gates.csv",
       "runs": [
         "wp1_cinc2013",
@@ -273,18 +292,90 @@
       ]
     },
     {
+      "file": "tables/t12a_rhythm_500hz.csv",
+      "runs": [
+        "wp4e_rhythm_500hz"
+      ]
+    },
+    {
+      "file": "tables/t12b_structure_by_size_group_conditional.csv",
+      "runs": [
+        "wp5c_structure_by_size"
+      ]
+    },
+    {
+      "file": "tables/t12c_trust_baselines.csv",
+      "runs": [
+        "wp3b_trust_baselines"
+      ]
+    },
+    {
+      "file": "tables/t12d_calibration_transfer.csv",
+      "runs": [
+        "wp13_calibration_transfer"
+      ]
+    },
+    {
+      "file": "figures/f10_calibration_transfer.png",
+      "runs": [
+        "wp13_calibration_transfer"
+      ]
+    },
+    {
+      "file": "tables/t12e_allocation_at_design_budget.csv",
+      "runs": [
+        "wp10_allocation"
+      ]
+    },
+    {
+      "file": "tables/t12f_allocation_split_half.csv",
+      "runs": [
+        "wp10_allocation"
+      ]
+    },
+    {
+      "file": "tables/t12g_size_check.csv",
+      "runs": [
+        "wp10_allocation"
+      ]
+    },
+    {
+      "file": "tables/t12h_net_benefit.csv",
+      "runs": [
+        "wp10_allocation"
+      ]
+    },
+    {
+      "file": "tables/t12i_with_without_rhythm.csv",
+      "runs": [
+        "wp10_allocation"
+      ]
+    },
+    {
+      "file": "tables/t12j_conformal_validity.csv",
+      "runs": [
+        "wp12_theory_simulation"
+      ]
+    },
+    {
       "file": "RESULTS.md",
       "runs": [
+        "wp10_allocation",
+        "wp12_theory_simulation",
+        "wp13_calibration_transfer",
         "wp1_cinc2013",
         "wp2_doppler_cycles",
         "wp2b_function_reference",
         "wp3_trust_check",
         "wp3_trust_check_v1_prespecified",
+        "wp3b_trust_baselines",
         "wp4b_rhythm_intervals",
         "wp4c_foundation",
         "wp4d_cnn",
+        "wp4e_rhythm_500hz",
         "wp5_structure_delta",
         "wp5b_structure_controls_delta",
+        "wp5c_structure_by_size",
         "wp6_fusion",
         "wp6b_fusion_structure",
         "wp7_dependence_bounds",

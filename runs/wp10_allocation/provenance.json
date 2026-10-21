@@ -1,0 +1,103 @@
+{
+  "run": "wp10_allocation",
+  "description": "Budgeted split of the false-referral ceiling between the experts, compared with the design levels and an equal split; Holm and Simes; net benefit per 1000. A check made after seeing the results.",
+  "created_utc": "2026-10-20T05:51:41+00:00",
+  "script": "scripts/run_wp10_allocation.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "a60942c8542fc21ce06ab559436dee307a169693",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "made_after_seeing_results": true,
+    "budgets": [
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3
+    ],
+    "budget_is": "sum of effective alarm levels",
+    "design_shares": {
+      "structure": 0.25,
+      "function": 0.25,
+      "rhythm": 0.5
+    },
+    "function_level": "1/4 of the budget, never optimised (no abnormal cases)",
+    "rhythm_levels": "multiples of 1/15 (14 healthy calibration recordings)",
+    "structure_grid_step": 0.0025,
+    "priors": {
+      "structure": 0.009,
+      "function": 0.002,
+      "rhythm": 0.001
+    },
+    "rhythm_prevalence_factors": [
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0
+    ],
+    "split_half": {
+      "splits": 200,
+      "unit": "person with the finding",
+      "seed": 0
+    },
+    "harm_ratios": [
+      0.005,
+      0.01,
+      0.02,
+      0.05,
+      0.1
+    ],
+    "size_check": {
+      "n": 200000,
+      "total": 0.2,
+      "dependence": {
+        "independent": 0.0,
+        "positive (rho +0.5)": 0.5,
+        "negative (rho -0.45)": -0.45
+      }
+    },
+    "tie_break": "same value: smaller effective ceiling first"
+  },
+  "data": {
+    "structure": {
+      "n_files": 1,
+      "total_bytes": 69518,
+      "manifest_sha256": "355ce812fbca1372e3e3819a69912049a2abb528d1d6a239327e9337daaecaaf"
+    },
+    "function": {
+      "n_files": 1,
+      "total_bytes": 12523,
+      "manifest_sha256": "681b8ce1a685bbf8b2045a7e4ddad71309ded39bd9480b45d1170a196ba969fc"
+    },
+    "rhythm": {
+      "n_files": 2,
+      "total_bytes": 10449,
+      "manifest_sha256": "a96e2f9bb9ee96197d30d796d2784c9d479ec6eda1559a93d9c975b3f54e9810"
+    },
+    "wp8_curves": {
+      "n_files": 1,
+      "total_bytes": 6384,
+      "manifest_sha256": "b194531d504edf7eced27f97b019e59887f82ddcb35a2c04b156b4ec5c083413"
+    }
+  },
+  "n_real": 838,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "scripts/run_wp10_allocation.py"
+  ]
+}
