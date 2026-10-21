@@ -1,0 +1,4 @@
+Experts,Nominal ceiling,Effective ceiling,Measured healthy range (any dependence),Caught,True referrals per 1000,False referrals per 1000 (ceiling)
+"three experts, design levels",0.200,0.167,"[6.5%, 9.8%]","structure 46.6%, rhythm 66.7%",4.86,165
+structure and function only,0.100,0.100,"[6.5%, 9.8%]","structure 46.6%, rhythm 0.0%",4.20,99
+"structure and function, rhythm's budget given to structure",0.167,0.167,"[11.6%, 15.0%]","structure 58.6%, rhythm 0.0%",5.28,165

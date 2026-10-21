@@ -26,6 +26,25 @@ re-summarises saved per-case outputs and fits nothing new. The numbers are in
 | `wp8_tradeoff` | Sensitivity and healthy alarm rate of each expert at a grid of alarm levels, and the false-referral ceiling of every combination of levels (figure f9). Shows that the rhythm expert, with 14 healthy calibration recordings, cannot alarm below 1/15 and that its level 0.10 acts as 1/15 |
 | `wp9_checks_after_results` | Rhythm AUROC on the 22 recordings sampled at 1 kHz, with intervals; paired AUROC differences of rhythm scores (ECGFounder against the random-weight network, the expert against the best single index and against heart rate alone); robust ECG-Doppler agreement (percentiles of the beat-to-beat difference); structure alarms by image size; Doppler alarms by gestational age and the correlation of the Doppler score with gestational age; the identifiers of missed structural defects |
 
+## Added on 20 October 2026
+
+A second review asked whether the methods are new, whether the experts read what they claim to
+read, and what the false referrals mean for a clinic. Every run below is a check made after seeing
+the results; their numbers are in `reports/RESULTS.md`, section 12, and in the claim ledger at the
+top of that file. `docs/positioning.md` says what is standard and what is not.
+
+| Run | What it adds |
+|---|---|
+| `wp4e_rhythm_500hz` | The rhythm expert and the ECGFounder probes with every NIFEADB recording brought to 500 Hz before extraction; intervals on the 22 recordings from one setting; paired differences against the original runs |
+| `wp5c_structure_by_size` | The structure expert by image size with alarms calibrated inside each size group (group-conditional conformal), from the saved embeddings; AUROC per group |
+| `wp3b_trust_baselines` | Heart-rate-only and beat-train cross-correlation baselines for the ECG-Doppler trust check, with paired differences by woman |
+| `wp13_calibration_transfer` | Rhythm false alarms on healthy NInFEA recordings against the number of local calibration women (local and pooled calibration), and the distance between the two datasets' healthy scores |
+| `wp10_allocation` | Splitting the false-referral ceiling between the experts (levels chosen on half the people, valued on the other half), Holm and Simes, net benefit per 1000 over a grid of harm ratios, and the headline with and without the rhythm expert |
+| `wp12_theory_simulation` | Simulation of the standard results the rule relies on (`docs/theory_notes.md`) |
+
+Prepared but not run: `scripts/run_wp11_external_echo.py`, the frozen structure expert on a
+second echo dataset, as fixed in `docs/preregistration_external_echo.md` (no data yet).
+
 The threats to validity are generated with their numbers in `reports/RESULTS.md`, section 11.
 
 ## What could not be done, and why

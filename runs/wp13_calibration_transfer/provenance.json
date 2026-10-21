@@ -1,0 +1,68 @@
+{
+  "run": "wp13_calibration_transfer",
+  "description": "Rhythm false-alarm rate on healthy NInFEA recordings against the number of local calibration recordings (transported, local and pooled calibration). A check made after seeing the results.",
+  "created_utc": "2026-10-20T05:25:28+00:00",
+  "script": "scripts/run_wp13_calibration_transfer.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "be7cc95c943433e7c04ded41b3b12808ca493a7c",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "made_after_seeing_results": true,
+    "requested_by": "review of 20 Oct 2026",
+    "level": 0.1,
+    "tolerance": 0.05,
+    "holds": "can alarm in every draw and mean realised rate <= level + tolerance",
+    "criterion_revised_after_trial_run": "first criterion: realised rate <= level + tolerance in 90% of draws",
+    "minimum_calibration_recordings_to_alarm": 9,
+    "n_women_grid": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      8,
+      10,
+      13,
+      16,
+      20,
+      25,
+      30
+    ],
+    "draws": 500,
+    "bootstrap": 2000,
+    "seed": 0,
+    "device_pair": "NIFEADB (fitting, calibration) to NInFEA (use)",
+    "unit_of_sampling": "woman"
+  },
+  "data": {
+    "cohort": {
+      "n_files": 1,
+      "total_bytes": 5121,
+      "manifest_sha256": "f7d4634575137e0fb9e7e930afade755d626c5461c05df549960fe193c630921"
+    },
+    "nifeadb_scores": {
+      "n_files": 1,
+      "total_bytes": 4328,
+      "manifest_sha256": "740229f8399ea06521b0c4e4cf04b15f62fee10d2cbe6fc37fa10544a52a4dbf"
+    }
+  },
+  "n_real": 71,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "scripts/run_wp13_calibration_transfer.py"
+  ]
+}

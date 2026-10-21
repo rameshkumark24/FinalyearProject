@@ -1,0 +1,5 @@
+Allocation,Levels set (structure / function / rhythm),Levels acting,Effective ceiling,Structural defects caught,Arrhythmias caught,True referrals per 1000 (assumed prevalences),False referrals per 1000 (ceiling),"False referrals per 1000 (measured, any dependence)"
+design shares,0.050 / 0.050 / 0.100,0.050 / 0.050 / 0.067,0.167,46.6%,66.7%,4.86,165,64 to 97
+equal split,0.067 / 0.067 / 0.067,0.067 / 0.067 / 0.067,0.200,49.6%,66.7%,5.13,198,70 to 120
+optimised,0.136 / 0.050 / 0.000,0.136 / 0.050 / 0.000,0.186,63.2%,0.0%,5.68,184,142 to 175
+"optimised, same ceiling as design shares",0.112 / 0.050 / 0.000,0.112 / 0.050 / 0.000,0.162,58.6%,0.0%,5.28,160,115 to 148

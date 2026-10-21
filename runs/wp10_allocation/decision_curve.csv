@@ -1,0 +1,26 @@
+harm_ratio,strategy,true_referrals_per_1000,false_referrals_per_1000_ceiling,net_benefit_per_1000_at_ceiling,net_benefit_per_1000_at_measured_low
+0.005,"design (0.05, 0.05, 0.10)",4.862155,164.666667,4.038822,4.542931
+0.005,"optimised, same ceiling as design shares",5.278195,160.056,4.477915,4.703591
+0.005,without the rhythm expert,4.195489,98.8,3.701489,3.876264
+0.005,refer everyone,10.0,988.0,5.06,5.06
+0.005,refer no one,0.0,0.0,0.0,0.0
+0.01,"design (0.05, 0.05, 0.10)",4.862155,164.666667,3.215489,4.223706
+0.01,"optimised, same ceiling as design shares",5.278195,160.056,3.677635,4.128987
+0.01,without the rhythm expert,4.195489,98.8,3.207489,3.55704
+0.01,refer everyone,10.0,988.0,0.12,0.12
+0.01,refer no one,0.0,0.0,0.0,0.0
+0.02,"design (0.05, 0.05, 0.10)",4.862155,164.666667,1.568822,3.585257
+0.02,"optimised, same ceiling as design shares",5.278195,160.056,2.077075,2.979779
+0.02,without the rhythm expert,4.195489,98.8,2.219489,2.91859
+0.02,refer everyone,10.0,988.0,-9.76,-9.76
+0.02,refer no one,0.0,0.0,0.0,0.0
+0.05,"design (0.05, 0.05, 0.10)",4.862155,164.666667,-3.371178,1.66991
+0.05,"optimised, same ceiling as design shares",5.278195,160.056,-2.724605,-0.467847
+0.05,without the rhythm expert,4.195489,98.8,-0.744511,1.003243
+0.05,refer everyone,10.0,988.0,-39.4,-39.4
+0.05,refer no one,0.0,0.0,0.0,0.0
+0.1,"design (0.05, 0.05, 0.10)",4.862155,164.666667,-11.604511,-1.522336
+0.1,"optimised, same ceiling as design shares",5.278195,160.056,-10.727405,-6.213889
+0.1,without the rhythm expert,4.195489,98.8,-5.684511,-2.189002
+0.1,refer everyone,10.0,988.0,-88.8,-88.8
+0.1,refer no one,0.0,0.0,0.0,0.0

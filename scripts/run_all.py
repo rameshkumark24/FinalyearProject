@@ -2,6 +2,7 @@
 
     python scripts/run_all.py            # everything (about two hours on the development laptop)
     python scripts/run_all.py wp3 wp6    # only the named steps
+    python scripts/run_all.py --list     # the steps and what each needs (data, weights, GPU)
 
 Each step writes its run folder under ``runs/`` and a log under ``logs/``. The chain stops
 at the first step that fails to run. A gate that is not met does not stop the chain: it is a
@@ -34,6 +35,14 @@ STEPS = [
     ("wp7", "run_wp7_dependence_bounds.py", "wp7_dependence_bounds", "gate_G7"),
     ("wp8", "run_wp8_tradeoff.py", "wp8_tradeoff", None),
     ("wp9", "run_wp9_checks_after_results.py", "wp9_checks_after_results", None),
+    # Checks requested in the review of 20 October 2026, also made after seeing the results.
+    ("wp4e", "run_wp4e_rhythm_500hz.py", "wp4e_rhythm_500hz", None),
+    ("wp5c", "run_wp5c_structure_by_size.py", "wp5c_structure_by_size", None),
+    ("wp3b", "run_wp3b_trust_baselines.py", "wp3b_trust_baselines", None),
+    ("wp13", "run_wp13_calibration_transfer.py", "wp13_calibration_transfer", None),
+    ("wp12", "run_wp12_theory_simulation.py", "wp12_theory_simulation", None),
+    ("wp10", "run_wp10_allocation.py", "wp10_allocation", None),
+    # Not a step: scripts/run_wp11_external_echo.py needs a second echo dataset (docs/preregistration_external_echo.md).
     # Artifacts of the one-patient research tool, each refit checked against its run.
     ("tool", "export_artifacts.py", "tool_artifacts", None),
 ]
@@ -51,10 +60,24 @@ NEEDS = {"wp5s": DELTA_ROOT / "DELTA_Dataset" / "metadata.csv",
          "wp6b": ROOT / "runs" / "wp5_structure_delta" / "metrics.json",
          "wp7": ROOT / "runs" / "wp6b_fusion_structure" / "metrics.json",
          "wp8": ROOT / "runs" / "wp5_structure_delta" / "metrics.json",
-         "wp9": ROOT / "runs" / "wp5_structure_delta" / "metrics.json"}
+         "wp9": ROOT / "runs" / "wp5_structure_delta" / "metrics.json",
+         "wp5c": ROOT / "runs" / "wp5_structure_delta" / "embeddings.npz",
+         "wp10": ROOT / "runs" / "wp5_structure_delta" / "metrics.json"}
+# What each step needs besides the CPU and the public data under data/ (python scripts/run_all.py --list).
+RESOURCES = {"wp4c": "ECGFounder weights; a GPU is advised", "wp4d": "a GPU is advised",
+             "wp5s": "the DELTA dataset and the FetalCLIP weights; a GPU is advised (about half an hour)",
+             "wp4e": "ECGFounder weights; a GPU is advised (about 17 minutes on the development laptop)",
+             "wp5b": "run wp5s", "wp6b": "run wp5s", "wp7": "run wp6b", "wp8": "run wp5s", "wp9": "run wp5s",
+             "wp5c": "the embeddings saved by run wp5s", "wp10": "run wp5s; uses run wp4e if present",
+             "tool": "runs wp2b, wp4b and wp5s; the FetalCLIP weights"}
 
 
 def main() -> int:
+    if "--list" in sys.argv[1:]:
+        for key, script, run, _ in STEPS:
+            print(f"{key:5s} {script:36s} {RESOURCES.get(key, 'CPU and the public data')}")
+        print("not a step: run_wp11_external_echo.py needs a second echo dataset (not yet obtained)")
+        return 0
     wanted = set(sys.argv[1:])
     logs = ROOT / "logs"
     logs.mkdir(parents=True, exist_ok=True)

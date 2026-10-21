@@ -1,0 +1,239 @@
+{
+  "made_after_seeing_results": true,
+  "requested_by": "review of 20 Oct 2026",
+  "design_levels": {
+    "structure": 0.05,
+    "function": 0.05,
+    "rhythm": 0.1
+  },
+  "priors": {
+    "structure": 0.009,
+    "function": 0.002,
+    "rhythm": 0.001
+  },
+  "priors_note": "structure 0.009 is the decision rule's prior; function 0.002 and rhythm 0.001 are assumptions without a cited source [unverified - needs a source]; the rhythm prevalence is varied over a grid for that reason",
+  "at_design_budget_base_prevalence": {
+    "design shares": {
+      "rhythm_source": "wp4b (the rhythm expert as used)",
+      "budget": 0.2,
+      "rhythm_prevalence_factor": 1.0,
+      "allocation": "design shares",
+      "structure_level": 0.05,
+      "function_level": 0.05,
+      "rhythm_level": 0.1,
+      "structure_effective": 0.05,
+      "function_effective": 0.05,
+      "rhythm_effective": 0.06666666666666667,
+      "effective_ceiling": 0.16666666666666669,
+      "unspent": 0.033333333333333326,
+      "structure_sensitivity": 0.46616541353383456,
+      "rhythm_sensitivity": 0.6666666666666666,
+      "true_referrals_per_1000": 4.862155388471178,
+      "false_referrals_per_1000_ceiling": 164.66666666666669,
+      "false_referrals_per_1000_measured_low": 63.84491114701131,
+      "false_referrals_per_1000_measured_high": 96.77824448034464
+    },
+    "equal split": {
+      "rhythm_source": "wp4b (the rhythm expert as used)",
+      "budget": 0.2,
+      "rhythm_prevalence_factor": 1.0,
+      "allocation": "equal split",
+      "structure_level": 0.06666666666666667,
+      "function_level": 0.06666666666666667,
+      "rhythm_level": 0.06666666666666667,
+      "structure_effective": 0.06666666666666667,
+      "function_effective": 0.06666666666666667,
+      "rhythm_effective": 0.06666666666666667,
+      "effective_ceiling": 0.2,
+      "unspent": 0.0,
+      "structure_sensitivity": 0.49624060150375937,
+      "rhythm_sensitivity": 0.6666666666666666,
+      "true_referrals_per_1000": 5.132832080200501,
+      "false_referrals_per_1000_ceiling": 197.6,
+      "false_referrals_per_1000_measured_low": 70.22940226171244,
+      "false_referrals_per_1000_measured_high": 119.62940226171246
+    },
+    "optimised": {
+      "rhythm_source": "wp4b (the rhythm expert as used)",
+      "budget": 0.2,
+      "rhythm_prevalence_factor": 1.0,
+      "allocation": "optimised",
+      "structure_level": 0.136,
+      "function_level": 0.05,
+      "rhythm_level": 0.0,
+      "structure_effective": 0.136,
+      "function_effective": 0.05,
+      "rhythm_effective": 0.0,
+      "effective_ceiling": 0.186,
+      "unspent": 0.0,
+      "structure_sensitivity": 0.631578947368421,
+      "rhythm_sensitivity": 0.0,
+      "true_referrals_per_1000": 5.684210526315789,
+      "false_referrals_per_1000_ceiling": 183.768,
+      "false_referrals_per_1000_measured_low": 142.05492730210014,
+      "false_referrals_per_1000_measured_high": 174.98826063543348
+    },
+    "optimised, same ceiling as design shares": {
+      "rhythm_source": "wp4b (the rhythm expert as used)",
+      "budget": 0.2,
+      "rhythm_prevalence_factor": 1.0,
+      "allocation": "optimised, same ceiling as design shares",
+      "structure_level": 0.112,
+      "function_level": 0.05,
+      "rhythm_level": 0.0,
+      "structure_effective": 0.112,
+      "function_effective": 0.05,
+      "rhythm_effective": 0.0,
+      "effective_ceiling": 0.162,
+      "unspent": 0.0,
+      "structure_sensitivity": 0.5864661654135338,
+      "rhythm_sensitivity": 0.0,
+      "true_referrals_per_1000": 5.278195488721804,
+      "false_referrals_per_1000_ceiling": 160.056,
+      "false_referrals_per_1000_measured_low": 114.92084006462036,
+      "false_referrals_per_1000_measured_high": 147.8541733979537
+    }
+  },
+  "selection_on_one_half_valued_on_the_other_at_design_budget": {
+    "budget": 0.2,
+    "rhythm_prevalence_factor": 1.0,
+    "optimised - design shares mean per 1000": 0.5963184079601987,
+    "optimised (same ceiling) - design shares mean per 1000": 0.232562189054726,
+    "optimised - equal split mean per 1000": 0.33975124378109434,
+    "optimised - design shares interval low": 0.07276119402985137,
+    "optimised (same ceiling) - design shares interval low": -0.26368159203980085,
+    "optimised - equal split interval low": -0.1625000000000008,
+    "optimised - design shares interval high": 1.1119402985074631,
+    "optimised (same ceiling) - design shares interval high": 0.7089552238805962,
+    "optimised - equal split interval high": 0.7794154228855722,
+    "optimised - design shares share above 0": 0.975,
+    "optimised (same ceiling) - design shares share above 0": 0.78,
+    "optimised - equal split share above 0": 0.9,
+    "share choosing another rhythm level at the same ceiling": 0.92
+  },
+  "largest_mean_gain_same_ceiling_per_1000_over_grid": 1.0922014925373136,
+  "simes_illustration_assuming_independent_healthy_other_tests": {
+    "structure": {
+      "own_test_only": 0.49624060150375937,
+      "bonferroni_any_alarm": 0.5618552631578948,
+      "simes": 0.5795582706766916,
+      "n": 133,
+      "note": "the gap between own test and any-alarm is chance alarms of the two other tests, not detection"
+    },
+    "rhythm": {
+      "own_test_only": 0.6666666666666666,
+      "bonferroni_any_alarm": 0.7100833333333334,
+      "simes": 0.7215916666666665,
+      "n": 12,
+      "note": "the gap between own test and any-alarm is chance alarms of the two other tests, not detection"
+    }
+  },
+  "size_check": [
+    {
+      "dependence": "independent",
+      "tests": 3,
+      "total": 0.2,
+      "n_simulated": 200000,
+      "bonferroni": 0.186795,
+      "holm": 0.1875,
+      "holm_equals_bonferroni_on_first_20000": true,
+      "simes": 0.20005,
+      "simes_guaranteed": "yes (independence)"
+    },
+    {
+      "dependence": "positive (rho +0.5)",
+      "tests": 3,
+      "total": 0.2,
+      "n_simulated": 200000,
+      "bonferroni": 0.152155,
+      "holm": 0.1558,
+      "holm_equals_bonferroni_on_first_20000": true,
+      "simes": 0.173905,
+      "simes_guaranteed": "yes (positive dependence)"
+    },
+    {
+      "dependence": "negative (rho -0.45)",
+      "tests": 3,
+      "total": 0.2,
+      "n_simulated": 200000,
+      "bonferroni": 0.199115,
+      "holm": 0.1985,
+      "holm_equals_bonferroni_on_first_20000": true,
+      "simes": 0.202885,
+      "simes_guaranteed": "no"
+    },
+    {
+      "dependence": "worst case for Simes (two tests)",
+      "tests": 2,
+      "total": 0.2,
+      "n_simulated": 200000,
+      "bonferroni": 0.200175,
+      "holm": 0.1999,
+      "holm_equals_bonferroni_on_first_20000": true,
+      "simes": 0.300195,
+      "simes_guaranteed": "no"
+    }
+  ],
+  "headline_with_and_without_rhythm": {
+    "three experts, design levels": {
+      "levels": {
+        "structure": 0.05,
+        "function": 0.05,
+        "rhythm": 0.1
+      },
+      "nominal_ceiling": 0.2,
+      "effective_ceiling": 0.16666666666666669,
+      "measured_healthy_range_any_dependence": [
+        0.06462035541195477,
+        0.09795368874528809
+      ],
+      "sensitivity": {
+        "structure": 0.46616541353383456,
+        "rhythm": 0.6666666666666666
+      },
+      "true_referrals_per_1000": 4.862155388471178,
+      "false_referrals_per_1000_ceiling": 164.66666666666669
+    },
+    "structure and function only": {
+      "levels": {
+        "structure": 0.05,
+        "function": 0.05,
+        "rhythm": 0.0
+      },
+      "nominal_ceiling": 0.1,
+      "effective_ceiling": 0.1,
+      "measured_healthy_range_any_dependence": [
+        0.06462035541195477,
+        0.09795368874528809
+      ],
+      "sensitivity": {
+        "structure": 0.46616541353383456,
+        "rhythm": 0.0
+      },
+      "true_referrals_per_1000": 4.195488721804511,
+      "false_referrals_per_1000_ceiling": 98.8
+    },
+    "structure and function, rhythm's budget given to structure": {
+      "levels": {
+        "structure": 0.11666666666666667,
+        "function": 0.05,
+        "rhythm": 0.0
+      },
+      "nominal_ceiling": 0.16666666666666669,
+      "effective_ceiling": 0.16666666666666669,
+      "measured_healthy_range_any_dependence": [
+        0.11631663974151858,
+        0.14964997307485192
+      ],
+      "sensitivity": {
+        "structure": 0.5864661654135338,
+        "rhythm": 0.0
+      },
+      "true_referrals_per_1000": 5.278195488721804,
+      "false_referrals_per_1000_ceiling": 164.66666666666669
+    }
+  },
+  "rhythm_500hz_variant_included": true,
+  "function_note": "the function level is never optimised and its people are never counted: it has no abnormal cases",
+  "reading": "The union bound is standard. Splitting a fixed ceiling differently changes which condition is detected more often; it never improves detection of any one condition beyond what that expert gives at its own level. Gains are reported per 1000 people screened at assumed prevalences; with these sample sizes they are small and uncertain."
+}

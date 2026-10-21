@@ -1,0 +1,25 @@
+women,mismatch,row,auroc,ci_low,ci_high,difference,can_be_ranked
+development,mother's beats,locked share,0.99811,0.975069,1.0,,
+development,mother's beats,heart rate only,0.996219,0.97,1.0,,
+development,mother's beats,locked minus heart rate,,0.0,0.01,0.00189,False
+development,another woman's fetal ECG,locked share,0.96013,0.913581,0.992819,,
+development,another woman's fetal ECG,heart rate only,0.93785,0.857234,0.991704,,
+development,another woman's fetal ECG,cross correlation,0.989987,0.966743,1.0,,
+development,another woman's fetal ECG,locked minus heart rate,,-0.005058,0.064329,0.02228,False
+development,another woman's fetal ECG,locked minus cross correlation,,-0.056633,-0.006892,-0.029857,True
+test,mother's beats,locked share,0.984295,0.945502,1.0,,
+test,mother's beats,heart rate only,0.966399,0.888408,1.0,,
+test,mother's beats,locked minus heart rate,,0.0,0.05924,0.017896,False
+test,another woman's fetal ECG,locked share,0.919454,0.846682,0.974115,,
+test,another woman's fetal ECG,heart rate only,0.897983,0.819122,0.962422,,
+test,another woman's fetal ECG,cross correlation,0.977208,0.943583,0.998124,,
+test,another woman's fetal ECG,locked minus heart rate,,0.00557,0.044957,0.021471,True
+test,another woman's fetal ECG,locked minus cross correlation,,-0.1063,-0.022,-0.057754,True
+all,mother's beats,locked share,0.989583,0.963991,1.0,,
+all,mother's beats,heart rate only,0.977778,0.926019,1.0,,
+all,mother's beats,locked minus heart rate,,0.0,0.038948,0.011806,False
+all,another woman's fetal ECG,locked share,0.932684,0.887289,0.970506,,
+all,another woman's fetal ECG,heart rate only,0.909399,0.852364,0.956484,,
+all,another woman's fetal ECG,cross correlation,0.981463,0.962049,0.99606,,
+all,another woman's fetal ECG,locked minus heart rate,,0.008155,0.042474,0.023285,True
+all,another woman's fetal ECG,locked minus cross correlation,,-0.082329,-0.023417,-0.048779,True

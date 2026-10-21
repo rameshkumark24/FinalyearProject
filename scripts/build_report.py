@@ -658,7 +658,7 @@ def section_guarantees() -> str:
     floor_rows = [[f["finding"], f["expert"], f"{f['caught']}/{f['n']}" if f["n"] != "" else "-",
                    f"{pct(f['sensitivity_floor'])} {pct_interval([f['ci_low'], f['ci_high']])}" if f["n"] != "" else "cannot be measured",
                    f["dataset"], f["note"]] for f in metrics["sensitivity_floor"]]
-    floor_text = table("t9c_sensitivity_floor", ["Finding", "Expert", "Caught", "Sensitivity of the rule is at least [95% CI]", "Dataset", "Note"],
+    floor_text = table("t9c_sensitivity_floor", ["Finding", "Expert", "Caught", "Detected by its own expert at its own level [95% CI]", "Dataset", "Note"],
                        floor_rows, [BOUNDS_RUN])
     grid = read_csv(BOUNDS_RUN, "precision_grid.csv")
     findings = list(dict.fromkeys(r["finding"] for r in grid))
@@ -675,10 +675,12 @@ def section_guarantees() -> str:
                            precision_rows, [BOUNDS_RUN])
     priors = metrics["priors"]
     notes = [
-        "Added after seeing the results (runs " + BOUNDS_RUN + " and " + TRADEOFF_RUN + "); nothing is fitted. Two guarantees of the decision rule hold "
-        "without any paired patient, for any dependence between the tests, and are checked by property tests (tests/test_guarantees.py, tests/test_fusion.py): "
-        "(1) the share of healthy fetuses referred is at most the sum of the alarm levels of the experts used; (2) a fetus whose finding makes its expert "
-        "alarm is always referred, so the rule detects each finding at least as often as the expert that looks for it.",
+        "Added after seeing the results (runs " + BOUNDS_RUN + " and " + TRADEOFF_RUN + "); nothing is fitted. Two properties of the any-alarm rule hold "
+        "without any paired patient, for any dependence between the tests, and property tests check that the code has them (tests/test_guarantees.py, "
+        "tests/test_fusion.py). Both are standard, not contributions of this project (docs/positioning.md): (1) the share of healthy fetuses referred is at most "
+        "the sum of the alarm levels of the experts used - the union (Bonferroni) bound; (2) a fetus whose finding makes its expert alarm is always referred. "
+        "Property (2) only restates each expert's own sensitivity: combining tests widens which conditions are checked and adds false referrals, but it never "
+        "makes any one condition easier to detect. The range between the largest single rate and the sum (the Frechet bounds) is equally standard.",
         f"Gate G7, defined {gate['defined']}: {gate['rule']}. At the measured rates **{state(gate['passed_at_measured_rates'])}**, range "
         f"{pct_interval(gate['range_at_measured_rates'])} against a ceiling of {pct(gate['ceiling'], 0)}; with uncertainty **{state(gate['passed_with_uncertainty'])}**, "
         f"range {pct_interval(gate['range_with_uncertainty'])} ({gate['uncertainty']}). Upper limit of each rate: "
@@ -707,7 +709,8 @@ def section_guarantees() -> str:
     axis.set_title("False referrals of three experts under different dependence")
     axis.legend(fontsize=7)
     picture = save(figure, "f8_dependence_dial", [BOUNDS_RUN])
-    parts = ["## 9. What the fused system guarantees without paired data", *notes, range_text, calibration_text, floor_text, precision_text, picture]
+    parts = ["## 9. What the any-alarm rule guarantees without paired data (standard bounds)", *notes, range_text, calibration_text, floor_text,
+             precision_text, picture]
 
     if (RUNS / TRADEOFF_RUN / "metrics.json").exists():
         trade, provenance = load_run(TRADEOFF_RUN)
@@ -840,8 +843,330 @@ def section_threats() -> str:
         f"9. **Assumed priors.** {bounds['priors']['status'].capitalize()}; precision is shown over a grid of prevalences (section 9).",
         f"10. **Discrete p-values.** With few calibration cases an alarm level acts as the next lower attainable p-value; for the rhythm expert the level "
         f"{trade['design_levels']['rhythm']} acts as {num(trade['rhythm_smallest_level']['effective_level_of_the_design'], 3)}.",
+        "11. **No external validation.** No expert has been tested on a dataset other than the one it was built on; the script for a second echo "
+        "dataset is ready (scripts/run_wp11_external_echo.py, docs/preregistration_external_echo.md) but has no data.",
+        "12. **Standard methods.** The union bound, the Frechet range, conformal p-values, group-conditional calibration, Holm and Simes, and choosing "
+        "levels to maximise true positives under a false-positive cap are all established; docs/positioning.md and docs/related_work.md list what is "
+        "and is not new.",
     ]
+    if have(RATE_RUN):
+        rate = load_run(RATE_RUN)[0]
+        c = rate["comparison_with_original"]["logistic_rhythm"]
+        items.append(f"13. **Recording setting in NIFEADB.** With every recording brought to 500 Hz the rhythm expert reaches {num(c['auroc_500hz'])} "
+                     f"{interval(c['auroc_500hz_ci'])}, so the sampling rate itself was not its cue; but the mother's chest lead, which holds no fetal signal, "
+                     f"still scores {num(rate['recording_level']['ecgfounder__maternal_chest']['auroc'])}: the four recordings sampled at 500 Hz, all "
+                     "arrhythmia, differ in some other way that resampling cannot remove (section 12.1).")
+    if have(TRUST_BASELINE_RUN):
+        hr = load_run(TRUST_BASELINE_RUN)[0]["by_women"]["test"]["maternal_substitution"]["heart_rate_only"]
+        items.append(f"14. **Simple baselines for the trust check.** Heart rate alone separates the mother's beats with AUROC {num(hr['auroc'])} "
+                     f"{interval(hr['ci'])}, and a cross-correlation of the beat trains beats the locked share on swapped pairs (section 12.3).")
     return "\n\n".join(["## 11. Threats to validity", "\n".join(items)])
+
+
+RATE_RUN, SIZE_RUN, TRUST_BASELINE_RUN = "wp4e_rhythm_500hz", "wp5c_structure_by_size", "wp3b_trust_baselines"
+ALLOCATION_RUN, THEORY_RUN, TRANSFER_RUN = "wp10_allocation", "wp12_theory_simulation", "wp13_calibration_transfer"
+CONFIRMATORY = "confirmatory: split, model and level fixed before the held-out data"
+EXPLORATORY = "exploratory: made after seeing the results; interval not corrected for the number of checks"
+
+
+def have(*runs: str) -> bool:
+    return all((RUNS / run / "metrics.json").exists() for run in runs)
+
+
+def claim_ledger() -> str:
+    """One row per claim: how it was tested, on how many cases, with what result, and what would overturn it."""
+    rows, runs = [], []
+
+    def add(claim, kind, n, estimate, dataset, run, falsifier):
+        rows.append([claim, kind, n, estimate, dataset, run, falsifier])
+        runs.append(run)
+
+    if have("wp1_cinc2013"):
+        m = load_run("wp1_cinc2013")[0]
+        test = m["by_config"]["full"]["test"]
+        add("Fetal beats are found without following the mother", CONFIRMATORY, f"{test['n_recordings']} test recordings",
+            f"median F1 {num(test['f1_median'])} {interval(test['f1_median_ci'])}", "CinC 2013 set A", "wp1_cinc2013",
+            f"failing the gate on new recordings ({m['gate_G1']['rule']})")
+    if have("wp2_doppler_cycles"):
+        m = load_run("wp2_doppler_cycles")[0]
+        test = m["by_config"]["full"]["test"]
+        add("Cardiac cycles are found on Doppler strips", CONFIRMATORY, f"{test['n_strips']} test strips, {test['n_marks']} marks",
+            f"mean F1 {num(test['f1_mean'])} {interval(test['f1_mean_ci'])}", "annotated NInFEA strips", "wp2_doppler_cycles",
+            f"failing the gate on new strips ({m['gate_G2']['rule']})")
+    if have("wp3_trust_check"):
+        m = load_run("wp3_trust_check")[0]
+        test, gate = m["by_split"]["test"], m["gate_G3"]
+        falsifier = "a simpler score separating them as well"
+        if have(TRUST_BASELINE_RUN):
+            hr = load_run(TRUST_BASELINE_RUN)[0]["by_women"]["test"]["maternal_substitution"]["heart_rate_only"]
+            falsifier += f" - heart rate alone reaches {num(hr['auroc'])} {interval(hr['ci'])} (section 12.3)"
+        add("The trust check tells a real ECG-Doppler pair from the mother's beats", CONFIRMATORY,
+            f"{test['auroc_vs_maternal']['n_pos']} recordings of {test['n_women']} test women",
+            f"AUROC {num(test['auroc_vs_maternal']['auroc'])} {interval(test['auroc_vs_maternal']['ci'])}", "NInFEA", "wp3_trust_check", falsifier)
+        add("ECG and Doppler beat-to-beat rates agree within the target", CONFIRMATORY, f"{test['n_women']} test women",
+            f"limits {interval(gate['beat_level_limits_bpm'], 1)} bpm: **{state(gate['beat_level_passed'])}**", "NInFEA", "wp3_trust_check",
+            "already falsified: gate G3 is not met")
+    if have("wp4b_rhythm_intervals"):
+        r = load_run("wp4b_rhythm_intervals")[0]["recording_level"]["logistic_rhythm"]
+        falsifier = "AUROC near 0.5 on recordings of both classes from one recording setting"
+        if have(RATE_RUN):
+            w = load_run(RATE_RUN)[0]["without_native_500hz_recordings"]["logistic_rhythm"]
+            falsifier += f" (the {w['n']} recordings from one setting give {num(w['auroc'])} {interval(w['auroc_ci'])}, section 12.1)"
+        add("The rhythm expert separates arrhythmia from normal rhythm (feasibility on 26 recordings)", CONFIRMATORY,
+            f"{r['n']} recordings ({r['n_positive']} arrhythmia)", f"AUROC {num(r['auroc'])} {interval(r['auroc_ci'])}", "NIFEADB",
+            "wp4b_rhythm_intervals", falsifier)
+    labelled = structure_runs()
+    if labelled:
+        m = load_run(labelled[0])[0]
+        probe = m["probes"]["fetalclip_scan"]
+        controls = [m["probes"][name]["auroc"] for name in ("no_anatomy_numbers", "fetalclip_overlay_only")]
+        falsifier = (f"inputs without heart anatomy scoring as high (they reach {num(min(controls))} to {num(max(controls))}); "
+                     "AUROC near 0.5 inside one image-size group or on a second dataset")
+        if have(SIZE_RUN):
+            flag = load_run(SIZE_RUN)[0]["flag_642x506"]
+            falsifier += f" (642x506: {num(flag['auroc'])} {interval(flag['auroc_ci'])}, section 12.2); no second dataset yet"
+        add("The structure expert reads heart structure (upper bound only)", CONFIRMATORY,
+            f"{m['dataset']['cases']} cases ({m['dataset']['abnormal_cases']} with a defect)", f"AUROC {num(probe['auroc'])} {interval(probe['ci'])}",
+            "DELTA (one centre)", labelled[0], falsifier)
+    if have("wp2b_function_reference"):
+        f = load_run("wp2b_function_reference")[0]["healthy_recordings_flagged"]
+        design_level = load_run(TRADEOFF_RUN)[0]["design_levels"]["function"] if have(TRADEOFF_RUN) else min(map(float, f))
+        level = next(k for k in f if np.isclose(float(k), design_level))
+        row = f[level]
+        add("The function expert flags healthy fetuses at no more than its level", CONFIRMATORY, f"{row['recordings']} healthy recordings",
+            f"{row['recordings_flagged']} flagged at {level} {pct_interval(row['share_ci_by_woman'])} (by woman)", "NInFEA (healthy only)",
+            "wp2b_function_reference", "more flagged than the level on new healthy recordings; its sensitivity is unknown")
+    if have("wp6_fusion"):
+        cohort = load_run("wp6_fusion")[0]["B_real_paired_cohort"]
+        local = cohort["with_rhythm_score_calibrated_on_ninfea_leave_one_woman_out"]["false_referrals"]
+        transported = cohort["false_referrals"]
+        add("False referrals stay under the ceiling when each expert is calibrated where it is used", CONFIRMATORY,
+            f"{local['n']} real ECG-Doppler pairs", f"{pct(local['share'])} {pct_interval(local['ci'])} (ceiling {pct(local['ceiling_from_alarm_levels'], 0)})",
+            "NInFEA", "wp6_fusion", "healthy pairs from a new setting referred above the ceiling after local calibration")
+        add("Calibration carried over from another device does not hold", CONFIRMATORY, f"{transported['n']} real ECG-Doppler pairs",
+            f"{pct(transported['share'])} {pct_interval(transported['ci'])} referred", "NIFEADB to NInFEA", "wp6_fusion",
+            "carried-over calibration staying at its level on other devices")
+    if have(BOUNDS_RUN):
+        gate = load_run(BOUNDS_RUN)[0]["gate_G7"]
+        add("False referrals of three experts for any dependence (Frechet range)", EXPLORATORY, "measured rates of each expert",
+            f"{pct_interval(gate['range_at_measured_rates'])}; with uncertainty {pct_interval(gate['range_with_uncertainty'])}", "three datasets",
+            BOUNDS_RUN, "a joint rate on paired patients outside the range")
+    if have(TRADEOFF_RUN):
+        smallest = load_run(TRADEOFF_RUN)[0]["rhythm_smallest_level"]
+        add("With 14 calibration recordings the rhythm level acts as a multiple of 1/15", EXPLORATORY + " (arithmetic)",
+            f"{smallest['n_healthy_calibration']} calibration recordings",
+            f"effective level {num(smallest['effective_level_of_the_design'])}; effective ceiling {pct(smallest['effective_ceiling_of_the_design'])}",
+            "NIFEADB", TRADEOFF_RUN, "none: it follows from the p-value formula")
+    if have(RATE_RUN):
+        c = load_run(RATE_RUN)[0]["comparison_with_original"]["logistic_rhythm"]
+        diff = c["paired_difference_500hz_minus_original"]
+        add("The rhythm expert does not rely on the sampling rate itself", EXPLORATORY, "26 recordings, all brought to 500 Hz",
+            f"AUROC {num(c['auroc_500hz'])} {interval(c['auroc_500hz_ci'])}; change {num(diff['difference'])} {interval(diff['ci'])}", "NIFEADB", RATE_RUN,
+            "AUROC falling after the common 500 Hz step; the recording setting itself is not removed by resampling")
+    if have(SIZE_RUN):
+        flag = load_run(SIZE_RUN)[0]["flag_642x506"]
+        add("Calibrating inside each image-size group does not restore detection at 642x506", EXPLORATORY, f"{flag['n_abnormal']} defects at 642x506",
+            f"caught {flag['group_conditional_caught']} of {flag['n_abnormal']}", "DELTA", SIZE_RUN, "defects caught there once calibrated in-group")
+    if have(TRUST_BASELINE_RUN):
+        swap = load_run(TRUST_BASELINE_RUN)[0]["by_women"]["test"]["swap"]["locked_minus_cross_correlation"]
+        add("A plain pulse-train cross-correlation tells swapped pairs apart better than the locked share", EXPLORATORY, "test women",
+            f"AUROC difference (locked minus cross-correlation) {num(swap['difference'])} {interval(swap['ci'])}", "NInFEA", TRUST_BASELINE_RUN,
+            "the difference interval covering 0 on new recordings")
+    if have(TRANSFER_RUN):
+        m = load_run(TRANSFER_RUN)[0]
+        holds = m["smallest_calibration_that_holds"]["local"]
+        estimate = (f"about {holds['calibration_women']} women ({num(holds['calibration_recordings_median'], 0)} recordings)"
+                    if isinstance(holds, dict) else holds)
+        add("Local calibration keeps rhythm false alarms near the level from a modest number of healthy recordings", EXPLORATORY,
+            f"{m['n_recordings_readable']} recordings of {m['n_women_readable']} women", estimate, "NIFEADB to NInFEA (one device pair)", TRANSFER_RUN,
+            "another device pair needing far more; sensitivity after local calibration is unknown")
+    if have(ALLOCATION_RUN):
+        m = load_run(ALLOCATION_RUN)[0]
+        s = m["selection_on_one_half_valued_on_the_other_at_design_budget"]
+        key = "optimised (same ceiling) - design shares"
+        add("Splitting the same false-referral ceiling differently adds true referrals", EXPLORATORY,
+            "levels chosen on half the people, valued on the other half",
+            f"{num(s[key + ' mean per 1000'], 2)} per 1000 [{num(s[key + ' interval low'], 2)}, {num(s[key + ' interval high'], 2)}]",
+            "DELTA and NIFEADB, assumed prevalences", ALLOCATION_RUN, "an interval covering 0 (a gain too small to matter)")
+    header = ["Claim", "Kind", "n", "Estimate [95% CI]", "Dataset", "Run", "Would be overturned by"]
+    lead = ("Every claim of the project in one table, generated from the run folders. 'Confirmatory' rows were tested as planned before the held-out data "
+            "were used; 'exploratory' rows were added after the results were known (sections 9 to 12) and their intervals are not corrected for the "
+            "number of checks, so read them as exploratory only.")
+    return "## Claim ledger\n\n" + lead + "\n\n" + table("t00_claim_ledger", header, rows, sorted(set(runs)))
+
+
+def section_review_checks() -> str:
+    """Section 12: the checks asked for in the review of 20 October 2026."""
+    parts = ["## 12. Checks requested on 20 October 2026 (made after seeing the results)",
+             "Each subsection re-uses saved outputs or refits only linear probes, as the original runs did; the settings were fixed in each run's "
+             "config before computing. Intervals are not corrected for the number of checks."]
+    if have(RATE_RUN):
+        m = load_run(RATE_RUN)[0]
+        rows = []
+        for key, r in m["recording_level"].items():
+            w = m["without_native_500hz_recordings"][key]
+            c = m["comparison_with_original"].get(key)
+            diff = c.get("paired_difference_500hz_minus_original") if c else None
+            rows.append([key.replace("__", ", "), r.get("role", "interval expert"), f"{num(r['auroc'])} {interval(r['auroc_ci'])}",
+                         f"{num(w['auroc'])} {interval(w['auroc_ci'])}", num(c["original_auroc_published"]) if c else "-",
+                         f"{num(diff['difference'])} {interval(diff['ci'])}" if diff else ("not compared: saved scores tie" if c else "-")])
+        unchanged = m["control_inputs_unchanged_from_wp4c"]
+        notes = [f"**12.1 Rhythm expert with every recording at 500 Hz (run {RATE_RUN}).** The {m['dataset']['resampled_to_500hz']} recordings sampled at 1 kHz were "
+                 "reduced to 500 Hz before the frozen extraction, features and probes. The four recordings already at 500 Hz got identical input, and their "
+                 f"beats equal run wp4a's: {all(m['native_500hz_recordings_beats_identical_to_wp4a'].values())}. The control inputs were resampled per "
+                 "recording here and per segment in wp4c, so their embeddings are " + ("identical" if all(unchanged.values()) else "close but not identical")
+                 + f"; the mother's chest lead scores {num(m['comparison_with_original']['ecgfounder__maternal_chest']['auroc_500hz'])} in both runs. " + m["reading"]]
+        parts += notes + [table("t12a_rhythm_500hz", ["Score", "Role", "AUROC, 26 recordings [95% CI]", "AUROC, 22 recordings from one setting [95% CI]",
+                                                      "Original AUROC", "Change from the original [95% CI, paired]"], rows, [RATE_RUN])]
+    if have(SIZE_RUN):
+        m, provenance = load_run(SIZE_RUN)
+        rows = []
+        for e in m["by_group"]:
+            auc = f"{num(e['auroc'])} {interval(e['auroc_ci'])}" if "auroc" in e else "-"
+            rows.append([e["group"], e["n_normal"], e["n_abnormal"], auc, min(e["calibration_normals_per_fold"]), yes(e["can_alarm_in_every_fold"]),
+                         f"{e['marginal_sensitivity']['k']}/{e['marginal_sensitivity']['n']}", f"{e['marginal_false_alarms']['k']}/{e['marginal_false_alarms']['n']}",
+                         f"{e['group_conditional_sensitivity']['k']}/{e['group_conditional_sensitivity']['n']}",
+                         f"{e['group_conditional_false_alarms']['k']}/{e['group_conditional_false_alarms']['n']}"])
+        overall = m["overall"]
+        parts += [f"**12.2 Structure expert by image size, calibrated inside each group (run {SIZE_RUN}).** The run's conformal p-values were recomputed "
+                  f"from the saved embeddings and equal the published ones ({m['published_p_values_reproduced']}). Ranking each case only among the "
+                  "calibration normals of its own size group keeps false alarms at the level inside every group, but a group needs at least "
+                  f"{provenance['config']['minimum_calibration_normals_to_alarm']} calibration normals in a fold to alarm at all. Overall, group-conditional "
+                  f"calibration caught {overall['group_conditional']['sensitivity']['k']} of {overall['group_conditional']['sensitivity']['n']} defects with "
+                  f"{overall['group_conditional']['false_alarms']['k']} of {overall['group_conditional']['false_alarms']['n']} normal cases flagged (marginal: "
+                  f"{overall['marginal']['sensitivity']['k']} and {overall['marginal']['false_alarms']['k']}). " + m["reading"],
+                  table("t12b_structure_by_size_group_conditional",
+                        ["Image size", "Normal", "Defect", "AUROC [95% CI]", "Calibration normals (smallest fold)", "Can alarm in every fold",
+                         "Caught (marginal)", "Normal flagged (marginal)", "Caught (in-group)", "Normal flagged (in-group)"], rows, [SIZE_RUN])]
+    if have(TRUST_BASELINE_RUN):
+        m = load_run(TRUST_BASELINE_RUN)[0]
+        rows = []
+        for women in ("test", "all"):
+            block = m["by_women"][women]
+            for mismatch, part in (("the mother's beats", "maternal_substitution"), ("another woman's fetal ECG", "swap")):
+                for score, value in block[part].items():
+                    if "minus" in score:
+                        rows.append([women, mismatch, score.replace("_", " "), "-", f"{num(value['difference'])} {interval(value['ci'])}", yes(value["can_be_ranked"])])
+                    else:
+                        rows.append([women, mismatch, score.replace("_", " "), f"{num(value['auroc'])} {interval(value['ci'])}", "-", "-"])
+        parts += [f"**12.3 Baselines for the trust check (run {TRUST_BASELINE_RUN}).** The trust check is {m['wording']}. Heart rate alone nearly matches it "
+                  "against the mother's beats, and a plain cross-correlation of the two beat trains separates swapped pairs better than the locked share. "
+                  f"Gate G3 is unchanged ({m['gate_G3_unchanged']['note']}). Failure modes no recording here tests: " + "; ".join(m["untested_failure_modes"]) + ".",
+                  table("t12c_trust_baselines", ["Women", "Mismatch", "Score", "AUROC [95% CI]", "Difference [95% CI, women resampled]", "Can be ranked"],
+                        rows, [TRUST_BASELINE_RUN])]
+    if have(TRANSFER_RUN):
+        m, provenance = load_run(TRANSFER_RUN)
+        rows = [[r["calibration_women"], num(r["calibration_recordings_median"], 0), yes(r["can_alarm_in_every_draw"]),
+                 f"{pct(r['local_mean'])} [{pct(r['local_p5'])}, {pct(r['local_p95'])}]", pct_interval(r["beta_range_90_at_median_size"]),
+                 f"{pct(r['pooled_mean'])} [{pct(r['pooled_p5'])}, {pct(r['pooled_p95'])}]"] for r in m["curve"]]
+        shift, transported = m["shift"], m["transported"]
+        smallest = m["smallest_calibration_that_holds"]
+        scope = m["scope"][0].upper() + m["scope"][1:]
+
+        def held(entry) -> str:
+            return (f"{entry['calibration_women']} women ({num(entry['calibration_recordings_median'], 0)} recordings, median)"
+                    if isinstance(entry, dict) else str(entry))
+
+        parts += [f"**12.4 How many local healthy recordings the rhythm expert needs (run {TRANSFER_RUN}).** {scope}. Calibrated on the "
+                  f"14 NIFEADB recordings it flagged {transported['flagged']} of {transported['n']} healthy NInFEA recordings ({pct(transported['false_alarm_rate'])}). "
+                  f"Kolmogorov-Smirnov distance between the healthy scores of the two datasets {num(shift['distance'])} {interval(shift['ci'])}; the observed excess "
+                  f"of false alarms, {pct(shift['observed_excess_false_alarms'])}, is within it, as theory says. Criterion: {provenance['config']['holds']} "
+                  f"(level {provenance['config']['level']}, tolerance {provenance['config']['tolerance']}; revised after a trial run, see the run's config). Smallest "
+                  f"calibration that holds: local {held(smallest['local'])}; pooled with the NIFEADB recordings {held(smallest['pooled'])}. Per-draw percentiles include the "
+                  "noise of the few test women left; the Beta column is the spread expected from the calibration set alone.",
+                  table("t12d_calibration_transfer", ["Calibration women", "Recordings (median)", "Can alarm in every draw",
+                                                       "Local: mean false alarms [5th, 95th percentile]", "Expected from the calibration set alone (Beta, 90%)",
+                                                       "Pooled with NIFEADB: mean [5th, 95th]"], rows, [TRANSFER_RUN])]
+        figure, axis = plt.subplots(figsize=(8, 5))
+        women = [r["calibration_women"] for r in m["curve"]]
+        axis.fill_between(women, [r["local_p5"] for r in m["curve"]], [r["local_p95"] for r in m["curve"]], color="tab:blue", alpha=THIRD,
+                          label="local calibration, 5th to 95th percentile of draws")
+        axis.plot(women, [r["local_mean"] for r in m["curve"]], color="tab:blue", marker="o", label="local calibration, mean")
+        axis.plot(women, [r["pooled_mean"] for r in m["curve"]], color="tab:orange", marker="s", label="pooled with the 14 NIFEADB recordings, mean")
+        axis.axhline(transported["false_alarm_rate"], color="tab:red", linestyle="--", label="carried over from NIFEADB")
+        axis.axhline(provenance["config"]["level"], color="black", linestyle=":", label="alarm level")
+        axis.set_xlabel("Healthy NInFEA women used for calibration")
+        axis.set_ylabel("Share of other women's healthy recordings flagged")
+        axis.set_title("Rhythm false alarms against local calibration size")
+        axis.legend(fontsize=7)
+        parts.append(save(figure, "f10_calibration_transfer", [TRANSFER_RUN]))
+    if have(ALLOCATION_RUN):
+        m, provenance = load_run(ALLOCATION_RUN)
+        design_budget = sum(m["design_levels"].values())
+        rows = [[kind, f"{num(r['structure_level'])} / {num(r['function_level'])} / {num(r['rhythm_level'])}",
+                 f"{num(r['structure_effective'])} / {num(r['function_effective'])} / {num(r['rhythm_effective'])}", num(r["effective_ceiling"]),
+                 pct(r["structure_sensitivity"]), pct(r["rhythm_sensitivity"]), num(r["true_referrals_per_1000"], 2),
+                 num(r["false_referrals_per_1000_ceiling"], 0),
+                 f"{num(r['false_referrals_per_1000_measured_low'], 0)} to {num(r['false_referrals_per_1000_measured_high'], 0)}"]
+                for kind, r in m["at_design_budget_base_prevalence"].items()]
+        key = "optimised (same ceiling) - design shares"
+        split_rows = []
+        for raw in read_csv(ALLOCATION_RUN, "selection_split_half.csv"):
+            if not np.isclose(float(raw["budget"]), design_budget):
+                continue
+            s = {k: float(v) for k, v in raw.items()}
+            whole = "optimised - design shares"
+            split_rows.append([num(s["rhythm_prevalence_factor"], 1),
+                               f"{num(s[key + ' mean per 1000'], 2)} [{num(s[key + ' interval low'], 2)}, {num(s[key + ' interval high'], 2)}]",
+                               pct(s[key + " share above 0"]),
+                               f"{num(s[whole + ' mean per 1000'], 2)} [{num(s[whole + ' interval low'], 2)}, {num(s[whole + ' interval high'], 2)}]",
+                               pct(s["share choosing another rhythm level at the same ceiling"])])
+        size_rows = [[r["dependence"], r["tests"], num(r["total"], 2), num(r["bonferroni"], 4), num(r["holm"], 4), num(r["simes"], 4), r["simes_guaranteed"]]
+                     for r in m["size_check"]]
+        curve = read_csv(ALLOCATION_RUN, "decision_curve.csv")
+        strategies = list(dict.fromkeys(r["strategy"] for r in curve))
+        harms = list(dict.fromkeys(r["harm_ratio"] for r in curve))
+        curve_rows = [[harm] + [num(float(next(r for r in curve if r["harm_ratio"] == harm and r["strategy"] == s)["net_benefit_per_1000_at_ceiling"]), 2)
+                                for s in strategies] for harm in harms]
+        headline = [[name, num(h["nominal_ceiling"]), num(h["effective_ceiling"]), pct_interval(h["measured_healthy_range_any_dependence"]),
+                     ", ".join(f"{k} {pct(v)}" for k, v in h["sensitivity"].items()), num(h["true_referrals_per_1000"], 2), num(h["false_referrals_per_1000_ceiling"], 0)]
+                    for name, h in m["headline_with_and_without_rhythm"].items()]
+        illustration = m["simes_illustration_assuming_independent_healthy_other_tests"]
+        parts += [f"**12.5 Splitting the false-referral ceiling between the experts (run {ALLOCATION_RUN}).** {m['reading']} Budget = sum of the effective "
+                  f"levels. Priors: {levels_text(m['priors'])}; {m['priors_note']}. {m['function_note'].capitalize()}. Choosing levels to maximise expected true "
+                  "referrals under a cap on false positives, with the cut-offs estimated on one part of the data and tested on another, is the method of "
+                  "Rubin, Dudoit and van der Laan (2006); optimal weights for weighted Bonferroni are reviewed by Roeder and Wasserman (2009). Only the "
+                  "discrete conformal levels and the prevalence weights are specific to this setting (docs/positioning.md). At the decision rule's priors the "
+                  f"like-for-like optimum sets the rhythm level to {num(m['at_design_budget_base_prevalence']['optimised, same ceiling as design shares']['rhythm_effective'])}: "
+                  "the result depends on the assumed prevalences (table below).",
+                  table("t12e_allocation_at_design_budget", ["Allocation", "Levels set (structure / function / rhythm)", "Levels acting", "Effective ceiling",
+                                                            "Structural defects caught", "Arrhythmias caught", "True referrals per 1000 (assumed prevalences)",
+                                                            "False referrals per 1000 (ceiling)", "False referrals per 1000 (measured, any dependence)"],
+                        rows, [ALLOCATION_RUN]),
+                  "Levels chosen on half of the people with each finding and valued on the other half (200 splits), at the design budget, for each multiple of "
+                  "the assumed rhythm prevalence:",
+                  table("t12f_allocation_split_half", ["Rhythm prevalence factor", "Gain at the same ceiling, per 1000 [95% of splits]", "Splits with a gain",
+                                                      "Gain using the whole budget, per 1000 [95% of splits]", "Splits choosing another rhythm level"],
+                        split_rows, [ALLOCATION_RUN]),
+                  "Size of the yes/no referral under chosen dependence (simulated healthy people). For the referral decision Holm refers exactly whom "
+                  "Bonferroni refers (Holm was run on the first 20000 simulated people of each row, where it referred the same people as Bonferroni: "
+                  + yes(all(r["holm_equals_bonferroni_on_first_20000"] for r in m["size_check"])) + "); Simes is guaranteed only under positive dependence "
+                  "and exceeds its total for a dependence built against it. "
+                  f"Under the assumption that the two other tests behave like independent healthy tests, Simes would refer {pct(illustration['structure']['simes'])} "
+                  f"of the defects against {pct(illustration['structure']['bonferroni_any_alarm'])} for Bonferroni with equal levels "
+                  f"(own test alone {pct(illustration['structure']['own_test_only'])}); the gap is chance alarms of the other tests, not detection.",
+                  table("t12g_size_check", ["Dependence", "Tests", "Total", "Bonferroni", "Holm", "Simes", "Simes guaranteed"], size_rows, [ALLOCATION_RUN]),
+                  "Net benefit per 1000 people screened (true referrals minus the harm ratio times false referrals, false referrals at the ceiling). The harm "
+                  "ratio - harm of one unnecessary referral relative to the benefit of one needed referral - is a clinical judgement not made here:",
+                  table("t12h_net_benefit", ["Harm ratio"] + strategies, curve_rows, [ALLOCATION_RUN]),
+                  "The headline with and without the rhythm expert:",
+                  table("t12i_with_without_rhythm", ["Experts", "Nominal ceiling", "Effective ceiling", "Measured healthy range (any dependence)", "Caught",
+                                                    "True referrals per 1000", "False referrals per 1000 (ceiling)"], headline, [ALLOCATION_RUN])]
+    if have(THEORY_RUN):
+        m = load_run(THEORY_RUN)[0]
+        a = [r for r in read_csv(THEORY_RUN, "a_conformal_validity.csv") if r["scores"] == "normal"]
+        rows = [[r["calibration_n"], r["level"], num(float(r["effective_level"]), 4), num(float(r["mean_rate"]), 4),
+                 f"[{num(float(r['p5_rate']), 3)}, {num(float(r['p95_rate']), 3)}]", f"[{num(float(r['beta_p5']), 3)}, {num(float(r['beta_p95']), 3)}]"] for r in a]
+        ends = m["b_ends_reached"]
+        parts += [f"**12.6 The standard guarantees, simulated (run {THEORY_RUN}, synthetic data).** {m['reading'].capitalize()}. Mean false-alarm rate never above "
+                  f"the effective level by more than 3 standard errors: {m['a_mean_rate_never_above_effective_level_by_more_than_3_se']}; largest gap between "
+                  f"simulated and Beta percentiles {num(m['a_largest_gap_between_simulated_and_beta_percentiles'], 3)}. Union bound: every dependence inside "
+                  f"{pct_interval(ends['range'])}: {m['b_every_dependence_inside_the_range']}, with the lower end reached by nested alarms ({pct(ends['lower'])}) and "
+                  f"the upper by alarms that never come together ({pct(ends['upper'])}). Under a location shift the false-alarm rate stayed within the level "
+                  f"plus the Kolmogorov-Smirnov distance: {m['c_every_shift_within_level_plus_ks']}. References: docs/theory_notes.md.",
+                  table("t12j_conformal_validity", ["Calibration n", "Level", "Effective level", "Mean false-alarm rate", "Per-set rate, 5th-95th percentile",
+                                                   "Beta law, 5th-95th percentile"], rows, [THEORY_RUN])]
+    return "\n\n".join(parts) if len(parts) > 2 else ""
 
 
 def section_gates() -> str:
@@ -878,8 +1203,8 @@ def main() -> None:
         "# Results of the rebuild\n\nGenerated by `scripts/build_report.py` from the run folders under `runs/`. "
         "Do not edit by hand: change the analysis, re-run it, and rebuild. Tables are also saved as CSV in `reports/tables/`, "
         "figures in `reports/figures/`, and `reports/manifest.json` lists the runs behind every file.",
-        section_gates(), section_wp1(), section_wp2(), section_wp3(), section_wp2b(), section_wp4(), section_wp5(), section_wp6(), section_wp6b(),
-        section_guarantees(), section_checks(), section_threats(),
+        claim_ledger(), section_gates(), section_wp1(), section_wp2(), section_wp3(), section_wp2b(), section_wp4(), section_wp5(), section_wp6(),
+        section_wp6b(), section_guarantees(), section_checks(), section_review_checks(), section_threats(),
     ]
     (REPORTS / "RESULTS.md").write_text("\n\n".join(part for part in parts if part) + "\n", encoding="utf-8")
     MANIFEST.append({"file": "RESULTS.md", "runs": sorted({run for entry in MANIFEST for run in entry["runs"]})})

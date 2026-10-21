@@ -1,0 +1,105 @@
+{
+  "run": "wp4e_rhythm_500hz",
+  "description": "Rhythm expert and ECGFounder probes again with every NIFEADB recording brought to 500 Hz first (check made after seeing the results)",
+  "created_utc": "2026-10-20T05:24:50+00:00",
+  "script": "scripts/run_wp4e_rhythm_500hz.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "be7cc95c943433e7c04ded41b3b12808ca493a7c",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "made_after_seeing_results": true,
+    "requested_by": "review of 20 Oct 2026",
+    "common_sampling_hz": 500,
+    "resampling": "scipy.signal.resample_poly(x, 1, 2), default Kaiser anti-aliasing filter",
+    "ecg": {
+      "n_components": 3,
+      "max_sources": 8,
+      "n_tracked": 3,
+      "smoothness": 4.0,
+      "min_score": 0.2,
+      "seed": 0
+    },
+    "segment_s": 60.0,
+    "min_last_segment_s": 30.0,
+    "interval_model": "wp4b logistic: median imputation, standardisation, L2 logistic regression C=1, threshold 0.5",
+    "probe": "wp4c: standardise, PCA(8), logistic regression C=1",
+    "inputs": [
+      "fetal",
+      "fetal_stretch2",
+      "abdominal_raw",
+      "maternal_chest"
+    ],
+    "permutations": {
+      "logistic": 500,
+      "single_index": 10000,
+      "probe": 300
+    },
+    "bootstrap": {
+      "resamples": 2000,
+      "unit": "subject (recording)",
+      "seed": 0
+    },
+    "compared_with": {
+      "logistic_rhythm": "wp4b_rhythm_intervals:oof_logistic_rhythm",
+      "ecgfounder__fetal": "wp4c_foundation:oof_ecgfounder__fetal",
+      "random_init__fetal": "wp4c_foundation:oof_random_init__fetal",
+      "ecgfounder__maternal_chest": "wp4c_foundation:oof_ecgfounder__maternal_chest",
+      "ecgfounder__abdominal_raw": "wp4c_foundation:oof_ecgfounder__abdominal_raw"
+    },
+    "rule_for_paired_differences": "only where the original AUROC is reproduced exactly from its saved per-record scores",
+    "not_repeated": [
+      "random forest",
+      "leakage comparison",
+      "CinC 2013 heart-rate probes",
+      "maternal heart-rate probe"
+    ],
+    "device": "cuda",
+    "random_init": {
+      "name": "random-init Net1D",
+      "seed": 0,
+      "verified": false
+    }
+  },
+  "data": {
+    "nifeadb": {
+      "n_files": 52,
+      "total_bytes": 186294562,
+      "manifest_sha256": "6171bc17ae2db8ffb7f9fc42ecd24e7ff9288edf2c7f942105d9a032c4a6a19b"
+    },
+    "original_scores": {
+      "n_files": 4,
+      "total_bytes": 3956178,
+      "manifest_sha256": "c3a898c1481c58ea19c09c5ead17fa26520a026f17ba09fc61776c5172277e2d"
+    }
+  },
+  "n_real": 26,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [
+    {
+      "claimed_name": "ECGFounder single-lead",
+      "verified": true,
+      "sha256": "f863a38897fb49a27fec7e44008ea3c7bdbd29c77fa4a02ecbb8c56df4f37603",
+      "file": "1_lead_ECGFounder.pth",
+      "bytes": 369807481,
+      "source": "huggingface.co/PKUDigitalHealth/ECGFounder",
+      "licence": "MIT (model card)",
+      "n_parameters": 30807750
+    }
+  ],
+  "seed": 0,
+  "argv": [
+    "scripts/run_wp4e_rhythm_500hz.py"
+  ]
+}

@@ -1,0 +1,13 @@
+calibration_n,calibration,group,mean_rate,level,expected_group_calibration_n,minimum_group_size_to_alarm
+40,marginal,main (70%),0.017667,0.05,28.0,19
+40,marginal,shifted (30%),0.122165,0.05,12.0,19
+40,group-conditional,main (70%),0.033173,0.05,28.0,19
+40,group-conditional,shifted (30%),0.000712,0.05,12.0,19
+100,marginal,main (70%),0.01668,0.05,70.0,19
+100,marginal,shifted (30%),0.123419,0.05,30.0,19
+100,group-conditional,main (70%),0.042423,0.05,70.0,19
+100,group-conditional,shifted (30%),0.032453,0.05,30.0,19
+400,marginal,main (70%),0.016467,0.05,280.0,19
+400,marginal,shifted (30%),0.127504,0.05,120.0,19
+400,group-conditional,main (70%),0.048319,0.05,280.0,19
+400,group-conditional,shifted (30%),0.045867,0.05,120.0,19

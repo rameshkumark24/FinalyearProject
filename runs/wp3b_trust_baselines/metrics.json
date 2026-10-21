@@ -1,0 +1,263 @@
+{
+  "made_after_seeing_results": true,
+  "by_women": {
+    "development": {
+      "n_recordings": 23,
+      "n_women": 13,
+      "n_swaps": 482,
+      "maternal_substitution": {
+        "locked_share": {
+          "auroc": 0.998109640831758,
+          "ci": [
+            0.9750692520775623,
+            1.0
+          ],
+          "n_positive": 23,
+          "n_negative": 23
+        },
+        "heart_rate_only": {
+          "auroc": 0.996219281663516,
+          "ci": [
+            0.97,
+            1.0
+          ],
+          "n_positive": 23,
+          "n_negative": 23
+        },
+        "locked_minus_heart_rate": {
+          "difference": 0.001890359168241984,
+          "ci": [
+            0.0,
+            0.010000000000000009
+          ],
+          "n_resamples": 2000,
+          "can_be_ranked": false
+        }
+      },
+      "swap": {
+        "locked_share": {
+          "auroc": 0.9601298935594443,
+          "ci": [
+            0.9135814410245373,
+            0.9928191897554985
+          ],
+          "n_positive": 23,
+          "n_negative": 482
+        },
+        "heart_rate_only": {
+          "auroc": 0.9378495399603103,
+          "ci": [
+            0.8572344039351851,
+            0.9917035953141531
+          ],
+          "n_positive": 23,
+          "n_negative": 482
+        },
+        "cross_correlation": {
+          "auroc": 0.9899873714594984,
+          "ci": [
+            0.9667426673304427,
+            1.0
+          ],
+          "n_positive": 23,
+          "n_negative": 482
+        },
+        "locked_minus_heart_rate": {
+          "difference": 0.02228035359913405,
+          "ci": [
+            -0.005058044206699613,
+            0.06432936092314827
+          ],
+          "n_resamples": 2000,
+          "can_be_ranked": false
+        },
+        "locked_minus_cross_correlation": {
+          "difference": -0.029857477900054108,
+          "ci": [
+            -0.05663274148326674,
+            -0.006892299366012098
+          ],
+          "n_resamples": 2000,
+          "can_be_ranked": true
+        }
+      }
+    },
+    "test": {
+      "n_recordings": 37,
+      "n_women": 26,
+      "n_swaps": 1238,
+      "maternal_substitution": {
+        "locked_share": {
+          "auroc": 0.9842951059167275,
+          "ci": [
+            0.9455017301038062,
+            1.0
+          ],
+          "n_positive": 37,
+          "n_negative": 37
+        },
+        "heart_rate_only": {
+          "auroc": 0.9663988312636961,
+          "ci": [
+            0.8884083044982699,
+            1.0
+          ],
+          "n_positive": 37,
+          "n_negative": 37
+        },
+        "locked_minus_heart_rate": {
+          "difference": 0.017896274653031452,
+          "ci": [
+            0.0,
+            0.059240148417169416
+          ],
+          "n_resamples": 2000,
+          "can_be_ranked": false
+        }
+      },
+      "swap": {
+        "locked_share": {
+          "auroc": 0.9194537833471598,
+          "ci": [
+            0.8466821281829361,
+            0.9741150446582153
+          ],
+          "n_positive": 37,
+          "n_negative": 1238
+        },
+        "heart_rate_only": {
+          "auroc": 0.8979827970134917,
+          "ci": [
+            0.8191224362010632,
+            0.9624220779048307
+          ],
+          "n_positive": 37,
+          "n_negative": 1238
+        },
+        "cross_correlation": {
+          "auroc": 0.9772082259965943,
+          "ci": [
+            0.9435826620934703,
+            0.9981244352681486
+          ],
+          "n_positive": 37,
+          "n_negative": 1238
+        },
+        "locked_minus_heart_rate": {
+          "difference": 0.021470986333668063,
+          "ci": [
+            0.005569934127110071,
+            0.044956814464660204
+          ],
+          "n_resamples": 2000,
+          "can_be_ranked": true
+        },
+        "locked_minus_cross_correlation": {
+          "difference": -0.05775444264943452,
+          "ci": [
+            -0.10629992212309387,
+            -0.022000052097696392
+          ],
+          "n_resamples": 2000,
+          "can_be_ranked": true
+        }
+      }
+    },
+    "all": {
+      "n_recordings": 60,
+      "n_women": 39,
+      "n_swaps": 1720,
+      "maternal_substitution": {
+        "locked_share": {
+          "auroc": 0.9895833333333334,
+          "ci": [
+            0.9639905330009497,
+            1.0
+          ],
+          "n_positive": 60,
+          "n_negative": 60
+        },
+        "heart_rate_only": {
+          "auroc": 0.9777777777777777,
+          "ci": [
+            0.926018705363954,
+            1.0
+          ],
+          "n_positive": 60,
+          "n_negative": 60
+        },
+        "locked_minus_heart_rate": {
+          "difference": 0.011805555555555625,
+          "ci": [
+            0.0,
+            0.03894753147079919
+          ],
+          "n_resamples": 2000,
+          "can_be_ranked": false
+        }
+      },
+      "swap": {
+        "locked_share": {
+          "auroc": 0.9326841085271318,
+          "ci": [
+            0.8872892132895404,
+            0.9705056269333826
+          ],
+          "n_positive": 60,
+          "n_negative": 1720
+        },
+        "heart_rate_only": {
+          "auroc": 0.9093992248062015,
+          "ci": [
+            0.8523643412091207,
+            0.9564844513446428
+          ],
+          "n_positive": 60,
+          "n_negative": 1720
+        },
+        "cross_correlation": {
+          "auroc": 0.9814631782945736,
+          "ci": [
+            0.9620489878116011,
+            0.9960595541398719
+          ],
+          "n_positive": 60,
+          "n_negative": 1720
+        },
+        "locked_minus_heart_rate": {
+          "difference": 0.023284883720930294,
+          "ci": [
+            0.008154973671849457,
+            0.04247350219981331
+          ],
+          "n_resamples": 2000,
+          "can_be_ranked": true
+        },
+        "locked_minus_cross_correlation": {
+          "difference": -0.04877906976744184,
+          "ci": [
+            -0.08232854618731811,
+            -0.023416730938282688
+          ],
+          "n_resamples": 2000,
+          "can_be_ranked": true
+        }
+      }
+    }
+  },
+  "published_maternal_auroc_test": 0.9842951059167275,
+  "locked_share_matches_published": true,
+  "gate_G3_unchanged": {
+    "beat_level_passed": false,
+    "note": "this run does not change gate G3, which stays not met"
+  },
+  "untested_failure_modes": [
+    "both signals following the mother (Doppler gate on a maternal vessel and maternal ECG): they would agree and pass",
+    "the other twin in a twin pregnancy: two fetal hearts at similar rates",
+    "fetal arrhythmias with irregular beats or atrioventricular block (none in NInFEA): a correct pair may fail to lock",
+    "recordings that are not simultaneous: the check cannot run, and the rule then asks for a repeat",
+    "other ECG or ultrasound devices, sampling rates and Doppler gate placements than NInFEA's",
+    "long periods of fetal movement or very low ECG quality beyond what the 60 recordings contain"
+  ],
+  "wording": "a consistency (substitution) check between two simultaneous recordings of the same heart, not a measure of diagnostic accuracy; using Doppler as the reference for fetal ECG timing is established practice, not new"
+}

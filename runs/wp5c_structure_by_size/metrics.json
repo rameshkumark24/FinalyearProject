@@ -1,0 +1,290 @@
+{
+  "made_after_seeing_results": true,
+  "published_p_values_reproduced": true,
+  "by_group": [
+    {
+      "group": "900x752",
+      "sizes": [
+        "900x752"
+      ],
+      "n_normal": 417,
+      "n_abnormal": 114,
+      "calibration_normals_per_fold": [
+        92,
+        92,
+        93,
+        97,
+        92
+      ],
+      "can_alarm_in_every_fold": true,
+      "auroc": 0.8583449030249485,
+      "auroc_ci": [
+        0.810097857624778,
+        0.9010471829750731
+      ],
+      "marginal_false_alarms": {
+        "k": 30,
+        "n": 417,
+        "share": 0.07194244604316546,
+        "ci": [
+          0.04906267107943215,
+          0.10111144040885832
+        ]
+      },
+      "marginal_sensitivity": {
+        "k": 60,
+        "n": 114,
+        "share": 0.5263157894736842,
+        "ci": [
+          0.4306479543121689,
+          0.6205831422358978
+        ]
+      },
+      "group_conditional_false_alarms": {
+        "k": 21,
+        "n": 417,
+        "share": 0.050359712230215826,
+        "ci": [
+          0.03144016183789623,
+          0.07595235014017154
+        ]
+      },
+      "group_conditional_sensitivity": {
+        "k": 59,
+        "n": 114,
+        "share": 0.5175438596491229,
+        "ci": [
+          0.4220402975070038,
+          0.612113806781295
+        ]
+      }
+    },
+    {
+      "group": "642x506",
+      "sizes": [
+        "642x506"
+      ],
+      "n_normal": 112,
+      "n_abnormal": 11,
+      "calibration_normals_per_fold": [
+        22,
+        22,
+        20,
+        16,
+        19
+      ],
+      "can_alarm_in_every_fold": false,
+      "auroc": 0.5267857142857143,
+      "auroc_ci": [
+        0.28322044334975366,
+        0.7611495706002874
+      ],
+      "marginal_false_alarms": {
+        "k": 7,
+        "n": 112,
+        "share": 0.0625,
+        "ci": [
+          0.02549509099991495,
+          0.12453936816055108
+        ]
+      },
+      "marginal_sensitivity": {
+        "k": 0,
+        "n": 11,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.28491415291815436
+        ]
+      },
+      "group_conditional_false_alarms": {
+        "k": 5,
+        "n": 112,
+        "share": 0.044642857142857144,
+        "ci": [
+          0.014652114872299041,
+          0.10111007355718245
+        ]
+      },
+      "group_conditional_sensitivity": {
+        "k": 0,
+        "n": 11,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.28491415291815436
+        ]
+      }
+    },
+    {
+      "group": "806x648",
+      "sizes": [
+        "806x648"
+      ],
+      "n_normal": 69,
+      "n_abnormal": 5,
+      "calibration_normals_per_fold": [
+        6,
+        7,
+        9,
+        8,
+        6
+      ],
+      "can_alarm_in_every_fold": false,
+      "auroc": 0.6985507246376812,
+      "auroc_ci": [
+        0.3271830985915493,
+        0.9452054794520548
+      ],
+      "marginal_false_alarms": {
+        "k": 3,
+        "n": 69,
+        "share": 0.043478260869565216,
+        "ci": [
+          0.009057607358815035,
+          0.1218471493656237
+        ]
+      },
+      "marginal_sensitivity": {
+        "k": 1,
+        "n": 5,
+        "share": 0.2,
+        "ci": [
+          0.0050507633794680575,
+          0.7164179361180893
+        ]
+      },
+      "group_conditional_false_alarms": {
+        "k": 0,
+        "n": 69,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.05205805786307967
+        ]
+      },
+      "group_conditional_sensitivity": {
+        "k": 0,
+        "n": 5,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.5218237501049814
+        ]
+      }
+    },
+    {
+      "group": "other sizes",
+      "sizes": [
+        "1114x766",
+        "448x404",
+        "744x658"
+      ],
+      "n_normal": 21,
+      "n_abnormal": 3,
+      "calibration_normals_per_fold": [
+        4,
+        3,
+        2,
+        3,
+        7
+      ],
+      "can_alarm_in_every_fold": false,
+      "auroc": 0.8095238095238095,
+      "auroc_ci": [
+        0.4090909090909091,
+        1.0
+      ],
+      "marginal_false_alarms": {
+        "k": 0,
+        "n": 21,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.1610976152190796
+        ]
+      },
+      "marginal_sensitivity": {
+        "k": 1,
+        "n": 3,
+        "share": 0.3333333333333333,
+        "ci": [
+          0.008403758659612636,
+          0.9057006759497539
+        ]
+      },
+      "group_conditional_false_alarms": {
+        "k": 0,
+        "n": 21,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.1610976152190796
+        ]
+      },
+      "group_conditional_sensitivity": {
+        "k": 0,
+        "n": 3,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.7075982261787133
+        ]
+      }
+    }
+  ],
+  "overall": {
+    "marginal": {
+      "false_alarms": {
+        "k": 40,
+        "n": 619,
+        "share": 0.06462035541195477,
+        "ci": [
+          0.04656342205288964,
+          0.0869580132214595
+        ]
+      },
+      "sensitivity": {
+        "k": 62,
+        "n": 133,
+        "share": 0.46616541353383456,
+        "ci": [
+          0.3792415109021964,
+          0.5546291920378923
+        ]
+      }
+    },
+    "group_conditional": {
+      "false_alarms": {
+        "k": 26,
+        "n": 619,
+        "share": 0.0420032310177706,
+        "ci": [
+          0.02761833354920826,
+          0.06094101762584303
+        ]
+      },
+      "sensitivity": {
+        "k": 59,
+        "n": 133,
+        "share": 0.44360902255639095,
+        "ci": [
+          0.3575395819868652,
+          0.5322454718582681
+        ]
+      }
+    }
+  },
+  "flag_642x506": {
+    "marginal_caught": 0,
+    "group_conditional_caught": 0,
+    "n_abnormal": 11,
+    "auroc": 0.5267857142857143,
+    "auroc_ci": [
+      0.28322044334975366,
+      0.7611495706002874
+    ]
+  },
+  "published_alarm_summary_present": true,
+  "reading": "Group-conditional calibration fixes the false-alarm rate inside each size group; it does not add detection. A group whose AUROC interval includes 0.5, or whose sensitivity stays near zero, gives no evidence that the expert reads heart structure there."
+}

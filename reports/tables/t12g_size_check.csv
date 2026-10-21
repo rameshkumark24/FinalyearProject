@@ -1,0 +1,5 @@
+Dependence,Tests,Total,Bonferroni,Holm,Simes,Simes guaranteed
+independent,3,0.20,0.1868,0.1875,0.2001,yes (independence)
+positive (rho +0.5),3,0.20,0.1522,0.1558,0.1739,yes (positive dependence)
+negative (rho -0.45),3,0.20,0.1991,0.1985,0.2029,no
+worst case for Simes (two tests),2,0.20,0.2002,0.1999,0.3002,no

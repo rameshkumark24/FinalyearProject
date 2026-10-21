@@ -1,0 +1,17 @@
+Women,Mismatch,Score,AUROC [95% CI],"Difference [95% CI, women resampled]",Can be ranked
+test,the mother's beats,locked share,"0.984 [0.946, 1.000]",-,-
+test,the mother's beats,heart rate only,"0.966 [0.888, 1.000]",-,-
+test,the mother's beats,locked minus heart rate,-,"0.018 [0.000, 0.059]",no
+test,another woman's fetal ECG,locked share,"0.919 [0.847, 0.974]",-,-
+test,another woman's fetal ECG,heart rate only,"0.898 [0.819, 0.962]",-,-
+test,another woman's fetal ECG,cross correlation,"0.977 [0.944, 0.998]",-,-
+test,another woman's fetal ECG,locked minus heart rate,-,"0.021 [0.006, 0.045]",yes
+test,another woman's fetal ECG,locked minus cross correlation,-,"-0.058 [-0.106, -0.022]",yes
+all,the mother's beats,locked share,"0.990 [0.964, 1.000]",-,-
+all,the mother's beats,heart rate only,"0.978 [0.926, 1.000]",-,-
+all,the mother's beats,locked minus heart rate,-,"0.012 [0.000, 0.039]",no
+all,another woman's fetal ECG,locked share,"0.933 [0.887, 0.971]",-,-
+all,another woman's fetal ECG,heart rate only,"0.909 [0.852, 0.956]",-,-
+all,another woman's fetal ECG,cross correlation,"0.981 [0.962, 0.996]",-,-
+all,another woman's fetal ECG,locked minus heart rate,-,"0.023 [0.008, 0.042]",yes
+all,another woman's fetal ECG,locked minus cross correlation,-,"-0.049 [-0.082, -0.023]",yes
