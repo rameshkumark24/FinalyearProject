@@ -930,7 +930,8 @@ def claim_ledger() -> str:
             "DELTA (one centre)", labelled[0], falsifier)
     if have("wp2b_function_reference"):
         f = load_run("wp2b_function_reference")[0]["healthy_recordings_flagged"]
-        level = min(f, key=float)
+        design_level = load_run(TRADEOFF_RUN)[0]["design_levels"]["function"] if have(TRADEOFF_RUN) else min(map(float, f))
+        level = next(k for k in f if np.isclose(float(k), design_level))
         row = f[level]
         add("The function expert flags healthy fetuses at no more than its level", CONFIRMATORY, f"{row['recordings']} healthy recordings",
             f"{row['recordings_flagged']} flagged at {level} {pct_interval(row['share_ci_by_woman'])} (by woman)", "NInFEA (healthy only)",
@@ -1012,8 +1013,9 @@ def section_review_checks() -> str:
         unchanged = m["control_inputs_unchanged_from_wp4c"]
         notes = [f"**12.1 Rhythm expert with every recording at 500 Hz (run {RATE_RUN}).** The {m['dataset']['resampled_to_500hz']} recordings sampled at 1 kHz were "
                  "reduced to 500 Hz before the frozen extraction, features and probes. The four recordings already at 500 Hz got identical input, and their "
-                 f"beats equal run wp4a's: {all(m['native_500hz_recordings_beats_identical_to_wp4a'].values())}. The control inputs reached the network at "
-                 f"500 Hz already in wp4c, and their embeddings are unchanged: {all(unchanged.values())}. " + m["reading"]]
+                 f"beats equal run wp4a's: {all(m['native_500hz_recordings_beats_identical_to_wp4a'].values())}. The control inputs were resampled per "
+                 "recording here and per segment in wp4c, so their embeddings are " + ("identical" if all(unchanged.values()) else "close but not identical")
+                 + f"; the mother's chest lead scores {num(m['comparison_with_original']['ecgfounder__maternal_chest']['auroc_500hz'])} in both runs. " + m["reading"]]
         parts += notes + [table("t12a_rhythm_500hz", ["Score", "Role", "AUROC, 26 recordings [95% CI]", "AUROC, 22 recordings from one setting [95% CI]",
                                                       "Original AUROC", "Change from the original [95% CI, paired]"], rows, [RATE_RUN])]
     if have(SIZE_RUN):
@@ -1059,12 +1061,18 @@ def section_review_checks() -> str:
                  f"{pct(r['pooled_mean'])} [{pct(r['pooled_p5'])}, {pct(r['pooled_p95'])}]"] for r in m["curve"]]
         shift, transported = m["shift"], m["transported"]
         smallest = m["smallest_calibration_that_holds"]
-        parts += [f"**12.4 How many local healthy recordings the rhythm expert needs (run {TRANSFER_RUN}).** {m['scope'].capitalize()}. Calibrated on the "
+        scope = m["scope"][0].upper() + m["scope"][1:]
+
+        def held(entry) -> str:
+            return (f"{entry['calibration_women']} women ({num(entry['calibration_recordings_median'], 0)} recordings, median)"
+                    if isinstance(entry, dict) else str(entry))
+
+        parts += [f"**12.4 How many local healthy recordings the rhythm expert needs (run {TRANSFER_RUN}).** {scope}. Calibrated on the "
                   f"14 NIFEADB recordings it flagged {transported['flagged']} of {transported['n']} healthy NInFEA recordings ({pct(transported['false_alarm_rate'])}). "
                   f"Kolmogorov-Smirnov distance between the healthy scores of the two datasets {num(shift['distance'])} {interval(shift['ci'])}; the observed excess "
                   f"of false alarms, {pct(shift['observed_excess_false_alarms'])}, is within it, as theory says. Criterion: {provenance['config']['holds']} "
                   f"(level {provenance['config']['level']}, tolerance {provenance['config']['tolerance']}; revised after a trial run, see the run's config). Smallest "
-                  f"calibration that holds: local {smallest['local']}; pooled with the NIFEADB recordings {smallest['pooled']}. Per-draw percentiles include the "
+                  f"calibration that holds: local {held(smallest['local'])}; pooled with the NIFEADB recordings {held(smallest['pooled'])}. Per-draw percentiles include the "
                   "noise of the few test women left; the Beta column is the spread expected from the calibration set alone.",
                   table("t12d_calibration_transfer", ["Calibration women", "Recordings (median)", "Can alarm in every draw",
                                                        "Local: mean false alarms [5th, 95th percentile]", "Expected from the calibration set alone (Beta, 90%)",
@@ -1118,7 +1126,9 @@ def section_review_checks() -> str:
                   f"levels. Priors: {levels_text(m['priors'])}; {m['priors_note']}. {m['function_note'].capitalize()}. Choosing levels to maximise expected true "
                   "referrals under a cap on false positives, with the cut-offs estimated on one part of the data and tested on another, is the method of "
                   "Rubin, Dudoit and van der Laan (2006); optimal weights for weighted Bonferroni are reviewed by Roeder and Wasserman (2009). Only the "
-                  "discrete conformal levels and the prevalence weights are specific to this setting (docs/positioning.md).",
+                  "discrete conformal levels and the prevalence weights are specific to this setting (docs/positioning.md). At the decision rule's priors the "
+                  f"like-for-like optimum sets the rhythm level to {num(m['at_design_budget_base_prevalence']['optimised, same ceiling as design shares']['rhythm_effective'])}: "
+                  "the result depends on the assumed prevalences (table below).",
                   table("t12e_allocation_at_design_budget", ["Allocation", "Levels set (structure / function / rhythm)", "Levels acting", "Effective ceiling",
                                                             "Structural defects caught", "Arrhythmias caught", "True referrals per 1000 (assumed prevalences)",
                                                             "False referrals per 1000 (ceiling)", "False referrals per 1000 (measured, any dependence)"],
@@ -1129,7 +1139,9 @@ def section_review_checks() -> str:
                                                       "Gain using the whole budget, per 1000 [95% of splits]", "Splits choosing another rhythm level"],
                         split_rows, [ALLOCATION_RUN]),
                   "Size of the yes/no referral under chosen dependence (simulated healthy people). For the referral decision Holm refers exactly whom "
-                  "Bonferroni refers; Simes is guaranteed only under positive dependence and exceeds its total for a dependence built against it. "
+                  "Bonferroni refers (Holm was run on the first 20000 simulated people of each row, where it referred the same people as Bonferroni: "
+                  + yes(all(r["holm_equals_bonferroni_on_first_20000"] for r in m["size_check"])) + "); Simes is guaranteed only under positive dependence "
+                  "and exceeds its total for a dependence built against it. "
                   f"Under the assumption that the two other tests behave like independent healthy tests, Simes would refer {pct(illustration['structure']['simes'])} "
                   f"of the defects against {pct(illustration['structure']['bonferroni_any_alarm'])} for Bonferroni with equal levels "
                   f"(own test alone {pct(illustration['structure']['own_test_only'])}); the gap is chance alarms of the other tests, not detection.",
