@@ -12,7 +12,7 @@ Settings, fixed before computing:
   probe          standardise, PCA(32), logistic regression C=1 with balanced class weights (as wp5),
                  fitted on every case of the source dataset
   no fetus twice the target leaves out patients seen in the source: Heartbeat 2T <-> 3T by patient
-                 code, Heartbeat <-> CARDIUM by the matches of run wp14 (exact or possible)
+                 code, Heartbeat <-> CARDIUM by any scan-region match of run wp14b (same or single)
   trimester      FetalCLIP: fitted on the training patients of each of the authors' 4 folds (2T),
                  AUROC on that fold's validation patients and on the 3T patients never seen in 2T;
                  the authors' models: the same two AUROCs from run wp15
@@ -45,7 +45,7 @@ SOURCES = {"delta": RUNS / "wp5_structure_delta" / "embeddings.npz",
            "heartbeat_2T": RUNS / "wp5_structure_heartbeat_2T" / "private" / "embeddings.npz",
            "heartbeat_3T": RUNS / "wp5_structure_heartbeat_3T" / "private" / "embeddings.npz",
            "cardium": RUNS / "wp5_structure_cardium" / "private" / "embeddings.npz"}
-MATCHES = RUNS / "wp14_echo_overlap" / "private" / "matched_patients.csv"
+MATCHES = RUNS / "wp14b_echo_overlap_scan" / "private" / "matched_patients.csv"   # Heartbeat <-> CARDIUM, scan-region matches
 INDEX_2T = DATA / "indexes" / "echo_heartbeat_2T_index.csv"
 FEATURES, N_COMPONENTS, SEED = "fetalclip_scan", 32, 0
 
@@ -65,31 +65,29 @@ def load(dataset: str) -> dict:
     return {"cases": cases, "patients": [patient(dataset, c) for c in cases], "y": data["labels"].astype(int), "x": data[FEATURES]}
 
 
-def shared_patients() -> dict[tuple[str, str], set[tuple[str, str]]]:
-    pairs: dict[tuple[str, str], set[tuple[str, str]]] = {}
+def shared_patients() -> set[tuple[str, str]]:
+    """(Heartbeat patient code, CARDIUM patient) pairs with at least one matched scan (run wp14b)."""
     with MATCHES.open(encoding="utf-8", newline="") as handle:
-        for r in csv.DictReader(handle):
-            pairs.setdefault((r["first"], r["second"]), set()).add((r["first_patient"], r["second_patient"]))
-    return pairs
+        return {(r["first_patient"], r["second_patient"]) for r in csv.DictReader(handle)}
 
 
-def seen_in(source: str, target: str, data: dict, pairs: dict) -> set[str]:
+def seen_in(source: str, target: str, data: dict, pairs: set[tuple[str, str]]) -> set[str]:
     """Patients of the target that also appear in the source: by patient code across the Heartbeat
-    trimesters, by the image matches of run wp14 otherwise."""
+    trimesters, by the scan matches of run wp14b between Heartbeat and CARDIUM."""
     if {source, target} == {"heartbeat_2T", "heartbeat_3T"}:
         return set(data[source]["patients"]) & set(data[target]["patients"])
-    seen: set[str] = set()
-    for (first, second), matched in pairs.items():
-        if (first, second) == (source, target):
-            seen |= {q for _, q in matched}
-        elif (first, second) == (target, source):
-            seen |= {p for p, _ in matched}
-    return seen
+    if source.startswith("heartbeat") and target == "cardium":
+        in_source = set(data[source]["patients"])
+        return {q for p, q in pairs if p in in_source}
+    if source == "cardium" and target.startswith("heartbeat"):
+        in_source = set(data[source]["patients"])
+        return {p for p, q in pairs if q in in_source}
+    return set()
 
 
 def main() -> None:
     for name in ("wp5_structure_delta", "wp5_structure_heartbeat_2T", "wp5_structure_heartbeat_3T", "wp5_structure_cardium",
-                 "wp14_echo_overlap", "wp15_reference_models"):
+                 "wp14b_echo_overlap_scan", "wp15_reference_models"):
         load_run(name)
     data = {name: load(name) for name in SOURCES}
     pairs = shared_patients()
