@@ -4,7 +4,10 @@
       "file": "tables/t00_claim_ledger.csv",
       "runs": [
         "wp10_allocation",
+        "wp11_external_echo_heartbeat_2T",
         "wp13_calibration_transfer",
+        "wp17_structure_calibration",
+        "wp18_echo_retest",
         "wp1_cinc2013",
         "wp2_doppler_cycles",
         "wp2b_function_reference",
@@ -358,11 +361,63 @@
       ]
     },
     {
+      "file": "tables/t13a_overlap_frames.csv",
+      "runs": [
+        "wp14_echo_overlap"
+      ]
+    },
+    {
+      "file": "tables/t13b_external_test.csv",
+      "runs": [
+        "wp11_external_echo_heartbeat_2T",
+        "wp11_external_echo_heartbeat_2T_test",
+        "wp11_external_echo_heartbeat_3T",
+        "wp11_external_echo_cardium",
+        "wp11_external_echo_cardium_grey"
+      ]
+    },
+    {
+      "file": "tables/t13d_probes_per_dataset.csv",
+      "runs": [
+        "wp5_structure_heartbeat_2T",
+        "wp5_structure_heartbeat_3T",
+        "wp5_structure_cardium",
+        "wp5_structure_delta"
+      ]
+    },
+    {
+      "file": "tables/t13e_transfer.csv",
+      "runs": [
+        "wp16_structure_transfer"
+      ]
+    },
+    {
+      "file": "tables/t13f_trimester_shift.csv",
+      "runs": [
+        "wp16_structure_transfer"
+      ]
+    },
+    {
+      "file": "tables/t13g_structure_calibration.csv",
+      "runs": [
+        "wp17_structure_calibration"
+      ]
+    },
+    {
       "file": "RESULTS.md",
       "runs": [
         "wp10_allocation",
+        "wp11_external_echo_cardium",
+        "wp11_external_echo_cardium_grey",
+        "wp11_external_echo_heartbeat_2T",
+        "wp11_external_echo_heartbeat_2T_test",
+        "wp11_external_echo_heartbeat_3T",
         "wp12_theory_simulation",
         "wp13_calibration_transfer",
+        "wp14_echo_overlap",
+        "wp16_structure_transfer",
+        "wp17_structure_calibration",
+        "wp18_echo_retest",
         "wp1_cinc2013",
         "wp2_doppler_cycles",
         "wp2b_function_reference",
@@ -373,7 +428,10 @@
         "wp4c_foundation",
         "wp4d_cnn",
         "wp4e_rhythm_500hz",
+        "wp5_structure_cardium",
         "wp5_structure_delta",
+        "wp5_structure_heartbeat_2T",
+        "wp5_structure_heartbeat_3T",
         "wp5b_structure_controls_delta",
         "wp5c_structure_by_size",
         "wp6_fusion",

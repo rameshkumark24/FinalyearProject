@@ -1,0 +1,2 @@
+Model,2T validation AUROC,Unseen 3T AUROC,Drop
+fetalclip_probe,0.786,0.711,0.075

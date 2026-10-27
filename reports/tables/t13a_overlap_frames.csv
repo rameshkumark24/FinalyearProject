@@ -1,0 +1,7 @@
+Datasets,Images,Identical frames,Near-identical frames,Patients sharing a frame
+delta vs heartbeat_2T,3760 / 3279,0,0,0
+delta vs heartbeat_3T,3760 / 2936,0,0,0
+delta vs cardium,3760 / 6558,0,0,0
+heartbeat_2T vs heartbeat_3T,3279 / 2936,2,2,1
+heartbeat_2T vs cardium,3279 / 6558,0,0,0
+heartbeat_3T vs cardium,2936 / 6558,0,0,0

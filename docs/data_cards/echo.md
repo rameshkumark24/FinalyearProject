@@ -42,7 +42,7 @@
 
 **Results:** `reports/RESULTS.md`, section 6 (runs `wp5_structure_delta`, `wp5b_structure_controls_delta`) and section 8 (run `wp6b_fusion_structure`).
 
-## Heartbeat and CARDIUM — not available to us
+## Heartbeat and CARDIUM — obtained on 24 and 27 October 2026 (see heartbeat.md, cardium.md)
 
 | Dataset | What it holds (from the project's literature notes) | Access |
 |---|---|---|

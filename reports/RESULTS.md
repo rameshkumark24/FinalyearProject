@@ -13,10 +13,14 @@ Every claim of the project in one table, generated from the run folders. 'Confir
 | The trust check tells a real ECG-Doppler pair from the mother's beats | confirmatory: split, model and level fixed before the held-out data | 37 recordings of 26 test women | AUROC 0.984 [0.946, 1.000] | NInFEA | wp3_trust_check | a simpler score separating them as well - heart rate alone reaches 0.966 [0.888, 1.000] (section 12.3) |
 | ECG and Doppler beat-to-beat rates agree within the target | confirmatory: split, model and level fixed before the held-out data | 26 test women | limits [-13.3, 13.3] bpm: **NOT met** | NInFEA | wp3_trust_check | already falsified: gate G3 is not met |
 | The rhythm expert separates arrhythmia from normal rhythm (feasibility on 26 recordings) | confirmatory: split, model and level fixed before the held-out data | 26 recordings (12 arrhythmia) | AUROC 0.798 [0.552, 0.994] | NIFEADB | wp4b_rhythm_intervals | AUROC near 0.5 on recordings of both classes from one recording setting (the 22 recordings from one setting give 0.714 [0.375, 0.981], section 12.1) |
-| The structure expert reads heart structure (upper bound only) | confirmatory: split, model and level fixed before the held-out data | 752 cases (133 with a defect) | AUROC 0.828 [0.779, 0.871] | DELTA (one centre) | wp5_structure_delta | inputs without heart anatomy scoring as high (they reach 0.619 to 0.770); AUROC near 0.5 inside one image-size group or on a second dataset (642x506: 0.527 [0.283, 0.761], section 12.2); no second dataset yet |
+| The structure expert reads heart structure (upper bound only) | confirmatory: split, model and level fixed before the held-out data | 752 cases (133 with a defect) | AUROC 0.828 [0.779, 0.871] | DELTA (one centre) | wp5_structure_delta | inputs without heart anatomy scoring as high (they reach 0.619 to 0.770); AUROC near 0.5 inside one image-size group or on a second dataset (642x506: 0.527 [0.283, 0.761], section 12.2); on Heartbeat it reached 0.509 [0.435, 0.583] (section 13.2) |
 | The function expert flags healthy fetuses at no more than its level | confirmatory: split, model and level fixed before the held-out data | 60 healthy recordings | 2 flagged at 0.05 [0.0%, 8.8%] (by woman) | NInFEA (healthy only) | wp2b_function_reference | more flagged than the level on new healthy recordings; its sensitivity is unknown |
 | False referrals stay under the ceiling when each expert is calibrated where it is used | confirmatory: split, model and level fixed before the held-out data | 60 real ECG-Doppler pairs | 10.0% [3.8%, 20.5%] (ceiling 15%) | NInFEA | wp6_fusion | healthy pairs from a new setting referred above the ceiling after local calibration |
 | Calibration carried over from another device does not hold | confirmatory: split, model and level fixed before the held-out data | 60 real ECG-Doppler pairs | 51.7% [38.4%, 64.8%] referred | NIFEADB to NInFEA | wp6_fusion | carried-over calibration staying at its level on other devices |
+| The structure expert reads heart structure in another country's data | confirmatory: preregistered on 20 Oct 2026, data seen only afterwards (clarifications of 27 Oct) | 784 patients (50 with CHD) | AUROC 0.509 [0.435, 0.583]: does not support it | Heartbeat, 2nd trimester (Colombia) | wp11_external_echo_heartbeat_2T | already falsified for the frozen DELTA expert (section 13.2) |
+| The structure expert's DELTA alarm level holds in another country's data | confirmatory: preregistered on 20 Oct 2026, data seen only afterwards (clarifications of 27 Oct) | 734 normal patients | 94 flagged (12.8%) [10.5%, 15.4%] at level 0.05 | Heartbeat, 2nd trimester | wp11_external_echo_heartbeat_2T | already falsified: the interval excludes the level |
+| Local calibration repairs the echo expert's false alarms but not its detection | exploratory: made after seeing the results; interval not corrected for the number of checks | 734 healthy and 50 CHD patients | false alarms within the level from 19 local healthy patients; 4.3% of CHD caught then | Heartbeat, 2nd trimester | wp17_structure_calibration | detection well above the level after local calibration |
+| The echo expert gives the same answer for the same fetus scanned twice | exploratory: made after seeing the results; interval not corrected for the number of checks | 294 fetuses (2nd and 3rd trimester) | Spearman 0.05 [-0.07, 0.17] | Heartbeat | wp18_echo_retest | already falsified: the two scores do not agree |
 | False referrals of three experts for any dependence (Frechet range) | exploratory: made after seeing the results; interval not corrected for the number of checks | measured rates of each expert | [7.1%, 16.9%]; with uncertainty [4.5%, 57.4%] | three datasets | wp7_dependence_bounds | a joint rate on paired patients outside the range |
 | With 14 calibration recordings the rhythm level acts as a multiple of 1/15 | exploratory: made after seeing the results; interval not corrected for the number of checks (arithmetic) | 14 calibration recordings | effective level 0.067; effective ceiling 16.7% | NIFEADB | wp8_tradeoff | none: it follows from the p-value formula |
 | The rhythm expert does not rely on the sampling rate itself | exploratory: made after seeing the results; interval not corrected for the number of checks | 26 recordings, all brought to 500 Hz | AUROC 0.810 [0.581, 0.994]; change 0.012 [0.000, 0.054] | NIFEADB | wp4e_rhythm_500hz | AUROC falling after the common 500 Hz step; the recording setting itself is not removed by resampling |
@@ -650,6 +654,107 @@ The headline with and without the rhythm expert:
 | 619 | 0.05 | 0.0500 | 0.0501 | [0.035, 0.068] | [0.036, 0.065] |
 | 619 | 0.1 | 0.1000 | 0.0994 | [0.078, 0.122] | [0.081, 0.121] |
 
+## 13. External echo data: Heartbeat and CARDIUM
+
+Both datasets come from the BCV group of Universidad de los Andes (Colombia) and were received through the authors' request forms (data cards: docs/data_cards/heartbeat.md, cardium.md). Their terms forbid redistribution, so only aggregate numbers appear here; per-patient outputs stay in each run's private folder. The frozen DELTA structure expert on these data is the test preregistered on 20 October 2026 (docs/preregistration_external_echo.md, with clarifications dated 27 October, made before any model saw the images); everything after 13.2 is exploratory.
+
+**13.1 Shared images and patients (runs wp14_echo_overlap, wp14b_echo_overlap_scan).** Whole frames compared by identical pixels and by a difference hash:
+
+| Datasets | Images | Identical frames | Near-identical frames | Patients sharing a frame |
+|---|---|---|---|---|
+| delta vs heartbeat_2T | 3760 / 3279 | 0 | 0 | 0 |
+| delta vs heartbeat_3T | 3760 / 2936 | 0 | 0 | 0 |
+| delta vs cardium | 3760 / 6558 | 0 | 0 | 0 |
+| heartbeat_2T vs heartbeat_3T | 3279 / 2936 | 2 | 2 | 1 |
+| heartbeat_2T vs cardium | 3279 / 6558 | 0 | 0 | 0 |
+| heartbeat_3T vs cardium | 2936 / 6558 | 0 | 0 | 0 |
+
+Heartbeat and CARDIUM store frames of different sizes, so run wp14b compared the cleaned scan regions instead: 2856 candidate image pairs, 2812 confirmed by thumbnail correlation; 507 Heartbeat-CARDIUM patient pairs share two or more scans and 180 share one (505 of the 507 with the same label), so CARDIUM is largely a second export of Heartbeat's fetuses, not an independent dataset. Inside the datasets: heartbeat: 16 images repeated across 6 patients (0 with different labels); cardium: 231 images repeated across 34 patients (53 with different labels).
+
+**13.2 The frozen DELTA structure expert on the new data (preregistered; runs wp11_external_echo_*).** Nothing was refitted. Alarms at level 0.05 with the DELTA calibration (transported) and with half of each dataset's normal cases (local). The single-number shortcut scores (image width, height, mean brightness) are AUROCs of those numbers alone.
+
+| Dataset | Patients (CHD) | AUROC [95% CI] | Transported: CHD caught [CI] | Transported: normal flagged [CI] | Local: CHD caught [CI] | Local: normal flagged [CI] | Shortcut scores (AUROC) | Unusable images / patients |
+|---|---|---|---|---|---|---|---|---|
+| Heartbeat, 2nd trimester (primary) | 784 (50) | 0.509 [0.435, 0.583] | 7/50 (14.0%) [5.8%, 26.7%] | 94/734 (12.8%) [10.5%, 15.4%] | 1/50 (2.0%) [0.1%, 10.6%] | 11/367 (3.0%) [1.5%, 5.3%] | width 0.621, height 0.515, mean brightness 0.334 | 0 / 0 |
+| Heartbeat, 2nd-trimester test set | 61 (6) | 0.455 [0.305, 0.598] | 0/6 (0.0%) [0.0%, 45.9%] | 7/55 (12.7%) [5.3%, 24.5%] | 0/6 (0.0%) [0.0%, 45.9%] | 2/28 (7.1%) [0.9%, 23.5%] | width 0.727, height 0.673, mean brightness 0.391 | 0 / 0 |
+| Heartbeat, 3rd trimester | 690 (50) | 0.543 [0.469, 0.617] | 9/50 (18.0%) [8.6%, 31.4%] | 136/640 (21.2%) [18.1%, 24.6%] | 4/50 (8.0%) [2.2%, 19.2%] | 21/320 (6.6%) [4.1%, 9.9%] | width 0.558, height 0.517, mean brightness 0.510 | 0 / 0 |
+| CARDIUM, all images | 1103 (74) | 0.499 [0.440, 0.560] | 9/74 (12.2%) [5.7%, 21.8%] | 174/1029 (16.9%) [14.7%, 19.3%] | 2/74 (2.7%) [0.3%, 9.4%] | 27/515 (5.2%) [3.5%, 7.5%] | width 0.582, height 0.519, mean brightness 0.437 | 0 / 0 |
+| CARDIUM, grey images only | 1023 (73) | 0.505 [0.441, 0.568] | 10/73 (13.7%) [6.8%, 23.8%] | 169/950 (17.8%) [15.4%, 20.4%] | 3/73 (4.1%) [0.9%, 11.5%] | 22/475 (4.6%) [2.9%, 6.9%] | width 0.587, height 0.521, mean brightness 0.439 | 0 / 0 |
+
+**Preregistered reading, primary dataset:** does not support 'reads heart structure' (its AUROC is not distinguishable from 0.5 and a single image number separates the classes at least as well), which the fixed rule counts as 'shortcut'. The rule asks for an AUROC interval above 0.5 and an AUROC above the strongest single-number shortcut (0.666 here). The transported alarm level does not hold (its false-alarm interval excludes the level 0.05). Secondary datasets, same rule: Heartbeat, 2nd-trimester test set: shortcut, calibration does not hold; Heartbeat, 3rd trimester: shortcut, calibration does not hold; CARDIUM, all images: shortcut, calibration does not hold; CARDIUM, grey images only: shortcut, calibration does not hold.
+
+**13.4 A FetalCLIP probe fitted on each dataset, with the same controls as DELTA (runs wp5_structure_*; exploratory).** Case-level folds inside each dataset; the controls are the same network with random weights, the parts removed by the cleaning step, and six numbers that describe the image rather than its content.
+
+| Dataset | FetalCLIP, cleaned scan | Random weights | Removed parts only | Six image numbers | Commonest image size: scan / six numbers |
+|---|---|---|---|---|---|
+| Heartbeat 2T | 0.808 [0.748, 0.867] | 0.677 [0.599, 0.755] | 0.804 [0.747, 0.859] | 0.709 [0.643, 0.782] | 1136x787 (377 cases): 0.862 / 0.670 |
+| Heartbeat 3T | 0.784 [0.701, 0.855] | 0.595 [0.515, 0.673] | 0.803 [0.726, 0.872] | 0.743 [0.661, 0.825] | 1136x787 (342 cases): 0.735 / 0.709 |
+| CARDIUM | 0.773 [0.717, 0.823] | 0.552 [0.487, 0.611] | 0.775 [0.712, 0.832] | 0.631 [0.574, 0.685] | 1071x852 (521 cases): 0.760 / 0.641 |
+| DELTA (for comparison) | 0.828 [0.779, 0.871] | 0.733 [0.684, 0.781] | 0.770 [0.720, 0.821] | 0.619 [0.563, 0.675] | 900x752 (531 cases): 0.870 / 0.618 |
+
+**13.5 Probes moved between datasets, and from the 2nd to the 3rd trimester (run wp16_structure_transfer; exploratory).** Fitted on every case of one dataset, applied to another; target patients seen in the source are left out. Within-dataset AUROC: delta 0.828, heartbeat_2T 0.808, heartbeat_3T 0.784, cardium 0.773.
+
+| Fitted on, applied to | AUROC [95% CI] | Patients | CHD | Left out (seen in the source) |
+|---|---|---|---|---|
+| delta to heartbeat_2T | 0.471 [0.400, 0.544] | 784 | 50 | 0 |
+| delta to heartbeat_3T | 0.473 [0.404, 0.546] | 690 | 50 | 0 |
+| delta to cardium | 0.491 [0.432, 0.551] | 1103 | 74 | 0 |
+| heartbeat_2T to delta | 0.521 [0.462, 0.575] | 752 | 133 | 0 |
+| heartbeat_2T to heartbeat_3T | 0.720 [0.617, 0.812] | 394 | 30 | 296 |
+| heartbeat_2T to cardium | 0.716 [0.632, 0.790] | 642 | 37 | 461 |
+| heartbeat_3T to delta | 0.458 [0.405, 0.512] | 752 | 133 | 0 |
+| heartbeat_3T to heartbeat_2T | 0.749 [0.671, 0.817] | 488 | 32 | 296 |
+| heartbeat_3T to cardium | 0.678 [0.596, 0.755] | 631 | 36 | 472 |
+| cardium to delta | 0.529 [0.475, 0.583] | 752 | 133 | 0 |
+| cardium to heartbeat_2T | 0.740 [0.626, 0.846] | 335 | 12 | 449 |
+| cardium to heartbeat_3T | 0.731 [0.622, 0.836] | 234 | 13 | 456 |
+
+Trimester shift (hypothesis H6): mean AUROC on the authors' 2nd-trimester validation folds and on the 394 3rd-trimester patients never seen in 2nd-trimester data, for the FetalCLIP probe and the authors' models.
+
+| Model | 2T validation AUROC | Unseen 3T AUROC | Drop |
+|---|---|---|---|
+| fetalclip_probe | 0.786 | 0.711 | 0.075 |
+
+**13.6 Does the structure expert's alarm level travel, and what does local calibration cost in detection? (run wp17_structure_calibration; exploratory).** Heartbeat, 2nd trimester (primary): transported calibration flagged 12.8% of normal fetuses and caught 14.0% of CHD; local calibration holds from 19 healthy patients, where it catches 4.3% of CHD; KS distance 0.132 [0.105, 0.255]; Heartbeat, 3rd trimester: transported calibration flagged 21.2% of normal fetuses and caught 18.0% of CHD; local calibration holds from 19 healthy patients, where it catches 6.9% of CHD; KS distance 0.264 [0.196, 0.384]; CARDIUM, all images: transported calibration flagged 16.9% of normal fetuses and caught 12.2% of CHD; local calibration holds from 19 healthy patients, where it catches 3.1% of CHD; KS distance 0.201 [0.147, 0.334].
+
+| Dataset | Local healthy patients | Can alarm | Local: normal flagged [5th, 95th] | Local: CHD caught [5th, 95th] | Pooled with DELTA: normal flagged | Pooled: CHD caught |
+|---|---|---|---|---|---|---|
+| Heartbeat, 2nd trimester (primary) | 0 | no | - | - | 12.8% | 14.0% |
+| Heartbeat, 2nd trimester (primary) | 5 | no | 0.0% [0.0%, 0.0%] | 0.0% [0.0%, 0.0%] | 11.8% | 13.3% |
+| Heartbeat, 2nd trimester (primary) | 10 | no | 0.0% [0.0%, 0.0%] | 0.0% [0.0%, 0.0%] | 10.5% | 11.8% |
+| Heartbeat, 2nd trimester (primary) | 19 | yes | 4.9% [0.1%, 14.7%] | 4.3% [0.0%, 16.0%] | 10.7% | 11.9% |
+| Heartbeat, 2nd trimester (primary) | 25 | yes | 3.9% [0.1%, 11.7%] | 3.1% [0.0%, 14.0%] | 9.6% | 10.4% |
+| Heartbeat, 2nd trimester (primary) | 40 | yes | 4.8% [0.7%, 10.5%] | 4.0% [0.0%, 14.0%] | 8.9% | 9.3% |
+| Heartbeat, 2nd trimester (primary) | 60 | yes | 5.0% [1.3%, 10.1%] | 4.1% [0.0%, 10.0%] | 8.3% | 8.3% |
+| Heartbeat, 2nd trimester (primary) | 100 | yes | 5.0% [1.7%, 9.1%] | 3.9% [2.0%, 8.0%] | 7.1% | 6.2% |
+| Heartbeat, 2nd trimester (primary) | 150 | yes | 4.6% [1.9%, 7.7%] | 3.5% [2.0%, 6.0%] | 6.2% | 4.8% |
+| Heartbeat, 2nd trimester (primary) | 200 | yes | 5.0% [2.2%, 8.2%] | 3.8% [2.0%, 6.0%] | 6.3% | 4.8% |
+| Heartbeat, 2nd trimester (primary) | 300 | yes | 4.9% [2.5%, 7.6%] | 3.8% [2.0%, 4.0%] | 5.8% | 4.2% |
+| Heartbeat, 3rd trimester | 0 | no | - | - | 21.2% | 18.0% |
+| Heartbeat, 3rd trimester | 5 | no | 0.0% [0.0%, 0.0%] | 0.0% [0.0%, 0.0%] | 19.0% | 16.2% |
+| Heartbeat, 3rd trimester | 10 | no | 0.0% [0.0%, 0.0%] | 0.0% [0.0%, 0.0%] | 14.8% | 14.5% |
+| Heartbeat, 3rd trimester | 19 | yes | 4.5% [0.2%, 12.4%] | 6.9% [2.0%, 16.0%] | 14.1% | 14.6% |
+| Heartbeat, 3rd trimester | 25 | yes | 3.8% [0.2%, 11.6%] | 6.2% [2.0%, 14.0%] | 12.0% | 13.6% |
+| Heartbeat, 3rd trimester | 40 | yes | 4.9% [0.8%, 12.0%] | 7.6% [2.0%, 16.0%] | 10.2% | 12.7% |
+| Heartbeat, 3rd trimester | 60 | yes | 4.9% [1.0%, 10.4%] | 7.6% [4.0%, 14.0%] | 8.7% | 11.6% |
+| Heartbeat, 3rd trimester | 100 | yes | 5.0% [1.7%, 9.4%] | 7.7% [4.0%, 14.0%] | 7.5% | 10.5% |
+| Heartbeat, 3rd trimester | 150 | yes | 4.7% [1.8%, 8.2%] | 7.3% [6.0%, 10.0%] | 6.5% | 9.1% |
+| Heartbeat, 3rd trimester | 200 | yes | 5.0% [2.3%, 8.2%] | 7.6% [6.0%, 10.0%] | 6.4% | 9.0% |
+| Heartbeat, 3rd trimester | 300 | yes | 5.0% [2.4%, 7.9%] | 7.5% [6.0%, 8.0%] | 5.9% | 8.4% |
+| CARDIUM, all images | 0 | no | - | - | 16.9% | 12.2% |
+| CARDIUM, all images | 5 | no | 0.0% [0.0%, 0.0%] | 0.0% [0.0%, 0.0%] | 15.0% | 11.4% |
+| CARDIUM, all images | 10 | no | 0.0% [0.0%, 0.0%] | 0.0% [0.0%, 0.0%] | 12.5% | 9.4% |
+| CARDIUM, all images | 19 | yes | 5.2% [0.2%, 15.2%] | 3.1% [0.0%, 12.2%] | 12.6% | 9.4% |
+| CARDIUM, all images | 25 | yes | 3.9% [0.2%, 11.4%] | 2.2% [0.0%, 8.1%] | 10.8% | 7.8% |
+| CARDIUM, all images | 40 | yes | 4.7% [0.8%, 11.2%] | 2.6% [0.0%, 8.1%] | 9.6% | 6.8% |
+| CARDIUM, all images | 60 | yes | 5.0% [1.2%, 10.1%] | 2.8% [0.0%, 8.1%] | 8.6% | 5.9% |
+| CARDIUM, all images | 100 | yes | 5.0% [1.8%, 9.5%] | 2.8% [0.0%, 8.1%] | 7.4% | 4.8% |
+| CARDIUM, all images | 150 | yes | 4.5% [1.9%, 8.0%] | 2.4% [1.4%, 5.4%] | 6.3% | 3.6% |
+| CARDIUM, all images | 200 | yes | 4.9% [2.5%, 8.1%] | 2.6% [1.4%, 5.4%] | 6.3% | 3.5% |
+| CARDIUM, all images | 300 | yes | 4.9% [2.6%, 7.4%] | 2.6% [1.4%, 2.7%] | 5.9% | 3.0% |
+
+**13.7 The same fetus scanned twice (run wp18_echo_retest; exploratory).** 296 Heartbeat patients were scanned in both trimesters (2 with different labels, left out). Spearman correlation of the frozen expert's two scores 0.05 [-0.07, 0.17] (n 294); alarms with the transported calibration agree with kappa -0.01 (table: {'both': 6, '2T only': 28, '3T only': 49, 'neither': 211}).
+
 ## 11. Threats to validity
 
 1. **Checks made after seeing the results.** Sections 9 and 10, gate G7 and the added rows in sections 3 and 5 were defined after the results were known. They re-summarise saved outputs; their intervals are not corrected for the number of checks.
@@ -662,7 +767,7 @@ The headline with and without the rhythm expert:
 8. **ECG-Doppler agreement.** Gate G3 is not met: classical limits [-13.3, 13.3] bpm, percentile limits [-16.6, 15.5] bpm.
 9. **Assumed priors.** The function and rhythm priors are assumptions without a cited source; precision is shown over a grid of prevalences (section 9).
 10. **Discrete p-values.** With few calibration cases an alarm level acts as the next lower attainable p-value; for the rhythm expert the level 0.1 acts as 0.067.
-11. **No external validation.** No expert has been tested on a dataset other than the one it was built on; the script for a second echo dataset is ready (scripts/run_wp11_external_echo.py, docs/preregistration_external_echo.md) but has no data.
+11. **The structure expert failed its external test.** Applied unchanged to Heartbeat (another country, preregistered), it reached AUROC 0.509 [0.435, 0.583] and flagged 12.8% of normal fetuses at its level (section 13). The rhythm and function experts have still not been tested on a second dataset.
 12. **Standard methods.** The union bound, the Frechet range, conformal p-values, group-conditional calibration, Holm and Simes, and choosing levels to maximise true positives under a false-positive cap are all established; docs/positioning.md and docs/related_work.md list what is and is not new.
 13. **Recording setting in NIFEADB.** With every recording brought to 500 Hz the rhythm expert reaches 0.810 [0.581, 0.994], so the sampling rate itself was not its cue; but the mother's chest lead, which holds no fetal signal, still scores 0.702: the four recordings sampled at 500 Hz, all arrhythmia, differ in some other way that resampling cannot remove (section 12.1).
 14. **Simple baselines for the trust check.** Heart rate alone separates the mother's beats with AUROC 0.966 [0.888, 1.000], and a cross-correlation of the beat trains beats the locked share on swapped pairs (section 12.3).
