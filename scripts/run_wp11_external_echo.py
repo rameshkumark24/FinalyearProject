@@ -182,10 +182,12 @@ def main(argv: list[str] | None = None) -> None:
     cases = sorted(by_case)
     features, labels, sizes, plain, kept_cases = [], [], [], [], []
     skipped_images, skipped_cases = 0, 0
+    ordered = [i for case in cases for i in by_case[case]]                  # every image, grouped by case
     with ProcessPoolExecutor(max_workers=args.workers) as pool:
+        stream = pool.map(clean_image, [str(paths[i]) for i in ordered], chunksize=8)
         for n, case in enumerate(cases):
             members = by_case[case]
-            cleaned = list(pool.map(clean_image, [str(paths[i]) for i in members]))
+            cleaned = [next(stream) for _ in members]
             images = [resize(image) for image, _ in cleaned if image is not None]
             skipped_images += sum(image is None for image, _ in cleaned)
             if not images:
