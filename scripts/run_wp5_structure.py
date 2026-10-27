@@ -287,6 +287,8 @@ def main() -> None:
     parser.add_argument("--index", required=True, type=Path, help="CSV with case, label, subtype, plane, path")
     parser.add_argument("--source", default="", help="where the dataset comes from (DOI, licence), written to the run")
     parser.add_argument("--workers", type=int, default=5, help="processes that clean images")
+    parser.add_argument("--restricted", action="store_true",
+                        help="the dataset's terms forbid redistribution: per-case files go to private/, which git ignores")
     args = parser.parse_args()
 
     rows = read_index(args.index)
@@ -294,6 +296,8 @@ def main() -> None:
     missing = [str(path) for path in paths if not path.exists()]
     if missing:
         raise FileNotFoundError(f"{len(missing)} images of the index are missing, first: {missing[0]}")
+    private = "private/" if args.restricted else ""
+    restricted_config = {"restricted": True} if args.restricted else {}
 
     started = time.time()
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -304,7 +308,7 @@ def main() -> None:
         script="scripts/run_wp5_structure.py",
         config={"dataset": args.name, "source": args.source, "alpha": ALPHA, "folds": N_FOLDS, "repeats": N_REPEATS,
                 "probe": f"standardise, PCA({N_COMPONENTS}), logistic regression C=1 with balanced class weights",
-                "permutations": N_PERM, "calibration_share": CALIBRATION_SHARE, "device": device},
+                "permutations": N_PERM, "calibration_share": CALIBRATION_SHARE, "device": device, **restricted_config},
         inputs={"index": [args.index], "images": paths},
         n_real=len({row["case"] for row in rows}),
         models=[record, twin_record(SEED)],
@@ -361,12 +365,14 @@ def main() -> None:
             entry["note"] = f"fewer than {MIN_PER_CLASS} cases in a class; not analysed"
         planes.append(entry)
 
-    run.write_csv("per_case.csv", [
+    if private:
+        (run.path / "private").mkdir(parents=True, exist_ok=True)
+    run.write_csv(private + "per_case.csv", [
         {"case": case, "label": int(label), "subtype": kind, "split": split[i], "image_size": size[i],
          "p_value": float(p_i), "alarm": bool(p_i <= ALPHA),
          **{f"score_{name}": float(scores[name][i]) for name in inputs}}
         for i, (case, label, kind, p_i) in enumerate(zip(cases, y, subtype, p))])
-    np.savez_compressed(run.path / "embeddings.npz", cases=np.array(cases), labels=y, **case_x)
+    np.savez_compressed(run.path / (private + "embeddings.npz"), cases=np.array(cases), labels=y, **case_x)
 
     audit_overlay, audit_trivial = results["fetalclip_overlay_only"], results["no_anatomy_numbers"]
     metrics = {
@@ -386,7 +392,9 @@ def main() -> None:
         "models": {"published": record, "control": control_record},
         "gate_G5": {"auroc_with_interval": True, "shortcut_audit_reported": True,
                     "reference_model_reproduced": False,
-                    "reason": "no released reference model exists for this dataset; the other two parts are reported"},
+                    "reason": ("the authors' released models are checked in a separate run (wp15_reference_models); the other two parts are "
+                               "reported" if args.restricted else
+                               "no released reference model exists for this dataset; the other two parts are reported")},
         "minutes": (time.time() - started) / 60,
     }
     run.finish(metrics)

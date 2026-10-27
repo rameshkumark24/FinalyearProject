@@ -44,7 +44,9 @@ The second one only restates each expert's own sensitivity (below).
    setting; carried over from another device it referred about half of the healthy fetuses
    (run `wp6_fusion`). Run `wp13_calibration_transfer` turns this into a learning curve: how many
    local healthy recordings bring false alarms back near the level, alone or pooled with the
-   original calibration set (one device pair, healthy fetuses only).
+   original calibration set (one device pair, healthy fetuses only). The structure expert repeats it on data with defects: carried
+   from DELTA to Heartbeat and CARDIUM its calibration fails, and local calibration repairs the false alarms but not the
+   detection (runs `wp11_external_echo_*`, `wp17_structure_calibration`).
 2. **Small-sample consequences, stated.** With 14 calibration recordings the rhythm level 0.10
    acts as 1/15, so part of the stated ceiling can never be spent (run `wp8_tradeoff`).
 3. **A trust check for simultaneous ECG and Doppler, with its baselines.** It is a consistency
@@ -66,7 +68,7 @@ The second one only restates each expert's own sensitivity (below).
   500 Hz the mother's chest lead still scores above chance, which points to other differences of
   those four recordings (runs `wp4e`, `wp9`). It is a feasibility result.
 - Any sensitivity of the function expert: NInFEA holds healthy fetuses only.
-- External validity: no expert has been tested on a second dataset.
+- External validity: the structure expert failed its preregistered external test (AUROC 0.509 on Heartbeat); the rhythm and function experts were not tested on a second dataset.
 
 ## The claim proposed for a paper (to be agreed with the guide)
 

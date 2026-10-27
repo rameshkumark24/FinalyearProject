@@ -1,4 +1,6 @@
-# Data card - second fetal echo dataset (not yet obtained)
+# Data card - second fetal echo dataset (obtained)
+
+**27 October 2026: both datasets were received. Their cards are `heartbeat.md` and `cardium.md`; this stub is kept as written before the request.**
 
 Stub written on 20 October 2026, before any data were requested. Fill in from the dataset's own
 documentation when access is granted; every field must cite where it was read.

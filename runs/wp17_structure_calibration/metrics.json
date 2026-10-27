@@ -1,0 +1,1086 @@
+{
+  "by_dataset": {
+    "heartbeat_2T": {
+      "n_healthy": 734,
+      "n_chd": 50,
+      "transported": {
+        "false_alarms": 0.12806539509536785,
+        "detection": 0.14,
+        "effective_level": 0.047619047619047616
+      },
+      "curve": [
+        {
+          "local_healthy": 0,
+          "can_alarm_local": false,
+          "effective_level_local": 0.0,
+          "beta_range_90_local": [
+            0.0,
+            0.0
+          ],
+          "pooled_false_alarms": {
+            "mean": 0.12806539509536785,
+            "p5": 0.12806539509536785,
+            "p95": 0.12806539509536785
+          },
+          "pooled_detection": {
+            "mean": 0.14000000000000007,
+            "p5": 0.14,
+            "p95": 0.14
+          },
+          "local_holds": false,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 5,
+          "can_alarm_local": false,
+          "effective_level_local": 0.0,
+          "beta_range_90_local": [
+            0.0,
+            0.0
+          ],
+          "local_false_alarms": {
+            "mean": 0.0,
+            "p5": 0.0,
+            "p95": 0.0
+          },
+          "local_detection": {
+            "mean": 0.0,
+            "p5": 0.0,
+            "p95": 0.0
+          },
+          "pooled_false_alarms": {
+            "mean": 0.11759396433470506,
+            "p5": 0.07133058984910837,
+            "p95": 0.1289437585733882
+          },
+          "pooled_detection": {
+            "mean": 0.13296000000000008,
+            "p5": 0.06,
+            "p95": 0.14
+          },
+          "local_holds": false,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 10,
+          "can_alarm_local": false,
+          "effective_level_local": 0.0,
+          "beta_range_90_local": [
+            0.0,
+            0.0
+          ],
+          "local_false_alarms": {
+            "mean": 0.0,
+            "p5": 0.0,
+            "p95": 0.0
+          },
+          "local_detection": {
+            "mean": 0.0,
+            "p5": 0.0,
+            "p95": 0.0
+          },
+          "pooled_false_alarms": {
+            "mean": 0.10510220994475139,
+            "p5": 0.05939226519337017,
+            "p95": 0.1298342541436464
+          },
+          "pooled_detection": {
+            "mean": 0.11784000000000003,
+            "p5": 0.04,
+            "p95": 0.14
+          },
+          "local_holds": false,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 19,
+          "can_alarm_local": true,
+          "effective_level_local": 0.05,
+          "beta_range_90_local": [
+            0.002696006302871282,
+            0.14586850331224344
+          ],
+          "local_false_alarms": {
+            "mean": 0.0492951048951049,
+            "p5": 0.0013986013986013986,
+            "p95": 0.14692307692307685
+          },
+          "local_detection": {
+            "mean": 0.042800000000000005,
+            "p5": 0.0,
+            "p95": 0.16
+          },
+          "pooled_false_alarms": {
+            "mean": 0.10666013986013985,
+            "p5": 0.05874125874125874,
+            "p95": 0.13986013986013987
+          },
+          "pooled_detection": {
+            "mean": 0.11860000000000004,
+            "p5": 0.04,
+            "p95": 0.14
+          },
+          "local_holds": true,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 25,
+          "can_alarm_local": true,
+          "effective_level_local": 0.038461538461538464,
+          "beta_range_90_local": [
+            0.0020496284126207912,
+            0.11292814500684321
+          ],
+          "local_false_alarms": {
+            "mean": 0.03883497884344147,
+            "p5": 0.0014104372355430183,
+            "p95": 0.1171368124118476
+          },
+          "local_detection": {
+            "mean": 0.03148,
+            "p5": 0.0,
+            "p95": 0.14
+          },
+          "pooled_false_alarms": {
+            "mean": 0.09593229901269393,
+            "p5": 0.052115655853314534,
+            "p95": 0.1311706629055007
+          },
+          "pooled_detection": {
+            "mean": 0.10352000000000003,
+            "p5": 0.04,
+            "p95": 0.14
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 40,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04878048780487805,
+          "beta_range_90_local": [
+            0.008956945592975591,
+            0.11318836094473755
+          ],
+          "local_false_alarms": {
+            "mean": 0.04768876080691642,
+            "p5": 0.007204610951008645,
+            "p95": 0.10525936599423624
+          },
+          "local_detection": {
+            "mean": 0.039520000000000007,
+            "p5": 0.0,
+            "p95": 0.14
+          },
+          "pooled_false_alarms": {
+            "mean": 0.0887406340057637,
+            "p5": 0.04755043227665706,
+            "p95": 0.13256484149855907
+          },
+          "pooled_detection": {
+            "mean": 0.09320000000000002,
+            "p5": 0.04,
+            "p95": 0.14
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 60,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04918032786885246,
+          "beta_range_90_local": [
+            0.01376515756828304,
+            0.10123589492416166
+          ],
+          "local_false_alarms": {
+            "mean": 0.04962017804154303,
+            "p5": 0.013353115727002967,
+            "p95": 0.10089020771513353
+          },
+          "local_detection": {
+            "mean": 0.04068000000000001,
+            "p5": 0.0,
+            "p95": 0.1
+          },
+          "pooled_false_alarms": {
+            "mean": 0.08310385756676558,
+            "p5": 0.04591988130563798,
+            "p95": 0.12470326409495543
+          },
+          "pooled_detection": {
+            "mean": 0.08328000000000002,
+            "p5": 0.04,
+            "p95": 0.14
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 100,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04950495049504951,
+          "beta_range_90_local": [
+            0.019905563662171836,
+            0.0891962501588798
+          ],
+          "local_false_alarms": {
+            "mean": 0.04964353312302839,
+            "p5": 0.017350157728706624,
+            "p95": 0.0914826498422713
+          },
+          "local_detection": {
+            "mean": 0.03888,
+            "p5": 0.02,
+            "p95": 0.08
+          },
+          "pooled_false_alarms": {
+            "mean": 0.07106309148264983,
+            "p5": 0.03943217665615142,
+            "p95": 0.11514195583596215
+          },
+          "pooled_detection": {
+            "mean": 0.06232000000000001,
+            "p5": 0.04,
+            "p95": 0.14
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 150,
+          "can_alarm_local": true,
+          "effective_level_local": 0.046357615894039736,
+          "beta_range_90_local": [
+            0.022104049836230516,
+            0.07741799715987178
+          ],
+          "local_false_alarms": {
+            "mean": 0.0463972602739726,
+            "p5": 0.018835616438356163,
+            "p95": 0.07705479452054795
+          },
+          "local_detection": {
+            "mean": 0.03495999999999999,
+            "p5": 0.02,
+            "p95": 0.06
+          },
+          "pooled_false_alarms": {
+            "mean": 0.06211986301369864,
+            "p5": 0.032534246575342464,
+            "p95": 0.0976027397260274
+          },
+          "pooled_detection": {
+            "mean": 0.04844,
+            "p5": 0.02,
+            "p95": 0.1
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 200,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04975124378109453,
+          "beta_range_90_local": [
+            0.027374253525114488,
+            0.0772109750173381
+          ],
+          "local_false_alarms": {
+            "mean": 0.049921348314606734,
+            "p5": 0.02247191011235955,
+            "p95": 0.08249063670411975
+          },
+          "local_detection": {
+            "mean": 0.0376,
+            "p5": 0.02,
+            "p95": 0.06
+          },
+          "pooled_false_alarms": {
+            "mean": 0.06276779026217229,
+            "p5": 0.03548689138576779,
+            "p95": 0.09363295880149813
+          },
+          "pooled_detection": {
+            "mean": 0.04784,
+            "p5": 0.04,
+            "p95": 0.08
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 300,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04983388704318937,
+          "beta_range_90_local": [
+            0.031069949744855267,
+            0.07199405714629513
+          ],
+          "local_false_alarms": {
+            "mean": 0.04943317972350231,
+            "p5": 0.02534562211981567,
+            "p95": 0.07615207373271879
+          },
+          "local_detection": {
+            "mean": 0.037720000000000004,
+            "p5": 0.02,
+            "p95": 0.04
+          },
+          "pooled_false_alarms": {
+            "mean": 0.05825806451612904,
+            "p5": 0.03225806451612903,
+            "p95": 0.08525345622119816
+          },
+          "pooled_detection": {
+            "mean": 0.04208,
+            "p5": 0.04,
+            "p95": 0.06
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        }
+      ],
+      "smallest_that_holds": {
+        "local": {
+          "healthy": 19,
+          "detection_mean": 0.042800000000000005
+        },
+        "pooled": {
+          "healthy": 25,
+          "detection_mean": 0.10352000000000003
+        }
+      },
+      "shift": {
+        "distance": 0.1316252087545047,
+        "ci": [
+          0.1051232750285664,
+          0.2551650259295069
+        ],
+        "observed_excess_false_alarms": 0.08044634747632023
+      }
+    },
+    "heartbeat_3T": {
+      "n_healthy": 640,
+      "n_chd": 50,
+      "transported": {
+        "false_alarms": 0.2125,
+        "detection": 0.18,
+        "effective_level": 0.047619047619047616
+      },
+      "curve": [
+        {
+          "local_healthy": 0,
+          "can_alarm_local": false,
+          "effective_level_local": 0.0,
+          "beta_range_90_local": [
+            0.0,
+            0.0
+          ],
+          "pooled_false_alarms": {
+            "mean": 0.21249999999999994,
+            "p5": 0.2125,
+            "p95": 0.2125
+          },
+          "pooled_detection": {
+            "mean": 0.18,
+            "p5": 0.18,
+            "p95": 0.18
+          },
+          "local_holds": false,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 5,
+          "can_alarm_local": false,
+          "effective_level_local": 0.0,
+          "beta_range_90_local": [
+            0.0,
+            0.0
+          ],
+          "local_false_alarms": {
+            "mean": 0.0,
+            "p5": 0.0,
+            "p95": 0.0
+          },
+          "local_detection": {
+            "mean": 0.0,
+            "p5": 0.0,
+            "p95": 0.0
+          },
+          "pooled_false_alarms": {
+            "mean": 0.19011968503937007,
+            "p5": 0.07401574803149606,
+            "p95": 0.2141732283464567
+          },
+          "pooled_detection": {
+            "mean": 0.16172,
+            "p5": 0.1,
+            "p95": 0.18
+          },
+          "local_holds": false,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 10,
+          "can_alarm_local": false,
+          "effective_level_local": 0.0,
+          "beta_range_90_local": [
+            0.0,
+            0.0
+          ],
+          "local_false_alarms": {
+            "mean": 0.0,
+            "p5": 0.0,
+            "p95": 0.0
+          },
+          "local_detection": {
+            "mean": 0.0,
+            "p5": 0.0,
+            "p95": 0.0
+          },
+          "pooled_false_alarms": {
+            "mean": 0.14758730158730157,
+            "p5": 0.0746031746031746,
+            "p95": 0.21587301587301588
+          },
+          "pooled_detection": {
+            "mean": 0.1448,
+            "p5": 0.1,
+            "p95": 0.18
+          },
+          "local_holds": false,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 19,
+          "can_alarm_local": true,
+          "effective_level_local": 0.05,
+          "beta_range_90_local": [
+            0.002696006302871282,
+            0.14586850331224344
+          ],
+          "local_false_alarms": {
+            "mean": 0.0446280193236715,
+            "p5": 0.001610305958132045,
+            "p95": 0.12399355877616747
+          },
+          "local_detection": {
+            "mean": 0.06912,
+            "p5": 0.02,
+            "p95": 0.16
+          },
+          "pooled_false_alarms": {
+            "mean": 0.14057648953301127,
+            "p5": 0.07407407407407407,
+            "p95": 0.21739130434782608
+          },
+          "pooled_detection": {
+            "mean": 0.1462,
+            "p5": 0.1,
+            "p95": 0.18
+          },
+          "local_holds": true,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 25,
+          "can_alarm_local": true,
+          "effective_level_local": 0.038461538461538464,
+          "beta_range_90_local": [
+            0.0020496284126207912,
+            0.11292814500684321
+          ],
+          "local_false_alarms": {
+            "mean": 0.03823414634146342,
+            "p5": 0.0016260162601626016,
+            "p95": 0.11552845528455277
+          },
+          "local_detection": {
+            "mean": 0.061560000000000004,
+            "p5": 0.02,
+            "p95": 0.14
+          },
+          "pooled_false_alarms": {
+            "mean": 0.12006178861788618,
+            "p5": 0.055284552845528454,
+            "p95": 0.2097560975609756
+          },
+          "pooled_detection": {
+            "mean": 0.1362,
+            "p5": 0.08,
+            "p95": 0.16
+          },
+          "local_holds": true,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 40,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04878048780487805,
+          "beta_range_90_local": [
+            0.008956945592975591,
+            0.11318836094473755
+          ],
+          "local_false_alarms": {
+            "mean": 0.04946333333333334,
+            "p5": 0.008333333333333333,
+            "p95": 0.12008333333333325
+          },
+          "local_detection": {
+            "mean": 0.07608000000000001,
+            "p5": 0.02,
+            "p95": 0.16
+          },
+          "pooled_false_alarms": {
+            "mean": 0.10249666666666667,
+            "p5": 0.04666666666666667,
+            "p95": 0.18166666666666667
+          },
+          "pooled_detection": {
+            "mean": 0.12748,
+            "p5": 0.08,
+            "p95": 0.16
+          },
+          "local_holds": true,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 60,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04918032786885246,
+          "beta_range_90_local": [
+            0.01376515756828304,
+            0.10123589492416166
+          ],
+          "local_false_alarms": {
+            "mean": 0.04924827586206897,
+            "p5": 0.010344827586206896,
+            "p95": 0.10353448275862061
+          },
+          "local_detection": {
+            "mean": 0.07648000000000002,
+            "p5": 0.04,
+            "p95": 0.14
+          },
+          "pooled_false_alarms": {
+            "mean": 0.0866896551724138,
+            "p5": 0.041293103448275865,
+            "p95": 0.15008620689655164
+          },
+          "pooled_detection": {
+            "mean": 0.11624000000000001,
+            "p5": 0.08,
+            "p95": 0.16
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 100,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04950495049504951,
+          "beta_range_90_local": [
+            0.019905563662171836,
+            0.0891962501588798
+          ],
+          "local_false_alarms": {
+            "mean": 0.05012592592592593,
+            "p5": 0.016666666666666666,
+            "p95": 0.09444444444444444
+          },
+          "local_detection": {
+            "mean": 0.07656,
+            "p5": 0.04,
+            "p95": 0.14
+          },
+          "pooled_false_alarms": {
+            "mean": 0.07519259259259259,
+            "p5": 0.037037037037037035,
+            "p95": 0.11666666666666667
+          },
+          "pooled_detection": {
+            "mean": 0.10504000000000002,
+            "p5": 0.06,
+            "p95": 0.14
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 150,
+          "can_alarm_local": true,
+          "effective_level_local": 0.046357615894039736,
+          "beta_range_90_local": [
+            0.022104049836230516,
+            0.07741799715987178
+          ],
+          "local_false_alarms": {
+            "mean": 0.047085714285714286,
+            "p5": 0.018367346938775512,
+            "p95": 0.08163265306122448
+          },
+          "local_detection": {
+            "mean": 0.07284,
+            "p5": 0.06,
+            "p95": 0.1
+          },
+          "pooled_false_alarms": {
+            "mean": 0.06459999999999999,
+            "p5": 0.0326530612244898,
+            "p95": 0.09795918367346938
+          },
+          "pooled_detection": {
+            "mean": 0.09132000000000001,
+            "p5": 0.06,
+            "p95": 0.14
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 200,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04975124378109453,
+          "beta_range_90_local": [
+            0.027374253525114488,
+            0.0772109750173381
+          ],
+          "local_false_alarms": {
+            "mean": 0.049504545454545454,
+            "p5": 0.022727272727272728,
+            "p95": 0.08181818181818182
+          },
+          "local_detection": {
+            "mean": 0.07564,
+            "p5": 0.06,
+            "p95": 0.1
+          },
+          "pooled_false_alarms": {
+            "mean": 0.06382727272727273,
+            "p5": 0.03409090909090909,
+            "p95": 0.09772727272727273
+          },
+          "pooled_detection": {
+            "mean": 0.09020000000000002,
+            "p5": 0.06,
+            "p95": 0.14
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 300,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04983388704318937,
+          "beta_range_90_local": [
+            0.031069949744855267,
+            0.07199405714629513
+          ],
+          "local_false_alarms": {
+            "mean": 0.049529411764705884,
+            "p5": 0.023529411764705882,
+            "p95": 0.07941176470588235
+          },
+          "local_detection": {
+            "mean": 0.07468000000000001,
+            "p5": 0.06,
+            "p95": 0.08
+          },
+          "pooled_false_alarms": {
+            "mean": 0.05894117647058823,
+            "p5": 0.03235294117647059,
+            "p95": 0.09117647058823529
+          },
+          "pooled_detection": {
+            "mean": 0.08412,
+            "p5": 0.08,
+            "p95": 0.1
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        }
+      ],
+      "smallest_that_holds": {
+        "local": {
+          "healthy": 19,
+          "detection_mean": 0.06912
+        },
+        "pooled": {
+          "healthy": 60,
+          "detection_mean": 0.11624000000000001
+        }
+      },
+      "shift": {
+        "distance": 0.26370967741935486,
+        "ci": [
+          0.19595766129032258,
+          0.3835773689516128
+        ],
+        "observed_excess_false_alarms": 0.16488095238095238
+      }
+    },
+    "cardium": {
+      "n_healthy": 1029,
+      "n_chd": 74,
+      "transported": {
+        "false_alarms": 0.16909620991253643,
+        "detection": 0.12162162162162163,
+        "effective_level": 0.047619047619047616
+      },
+      "curve": [
+        {
+          "local_healthy": 0,
+          "can_alarm_local": false,
+          "effective_level_local": 0.0,
+          "beta_range_90_local": [
+            0.0,
+            0.0
+          ],
+          "pooled_false_alarms": {
+            "mean": 0.1690962099125364,
+            "p5": 0.16909620991253643,
+            "p95": 0.16909620991253643
+          },
+          "pooled_detection": {
+            "mean": 0.12162162162162164,
+            "p5": 0.12162162162162163,
+            "p95": 0.12162162162162163
+          },
+          "local_holds": false,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 5,
+          "can_alarm_local": false,
+          "effective_level_local": 0.0,
+          "beta_range_90_local": [
+            0.0,
+            0.0
+          ],
+          "local_false_alarms": {
+            "mean": 0.0,
+            "p5": 0.0,
+            "p95": 0.0
+          },
+          "local_detection": {
+            "mean": 0.0,
+            "p5": 0.0,
+            "p95": 0.0
+          },
+          "pooled_false_alarms": {
+            "mean": 0.150482421875,
+            "p5": 0.07797851562500001,
+            "p95": 0.169921875
+          },
+          "pooled_detection": {
+            "mean": 0.11416216216216218,
+            "p5": 0.05405405405405406,
+            "p95": 0.12162162162162163
+          },
+          "local_holds": false,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 10,
+          "can_alarm_local": false,
+          "effective_level_local": 0.0,
+          "beta_range_90_local": [
+            0.0,
+            0.0
+          ],
+          "local_false_alarms": {
+            "mean": 0.0,
+            "p5": 0.0,
+            "p95": 0.0
+          },
+          "local_detection": {
+            "mean": 0.0,
+            "p5": 0.0,
+            "p95": 0.0
+          },
+          "pooled_false_alarms": {
+            "mean": 0.12525417075564277,
+            "p5": 0.07163886162904809,
+            "p95": 0.17075564278704614
+          },
+          "pooled_detection": {
+            "mean": 0.0940810810810811,
+            "p5": 0.04054054054054054,
+            "p95": 0.12162162162162163
+          },
+          "local_holds": false,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 19,
+          "can_alarm_local": true,
+          "effective_level_local": 0.05,
+          "beta_range_90_local": [
+            0.002696006302871282,
+            0.14586850331224344
+          ],
+          "local_false_alarms": {
+            "mean": 0.051801980198019806,
+            "p5": 0.0019801980198019802,
+            "p95": 0.1516336633663365
+          },
+          "local_detection": {
+            "mean": 0.03143243243243243,
+            "p5": 0.0,
+            "p95": 0.12162162162162163
+          },
+          "pooled_false_alarms": {
+            "mean": 0.125809900990099,
+            "p5": 0.07128712871287128,
+            "p95": 0.1712871287128713
+          },
+          "pooled_detection": {
+            "mean": 0.09410810810810813,
+            "p5": 0.04054054054054054,
+            "p95": 0.12162162162162163
+          },
+          "local_holds": true,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 25,
+          "can_alarm_local": true,
+          "effective_level_local": 0.038461538461538464,
+          "beta_range_90_local": [
+            0.0020496284126207912,
+            0.11292814500684321
+          ],
+          "local_false_alarms": {
+            "mean": 0.038876494023904376,
+            "p5": 0.00199203187250996,
+            "p95": 0.11364541832669313
+          },
+          "local_detection": {
+            "mean": 0.021675675675675677,
+            "p5": 0.0,
+            "p95": 0.08108108108108109
+          },
+          "pooled_false_alarms": {
+            "mean": 0.10808964143426295,
+            "p5": 0.05976095617529881,
+            "p95": 0.17231075697211157
+          },
+          "pooled_detection": {
+            "mean": 0.07832432432432433,
+            "p5": 0.02702702702702703,
+            "p95": 0.12162162162162163
+          },
+          "local_holds": true,
+          "pooled_holds": false
+        },
+        {
+          "local_healthy": 40,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04878048780487805,
+          "beta_range_90_local": [
+            0.008956945592975591,
+            0.11318836094473755
+          ],
+          "local_false_alarms": {
+            "mean": 0.04698887765419616,
+            "p5": 0.008088978766430738,
+            "p95": 0.1122345803842265
+          },
+          "local_detection": {
+            "mean": 0.026378378378378378,
+            "p5": 0.0,
+            "p95": 0.08108108108108109
+          },
+          "pooled_false_alarms": {
+            "mean": 0.09576946410515672,
+            "p5": 0.05055611729019211,
+            "p95": 0.1506572295247725
+          },
+          "pooled_detection": {
+            "mean": 0.06759459459459462,
+            "p5": 0.02702702702702703,
+            "p95": 0.12162162162162163
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 60,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04918032786885246,
+          "beta_range_90_local": [
+            0.01376515756828304,
+            0.10123589492416166
+          ],
+          "local_false_alarms": {
+            "mean": 0.04984932920536636,
+            "p5": 0.01238390092879257,
+            "p95": 0.10113519091847266
+          },
+          "local_detection": {
+            "mean": 0.028297297297297297,
+            "p5": 0.0,
+            "p95": 0.08108108108108109
+          },
+          "pooled_false_alarms": {
+            "mean": 0.08617543859649124,
+            "p5": 0.0411764705882353,
+            "p95": 0.15273477812177502
+          },
+          "pooled_detection": {
+            "mean": 0.058837837837837845,
+            "p5": 0.02702702702702703,
+            "p95": 0.12162162162162163
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 100,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04950495049504951,
+          "beta_range_90_local": [
+            0.019905563662171836,
+            0.0891962501588798
+          ],
+          "local_false_alarms": {
+            "mean": 0.04960172228202368,
+            "p5": 0.01829924650161464,
+            "p95": 0.09472551130247578
+          },
+          "local_detection": {
+            "mean": 0.027702702702702704,
+            "p5": 0.0,
+            "p95": 0.08108108108108109
+          },
+          "pooled_false_alarms": {
+            "mean": 0.07429278794402583,
+            "p5": 0.03659849300322928,
+            "p95": 0.11953713670613558
+          },
+          "pooled_detection": {
+            "mean": 0.04783783783783784,
+            "p5": 0.02702702702702703,
+            "p95": 0.08108108108108109
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 150,
+          "can_alarm_local": true,
+          "effective_level_local": 0.046357615894039736,
+          "beta_range_90_local": [
+            0.022104049836230516,
+            0.07741799715987178
+          ],
+          "local_false_alarms": {
+            "mean": 0.04519681456200227,
+            "p5": 0.019340159271899887,
+            "p95": 0.07969283276450506
+          },
+          "local_detection": {
+            "mean": 0.02445945945945946,
+            "p5": 0.013513513513513514,
+            "p95": 0.05405405405405406
+          },
+          "pooled_false_alarms": {
+            "mean": 0.06346302616609784,
+            "p5": 0.034129692832764506,
+            "p95": 0.09670079635949944
+          },
+          "pooled_detection": {
+            "mean": 0.03627027027027027,
+            "p5": 0.02702702702702703,
+            "p95": 0.08108108108108109
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 200,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04975124378109453,
+          "beta_range_90_local": [
+            0.027374253525114488,
+            0.0772109750173381
+          ],
+          "local_false_alarms": {
+            "mean": 0.04878407720144753,
+            "p5": 0.02527141133896261,
+            "p95": 0.0808805790108564
+          },
+          "local_detection": {
+            "mean": 0.026378378378378378,
+            "p5": 0.013513513513513514,
+            "p95": 0.05405405405405406
+          },
+          "pooled_false_alarms": {
+            "mean": 0.06273582629674307,
+            "p5": 0.03498190591073583,
+            "p95": 0.09294330518697219
+          },
+          "pooled_detection": {
+            "mean": 0.03527027027027027,
+            "p5": 0.02702702702702703,
+            "p95": 0.08108108108108109
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        },
+        {
+          "local_healthy": 300,
+          "can_alarm_local": true,
+          "effective_level_local": 0.04983388704318937,
+          "beta_range_90_local": [
+            0.031069949744855267,
+            0.07199405714629513
+          ],
+          "local_false_alarms": {
+            "mean": 0.049484224965706446,
+            "p5": 0.02606310013717421,
+            "p95": 0.07407407407407407
+          },
+          "local_detection": {
+            "mean": 0.026000000000000002,
+            "p5": 0.013513513513513514,
+            "p95": 0.02702702702702703
+          },
+          "pooled_false_alarms": {
+            "mean": 0.05904252400548697,
+            "p5": 0.03429355281207133,
+            "p95": 0.08100137174211242
+          },
+          "pooled_detection": {
+            "mean": 0.029621621621621623,
+            "p5": 0.02702702702702703,
+            "p95": 0.0412162162162156
+          },
+          "local_holds": true,
+          "pooled_holds": true
+        }
+      ],
+      "smallest_that_holds": {
+        "local": {
+          "healthy": 19,
+          "detection_mean": 0.03143243243243243
+        },
+        "pooled": {
+          "healthy": 40,
+          "detection_mean": 0.06759459459459462
+        }
+      },
+      "shift": {
+        "distance": 0.2011975297031255,
+        "ci": [
+          0.14693955923383178,
+          0.33415310824790745
+        ],
+        "observed_excess_false_alarms": 0.12147716229348882
+      }
+    }
+  },
+  "made_after_seeing_results": true,
+  "reading": "transported vs local calibration of the frozen DELTA structure expert on two external datasets with CHD cases"
+}

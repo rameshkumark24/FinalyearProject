@@ -1,0 +1,38 @@
+{
+  "patients_in_both_trimesters": 296,
+  "label_differs_between_trimesters": 2,
+  "kept": 294,
+  "kept_with_chd": 18,
+  "score_agreement_all": {
+    "rho": 0.04934532614457249,
+    "ci": [
+      -0.06953223314969323,
+      0.17012869702249903
+    ],
+    "n": 294
+  },
+  "score_agreement_chd": {
+    "rho": -0.16615067079463364,
+    "ci": [
+      -0.5942142516475892,
+      0.3842337053217438
+    ],
+    "n": 18
+  },
+  "score_agreement_no_chd": {
+    "rho": 0.05405573550605727,
+    "ci": [
+      -0.07196458520097937,
+      0.17844226305527625
+    ],
+    "n": 276
+  },
+  "alarm_table_transported": {
+    "both": 6,
+    "2T only": 28,
+    "3T only": 49,
+    "neither": 211
+  },
+  "alarm_kappa_transported": -0.009453313118701543,
+  "made_after_seeing_results": true
+}

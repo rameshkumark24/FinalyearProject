@@ -1,0 +1,13 @@
+"Fitted on, applied to",AUROC [95% CI],Patients,CHD,Left out (seen in the source)
+delta to heartbeat_2T,"0.471 [0.400, 0.544]",784,50,0
+delta to heartbeat_3T,"0.473 [0.404, 0.546]",690,50,0
+delta to cardium,"0.491 [0.432, 0.551]",1103,74,0
+heartbeat_2T to delta,"0.521 [0.462, 0.575]",752,133,0
+heartbeat_2T to heartbeat_3T,"0.720 [0.617, 0.812]",394,30,296
+heartbeat_2T to cardium,"0.716 [0.632, 0.790]",642,37,461
+heartbeat_3T to delta,"0.458 [0.405, 0.512]",752,133,0
+heartbeat_3T to heartbeat_2T,"0.749 [0.671, 0.817]",488,32,296
+heartbeat_3T to cardium,"0.678 [0.596, 0.755]",631,36,472
+cardium to delta,"0.529 [0.475, 0.583]",752,133,0
+cardium to heartbeat_2T,"0.740 [0.626, 0.846]",335,12,449
+cardium to heartbeat_3T,"0.731 [0.622, 0.836]",234,13,456

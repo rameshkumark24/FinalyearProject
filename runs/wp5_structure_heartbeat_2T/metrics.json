@@ -1,0 +1,1329 @@
+{
+  "dataset": {
+    "name": "heartbeat_2T",
+    "source": "Heartbeat (BCV-Uniandes), Front Cardiovasc Med 2026, doi:10.3389/fcvm.2026.1726484; academic and research use only",
+    "images": 3279,
+    "cases": 784,
+    "abnormal_cases": 50,
+    "normal_cases": 734
+  },
+  "probes": {
+    "fetalclip_scan": {
+      "auroc": 0.807574931880109,
+      "ci": [
+        0.7477827207999755,
+        0.8671238367788755
+      ],
+      "n_abnormal": 50,
+      "n_normal": 734,
+      "p_value": 0.004975124378109453,
+      "p_method": "labels shuffled over cases, probe refitted, 200 permutations"
+    },
+    "fetalclip_overlay_only": {
+      "auroc": 0.8039509536784741,
+      "ci": [
+        0.747054328629445,
+        0.8591371402867548
+      ],
+      "n_abnormal": 50,
+      "n_normal": 734,
+      "p_value": 0.004975124378109453,
+      "p_method": "labels shuffled over cases, probe refitted, 200 permutations"
+    },
+    "fetalclip_unaltered_image": {
+      "auroc": 0.8555858310626703,
+      "ci": [
+        0.808928721512408,
+        0.8986389000285664
+      ],
+      "n_abnormal": 50,
+      "n_normal": 734,
+      "p_value": 0.004975124378109453,
+      "p_method": "labels shuffled over cases, probe refitted, 200 permutations"
+    },
+    "no_anatomy_numbers": {
+      "auroc": 0.7090463215258855,
+      "ci": [
+        0.6426399527556598,
+        0.7815268590297306
+      ],
+      "n_abnormal": 50,
+      "n_normal": 734,
+      "p_value": 0.004975124378109453,
+      "p_method": "labels shuffled over cases, probe refitted, 200 permutations"
+    },
+    "random_weights_scan": {
+      "auroc": 0.6773297002724795,
+      "ci": [
+        0.5987652269906734,
+        0.7546778224421025
+      ],
+      "n_abnormal": 50,
+      "n_normal": 734,
+      "p_value": 0.004975124378109453,
+      "p_method": "labels shuffled over cases, probe refitted, 200 permutations"
+    }
+  },
+  "shortcut_audit": {
+    "overlay_only_auroc": 0.8039509536784741,
+    "overlay_only_ci": [
+      0.747054328629445,
+      0.8591371402867548
+    ],
+    "no_anatomy_numbers_auroc": 0.7090463215258855,
+    "no_anatomy_numbers_ci": [
+      0.6426399527556598,
+      0.7815268590297306
+    ],
+    "reading": "an interval that excludes 0.5 means the label can be read without looking at the heart"
+  },
+  "alarm": {
+    "alpha": 0.05,
+    "sensitivity": {
+      "caught": 12,
+      "n": 50,
+      "share": 0.24,
+      "ci": [
+        0.13060991619745735,
+        0.3816907481040383
+      ]
+    },
+    "false_alarms": {
+      "flagged": 39,
+      "n": 734,
+      "share": 0.05313351498637602,
+      "ci": [
+        0.03805239091839822,
+        0.07192248887086387
+      ]
+    },
+    "by_subtype": []
+  },
+  "own_partition": {
+    "fetalclip_scan": {
+      "auroc": 0.8606060606060606,
+      "ci": [
+        0.7068965517241379,
+        0.9597701149425287
+      ],
+      "fitted_on_cases": 543,
+      "calibration_normal_cases": 169,
+      "test_abnormal": 6,
+      "test_normal": 55,
+      "alarm": {
+        "alpha": 0.05,
+        "sensitivity": {
+          "caught": 2,
+          "n": 6,
+          "share": 0.3333333333333333,
+          "ci": [
+            0.043271868292741676,
+            0.7772219044964879
+          ]
+        },
+        "false_alarms": {
+          "flagged": 4,
+          "n": 55,
+          "share": 0.07272727272727272,
+          "ci": [
+            0.020170533353229988,
+            0.17586753528396834
+          ]
+        },
+        "by_subtype": []
+      }
+    },
+    "fetalclip_overlay_only": {
+      "auroc": 0.9,
+      "ci": [
+        0.789390142021721,
+        0.9807964441219158
+      ],
+      "fitted_on_cases": 543,
+      "calibration_normal_cases": 169,
+      "test_abnormal": 6,
+      "test_normal": 55,
+      "alarm": {
+        "alpha": 0.05,
+        "sensitivity": {
+          "caught": 0,
+          "n": 6,
+          "share": 0.0,
+          "ci": [
+            0.0,
+            0.45925812643990044
+          ]
+        },
+        "false_alarms": {
+          "flagged": 1,
+          "n": 55,
+          "share": 0.01818181818181818,
+          "ci": [
+            0.0004602178487956972,
+            0.0971910157492534
+          ]
+        },
+        "by_subtype": []
+      }
+    },
+    "fetalclip_unaltered_image": {
+      "auroc": 0.8515151515151516,
+      "ci": [
+        0.6096072567783094,
+        0.9885642446633827
+      ],
+      "fitted_on_cases": 543,
+      "calibration_normal_cases": 169,
+      "test_abnormal": 6,
+      "test_normal": 55,
+      "alarm": {
+        "alpha": 0.05,
+        "sensitivity": {
+          "caught": 4,
+          "n": 6,
+          "share": 0.6666666666666666,
+          "ci": [
+            0.22277809550351213,
+            0.9567281317072583
+          ]
+        },
+        "false_alarms": {
+          "flagged": 4,
+          "n": 55,
+          "share": 0.07272727272727272,
+          "ci": [
+            0.020170533353229988,
+            0.17586753528396834
+          ]
+        },
+        "by_subtype": []
+      }
+    },
+    "no_anatomy_numbers": {
+      "auroc": 0.6606060606060606,
+      "ci": [
+        0.4539891215106732,
+        0.836007696007696
+      ],
+      "fitted_on_cases": 543,
+      "calibration_normal_cases": 169,
+      "test_abnormal": 6,
+      "test_normal": 55,
+      "alarm": {
+        "alpha": 0.05,
+        "sensitivity": {
+          "caught": 1,
+          "n": 6,
+          "share": 0.16666666666666666,
+          "ci": [
+            0.00421074451448947,
+            0.6412345789976748
+          ]
+        },
+        "false_alarms": {
+          "flagged": 2,
+          "n": 55,
+          "share": 0.03636363636363636,
+          "ci": [
+            0.004434547318590694,
+            0.12526425709715003
+          ]
+        },
+        "by_subtype": []
+      }
+    },
+    "random_weights_scan": {
+      "auroc": 0.6575757575757576,
+      "ci": [
+        0.37719298245614036,
+        0.871588669950739
+      ],
+      "fitted_on_cases": 543,
+      "calibration_normal_cases": 169,
+      "test_abnormal": 6,
+      "test_normal": 55,
+      "alarm": {
+        "alpha": 0.05,
+        "sensitivity": {
+          "caught": 0,
+          "n": 6,
+          "share": 0.0,
+          "ci": [
+            0.0,
+            0.45925812643990044
+          ]
+        },
+        "false_alarms": {
+          "flagged": 1,
+          "n": 55,
+          "share": 0.01818181818181818,
+          "ci": [
+            0.0004602178487956972,
+            0.0971910157492534
+          ]
+        },
+        "by_subtype": []
+      }
+    }
+  },
+  "image_size_by_label": [
+    {
+      "size": "1004x688",
+      "normal": 1,
+      "abnormal": 1
+    },
+    {
+      "size": "1008x691",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1009x738",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1019x699",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1021x756",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1021x787",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "1022x787",
+      "normal": 3,
+      "abnormal": 0
+    },
+    {
+      "size": "1024x703",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "1024x731",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1029x709",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1030x708",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "1032x754",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1035x712",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1039x717",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1041x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1043x808",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1048x721",
+      "normal": 6,
+      "abnormal": 0
+    },
+    {
+      "size": "1054x787",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "1056x728",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1058x729",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1061x730",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1065x787",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "1065x807",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1066x734",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "1070x738",
+      "normal": 3,
+      "abnormal": 0
+    },
+    {
+      "size": "1070x790",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1072x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1073x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1074x741",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1077x743",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "1079x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1082x748",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1086x749",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "1088x752",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1092x754",
+      "normal": 4,
+      "abnormal": 0
+    },
+    {
+      "size": "1095x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1101x761",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "1101x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1105x794",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1111x768",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1111x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1116x772",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1136x787",
+      "normal": 343,
+      "abnormal": 34
+    },
+    {
+      "size": "1157x802",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1172x793",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1260x845",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "1604x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "244x326",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "244x328",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "245x351",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "246x327",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "322x458",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "323x325",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "330x451",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "337x466",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "341x444",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "342x457",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "395x535",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "397x535",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "398x535",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "400x535",
+      "normal": 3,
+      "abnormal": 0
+    },
+    {
+      "size": "475x655",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "476x655",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "476x670",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "477x670",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "478x655",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "480x655",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "483x655",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "484x670",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "488x670",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "522x721",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "553x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "558x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "559x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "560x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "562x787",
+      "normal": 3,
+      "abnormal": 0
+    },
+    {
+      "size": "563x787",
+      "normal": 4,
+      "abnormal": 0
+    },
+    {
+      "size": "564x787",
+      "normal": 9,
+      "abnormal": 0
+    },
+    {
+      "size": "565x786",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "565x787",
+      "normal": 6,
+      "abnormal": 0
+    },
+    {
+      "size": "566x787",
+      "normal": 12,
+      "abnormal": 0
+    },
+    {
+      "size": "567x787",
+      "normal": 4,
+      "abnormal": 0
+    },
+    {
+      "size": "568x787",
+      "normal": 6,
+      "abnormal": 0
+    },
+    {
+      "size": "573x655",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "579x803",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "586x391",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "591x625",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "600x535",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "623x569",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "628x893",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "639x595",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "639x655",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "640x415",
+      "normal": 0,
+      "abnormal": 1
+    },
+    {
+      "size": "642x619",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "645x619",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "648x896",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "649x715",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "655x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "669x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "670x921",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "674x935",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "681x787",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "688x699",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "693x670",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "700x1003",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "708x787",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "709x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "710x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "713x667",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "715x768",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "718x655",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "719x655",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "720x655",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "726x670",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "740x878",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "748x626",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "753x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "754x787",
+      "normal": 3,
+      "abnormal": 0
+    },
+    {
+      "size": "755x787",
+      "normal": 4,
+      "abnormal": 0
+    },
+    {
+      "size": "756x787",
+      "normal": 4,
+      "abnormal": 0
+    },
+    {
+      "size": "764x721",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "766x655",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "776x670",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "777x619",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "778x619",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "794x787",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "798x721",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "800x535",
+      "normal": 9,
+      "abnormal": 1
+    },
+    {
+      "size": "800x655",
+      "normal": 3,
+      "abnormal": 0
+    },
+    {
+      "size": "800x708",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "802x681",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "807x863",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "808x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "810x655",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "827x699",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "828x622",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "829x699",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "832x559",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "843x659",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "849x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "850x787",
+      "normal": 7,
+      "abnormal": 1
+    },
+    {
+      "size": "851x787",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "852x666",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "852x787",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "857x811",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "858x580",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "860x580",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "860x688",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "873x664",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "875x670",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "876x688",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "877x735",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "879x655",
+      "normal": 0,
+      "abnormal": 1
+    },
+    {
+      "size": "880x655",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "883x657",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "883x846",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "895x859",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "900x655",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "907x655",
+      "normal": 0,
+      "abnormal": 1
+    },
+    {
+      "size": "908x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "909x677",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "912x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "916x708",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "916x768",
+      "normal": 0,
+      "abnormal": 1
+    },
+    {
+      "size": "917x708",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "917x743",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "917x748",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "918x743",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "918x900",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "928x721",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "943x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "945x787",
+      "normal": 3,
+      "abnormal": 0
+    },
+    {
+      "size": "947x749",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "947x787",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "960x655",
+      "normal": 95,
+      "abnormal": 3
+    },
+    {
+      "size": "962x657",
+      "normal": 0,
+      "abnormal": 1
+    },
+    {
+      "size": "968x661",
+      "normal": 2,
+      "abnormal": 0
+    },
+    {
+      "size": "968x663",
+      "normal": 0,
+      "abnormal": 1
+    },
+    {
+      "size": "971x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "973x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "975x670",
+      "normal": 14,
+      "abnormal": 1
+    },
+    {
+      "size": "976x670",
+      "normal": 0,
+      "abnormal": 3
+    },
+    {
+      "size": "985x674",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "989x677",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "990x772",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "992x754",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "992x787",
+      "normal": 1,
+      "abnormal": 0
+    },
+    {
+      "size": "993x787",
+      "normal": 3,
+      "abnormal": 0
+    },
+    {
+      "size": "994x787",
+      "normal": 4,
+      "abnormal": 0
+    },
+    {
+      "size": "995x681",
+      "normal": 1,
+      "abnormal": 0
+    }
+  ],
+  "same_image_size": {
+    "size": "1136x787",
+    "cases": 377,
+    "abnormal": 34,
+    "probes": {
+      "fetalclip_scan": {
+        "auroc": 0.8616875321557195,
+        "ci": [
+          0.7972066835570059,
+          0.9162146739130435
+        ],
+        "n_abnormal": 34,
+        "n_normal": 343
+      },
+      "no_anatomy_numbers": {
+        "auroc": 0.6697821985937232,
+        "ci": [
+          0.5661311765104334,
+          0.7559229628557105
+        ],
+        "n_abnormal": 34,
+        "n_normal": 343
+      },
+      "random_weights_scan": {
+        "auroc": 0.5992968616017835,
+        "ci": [
+          0.5032560977237538,
+          0.6878847228256956
+        ],
+        "n_abnormal": 34,
+        "n_normal": 343
+      }
+    }
+  },
+  "by_plane": [
+    {
+      "plane": "3VT",
+      "cases": 492,
+      "abnormal": 39,
+      "auroc": 0.6630440935076697,
+      "ci": [
+        0.5742893350845744,
+        0.745416826355687
+      ],
+      "n_abnormal": 39,
+      "n_normal": 453
+    },
+    {
+      "plane": "4CH",
+      "cases": 703,
+      "abnormal": 47,
+      "auroc": 0.7740010378827192,
+      "ci": [
+        0.704087543204316,
+        0.8343352143256738
+      ],
+      "n_abnormal": 47,
+      "n_normal": 656
+    },
+    {
+      "plane": "LVOT",
+      "cases": 318,
+      "abnormal": 29,
+      "auroc": 0.7006323827705524,
+      "ci": [
+        0.596500437450661,
+        0.7924083531589924
+      ],
+      "n_abnormal": 29,
+      "n_normal": 289
+    },
+    {
+      "plane": "RVOT",
+      "cases": 198,
+      "abnormal": 32,
+      "auroc": 0.7799322289156626,
+      "ci": [
+        0.6957964534498009,
+        0.8592152304113511
+      ],
+      "n_abnormal": 32,
+      "n_normal": 166
+    }
+  ],
+  "models": {
+    "published": {
+      "claimed_name": "FetalCLIP",
+      "verified": true,
+      "sha256": "90916caa408baf9374ee3f8c1533463331a4ace37a13e61385e782905b35c310",
+      "file": "FetalCLIP_weights.pt",
+      "bytes": 1710766661,
+      "source": "huggingface.co/numansaeed/fetalclip-model",
+      "licence": "CC BY-NC 4.0",
+      "n_parameters": 427647233
+    },
+    "control": {
+      "name": "random-init network with the FetalCLIP architecture",
+      "seed": 0,
+      "verified": false
+    }
+  },
+  "gate_G5": {
+    "auroc_with_interval": true,
+    "shortcut_audit_reported": true,
+    "reference_model_reproduced": false,
+    "reason": "the authors' released models are checked in a separate run (wp15_reference_models); the other two parts are reported"
+  },
+  "minutes": 31.175871030489603
+}

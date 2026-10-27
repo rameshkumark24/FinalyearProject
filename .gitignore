@@ -67,3 +67,6 @@ artifacts/**/*.pt
 artifacts/**/*.jpg
 artifacts/**/*.png
 artifacts/**/*.bmp
+
+# Per-patient outputs of runs on datasets whose terms forbid redistribution (Heartbeat, CARDIUM)
+runs/**/private/

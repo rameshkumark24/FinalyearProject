@@ -43,7 +43,7 @@ are not repeated here: they are in `reports/RESULTS.md`, generated from the run 
   **[NEEDS CLINICIAN INPUT: how much, relative to the benefit of a needed referral]**.
 - **False reassurance.** A missed defect or arrhythmia after "routine" **[NEEDS CLINICIAN INPUT:
   consequences by condition]**. The structure expert caught under half of the defects at its
-  level in DELTA, and its results are an upper bound.
+  level in DELTA, its results there are an upper bound, and on data from another country it was at chance.
 - **Automation bias.** Staff may trust a "routine" more than their own reading
   **[NEEDS CLINICIAN INPUT]**.
 - **Equity.** Every expert was built on data from one centre or one database; none on Indian

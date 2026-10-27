@@ -1,0 +1,228 @@
+{
+  "transported_calibration": {
+    "n_abnormal": 6,
+    "n_normal": 55,
+    "auroc": 0.45454545454545453,
+    "auroc_ci": [
+      0.3045977011494253,
+      0.5980423280423282
+    ],
+    "sensitivity": {
+      "k": 0,
+      "n": 6,
+      "share": 0.0,
+      "ci": [
+        0.0,
+        0.45925812643990044
+      ]
+    },
+    "false_alarms": {
+      "k": 7,
+      "n": 55,
+      "share": 0.12727272727272726,
+      "ci": [
+        0.052735182963729484,
+        0.24480272032202482
+      ]
+    }
+  },
+  "local_calibration": {
+    "n_abnormal": 6,
+    "n_normal": 28,
+    "auroc": 0.42857142857142855,
+    "auroc_ci": [
+      0.23655913978494625,
+      0.6344827586206897
+    ],
+    "sensitivity": {
+      "k": 0,
+      "n": 6,
+      "share": 0.0,
+      "ci": [
+        0.0,
+        0.45925812643990044
+      ]
+    },
+    "false_alarms": {
+      "k": 2,
+      "n": 28,
+      "share": 0.07142857142857142,
+      "ci": [
+        0.008770496703527133,
+        0.23503477317459076
+      ]
+    }
+  },
+  "local_calibration_normals": 27,
+  "by_image_size": {
+    "1136x787": {
+      "n_abnormal": 6,
+      "n_normal": 41,
+      "auroc": 0.4959349593495935,
+      "auroc_ci": [
+        0.32371794871794873,
+        0.6751488095238096
+      ],
+      "sensitivity": {
+        "k": 0,
+        "n": 6,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.45925812643990044
+        ]
+      },
+      "false_alarms": {
+        "k": 6,
+        "n": 41,
+        "share": 0.14634146341463414,
+        "ci": [
+          0.055657363712436625,
+          0.29173048801749396
+        ]
+      }
+    },
+    "400x535": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "473x655": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "568x787": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 1,
+        "share": 1.0,
+        "ci": [
+          0.025,
+          1.0
+        ]
+      }
+    },
+    "569x787": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "960x655": {
+      "n_abnormal": 0,
+      "n_normal": 9,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 9,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.3362671168799428
+        ]
+      }
+    },
+    "975x670": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    }
+  },
+  "shortcut_single_numbers_auroc": {
+    "width": 0.7272727272727273,
+    "height": 0.6727272727272727,
+    "mean_brightness": 0.39090909090909093
+  },
+  "images": 341,
+  "unusable_images_skipped": 0,
+  "cases_without_a_usable_image": 0,
+  "cases": 61,
+  "refit": false
+}

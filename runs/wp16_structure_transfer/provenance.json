@@ -1,0 +1,53 @@
+{
+  "run": "wp16_structure_transfer",
+  "description": "FetalCLIP structure probes moved between echo datasets and from the 2nd to the 3rd trimester (exploratory)",
+  "created_utc": "2026-10-27T18:23:04+00:00",
+  "script": "scripts/run_wp16_structure_transfer.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "a251afdfb6f09e2386546b17bb66e210a70977d1",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "restricted": true,
+    "features": "fetalclip_scan",
+    "probe": "standardise, PCA(32), logistic C=1 balanced",
+    "fit": "every case of the source",
+    "exclusion": "target patients seen in the source are left out",
+    "made_after_seeing_results": true
+  },
+  "data": {
+    "embeddings": {
+      "n_files": 4,
+      "total_bytes": 52011265,
+      "manifest_sha256": "e772bb643ced6482ca6193d8b46a8717e9ed13e9ab27a8df7658934cc44b9237"
+    },
+    "matches": {
+      "n_files": 1,
+      "total_bytes": 37592,
+      "manifest_sha256": "9635f3d0bc6f60fa52fa7862ef12082ec559e127c8c310281c9ec87af980f7d2"
+    },
+    "folds": {
+      "n_files": 1,
+      "total_bytes": 348175,
+      "manifest_sha256": "e779ba1390888eb952413621492e4fad3ef45516e440c4a8fa0929be95f9a4e8"
+    }
+  },
+  "n_real": 3329,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "scripts/run_wp16_structure_transfer.py"
+  ]
+}
