@@ -1318,14 +1318,19 @@ def section_external_echo() -> str:
                       ("CARDIUM", "wp5_structure_cardium"), ("DELTA (for comparison)", "wp5_structure_delta")):
         if not have(run):
             continue
-        probes = load_run(run)[0]["probes"]
+        metrics_run = load_run(run)[0]
+        probes = metrics_run["probes"]
+        same = metrics_run.get("same_image_size", {})
+        inside = (f"{same['size']} ({same['cases']} cases): {num(same['probes']['fetalclip_scan']['auroc'])} / "
+                  f"{num(same['probes']['no_anatomy_numbers']['auroc'])}" if same.get("probes") else "-")
         probe_rows.append([name] + [f"{num(probes[p]['auroc'])} {interval(probes[p]['ci'])}" for p in
-                                    ("fetalclip_scan", "random_weights_scan", "fetalclip_overlay_only", "no_anatomy_numbers")])
+                                    ("fetalclip_scan", "random_weights_scan", "fetalclip_overlay_only", "no_anatomy_numbers")] + [inside])
     if len(probe_rows) > 1:
         parts += ["**13.4 A FetalCLIP probe fitted on each dataset, with the same controls as DELTA (runs wp5_structure_*; exploratory).** "
                   "Case-level folds inside each dataset; the controls are the same network with random weights, the parts removed by the "
                   "cleaning step, and six numbers that describe the image rather than its content.",
-                  table("t13d_probes_per_dataset", ["Dataset", "FetalCLIP, cleaned scan", "Random weights", "Removed parts only", "Six image numbers"],
+                  table("t13d_probes_per_dataset", ["Dataset", "FetalCLIP, cleaned scan", "Random weights", "Removed parts only", "Six image numbers",
+                                                    "Commonest image size: scan / six numbers"],
                         probe_rows, ["wp5_structure_heartbeat_2T", "wp5_structure_heartbeat_3T", "wp5_structure_cardium", "wp5_structure_delta"])]
     if have("wp16_structure_transfer"):
         m = load_run("wp16_structure_transfer")[0]
