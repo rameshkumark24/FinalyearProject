@@ -975,6 +975,18 @@ def claim_ledger() -> str:
             f"{t['false_alarms']['k']} flagged ({pct(t['false_alarms']['share'])}) {pct_interval(t['false_alarms']['ci'])} at level {v['level']}",
             "Heartbeat, 2nd trimester", "wp11_external_echo_heartbeat_2T",
             "already falsified: the interval excludes the level" if not v["calibration_holds"] else "an interval excluding the level")
+    if have("wp17_structure_calibration"):
+        d = load_run("wp17_structure_calibration")[0]["by_dataset"]["heartbeat_2T"]
+        hold = d["smallest_that_holds"]["local"]
+        if isinstance(hold, dict):
+            add("Local calibration repairs the echo expert's false alarms but not its detection", EXPLORATORY,
+                f"{d['n_healthy']} healthy and {d['n_chd']} CHD patients",
+                f"false alarms within the level from {hold['healthy']} local healthy patients; {pct(hold['detection_mean'])} of CHD caught then",
+                "Heartbeat, 2nd trimester", "wp17_structure_calibration", "detection well above the level after local calibration")
+    if have("wp18_echo_retest"):
+        r = load_run("wp18_echo_retest")[0]["score_agreement_all"]
+        add("The echo expert gives the same answer for the same fetus scanned twice", EXPLORATORY, f"{r['n']} fetuses (2nd and 3rd trimester)",
+            f"Spearman {num(r['rho'], 2)} {interval(r['ci'], 2)}", "Heartbeat", "wp18_echo_retest", "already falsified: the two scores do not agree")
     if have(BOUNDS_RUN):
         gate = load_run(BOUNDS_RUN)[0]["gate_G7"]
         add("False referrals of three experts for any dependence (Frechet range)", EXPLORATORY, "measured rates of each expert",
@@ -1340,8 +1352,10 @@ def section_external_echo() -> str:
                              f"{pct(r['pooled_false_alarms']['mean'])}", f"{pct(r['pooled_detection']['mean'])}"])
         summary = "; ".join(f"{EXTERNAL_NAMES.get(n, n)}: transported calibration flagged {pct(d['transported']['false_alarms'])} of normal "
                             f"fetuses and caught {pct(d['transported']['detection'])} of CHD; local calibration holds from "
-                            f"{d['smallest_that_holds']['local']['healthy'] if isinstance(d['smallest_that_holds']['local'], dict) else d['smallest_that_holds']['local']} "
-                            f"healthy patients; KS distance {num(d['shift']['distance'])} {interval(d['shift']['ci'])}"
+                            + (f"{d['smallest_that_holds']['local']['healthy']} healthy patients, where it catches "
+                               f"{pct(d['smallest_that_holds']['local']['detection_mean'])} of CHD"
+                               if isinstance(d['smallest_that_holds']['local'], dict) else str(d['smallest_that_holds']['local']))
+                            + f"; KS distance {num(d['shift']['distance'])} {interval(d['shift']['ci'])}"
                             for n, d in m["by_dataset"].items())
         parts += ["**13.6 Does the structure expert's alarm level travel, and what does local calibration cost in detection? (run "
                   "wp17_structure_calibration; exploratory).** " + summary + ".",
