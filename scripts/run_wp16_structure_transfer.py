@@ -87,8 +87,9 @@ def seen_in(source: str, target: str, data: dict, pairs: set[tuple[str, str]]) -
 
 def main() -> None:
     for name in ("wp5_structure_delta", "wp5_structure_heartbeat_2T", "wp5_structure_heartbeat_3T", "wp5_structure_cardium",
-                 "wp14b_echo_overlap_scan", "wp15_reference_models"):
+                 "wp14b_echo_overlap_scan"):
         load_run(name)
+    has_reference = (RUNS / "wp15_reference_models" / "metrics.json").exists()       # the authors' models, if that run was made
     data = {name: load(name) for name in SOURCES}
     pairs = shared_patients()
     run = Run("wp16_structure_transfer",
@@ -131,7 +132,7 @@ def main() -> None:
         fitted = probe().fit(hb2["x"][train], hb2["y"][train])
         fetalclip["val_auroc"].append(auroc(hb2["y"][val], fitted.predict_proba(hb2["x"][val])[:, 1]))
         fetalclip["unseen_3T_auroc"].append(auroc(hb3["y"][unseen], fitted.predict_proba(hb3["x"][unseen])[:, 1]))
-    reference = load_run("wp15_reference_models")[0]["results"]
+    reference = load_run("wp15_reference_models")[0]["results"] if has_reference else {}
     trimester = {"fetalclip_probe": {"val_auroc_mean": float(np.mean(fetalclip["val_auroc"])),
                                      "unseen_3T_auroc_mean": float(np.mean(fetalclip["unseen_3T_auroc"])),
                                      "drop": float(np.mean(fetalclip["val_auroc"]) - np.mean(fetalclip["unseen_3T_auroc"])),
@@ -142,6 +143,7 @@ def main() -> None:
             trimester[arch] = {"val_auroc_mean": cv["auroc"]["mean"], "unseen_3T_auroc_mean": shifted["auroc"]["mean"],
                                "drop": cv["auroc"]["mean"] - shifted["auroc"]["mean"]}
     run.finish({"transfer": matrix, "within_dataset_auroc": within, "trimester_shift": trimester,
+                "authors_models_compared": has_reference,
                 "unseen_3T_patients": int(unseen.sum()), "made_after_seeing_results": True})
     for name, entry in trimester.items():
         print(f"{name:16s} 2T val {entry['val_auroc_mean']:.3f} -> unseen 3T {entry['unseen_3T_auroc_mean']:.3f} (drop {entry['drop']:+.3f})")
