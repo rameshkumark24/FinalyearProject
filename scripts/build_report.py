@@ -807,6 +807,16 @@ def section_checks() -> str:
     return "\n\n".join(["## 10. Checks made after seeing the results", *notes, size_text, week_text, pair_text])
 
 
+def external_threat() -> str:
+    if not have("wp11_external_echo_heartbeat_2T"):
+        return ("11. **No external validation.** No expert has been tested on a dataset other than the one it was built on; the script for a "
+                "second echo dataset is ready (scripts/run_wp11_external_echo.py, docs/preregistration_external_echo.md) but has no data.")
+    t = load_run("wp11_external_echo_heartbeat_2T")[0]["transported_calibration"]
+    return (f"11. **The structure expert failed its external test.** Applied unchanged to Heartbeat (another country, preregistered), it reached "
+            f"AUROC {num(t['auroc'])} {interval(t['auroc_ci'])} and flagged {pct(t['false_alarms']['share'])} of normal fetuses at its level "
+            "(section 13). The rhythm and function experts have still not been tested on a second dataset.")
+
+
 def section_threats() -> str:
     needed = [BOUNDS_RUN, TRADEOFF_RUN, CHECKS_RUN, "wp6_fusion", "wp3_trust_check"]
     labelled = structure_runs()
@@ -845,8 +855,7 @@ def section_threats() -> str:
         f"9. **Assumed priors.** {bounds['priors']['status'].capitalize()}; precision is shown over a grid of prevalences (section 9).",
         f"10. **Discrete p-values.** With few calibration cases an alarm level acts as the next lower attainable p-value; for the rhythm expert the level "
         f"{trade['design_levels']['rhythm']} acts as {num(trade['rhythm_smallest_level']['effective_level_of_the_design'], 3)}.",
-        "11. **No external validation.** No expert has been tested on a dataset other than the one it was built on; the script for a second echo "
-        "dataset is ready (scripts/run_wp11_external_echo.py, docs/preregistration_external_echo.md) but has no data.",
+        external_threat(),
         "12. **Standard methods.** The union bound, the Frechet range, conformal p-values, group-conditional calibration, Holm and Simes, and choosing "
         "levels to maximise true positives under a false-positive cap are all established; docs/positioning.md and docs/related_work.md list what is "
         "and is not new.",
@@ -926,7 +935,12 @@ def claim_ledger() -> str:
                      "AUROC near 0.5 inside one image-size group or on a second dataset")
         if have(SIZE_RUN):
             flag = load_run(SIZE_RUN)[0]["flag_642x506"]
-            falsifier += f" (642x506: {num(flag['auroc'])} {interval(flag['auroc_ci'])}, section 12.2); no second dataset yet"
+            falsifier += f" (642x506: {num(flag['auroc'])} {interval(flag['auroc_ci'])}, section 12.2)"
+        if have("wp11_external_echo_heartbeat_2T"):
+            external = load_run("wp11_external_echo_heartbeat_2T")[0]["transported_calibration"]
+            falsifier += f"; on Heartbeat it reached {num(external['auroc'])} {interval(external['auroc_ci'])} (section 13.2)"
+        else:
+            falsifier += "; no second dataset yet"
         add("The structure expert reads heart structure (upper bound only)", CONFIRMATORY,
             f"{m['dataset']['cases']} cases ({m['dataset']['abnormal_cases']} with a defect)", f"AUROC {num(probe['auroc'])} {interval(probe['ci'])}",
             "DELTA (one centre)", labelled[0], falsifier)
@@ -948,6 +962,19 @@ def claim_ledger() -> str:
         add("Calibration carried over from another device does not hold", CONFIRMATORY, f"{transported['n']} real ECG-Doppler pairs",
             f"{pct(transported['share'])} {pct_interval(transported['ci'])} referred", "NIFEADB to NInFEA", "wp6_fusion",
             "carried-over calibration staying at its level on other devices")
+    if have("wp11_external_echo_heartbeat_2T"):
+        m = load_run("wp11_external_echo_heartbeat_2T")[0]
+        t = m["transported_calibration"]
+        v = external_verdict("wp11_external_echo_heartbeat_2T")
+        kind = "confirmatory: preregistered on 20 Oct 2026, data seen only afterwards (clarifications of 27 Oct)"
+        add("The structure expert reads heart structure in another country's data", kind,
+            f"{m['cases']} patients ({t['n_abnormal']} with CHD)", f"AUROC {num(t['auroc'])} {interval(t['auroc_ci'])}: "
+            + ("supports it" if v["reads"] else "does not support it"), "Heartbeat, 2nd trimester (Colombia)", "wp11_external_echo_heartbeat_2T",
+            "already falsified for the frozen DELTA expert (section 13.2)" if not v["reads"] else "AUROC near 0.5 on a further dataset")
+        add("The structure expert's DELTA alarm level holds in another country's data", kind, f"{t['false_alarms']['n']} normal patients",
+            f"{t['false_alarms']['k']} flagged ({pct(t['false_alarms']['share'])}) {pct_interval(t['false_alarms']['ci'])} at level {v['level']}",
+            "Heartbeat, 2nd trimester", "wp11_external_echo_heartbeat_2T",
+            "already falsified: the interval excludes the level" if not v["calibration_holds"] else "an interval excluding the level")
     if have(BOUNDS_RUN):
         gate = load_run(BOUNDS_RUN)[0]["gate_G7"]
         add("False referrals of three experts for any dependence (Frechet range)", EXPLORATORY, "measured rates of each expert",
@@ -1186,10 +1213,13 @@ def external_verdict(run: str) -> dict:
     metrics, provenance = load_run(run)
     t = metrics["transported_calibration"]
     strongest = shortcut_strength(metrics["shortcut_single_numbers_auroc"])
-    reads = t["auroc_ci"][0] > HALF and t["auroc"] > strongest
+    above_chance = t["auroc_ci"][0] > HALF
+    beats_shortcuts = t["auroc"] > strongest
     level = provenance["config"]["alpha"]
     holds = t["false_alarms"]["ci"][0] <= level <= t["false_alarms"]["ci"][1]
-    return {"reads": reads, "strongest_shortcut": strongest, "calibration_holds": holds, "level": level}
+    reasons = ([] if above_chance else ["its AUROC is not distinguishable from 0.5"]) +               ([] if beats_shortcuts else ["a single image number separates the classes at least as well"])
+    return {"reads": above_chance and beats_shortcuts, "strongest_shortcut": strongest, "calibration_holds": holds, "level": level,
+            "reasons": reasons}
 
 
 def section_external_echo() -> str:
@@ -1228,18 +1258,19 @@ def section_external_echo() -> str:
         verdicts[name] = external_verdict(run)
         short = m["shortcut_single_numbers_auroc"]
         rows.append([EXTERNAL_NAMES[name], f"{m['cases']} ({t['n_abnormal']})", f"{num(t['auroc'])} {interval(t['auroc_ci'])}",
-                     f"{t['sensitivity']['k']}/{t['sensitivity']['n']} {pct_interval(t['sensitivity']['ci'])}",
-                     f"{t['false_alarms']['k']}/{t['false_alarms']['n']} {pct_interval(t['false_alarms']['ci'])}",
-                     f"{local['sensitivity']['k']}/{local['sensitivity']['n']} {pct_interval(local['sensitivity']['ci'])}",
-                     f"{local['false_alarms']['k']}/{local['false_alarms']['n']} {pct_interval(local['false_alarms']['ci'])}",
+                     f"{t['sensitivity']['k']}/{t['sensitivity']['n']} ({pct(t['sensitivity']['share'])}) {pct_interval(t['sensitivity']['ci'])}",
+                     f"{t['false_alarms']['k']}/{t['false_alarms']['n']} ({pct(t['false_alarms']['share'])}) {pct_interval(t['false_alarms']['ci'])}",
+                     f"{local['sensitivity']['k']}/{local['sensitivity']['n']} ({pct(local['sensitivity']['share'])}) {pct_interval(local['sensitivity']['ci'])}",
+                     f"{local['false_alarms']['k']}/{local['false_alarms']['n']} ({pct(local['false_alarms']['share'])}) {pct_interval(local['false_alarms']['ci'])}",
                      ", ".join(f"{k.replace('_', ' ')} {num(v)}" for k, v in short.items()),
                      f"{m['unusable_images_skipped']} / {m['cases_without_a_usable_image']}"])
     primary = verdicts.get("heartbeat_2T")
     reading = ""
     if primary:
         reading = ("**Preregistered reading, primary dataset:** " + ("supports 'reads heart structure'" if primary["reads"] else
-                   "supports 'shortcut'") + f" (the AUROC interval must lie above 0.5 and the AUROC above the strongest single-number "
-                   f"shortcut, {num(primary['strongest_shortcut'])}); the transported alarm level " +
+                   "does not support 'reads heart structure' (" + " and ".join(primary["reasons"]) + "), which the fixed rule counts as "
+                   "'shortcut'") + f". The rule asks for an AUROC interval above 0.5 and an AUROC above the strongest single-number "
+                   f"shortcut ({num(primary['strongest_shortcut'])} here). The transported alarm level " +
                    ("holds" if primary["calibration_holds"] else "does not hold") +
                    f" (its false-alarm interval {'includes' if primary['calibration_holds'] else 'excludes'} the level {primary['level']}). "
                    "Secondary datasets, same rule: " + "; ".join(f"{EXTERNAL_NAMES[n]}: {'reads structure' if v['reads'] else 'shortcut'}, "
