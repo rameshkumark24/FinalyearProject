@@ -987,6 +987,16 @@ def claim_ledger() -> str:
         r = load_run("wp18_echo_retest")[0]["score_agreement_all"]
         add("The echo expert gives the same answer for the same fetus scanned twice", EXPLORATORY, f"{r['n']} fetuses (2nd and 3rd trimester)",
             f"Spearman {num(r['rho'], 2)} {interval(r['ci'], 2)}", "Heartbeat", "wp18_echo_retest", "already falsified: the two scores do not agree")
+    if have("wp15_reference_models"):
+        m = load_run("wp15_reference_models")[0]
+        r = m["results"]["heart-vit|2T|test"]
+        largest = max(abs(v) for model in m["all_models_2T_test_minus_readme_points"].values() for v in model.values())
+        add("The Heartbeat images, labels and splits are read as the authors intended", EXPLORATORY,
+            f"{r['n'][0]} test patients, {len(m['all_models_2T_test_minus_readme_points'])} released models",
+            f"Heart-ViT AUROC {num(r['auroc']['mean'])}, sensitivity {pct(r['sensitivity']['mean'])}, specificity "
+            f"{pct(r['specificity']['mean'])}; every published test metric within {largest:.3f} points",
+            "Heartbeat, 2nd-trimester test set", "wp15_reference_models",
+            "a released model missing its published result by more than 0.5 points")
     if have(BOUNDS_RUN):
         gate = load_run(BOUNDS_RUN)[0]["gate_G7"]
         add("False referrals of three experts for any dependence (Frechet range)", EXPLORATORY, "measured rates of each expert",
@@ -1300,17 +1310,22 @@ def section_external_echo() -> str:
         rows = []
         for key, value in m["results"].items():
             arch, cohort, split = key.split("|")
-            rows.append([arch, cohort, split, sum(value["n"]) // len(value["n"]), f"{num(value['auroc']['mean'])} ± {num(value['auroc']['sd_population'])}",
-                         f"{pct(value['sensitivity']['mean'])} ± {pct(value['sensitivity']['sd_population'])}",
-                         f"{pct(value['specificity']['mean'])} ± {pct(value['specificity']['sd_population'])}",
-                         f"{pct(value['f1']['mean'])} ± {pct(value['f1']['sd_population'])}"])
+            rows.append([arch, cohort, split, sum(value["n"]) // len(value["n"]), f"{num(value['auroc']['mean'])} ± {num(value['auroc']['sd_sample'])}",
+                         f"{pct(value['sensitivity']['mean'])} ± {pct(value['sensitivity']['sd_sample'])}",
+                         f"{pct(value['specificity']['mean'])} ± {pct(value['specificity']['sd_sample'])}",
+                         f"{pct(value['f1']['mean'])} ± {pct(value['f1']['sd_sample'])}"])
         diff = m["heart_vit_2T_test_minus_reported_points"]
+        largest_test = max(abs(v) for model in m["all_models_2T_test_minus_readme_points"].values() for v in model.values())
+        largest_cv = max(abs(v) for folds in m["heart_vit_cv_f1_minus_readme_points_per_fold"].values() for v in folds)
         parts += [f"**13.3 The authors' released models (run wp15_reference_models; exploratory).** Heart-ViT and five ImageNet-initialised "
                   f"baselines, loaded strictly from the released checkpoints and run with the authors' own inference and metric code on their "
                   f"splits. Heart-ViT on the 2nd-trimester test set minus the authors' README, in percentage points: "
-                  + ", ".join(f"{k} {v:+.2f}" for k, v in diff.items()) + f"; gate G5's 'reference model reproduced' is "
-                  f"**{state(m['gate_G5_reference_model_reproduced'])}** (tolerance 0.5 points). '3T-unseen' applies each 2nd-trimester fold model "
-                  f"to the {m['unseen_3T_patients']} 3rd-trimester patients never seen in the 2nd-trimester data. Mean ± SD over the 4 fold models.",
+                  + ", ".join(f"{k} {round(v, 2) + 0.0:+.2f}" for k, v in diff.items())
+                  + f"; every reported test metric of all six models within {largest_test:.3f} points, and Heart-ViT's cross-validation F1 of "
+                  f"each fold in both trimesters within {largest_cv:.3f} points. Gate G5's 'reference model reproduced' is "
+                  f"**{state(m['gate_G5_reference_model_reproduced'])}** (tolerance 0.5 points), so the images, labels and splits are read as "
+                  f"the authors intended. '3T-unseen' applies each 2nd-trimester fold model to the {m['unseen_3T_patients']} 3rd-trimester "
+                  f"patients never seen in the 2nd-trimester data. Mean ± SD over the 4 fold models (sample SD, as the authors report).",
                   table("t13c_reference_models", ["Model", "Patients", "Split", "n per fold", "AUROC", "Sensitivity", "Specificity", "F1"],
                         [[r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7]] for r in rows], ["wp15_reference_models"])]
     probe_rows = []

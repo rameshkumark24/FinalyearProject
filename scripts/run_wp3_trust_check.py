@@ -35,7 +35,7 @@ from sfr.doppler.cycles import CycleParams, detect_cycles, prepare  # noqa: E402
 from sfr.doppler.envelope import PIXELS_PER_SECOND, extract_envelopes  # noqa: E402
 from sfr.doppler.orientation import from_doppler, from_ecg  # noqa: E402
 from sfr.ecg.extract import extract_fetal_ecg  # noqa: E402
-from sfr.eval.stats import auroc, auroc_ci, bland_altman, bootstrap_ci, clopper_pearson  # noqa: E402
+from sfr.eval.stats import auroc_ci, bland_altman, clopper_pearson  # noqa: E402
 from sfr.paths import SPLITS  # noqa: E402
 from sfr.provenance import Run  # noqa: E402
 from sfr.trust.crossmodal import TrustRule, paired_intervals, plausible_intervals, trust_statistics, verdict  # noqa: E402

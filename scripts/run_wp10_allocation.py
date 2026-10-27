@@ -38,7 +38,6 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from sfr.eval.stats import clopper_pearson  # noqa: E402
 from sfr.fusion.conformal import leave_one_out_p_values, p_value  # noqa: E402
 from sfr.fusion.decision import DecisionConfig  # noqa: E402
 from sfr.paths import RUNS  # noqa: E402

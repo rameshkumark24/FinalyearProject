@@ -35,7 +35,7 @@ from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from sfr.doppler.reference import REFERENCE_MEASURES, conformal_p, fit_reference, leave_one_woman_out  # noqa: E402
+from sfr.doppler.reference import REFERENCE_MEASURES, fit_reference, leave_one_woman_out  # noqa: E402
 from sfr.echo.fetalclip import FETALCLIP_SHA256  # noqa: E402
 from sfr.eval.stats import auroc  # noqa: E402
 from sfr.fusion.conformal import p_value, smallest_p  # noqa: E402
