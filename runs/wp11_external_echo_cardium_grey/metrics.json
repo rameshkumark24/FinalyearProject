@@ -1,0 +1,1551 @@
+{
+  "transported_calibration": {
+    "n_abnormal": 73,
+    "n_normal": 950,
+    "auroc": 0.5052271088680605,
+    "auroc_ci": [
+      0.4407348685723972,
+      0.568125053399026
+    ],
+    "sensitivity": {
+      "k": 10,
+      "n": 73,
+      "share": 0.136986301369863,
+      "ci": [
+        0.06769406687686606,
+        0.23752865473670334
+      ]
+    },
+    "false_alarms": {
+      "k": 169,
+      "n": 950,
+      "share": 0.17789473684210527,
+      "ci": [
+        0.15407865504489474,
+        0.2037260870474365
+      ]
+    }
+  },
+  "local_calibration": {
+    "n_abnormal": 73,
+    "n_normal": 475,
+    "auroc": 0.5144196106705119,
+    "auroc_ci": [
+      0.45252524472138345,
+      0.5797357191719796
+    ],
+    "sensitivity": {
+      "k": 3,
+      "n": 73,
+      "share": 0.0410958904109589,
+      "ci": [
+        0.008556489507786055,
+        0.11543607876686149
+      ]
+    },
+    "false_alarms": {
+      "k": 22,
+      "n": 475,
+      "share": 0.04631578947368421,
+      "ci": [
+        0.029250102795269833,
+        0.06928537644692516
+      ]
+    }
+  },
+  "local_calibration_normals": 475,
+  "by_image_size": {
+    "1071x852": {
+      "n_abnormal": 55,
+      "n_normal": 602,
+      "auroc": 0.51433101781939,
+      "auroc_ci": [
+        0.4416648716596637,
+        0.5845794333417657
+      ],
+      "sensitivity": {
+        "k": 7,
+        "n": 55,
+        "share": 0.12727272727272726,
+        "ci": [
+          0.052735182963729484,
+          0.24480272032202482
+        ]
+      },
+      "false_alarms": {
+        "k": 94,
+        "n": 602,
+        "share": 0.15614617940199335,
+        "ci": [
+          0.12806398662173898,
+          0.18765001318560967
+        ]
+      }
+    },
+    "1115x884": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "1195x910": {
+      "n_abnormal": 0,
+      "n_normal": 2,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 2,
+        "share": 0.5,
+        "ci": [
+          0.01257911709342505,
+          0.9874208829065749
+        ]
+      }
+    },
+    "1539x852": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 1,
+        "share": 1.0,
+        "ci": [
+          0.025,
+          1.0
+        ]
+      }
+    },
+    "177x392": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "179x393": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 1,
+        "share": 1.0,
+        "ci": [
+          0.025,
+          1.0
+        ]
+      }
+    },
+    "180x416": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 1,
+        "share": 1.0,
+        "ci": [
+          0.025,
+          1.0
+        ]
+      }
+    },
+    "181x392": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 1,
+        "share": 1.0,
+        "ci": [
+          0.025,
+          1.0
+        ]
+      }
+    },
+    "265x516": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "324x600": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "328x600": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 1,
+        "share": 1.0,
+        "ci": [
+          0.025,
+          1.0
+        ]
+      }
+    },
+    "332x600": {
+      "n_abnormal": 0,
+      "n_normal": 3,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 2,
+        "n": 3,
+        "share": 0.6666666666666666,
+        "ci": [
+          0.09429932405024609,
+          0.9915962413403874
+        ]
+      }
+    },
+    "333x600": {
+      "n_abnormal": 0,
+      "n_normal": 3,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 2,
+        "n": 3,
+        "share": 0.6666666666666666,
+        "ci": [
+          0.09429932405024609,
+          0.9915962413403874
+        ]
+      }
+    },
+    "334x600": {
+      "n_abnormal": 0,
+      "n_normal": 2,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 2,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.841886116991581
+        ]
+      }
+    },
+    "335x600": {
+      "n_abnormal": 0,
+      "n_normal": 3,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 3,
+        "share": 0.3333333333333333,
+        "ci": [
+          0.008403758659612636,
+          0.9057006759497539
+        ]
+      }
+    },
+    "336x600": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "339x600": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "406x720": {
+      "n_abnormal": 0,
+      "n_normal": 3,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 3,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.7075982261787133
+        ]
+      }
+    },
+    "407x720": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "410x720": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 1,
+        "share": 1.0,
+        "ci": [
+          0.025,
+          1.0
+        ]
+      }
+    },
+    "412x720": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "412x735": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "415x720": {
+      "n_abnormal": 0,
+      "n_normal": 2,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 2,
+        "share": 0.5,
+        "ci": [
+          0.01257911709342505,
+          0.9874208829065749
+        ]
+      }
+    },
+    "415x735": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "416x720": {
+      "n_abnormal": 0,
+      "n_normal": 3,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 3,
+        "share": 0.3333333333333333,
+        "ci": [
+          0.008403758659612636,
+          0.9057006759497539
+        ]
+      }
+    },
+    "417x720": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "420x720": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "428x735": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "429x735": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "434x735": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "437x735": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "450x735": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "488x852": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "490x852": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 1,
+        "share": 1.0,
+        "ci": [
+          0.025,
+          1.0
+        ]
+      }
+    },
+    "491x852": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "493x852": {
+      "n_abnormal": 0,
+      "n_normal": 2,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 2,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.841886116991581
+        ]
+      }
+    },
+    "495x852": {
+      "n_abnormal": 0,
+      "n_normal": 3,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 2,
+        "n": 3,
+        "share": 0.6666666666666666,
+        "ci": [
+          0.09429932405024609,
+          0.9915962413403874
+        ]
+      }
+    },
+    "496x852": {
+      "n_abnormal": 0,
+      "n_normal": 2,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 2,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.841886116991581
+        ]
+      }
+    },
+    "497x852": {
+      "n_abnormal": 0,
+      "n_normal": 8,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 8,
+        "share": 0.125,
+        "ci": [
+          0.0031597235312519063,
+          0.5265096708752065
+        ]
+      }
+    },
+    "498x852": {
+      "n_abnormal": 1,
+      "n_normal": 1,
+      "auroc": 0.0,
+      "auroc_ci": [
+        0.0,
+        0.0
+      ],
+      "sensitivity": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 1,
+        "share": 1.0,
+        "ci": [
+          0.025,
+          1.0
+        ]
+      }
+    },
+    "499x852": {
+      "n_abnormal": 1,
+      "n_normal": 23,
+      "auroc": 0.6521739130434783,
+      "auroc_ci": [
+        0.45454545454545453,
+        0.8636363636363636
+      ],
+      "sensitivity": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      },
+      "false_alarms": {
+        "k": 3,
+        "n": 23,
+        "share": 0.13043478260869565,
+        "ci": [
+          0.02775150742279319,
+          0.3358891375371209
+        ]
+      }
+    },
+    "500x852": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 1,
+        "share": 1.0,
+        "ci": [
+          0.025,
+          1.0
+        ]
+      }
+    },
+    "501x852": {
+      "n_abnormal": 0,
+      "n_normal": 3,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 3,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.7075982261787133
+        ]
+      }
+    },
+    "502x852": {
+      "n_abnormal": 0,
+      "n_normal": 2,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 2,
+        "share": 0.5,
+        "ci": [
+          0.01257911709342505,
+          0.9874208829065749
+        ]
+      }
+    },
+    "503x852": {
+      "n_abnormal": 0,
+      "n_normal": 19,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 6,
+        "n": 19,
+        "share": 0.3157894736842105,
+        "ci": [
+          0.12576063587298328,
+          0.5655015688461509
+        ]
+      }
+    },
+    "504x852": {
+      "n_abnormal": 0,
+      "n_normal": 7,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 3,
+        "n": 7,
+        "share": 0.42857142857142855,
+        "ci": [
+          0.09898827844250786,
+          0.815948432359917
+        ]
+      }
+    },
+    "506x852": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "510x852": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "521x456": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "543x926": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "555x962": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "557x972": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "563x954": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "563x956": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "563x958": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "575x480": {
+      "n_abnormal": 3,
+      "n_normal": 0,
+      "sensitivity": {
+        "k": 2,
+        "n": 3,
+        "share": 0.6666666666666666,
+        "ci": [
+          0.09429932405024609,
+          0.9915962413403874
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      }
+    },
+    "575x960": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "589x996": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "629x854": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 1,
+        "n": 1,
+        "share": 1.0,
+        "ci": [
+          0.025,
+          1.0
+        ]
+      }
+    },
+    "635x1068": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "635x1078": {
+      "n_abnormal": 0,
+      "n_normal": 1,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 1,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.975
+        ]
+      }
+    },
+    "735x1186": {
+      "n_abnormal": 0,
+      "n_normal": 2,
+      "sensitivity": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 2,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.841886116991581
+        ]
+      }
+    },
+    "735x600": {
+      "n_abnormal": 3,
+      "n_normal": 34,
+      "auroc": 0.35294117647058826,
+      "auroc_ci": [
+        0.13716577540106953,
+        0.5784313725490197
+      ],
+      "sensitivity": {
+        "k": 0,
+        "n": 3,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.7075982261787133
+        ]
+      },
+      "false_alarms": {
+        "k": 5,
+        "n": 34,
+        "share": 0.14705882352941177,
+        "ci": [
+          0.04952845525617739,
+          0.31056573039512536
+        ]
+      }
+    },
+    "895x720": {
+      "n_abnormal": 5,
+      "n_normal": 153,
+      "auroc": 0.6104575163398693,
+      "auroc_ci": [
+        0.3466314935064935,
+        0.8376623376623377
+      ],
+      "sensitivity": {
+        "k": 1,
+        "n": 5,
+        "share": 0.2,
+        "ci": [
+          0.0050507633794680575,
+          0.7164179361180893
+        ]
+      },
+      "false_alarms": {
+        "k": 31,
+        "n": 153,
+        "share": 0.20261437908496732,
+        "ci": [
+          0.14201230256433084,
+          0.2750942319956481
+        ]
+      }
+    },
+    "910x735": {
+      "n_abnormal": 2,
+      "n_normal": 27,
+      "auroc": 0.6666666666666666,
+      "auroc_ci": [
+        0.4642857142857143,
+        0.8571428571428571
+      ],
+      "sensitivity": {
+        "k": 0,
+        "n": 2,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.841886116991581
+        ]
+      },
+      "false_alarms": {
+        "k": 5,
+        "n": 27,
+        "share": 0.18518518518518517,
+        "ci": [
+          0.06300000653767682,
+          0.38082987909399446
+        ]
+      }
+    },
+    "911x735": {
+      "n_abnormal": 3,
+      "n_normal": 0,
+      "sensitivity": {
+        "k": 0,
+        "n": 3,
+        "share": 0.0,
+        "ci": [
+          0.0,
+          0.7075982261787133
+        ]
+      },
+      "false_alarms": {
+        "k": 0,
+        "n": 0,
+        "share": NaN,
+        "ci": [
+          NaN,
+          NaN
+        ]
+      }
+    }
+  },
+  "shortcut_single_numbers_auroc": {
+    "width": 0.5871593366979092,
+    "height": 0.5208579668348955,
+    "mean_brightness": 0.439127613554434
+  },
+  "images": 5334,
+  "unusable_images_skipped": 0,
+  "cases_without_a_usable_image": 0,
+  "cases": 1023,
+  "refit": false
+}
