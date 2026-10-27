@@ -1,0 +1,46 @@
+{
+  "run": "wp18_echo_retest",
+  "description": "Structure expert on the same fetuses scanned in the 2nd and the 3rd trimester (Heartbeat; exploratory)",
+  "created_utc": "2026-10-27T16:31:10+00:00",
+  "script": "scripts/run_wp18_echo_retest.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "3b6a6220f87433ccb3ad961db60b14f2c92dcf26",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "restricted": true,
+    "runs": [
+      "wp11_external_echo_heartbeat_2T",
+      "wp11_external_echo_heartbeat_3T"
+    ],
+    "level": 0.05,
+    "bootstrap": 2000,
+    "seed": 0,
+    "made_after_seeing_results": true
+  },
+  "data": {
+    "scores": {
+      "n_files": 2,
+      "total_bytes": 66290,
+      "manifest_sha256": "972e32b1e6a3732ab653c38be0009562087facfe7206cbf001adb6c45dde3f85"
+    }
+  },
+  "n_real": 296,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "scripts/run_wp18_echo_retest.py"
+  ]
+}

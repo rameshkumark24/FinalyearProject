@@ -1,0 +1,64 @@
+{
+  "run": "wp17_structure_calibration",
+  "description": "Structure expert: false alarms and detection on Heartbeat and CARDIUM with transported, local and pooled calibration (exploratory)",
+  "created_utc": "2026-10-27T16:30:50+00:00",
+  "script": "scripts/run_wp17_structure_calibration.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "3b6a6220f87433ccb3ad961db60b14f2c92dcf26",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "restricted": true,
+    "datasets": [
+      "heartbeat_2T",
+      "heartbeat_3T",
+      "cardium"
+    ],
+    "level": 0.05,
+    "tolerance": 0.05,
+    "sizes": [
+      0,
+      5,
+      10,
+      19,
+      25,
+      40,
+      60,
+      100,
+      150,
+      200,
+      300
+    ],
+    "draws": 500,
+    "bootstrap": 2000,
+    "seed": 0,
+    "transported": "62 DELTA calibration scores",
+    "holds": "can alarm in every draw and mean false-alarm rate <= level + tolerance",
+    "made_after_seeing_results": true
+  },
+  "data": {
+    "scores": {
+      "n_files": 3,
+      "total_bytes": 125859,
+      "manifest_sha256": "9371fd60f02c170e8f20b65c86da551ee5f44e675a6881bd1ff001d0b508b817"
+    }
+  },
+  "n_real": 2577,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "scripts/run_wp17_structure_calibration.py"
+  ]
+}
