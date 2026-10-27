@@ -1,0 +1,30 @@
+{
+  "usable_images": {
+    "heartbeat": 6215,
+    "cardium": 6558
+  },
+  "candidate_image_pairs": 2856,
+  "matched_image_pairs": 2812,
+  "patient_pairs_same": 507,
+  "patient_pairs_single_image": 180,
+  "heartbeat_patients_found_in_cardium": 493,
+  "cardium_patients_found_in_heartbeat": 496,
+  "labels_agree_in_same_pairs": 505,
+  "first_listed_trimester_of_matched_heartbeat_patients": {
+    "2T": 356,
+    "3T": 151
+  },
+  "repeats_inside_datasets": {
+    "heartbeat": {
+      "images_repeated_across_patients": 16,
+      "patients_involved": 6,
+      "with_different_labels": 0
+    },
+    "cardium": {
+      "images_repeated_across_patients": 231,
+      "patients_involved": 34,
+      "with_different_labels": 53
+    }
+  },
+  "note": "counts only; matched patients are in private/matched_patients.csv (not in git)"
+}

@@ -1245,8 +1245,8 @@ def section_external_echo() -> str:
             text.append(f"Heartbeat and CARDIUM store frames of different sizes, so run wp14b compared the cleaned scan regions instead: "
                         f"{s['candidate_image_pairs']} candidate image pairs, {s['matched_image_pairs']} confirmed by thumbnail correlation; "
                         f"{s['patient_pairs_same']} Heartbeat-CARDIUM patient pairs share two or more scans and {s['patient_pairs_single_image']} "
-                        f"share one ({s['labels_agree_in_same_pairs']} of the {s['patient_pairs_same']} with the same label). Inside the datasets: "
-                        f"{repeats}.")
+                        f"share one ({s['labels_agree_in_same_pairs']} of the {s['patient_pairs_same']} with the same label), so CARDIUM is largely "
+                        f"a second export of Heartbeat's fetuses, not an independent dataset. Inside the datasets: {repeats}.")
         parts += text
     rows, verdicts = [], {}
     for name in EXTERNAL:

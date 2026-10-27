@@ -1,0 +1,138 @@
+{
+  "between_datasets": {
+    "delta__heartbeat_2T": {
+      "images": [
+        3760,
+        3279
+      ],
+      "exact_image_pairs": 0,
+      "near_image_pairs": 0,
+      "patients_with_an_exact_match": [
+        0,
+        0
+      ],
+      "patient_pairs_exact": 0,
+      "patient_pairs_possible_near_only": 0,
+      "labels_agree_in_exact_pairs": 0,
+      "patients": [
+        752,
+        784
+      ]
+    },
+    "delta__heartbeat_3T": {
+      "images": [
+        3760,
+        2936
+      ],
+      "exact_image_pairs": 0,
+      "near_image_pairs": 0,
+      "patients_with_an_exact_match": [
+        0,
+        0
+      ],
+      "patient_pairs_exact": 0,
+      "patient_pairs_possible_near_only": 0,
+      "labels_agree_in_exact_pairs": 0,
+      "patients": [
+        752,
+        690
+      ]
+    },
+    "delta__cardium": {
+      "images": [
+        3760,
+        6558
+      ],
+      "exact_image_pairs": 0,
+      "near_image_pairs": 0,
+      "patients_with_an_exact_match": [
+        0,
+        0
+      ],
+      "patient_pairs_exact": 0,
+      "patient_pairs_possible_near_only": 0,
+      "labels_agree_in_exact_pairs": 0,
+      "patients": [
+        752,
+        1103
+      ]
+    },
+    "heartbeat_2T__heartbeat_3T": {
+      "images": [
+        3279,
+        2936
+      ],
+      "exact_image_pairs": 2,
+      "near_image_pairs": 2,
+      "patients_with_an_exact_match": [
+        1,
+        1
+      ],
+      "patient_pairs_exact": 1,
+      "patient_pairs_possible_near_only": 0,
+      "labels_agree_in_exact_pairs": 1,
+      "patients": [
+        784,
+        690
+      ]
+    },
+    "heartbeat_2T__cardium": {
+      "images": [
+        3279,
+        6558
+      ],
+      "exact_image_pairs": 0,
+      "near_image_pairs": 0,
+      "patients_with_an_exact_match": [
+        0,
+        0
+      ],
+      "patient_pairs_exact": 0,
+      "patient_pairs_possible_near_only": 0,
+      "labels_agree_in_exact_pairs": 0,
+      "patients": [
+        784,
+        1103
+      ]
+    },
+    "heartbeat_3T__cardium": {
+      "images": [
+        2936,
+        6558
+      ],
+      "exact_image_pairs": 0,
+      "near_image_pairs": 0,
+      "patients_with_an_exact_match": [
+        0,
+        0
+      ],
+      "patient_pairs_exact": 0,
+      "patient_pairs_possible_near_only": 0,
+      "labels_agree_in_exact_pairs": 0,
+      "patients": [
+        690,
+        1103
+      ]
+    }
+  },
+  "within_datasets": {
+    "delta": {
+      "images": 3760,
+      "distinct_pixel_contents": 3760
+    },
+    "heartbeat_2T": {
+      "images": 3279,
+      "distinct_pixel_contents": 3243
+    },
+    "heartbeat_3T": {
+      "images": 2936,
+      "distinct_pixel_contents": 2921
+    },
+    "cardium": {
+      "images": 6558,
+      "distinct_pixel_contents": 6288
+    }
+  },
+  "near_bits": 10,
+  "note": "counts only; the matched patients are listed in private/matched_patients.csv (not in git)"
+}

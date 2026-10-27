@@ -1,0 +1,42 @@
+{
+  "run": "wp14b_echo_overlap_scan",
+  "description": "Shared fetuses between Heartbeat and CARDIUM compared on the cleaned scan region, and repeated images across patients inside each dataset",
+  "created_utc": "2026-10-27T14:58:05+00:00",
+  "script": "scripts/run_wp14b_echo_overlap_scan.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "7a29dcff2f4dbb8b385e03142eb44cdf620f31ea",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "candidate": "256-bit difference hash of the cleaned scan, Hamming distance <= 24",
+    "match": "thumbnail correlation >= 0.95",
+    "same_patient": ">= 2 matched images",
+    "repeats": "identical decoded pixels belonging to different patients of one dataset",
+    "restricted": true
+  },
+  "data": {
+    "indexes": {
+      "n_files": 2,
+      "total_bytes": 1455448,
+      "manifest_sha256": "fd99f9413096782f4b8dc134e1880783eabb9b922a47a4abea6366e162c98d6d"
+    }
+  },
+  "n_real": 12773,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": null,
+  "argv": [
+    "scripts/run_wp14b_echo_overlap_scan.py"
+  ]
+}

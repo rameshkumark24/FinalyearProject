@@ -29,7 +29,12 @@ per-patient outputs stay out of the public repository (`tests/test_privacy.py`).
 **Known problems.**
 - The views are not labelled and colour Doppler stills are mixed in; the cleaning step blanks
   coloured pixels, and a grey-only subset is analysed as well.
-- It comes from the same group as Heartbeat; run `wp14_echo_overlap` counts shared patients.
+- **It shares many fetuses with Heartbeat:** 496 of its 1,103 patients share two or more
+  cleaned scans with a Heartbeat patient, and 180 more patient pairs share one (run
+  `wp14b_echo_overlap_scan`; whole frames never match because the two store frames of different sizes). It is not an
+  independent second external dataset.
+- **Repeated images with conflicting labels:** 231 identical images appear under
+  34 different patients, and 53 of them under patients with different labels.
 - The clinical table describes a referral population; its rates do not transfer to screening.
 
 **Index files** (`python scripts/make_echo_index_cardium.py`, written to `data/indexes/`): all

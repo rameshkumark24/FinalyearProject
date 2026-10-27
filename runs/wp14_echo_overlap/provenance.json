@@ -1,0 +1,42 @@
+{
+  "run": "wp14_echo_overlap",
+  "description": "Exact and near-duplicate images, and shared patients, between DELTA, Heartbeat and CARDIUM",
+  "created_utc": "2026-10-27T14:48:31+00:00",
+  "script": "scripts/run_wp14_echo_overlap.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "70728f6ac6513bddd0769eed1fe23c2d748e608d",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "exact": "identical decoded RGB pixels",
+    "near": "256-bit difference hash, Hamming distance <= 10",
+    "same_patient": "at least one exact image match; possible if no exact match but two or more near matches",
+    "restricted": true,
+    "public_output": "counts only; matched patients in private/"
+  },
+  "data": {
+    "indexes": {
+      "n_files": 4,
+      "total_bytes": 1773652,
+      "manifest_sha256": "f139121d62df9273912a2b4a793fe84728c20e2949cc48baf9ebca508b9a1431"
+    }
+  },
+  "n_real": 16533,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": null,
+  "argv": [
+    "scripts/run_wp14_echo_overlap.py"
+  ]
+}

@@ -36,8 +36,13 @@ the public repository (`tests/test_privacy.py`).
   Results on it are reported, but never alone.
 - A case in this project is one patient in one trimester. The 296 patients scanned twice are
   never on both sides of a split, and analyses that pool the trimesters resample by patient.
-- Heartbeat and CARDIUM come from the same group; shared patients are counted by run
-  `wp14_echo_overlap` before the two are treated as separate sources.
+- **Heartbeat and CARDIUM share many fetuses.** Whole frames never match (the two store frames of
+  different sizes), but the cleaned scan regions do: 2812 matched scans; 493
+  Heartbeat patients share two or more scans with a CARDIUM patient (505 of 507 pairs
+  with the same label), and 180 more pairs share one scan (runs `wp14_echo_overlap`,
+  `wp14b_echo_overlap_scan`). The two are therefore not independent external datasets.
+- 16 identical images appear under 6 different patients
+  (0 with different labels).
 - The views differ from DELTA's (no abdominal view), so the frozen DELTA structure expert meets a
   different mix of planes here (see `docs/preregistration_external_echo.md`).
 
