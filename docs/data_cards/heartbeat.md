@@ -9,7 +9,7 @@ github.com/BCV-Uniandes/Heartbeat.
 
 **Access and terms.** Released only through the authors' request form, which checks the
 requester's institutional affiliation; "distributed exclusively for academic and research
-purposes" (repository README, read on 20 and 27 Oct 2026). The repository README states no
+purposes" (repository README, read on 20 and 27 Oct 2026). Users must cite the paper above. The repository README states no
 licence for the code. Requested by the team leader after 20 Oct 2026; on the development machine
 from 27 Oct 2026, in `data/heartbeat/` (git-ignored).
 
@@ -30,6 +30,7 @@ the public repository (`tests/test_privacy.py`).
 | Partition | 4 folds (train/val) inside each cross-validation set; one 2T test set | fold1..4.csv |
 | Released models | Heart-ViT, 4 folds for 2T and 4 for 3T; baselines (MobileNet, ResNet18, ResNet50, VGG16, ViT), 4 folds, 2T only | checkpoint files |
 | Reported results (Heart-ViT, 2T test, mean ± SD over the 4 fold models) | sensitivity 79.17 ± 8.33, specificity 93.18 ± 2.29, AUROC 88.56 ± 3.80 | repository README |
+| Reproduced here | every released model (Heart-ViT and five baselines), loaded strictly and run with the authors' code: all published 2T test metrics within 0.007 points; Heart-ViT's per-fold cross-validation F1 within 0.004 points | run `wp15_reference_models` |
 
 **Known problems.**
 - The 2T test set holds only 6 patients with CHD: one patient moves sensitivity by about 17 points.
