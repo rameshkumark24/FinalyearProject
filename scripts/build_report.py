@@ -401,7 +401,9 @@ PROBE_NAMES = {
 
 
 def structure_runs() -> list[str]:
-    return sorted(path.name for path in RUNS.glob("wp5_structure_*") if (path / "metrics.json").exists())
+    """Structure runs on open data (DELTA). Runs on restricted data are reported in section 13 only."""
+    return sorted(path.name for path in RUNS.glob("wp5_structure_*") if (path / "metrics.json").exists()
+                  and not load_run(path.name)[1]["config"].get("restricted"))
 
 
 def section_structure(run: str) -> str:
@@ -1169,6 +1171,166 @@ def section_review_checks() -> str:
     return "\n\n".join(parts) if len(parts) > 2 else ""
 
 
+EXTERNAL = ("heartbeat_2T", "heartbeat_2T_test", "heartbeat_3T", "cardium", "cardium_grey")
+EXTERNAL_NAMES = {"heartbeat_2T": "Heartbeat, 2nd trimester (primary)", "heartbeat_2T_test": "Heartbeat, 2nd-trimester test set",
+                  "heartbeat_3T": "Heartbeat, 3rd trimester", "cardium": "CARDIUM, all images", "cardium_grey": "CARDIUM, grey images only"}
+
+
+def shortcut_strength(values: dict) -> float:
+    """A single-number shortcut can separate the classes in either direction."""
+    return max(max(v, 1 - v) for v in values.values()) if values else float("nan")
+
+
+def external_verdict(run: str) -> dict:
+    """The reading rule fixed in docs/preregistration_external_echo.md (with its clarification of 27 Oct 2026)."""
+    metrics, provenance = load_run(run)
+    t = metrics["transported_calibration"]
+    strongest = shortcut_strength(metrics["shortcut_single_numbers_auroc"])
+    reads = t["auroc_ci"][0] > HALF and t["auroc"] > strongest
+    level = provenance["config"]["alpha"]
+    holds = t["false_alarms"]["ci"][0] <= level <= t["false_alarms"]["ci"][1]
+    return {"reads": reads, "strongest_shortcut": strongest, "calibration_holds": holds, "level": level}
+
+
+def section_external_echo() -> str:
+    if not have("wp11_external_echo_heartbeat_2T"):
+        return ""
+    parts = ["## 13. External echo data: Heartbeat and CARDIUM",
+             "Both datasets come from the BCV group of Universidad de los Andes (Colombia) and were received through the authors' request "
+             "forms (data cards: docs/data_cards/heartbeat.md, cardium.md). Their terms forbid redistribution, so only aggregate numbers "
+             "appear here; per-patient outputs stay in each run's private folder. The frozen DELTA structure expert on these data is the "
+             "test preregistered on 20 October 2026 (docs/preregistration_external_echo.md, with clarifications dated 27 October, made "
+             "before any model saw the images); everything after 13.2 is exploratory."]
+    if have("wp14_echo_overlap"):
+        m = load_run("wp14_echo_overlap")[0]
+        rows = [[pair.replace("__", " vs "), f"{v['images'][0]} / {v['images'][1]}", v["exact_image_pairs"], v["near_image_pairs"],
+                 v["patient_pairs_exact"]] for pair, v in m["between_datasets"].items()]
+        text = ["**13.1 Shared images and patients (runs wp14_echo_overlap, wp14b_echo_overlap_scan).** Whole frames compared by identical "
+                "pixels and by a difference hash:", table("t13a_overlap_frames", ["Datasets", "Images", "Identical frames", "Near-identical frames",
+                                                                                  "Patients sharing a frame"], rows, ["wp14_echo_overlap"])]
+        if have("wp14b_echo_overlap_scan"):
+            s = load_run("wp14b_echo_overlap_scan")[0]
+            repeats = "; ".join(f"{name}: {r['images_repeated_across_patients']} images repeated across {r['patients_involved']} patients "
+                                f"({r['with_different_labels']} with different labels)" for name, r in s["repeats_inside_datasets"].items())
+            text.append(f"Heartbeat and CARDIUM store frames of different sizes, so run wp14b compared the cleaned scan regions instead: "
+                        f"{s['candidate_image_pairs']} candidate image pairs, {s['matched_image_pairs']} confirmed by thumbnail correlation; "
+                        f"{s['patient_pairs_same']} Heartbeat-CARDIUM patient pairs share two or more scans and {s['patient_pairs_single_image']} "
+                        f"share one ({s['labels_agree_in_same_pairs']} of the {s['patient_pairs_same']} with the same label). Inside the datasets: "
+                        f"{repeats}.")
+        parts += text
+    rows, verdicts = [], {}
+    for name in EXTERNAL:
+        run = f"wp11_external_echo_{name}"
+        if not have(run):
+            continue
+        m = load_run(run)[0]
+        t, local = m["transported_calibration"], m["local_calibration"]
+        verdicts[name] = external_verdict(run)
+        short = m["shortcut_single_numbers_auroc"]
+        rows.append([EXTERNAL_NAMES[name], f"{m['cases']} ({t['n_abnormal']})", f"{num(t['auroc'])} {interval(t['auroc_ci'])}",
+                     f"{t['sensitivity']['k']}/{t['sensitivity']['n']} {pct_interval(t['sensitivity']['ci'])}",
+                     f"{t['false_alarms']['k']}/{t['false_alarms']['n']} {pct_interval(t['false_alarms']['ci'])}",
+                     f"{local['sensitivity']['k']}/{local['sensitivity']['n']} {pct_interval(local['sensitivity']['ci'])}",
+                     f"{local['false_alarms']['k']}/{local['false_alarms']['n']} {pct_interval(local['false_alarms']['ci'])}",
+                     ", ".join(f"{k.replace('_', ' ')} {num(v)}" for k, v in short.items()),
+                     f"{m['unusable_images_skipped']} / {m['cases_without_a_usable_image']}"])
+    primary = verdicts.get("heartbeat_2T")
+    reading = ""
+    if primary:
+        reading = ("**Preregistered reading, primary dataset:** " + ("supports 'reads heart structure'" if primary["reads"] else
+                   "supports 'shortcut'") + f" (the AUROC interval must lie above 0.5 and the AUROC above the strongest single-number "
+                   f"shortcut, {num(primary['strongest_shortcut'])}); the transported alarm level " +
+                   ("holds" if primary["calibration_holds"] else "does not hold") +
+                   f" (its false-alarm interval {'includes' if primary['calibration_holds'] else 'excludes'} the level {primary['level']}). "
+                   "Secondary datasets, same rule: " + "; ".join(f"{EXTERNAL_NAMES[n]}: {'reads structure' if v['reads'] else 'shortcut'}, "
+                                                                 f"calibration {'holds' if v['calibration_holds'] else 'does not hold'}"
+                                                                 for n, v in verdicts.items() if n != "heartbeat_2T") + ".")
+    parts += ["**13.2 The frozen DELTA structure expert on the new data (preregistered; runs wp11_external_echo_*).** Nothing was refitted. "
+              "Alarms at level 0.05 with the DELTA calibration (transported) and with half of each dataset's normal cases (local). The "
+              "single-number shortcut scores (image width, height, mean brightness) are AUROCs of those numbers alone.",
+              table("t13b_external_test", ["Dataset", "Patients (CHD)", "AUROC [95% CI]", "Transported: CHD caught [CI]",
+                                           "Transported: normal flagged [CI]", "Local: CHD caught [CI]", "Local: normal flagged [CI]",
+                                           "Shortcut scores (AUROC)", "Unusable images / patients"], rows,
+                    [f"wp11_external_echo_{n}" for n in verdicts]), reading]
+    if have("wp15_reference_models"):
+        m = load_run("wp15_reference_models")[0]
+        rows = []
+        for key, value in m["results"].items():
+            arch, cohort, split = key.split("|")
+            rows.append([arch, cohort, split, sum(value["n"]) // len(value["n"]), f"{num(value['auroc']['mean'])} ± {num(value['auroc']['sd_population'])}",
+                         f"{pct(value['sensitivity']['mean'])} ± {pct(value['sensitivity']['sd_population'])}",
+                         f"{pct(value['specificity']['mean'])} ± {pct(value['specificity']['sd_population'])}",
+                         f"{pct(value['f1']['mean'])} ± {pct(value['f1']['sd_population'])}"])
+        diff = m["heart_vit_2T_test_minus_reported_points"]
+        parts += [f"**13.3 The authors' released models (run wp15_reference_models; exploratory).** Heart-ViT and five ImageNet-initialised "
+                  f"baselines, loaded strictly from the released checkpoints and run with the authors' own inference and metric code on their "
+                  f"splits. Heart-ViT on the 2nd-trimester test set minus the authors' README, in percentage points: "
+                  + ", ".join(f"{k} {v:+.2f}" for k, v in diff.items()) + f"; gate G5's 'reference model reproduced' is "
+                  f"**{state(m['gate_G5_reference_model_reproduced'])}** (tolerance 0.5 points). '3T-unseen' applies each 2nd-trimester fold model "
+                  f"to the {m['unseen_3T_patients']} 3rd-trimester patients never seen in the 2nd-trimester data. Mean ± SD over the 4 fold models.",
+                  table("t13c_reference_models", ["Model", "Patients", "Split", "n per fold", "AUROC", "Sensitivity", "Specificity", "F1"],
+                        [[r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7]] for r in rows], ["wp15_reference_models"])]
+    probe_rows = []
+    for name, run in (("Heartbeat 2T", "wp5_structure_heartbeat_2T"), ("Heartbeat 3T", "wp5_structure_heartbeat_3T"),
+                      ("CARDIUM", "wp5_structure_cardium"), ("DELTA (for comparison)", "wp5_structure_delta")):
+        if not have(run):
+            continue
+        probes = load_run(run)[0]["probes"]
+        probe_rows.append([name] + [f"{num(probes[p]['auroc'])} {interval(probes[p]['ci'])}" for p in
+                                    ("fetalclip_scan", "random_weights_scan", "fetalclip_overlay_only", "no_anatomy_numbers")])
+    if len(probe_rows) > 1:
+        parts += ["**13.4 A FetalCLIP probe fitted on each dataset, with the same controls as DELTA (runs wp5_structure_*; exploratory).** "
+                  "Case-level folds inside each dataset; the controls are the same network with random weights, the parts removed by the "
+                  "cleaning step, and six numbers that describe the image rather than its content.",
+                  table("t13d_probes_per_dataset", ["Dataset", "FetalCLIP, cleaned scan", "Random weights", "Removed parts only", "Six image numbers"],
+                        probe_rows, ["wp5_structure_heartbeat_2T", "wp5_structure_heartbeat_3T", "wp5_structure_cardium", "wp5_structure_delta"])]
+    if have("wp16_structure_transfer"):
+        m = load_run("wp16_structure_transfer")[0]
+        rows = [[pair.replace("->", " to "), f"{num(v['auroc'])} {interval(v['ci'])}", v["n"], v["n_chd"], v["left_out_seen"]]
+                for pair, v in m["transfer"].items()]
+        shift_rows = [[name, num(v["val_auroc_mean"]), num(v["unseen_3T_auroc_mean"]), num(v["drop"])] for name, v in m["trimester_shift"].items()]
+        parts += ["**13.5 Probes moved between datasets, and from the 2nd to the 3rd trimester (run wp16_structure_transfer; exploratory).** "
+                  "Fitted on every case of one dataset, applied to another; target patients seen in the source are left out. Within-dataset AUROC: "
+                  + ", ".join(f"{k} {num(v)}" for k, v in m["within_dataset_auroc"].items()) + ".",
+                  table("t13e_transfer", ["Fitted on, applied to", "AUROC [95% CI]", "Patients", "CHD", "Left out (seen in the source)"], rows,
+                        ["wp16_structure_transfer"]),
+                  f"Trimester shift (hypothesis H6): mean AUROC on the authors' 2nd-trimester validation folds and on the {m['unseen_3T_patients']} "
+                  "3rd-trimester patients never seen in 2nd-trimester data, for the FetalCLIP probe and the authors' models.",
+                  table("t13f_trimester_shift", ["Model", "2T validation AUROC", "Unseen 3T AUROC", "Drop"], shift_rows, ["wp16_structure_transfer"])]
+    if have("wp17_structure_calibration"):
+        m = load_run("wp17_structure_calibration")[0]
+        rows = []
+        for name, d in m["by_dataset"].items():
+            for r in d["curve"]:
+                lf, ld = r.get("local_false_alarms"), r.get("local_detection")
+                rows.append([EXTERNAL_NAMES.get(name, name), r["local_healthy"], yes(r["can_alarm_local"]),
+                             f"{pct(lf['mean'])} [{pct(lf['p5'])}, {pct(lf['p95'])}]" if lf else "-",
+                             f"{pct(ld['mean'])} [{pct(ld['p5'])}, {pct(ld['p95'])}]" if ld else "-",
+                             f"{pct(r['pooled_false_alarms']['mean'])}", f"{pct(r['pooled_detection']['mean'])}"])
+        summary = "; ".join(f"{EXTERNAL_NAMES.get(n, n)}: transported calibration flagged {pct(d['transported']['false_alarms'])} of normal "
+                            f"fetuses and caught {pct(d['transported']['detection'])} of CHD; local calibration holds from "
+                            f"{d['smallest_that_holds']['local']['healthy'] if isinstance(d['smallest_that_holds']['local'], dict) else d['smallest_that_holds']['local']} "
+                            f"healthy patients; KS distance {num(d['shift']['distance'])} {interval(d['shift']['ci'])}"
+                            for n, d in m["by_dataset"].items())
+        parts += ["**13.6 Does the structure expert's alarm level travel, and what does local calibration cost in detection? (run "
+                  "wp17_structure_calibration; exploratory).** " + summary + ".",
+                  table("t13g_structure_calibration", ["Dataset", "Local healthy patients", "Can alarm", "Local: normal flagged [5th, 95th]",
+                                                       "Local: CHD caught [5th, 95th]", "Pooled with DELTA: normal flagged", "Pooled: CHD caught"],
+                        rows, ["wp17_structure_calibration"])]
+    if have("wp18_echo_retest"):
+        m = load_run("wp18_echo_retest")[0]
+        a = m["score_agreement_all"]
+        parts.append(f"**13.7 The same fetus scanned twice (run wp18_echo_retest; exploratory).** {m['patients_in_both_trimesters']} Heartbeat "
+                     f"patients were scanned in both trimesters ({m['label_differs_between_trimesters']} with different labels, left out). Spearman "
+                     f"correlation of the frozen expert's two scores {num(a['rho'], 2)} {interval(a['ci'], 2)} (n {a['n']}); alarms with the "
+                     f"transported calibration agree with kappa {num(m['alarm_kappa_transported'], 2)} (table: {m['alarm_table_transported']}).")
+    return "\n\n".join(parts)
+
+
+def verdict_fallback(gate: dict) -> str:
+    return "cannot be evaluated: " + gate["reason"] if "reason" in gate else state(gate.get("passed"))
+
+
 def section_gates() -> str:
     labelled = structure_runs()
     entries = [("G1", "wp1_cinc2013", "gate_G1"), ("G2", "wp2_doppler_cycles", "gate_G2"), ("G3", "wp3_trust_check", "gate_G3"),
@@ -1187,6 +1349,12 @@ def section_gates() -> str:
         elif name == "G7":
             verdict = (f"at the measured rates {state(gate['passed_at_measured_rates'])} ({pct_interval(gate['range_at_measured_rates'])}); "
                        f"with uncertainty {state(gate['passed_with_uncertainty'])} ({pct_interval(gate['range_with_uncertainty'])}); gate defined after seeing the results")
+        elif name == "G5" and have("wp15_reference_models", "wp5_structure_heartbeat_2T"):
+            reproduced = load_run("wp15_reference_models")[0]["gate_G5_reference_model_reproduced"]
+            verdict = ((f"{'met' if reproduced else 'partly met'} on Heartbeat: the released Heart-ViT {'was' if reproduced else 'was NOT'} "
+                        "reproduced (run wp15_reference_models), and patient-level AUROC with an interval and the shortcut audit are reported "
+                        "(run wp5_structure_heartbeat_2T); on DELTA no released model exists")
+                       if gate.get("auroc_with_interval") else verdict_fallback(gate))
         elif name == "G5" and gate.get("auroc_with_interval"):
             verdict = "partly met: patient-level AUROC with an interval and the shortcut audit are reported; " + gate["reason"].split(";")[0]
         elif "reason" in gate:
@@ -1204,7 +1372,7 @@ def main() -> None:
         "Do not edit by hand: change the analysis, re-run it, and rebuild. Tables are also saved as CSV in `reports/tables/`, "
         "figures in `reports/figures/`, and `reports/manifest.json` lists the runs behind every file.",
         claim_ledger(), section_gates(), section_wp1(), section_wp2(), section_wp3(), section_wp2b(), section_wp4(), section_wp5(), section_wp6(),
-        section_wp6b(), section_guarantees(), section_checks(), section_review_checks(), section_threats(),
+        section_wp6b(), section_guarantees(), section_checks(), section_review_checks(), section_external_echo(), section_threats(),
     ]
     (REPORTS / "RESULTS.md").write_text("\n\n".join(part for part in parts if part) + "\n", encoding="utf-8")
     MANIFEST.append({"file": "RESULTS.md", "runs": sorted({run for entry in MANIFEST for run in entry["runs"]})})

@@ -42,7 +42,24 @@ STEPS = [
     ("wp13", "run_wp13_calibration_transfer.py", "wp13_calibration_transfer", None),
     ("wp12", "run_wp12_theory_simulation.py", "wp12_theory_simulation", None),
     ("wp10", "run_wp10_allocation.py", "wp10_allocation", None),
-    # Not a step: scripts/run_wp11_external_echo.py needs a second echo dataset (docs/preregistration_external_echo.md).
+    # External echo data (Heartbeat, CARDIUM; received 24 and 27 October 2026). Restricted: per-patient
+    # files stay in runs/*/private/. The wp11 steps are the preregistered test; the rest is exploratory.
+    ("ixhb", "make_echo_index_heartbeat.py", "", None),
+    ("ixcd", "make_echo_index_cardium.py", "", None),
+    ("wp14", "run_wp14_echo_overlap.py", "wp14_echo_overlap", None),
+    ("wp14b", "run_wp14b_echo_overlap_scan.py", "wp14b_echo_overlap_scan", None),
+    ("x2T", "run_wp11_external_echo.py", "wp11_external_echo_heartbeat_2T", None),
+    ("x2Tt", "run_wp11_external_echo.py", "wp11_external_echo_heartbeat_2T_test", None),
+    ("x3T", "run_wp11_external_echo.py", "wp11_external_echo_heartbeat_3T", None),
+    ("xcd", "run_wp11_external_echo.py", "wp11_external_echo_cardium", None),
+    ("xcdg", "run_wp11_external_echo.py", "wp11_external_echo_cardium_grey", None),
+    ("wp17", "run_wp17_structure_calibration.py", "wp17_structure_calibration", None),
+    ("wp18", "run_wp18_echo_retest.py", "wp18_echo_retest", None),
+    ("wp15", "run_wp15_reference_models.py", "wp15_reference_models", None),
+    ("s2T", "run_wp5_structure.py", "wp5_structure_heartbeat_2T", None),
+    ("s3T", "run_wp5_structure.py", "wp5_structure_heartbeat_3T", None),
+    ("scd", "run_wp5_structure.py", "wp5_structure_cardium", None),
+    ("wp16", "run_wp16_structure_transfer.py", "wp16_structure_transfer", None),
     # Artifacts of the one-patient research tool, each refit checked against its run.
     ("tool", "export_artifacts.py", "tool_artifacts", None),
 ]
@@ -55,6 +72,21 @@ ARGUMENTS = {
     "wp5b": ["--structure-run", "wp5_structure_delta"],
     "wp6b": ["--structure-run", "wp5_structure_delta"],
 }
+HEARTBEAT = ROOT / "data" / "heartbeat" / "dataset"
+CARDIUM = ROOT / "data" / "cardium_clinical" / "CARDIUM_dataset"
+INDEXES = ROOT / "data" / "indexes"
+SOURCE_HB = "Heartbeat (BCV-Uniandes), Front Cardiovasc Med 2026, doi:10.3389/fcvm.2026.1726484; academic and research use only"
+SOURCE_CD = "CARDIUM (BCV-Uniandes), arXiv:2510.15208; data CC BY-NC 4.0, academic and research use"
+for key, name, root, index, source in (("x2T", "heartbeat_2T", HEARTBEAT, "echo_heartbeat_2T_index.csv", SOURCE_HB),
+                                       ("x2Tt", "heartbeat_2T_test", HEARTBEAT, "echo_heartbeat_2T_test_index.csv", SOURCE_HB),
+                                       ("x3T", "heartbeat_3T", HEARTBEAT, "echo_heartbeat_3T_index.csv", SOURCE_HB),
+                                       ("xcd", "cardium", CARDIUM, "echo_cardium_index.csv", SOURCE_CD),
+                                       ("xcdg", "cardium_grey", CARDIUM, "echo_cardium_grey_index.csv", SOURCE_CD)):
+    ARGUMENTS[key] = ["--name", name, "--root", str(root), "--index", str(INDEXES / index), "--source", source]
+for key, name, root, index, source in (("s2T", "heartbeat_2T", HEARTBEAT, "echo_heartbeat_2T_index.csv", SOURCE_HB),
+                                       ("s3T", "heartbeat_3T", HEARTBEAT, "echo_heartbeat_3T_index.csv", SOURCE_HB),
+                                       ("scd", "cardium", CARDIUM, "echo_cardium_index.csv", SOURCE_CD)):
+    ARGUMENTS[key] = ["--name", name, "--root", str(root), "--index", str(INDEXES / index), "--source", source, "--restricted"]
 NEEDS = {"wp5s": DELTA_ROOT / "DELTA_Dataset" / "metadata.csv",
          "wp5b": ROOT / "runs" / "wp5_structure_delta" / "metrics.json",
          "wp6b": ROOT / "runs" / "wp5_structure_delta" / "metrics.json",
@@ -62,21 +94,40 @@ NEEDS = {"wp5s": DELTA_ROOT / "DELTA_Dataset" / "metadata.csv",
          "wp8": ROOT / "runs" / "wp5_structure_delta" / "metrics.json",
          "wp9": ROOT / "runs" / "wp5_structure_delta" / "metrics.json",
          "wp5c": ROOT / "runs" / "wp5_structure_delta" / "embeddings.npz",
-         "wp10": ROOT / "runs" / "wp5_structure_delta" / "metrics.json"}
+         "wp10": ROOT / "runs" / "wp5_structure_delta" / "metrics.json",
+         "ixhb": HEARTBEAT / "2T" / "cross_val" / "metadata_raw.csv", "ixcd": CARDIUM,
+         "wp14": INDEXES / "echo_cardium_index.csv", "wp14b": INDEXES / "echo_cardium_index.csv",
+         "x2T": INDEXES / "echo_heartbeat_2T_index.csv", "x2Tt": INDEXES / "echo_heartbeat_2T_test_index.csv",
+         "x3T": INDEXES / "echo_heartbeat_3T_index.csv", "xcd": INDEXES / "echo_cardium_index.csv",
+         "xcdg": INDEXES / "echo_cardium_grey_index.csv",
+         "wp17": ROOT / "runs" / "wp11_external_echo_cardium" / "metrics.json",
+         "wp18": ROOT / "runs" / "wp11_external_echo_heartbeat_3T" / "metrics.json",
+         "wp15": ROOT / "data" / "third_party" / "Heartbeat" / "run_eval.py",
+         "s2T": INDEXES / "echo_heartbeat_2T_index.csv", "s3T": INDEXES / "echo_heartbeat_3T_index.csv",
+         "scd": INDEXES / "echo_cardium_index.csv",
+         "wp16": ROOT / "runs" / "wp5_structure_cardium" / "metrics.json"}
 # What each step needs besides the CPU and the public data under data/ (python scripts/run_all.py --list).
 RESOURCES = {"wp4c": "ECGFounder weights; a GPU is advised", "wp4d": "a GPU is advised",
              "wp5s": "the DELTA dataset and the FetalCLIP weights; a GPU is advised (about half an hour)",
              "wp4e": "ECGFounder weights; a GPU is advised (about 17 minutes on the development laptop)",
              "wp5b": "run wp5s", "wp6b": "run wp5s", "wp7": "run wp6b", "wp8": "run wp5s", "wp9": "run wp5s",
              "wp5c": "the embeddings saved by run wp5s", "wp10": "run wp5s; uses run wp4e if present",
-             "tool": "runs wp2b, wp4b and wp5s; the FetalCLIP weights"}
+             "tool": "runs wp2b, wp4b and wp5s; the FetalCLIP weights",
+             "ixhb": "the Heartbeat dataset (request form; academic use)", "ixcd": "the CARDIUM dataset (request form; CC BY-NC 4.0)",
+             "wp14": "both index files and DELTA", "wp14b": "both index files",
+             "x2T": "Heartbeat, FetalCLIP weights, structure artifact; a GPU is advised",
+             "x2Tt": "Heartbeat, FetalCLIP weights, structure artifact", "x3T": "Heartbeat, FetalCLIP weights, structure artifact; a GPU is advised",
+             "xcd": "CARDIUM, FetalCLIP weights, structure artifact; a GPU is advised", "xcdg": "CARDIUM, FetalCLIP weights, structure artifact",
+             "wp17": "the private outputs of x2T, x3T and xcd", "wp18": "the private outputs of x2T and x3T",
+             "wp15": "the authors' code in data/third_party/Heartbeat and their checkpoints; a GPU is advised",
+             "s2T": "Heartbeat and FetalCLIP; a GPU is advised", "s3T": "Heartbeat and FetalCLIP; a GPU is advised",
+             "scd": "CARDIUM and FetalCLIP; a GPU is advised", "wp16": "runs wp5s, s2T, s3T, scd, wp14b and wp15"}
 
 
 def main() -> int:
     if "--list" in sys.argv[1:]:
         for key, script, run, _ in STEPS:
             print(f"{key:5s} {script:36s} {RESOURCES.get(key, 'CPU and the public data')}")
-        print("not a step: run_wp11_external_echo.py needs a second echo dataset (not yet obtained)")
         return 0
     wanted = set(sys.argv[1:])
     logs = ROOT / "logs"
