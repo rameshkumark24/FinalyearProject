@@ -1,0 +1,77 @@
+{
+  "run": "wp5_structure_heartbeat_2T",
+  "description": "Structure expert: frozen FetalCLIP features, linear probe with case-level folds, shortcut audit, conformal alarm.",
+  "created_utc": "2026-10-27T16:32:46+00:00",
+  "script": "scripts/run_wp5_structure.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "da25201338a61525bcd36735cc6f43c746672548",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "dataset": "heartbeat_2T",
+    "source": "Heartbeat (BCV-Uniandes), Front Cardiovasc Med 2026, doi:10.3389/fcvm.2026.1726484; academic and research use only",
+    "alpha": 0.05,
+    "folds": 5,
+    "repeats": 5,
+    "probe": "standardise, PCA(32), logistic regression C=1 with balanced class weights",
+    "permutations": 200,
+    "calibration_share": 0.25,
+    "device": "cuda",
+    "restricted": true
+  },
+  "data": {
+    "index": {
+      "n_files": 1,
+      "total_bytes": 348175,
+      "manifest_sha256": "e779ba1390888eb952413621492e4fad3ef45516e440c4a8fa0929be95f9a4e8"
+    },
+    "images": {
+      "n_files": 3279,
+      "total_bytes": 1196854139,
+      "manifest_sha256": "4e4b12daa9d11cfe99cb2afd68daeb55dd3baa8c516f7802f51f4c36401f2d4e"
+    }
+  },
+  "n_real": 784,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [
+    {
+      "claimed_name": "FetalCLIP",
+      "verified": true,
+      "sha256": "90916caa408baf9374ee3f8c1533463331a4ace37a13e61385e782905b35c310",
+      "file": "FetalCLIP_weights.pt",
+      "bytes": 1710766661,
+      "source": "huggingface.co/numansaeed/fetalclip-model",
+      "licence": "CC BY-NC 4.0",
+      "n_parameters": 427647233
+    },
+    {
+      "name": "random-init network with the FetalCLIP architecture",
+      "seed": 0,
+      "verified": false
+    }
+  ],
+  "seed": 0,
+  "argv": [
+    "scripts/run_wp5_structure.py",
+    "--name",
+    "heartbeat_2T",
+    "--root",
+    "data/heartbeat/dataset",
+    "--index",
+    "data/indexes/echo_heartbeat_2T_index.csv",
+    "--source",
+    "Heartbeat (BCV-Uniandes), Front Cardiovasc Med 2026, doi:10.3389/fcvm.2026.1726484; academic and research use only",
+    "--restricted"
+  ]
+}
