@@ -1,6 +1,6 @@
 """Run every analysis in order, on the current code, and print the gates.
 
-    python scripts/run_all.py            # everything (about two hours on the development laptop)
+    python scripts/run_all.py            # everything (about four and a half hours on the development laptop)
     python scripts/run_all.py wp3 wp6    # only the named steps
     python scripts/run_all.py --list     # the steps and what each needs (data, weights, GPU)
 

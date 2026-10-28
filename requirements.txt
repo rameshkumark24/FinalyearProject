@@ -16,3 +16,7 @@ huggingface_hub>=0.23      # weight download with a pinned revision
 
 # Tests
 pytest>=8.0
+
+# Only for run wp15, which executes the Heartbeat authors' code (data/third_party/Heartbeat):
+# torchvision>=0.19
+# tqdm>=4.66

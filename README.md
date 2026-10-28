@@ -58,6 +58,7 @@ Any rate on patients who had all three tests is not measured.
 ## Read this first
 
 - **Results live in `reports/RESULTS.md`**, which `scripts/build_report.py` generates from the run folders. Nothing in it is typed by hand.
+- **A complete re-run from scratch (28 October 2026) reproduced every per-case output and metric** (`reports/final_rerun_check.txt`). Run `wp15_reference_models`, which executes the Heartbeat authors' code, was made once on the same version.
 - **The heart-defect result rests on one open, single-centre dataset (DELTA), and its controls show that part of the label can be read from images without the heart** (`reports/RESULTS.md`, section 6). Read the structure expert's AUROC as an upper bound, not as screening performance.
 - **There is no measured performance of the fused system on patients.** That needs paired data, which does not exist publicly.
 - **Sections 9 to 12 of the report were added after the results were known** (16 and 20 October 2026, in answer to two reviews): bounds for any dependence, alarm levels against sensitivity, subgroups, baselines, the rhythm check at 500 Hz, group-conditional echo calibration, trust-check baselines, calibration transfer, budget allocation, and threats to validity. They refit nothing but linear probes, are labelled as checks made after seeing the results, and their intervals are not corrected for the number of checks: read them as exploratory only. **Section 13** (external echo data, 27 October 2026) holds one test fixed in advance (13.2, `docs/preregistration_external_echo.md`); the rest of it is exploratory in the same sense.
@@ -108,7 +109,7 @@ python scripts/download_models.py             # ECGFounder and FetalCLIP weights
 # (865d952adc0d8fe2be9df326e46cb763), extract the images and metadata.csv to data/delta/extracted/, then:
 python scripts/make_echo_index_delta.py       # splits/echo_delta_index.csv from the authors' metadata.csv
 python scripts/run_all.py --list              # every step and what it needs (data, weights, GPU)
-python scripts/run_all.py                     # every run, in order, about three hours on a laptop with a small GPU
+python scripts/run_all.py                     # every run, in order, about four and a half hours on a laptop with a small GPU
 python scripts/export_artifacts.py            # artifacts/ for the one-patient tool, each refit checked against its run
 python scripts/build_report.py                # reports/RESULTS.md, tables and figures
 python -m sfr.audit                           # provenance and labelling checks
@@ -154,7 +155,7 @@ python scripts/predict_patient.py --echo path/to/case_folder --cpu
 
 ## Data and licences
 
-See `docs/data_cards/`. Heartbeat (academic research only) and CARDIUM (CC BY-NC 4.0; academic, non-commercial research) are obtained through their authors' request forms and may not be passed on: their images, index files and per-patient outputs stay out of this repository (`tests/test_privacy.py`). Their terms ask every user to cite the dataset papers: Rodríguez et al., *Heartbeat*, Front Cardiovasc Med 2026, doi:10.3389/fcvm.2026.1726484; Vega et al., *CARDIUM: Congenital Anomaly Recognition with Diagnostic Images and Unified Medical records*, CVAMD workshop at ICCV 2025, arXiv:2510.15208. Run `wp15_reference_models` also needs the authors' Heartbeat code (github.com/BCV-Uniandes/Heartbeat, cloned to the git-ignored `data/third_party/Heartbeat`; it has no licence, so it is never copied here). CinC 2013, NInFEA and NIFEADB: Open Data Commons Attribution License v1.0. Annotated Doppler strips: CC BY 4.0. DELTA echo images: CC BY 4.0 (Zhang, Yao, Qian, Ye, figshare, doi:10.6084/m9.figshare.32358771). ECGFounder weights: MIT (model card). FetalCLIP weights: CC BY-NC 4.0 (research use only). No data or weights are in this repository.
+See `docs/data_cards/`. Heartbeat (academic research only) and CARDIUM (CC BY-NC 4.0; academic, non-commercial research) are obtained through their authors' request forms and may not be passed on: their images, index files and per-patient outputs stay out of this repository (`tests/test_privacy.py`). Their terms ask every user to cite the dataset papers: Rodríguez et al., *Heartbeat*, Front Cardiovasc Med 2026, doi:10.3389/fcvm.2026.1726484; Vega et al., *CARDIUM: Congenital Anomaly Recognition with Diagnostic Images and Unified Medical records*, CVAMD workshop at ICCV 2025, arXiv:2510.15208. Run `wp15_reference_models` also needs the authors' Heartbeat code (github.com/BCV-Uniandes/Heartbeat, cloned to the git-ignored `data/third_party/Heartbeat`; it has no licence, so it is never copied here) and the packages it imports besides ours (torchvision, tqdm; see its requirements.txt). CinC 2013, NInFEA and NIFEADB: Open Data Commons Attribution License v1.0. Annotated Doppler strips: CC BY 4.0. DELTA echo images: CC BY 4.0 (Zhang, Yao, Qian, Ye, figshare, doi:10.6084/m9.figshare.32358771). ECGFounder weights: MIT (model card). FetalCLIP weights: CC BY-NC 4.0 (research use only). No data or weights are in this repository.
 
 ## Paper
 
