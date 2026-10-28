@@ -6,6 +6,7 @@
         "wp10_allocation",
         "wp11_external_echo_heartbeat_2T",
         "wp13_calibration_transfer",
+        "wp15_reference_models",
         "wp17_structure_calibration",
         "wp18_echo_retest",
         "wp1_cinc2013",
@@ -377,6 +378,12 @@
       ]
     },
     {
+      "file": "tables/t13c_reference_models.csv",
+      "runs": [
+        "wp15_reference_models"
+      ]
+    },
+    {
       "file": "tables/t13d_probes_per_dataset.csv",
       "runs": [
         "wp5_structure_heartbeat_2T",
@@ -415,6 +422,7 @@
         "wp12_theory_simulation",
         "wp13_calibration_transfer",
         "wp14_echo_overlap",
+        "wp15_reference_models",
         "wp16_structure_transfer",
         "wp17_structure_calibration",
         "wp18_echo_retest",

@@ -1,2 +1,8 @@
 Model,2T validation AUROC,Unseen 3T AUROC,Drop
 fetalclip_probe,0.786,0.711,0.075
+heart-vit,0.886,0.855,0.032
+vit,0.839,0.832,0.007
+resnet18,0.804,0.782,0.022
+resnet50,0.828,0.793,0.035
+vgg16,0.809,0.796,0.013
+mobilenet,0.777,0.751,0.026

@@ -1,10 +1,10 @@
 {
   "run": "wp12_theory_simulation",
   "description": "Simulation of the standard guarantees used by the decision rule: conformal validity and the Beta law, the union bound and its ends, false alarms under shift, group-conditional calibration (synthetic data)",
-  "created_utc": "2026-10-20T05:42:24+00:00",
+  "created_utc": "2026-10-27T21:51:44+00:00",
   "script": "scripts/run_wp12_theory_simulation.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "a60942c8542fc21ce06ab559436dee307a169693",
+  "git_commit": "71d81f930d23e84b5e6fd5708a0bd57d45bcfa3f",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",
@@ -89,6 +89,6 @@
   "models": [],
   "seed": 0,
   "argv": [
-    "scripts/run_wp12_theory_simulation.py"
+    "C:\\Finalyearproject\\scripts\\run_wp12_theory_simulation.py"
   ]
 }

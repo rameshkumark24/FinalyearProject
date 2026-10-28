@@ -1,10 +1,10 @@
 {
   "run": "wp4b_rhythm_intervals",
   "description": "Rhythm expert on beat-interval features, NIFEADB, leave-one-subject-out, with controls and the leakage comparison",
-  "created_utc": "2026-10-17T04:17:02+00:00",
+  "created_utc": "2026-10-27T20:33:46+00:00",
   "script": "scripts/run_wp4b_rhythm_intervals.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "5e9fd9a7b28c1873f4e62f0eb36c8a0517a400c9",
+  "git_commit": "71d81f930d23e84b5e6fd5708a0bd57d45bcfa3f",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",

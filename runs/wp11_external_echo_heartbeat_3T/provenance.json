@@ -1,10 +1,10 @@
 {
   "run": "wp11_external_echo_heartbeat_3T",
   "description": "Frozen DELTA structure expert on an external echo dataset (no refitting), as preregistered",
-  "created_utc": "2026-10-27T15:33:39+00:00",
+  "created_utc": "2026-10-27T22:30:58+00:00",
   "script": "scripts/run_wp11_external_echo.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "8162c1662ec11eb8f9e7ac3d56d6716dba75807c",
+  "git_commit": "71d81f930d23e84b5e6fd5708a0bd57d45bcfa3f",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",
@@ -73,13 +73,13 @@
   ],
   "seed": 0,
   "argv": [
-    "scripts/run_wp11_external_echo.py",
+    "C:\\Finalyearproject\\scripts\\run_wp11_external_echo.py",
     "--name",
     "heartbeat_3T",
     "--root",
-    "data/heartbeat/dataset",
+    "C:\\Finalyearproject\\data\\heartbeat\\dataset",
     "--index",
-    "data/indexes/echo_heartbeat_3T_index.csv",
+    "C:\\Finalyearproject\\data\\indexes\\echo_heartbeat_3T_index.csv",
     "--source",
     "Heartbeat (BCV-Uniandes), Front Cardiovasc Med 2026, doi:10.3389/fcvm.2026.1726484; academic and research use only"
   ]

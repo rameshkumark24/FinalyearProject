@@ -9,7 +9,10 @@ github.com/BCV-Uniandes/Cardium.
 **Access and terms.** Released through the authors' request form, which checks the requester's
 institutional affiliation; dataset licence CC BY-NC 4.0, academic and research use; code Apache
 2.0 (repository README and licence files, read on 27 Oct 2026). On the development machine from
-24 Oct 2026, in `data/cardium_clinical/` (git-ignored). The authors ask users to cite the paper.
+24 Oct 2026, in `data/cardium_clinical/` (git-ignored). The access e-mail states the terms: use only
+for academic and non-commercial research, and cite the paper above (the authors' BibTeX names the
+venue as the Third Workshop on Computer Vision for Automated Medical Diagnosis, 2025; arXiv lists it
+as accepted to the CVAMD workshop at ICCV 2025).
 
 **What may be published.** Aggregate results only (as for Heartbeat): images, index files and
 per-patient outputs stay out of the public repository (`tests/test_privacy.py`).

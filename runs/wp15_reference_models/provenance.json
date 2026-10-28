@@ -1,0 +1,391 @@
+{
+  "run": "wp15_reference_models",
+  "description": "Heartbeat's released Heart-ViT and baseline checkpoints, run with the authors' code on their splits (exploratory; after the preregistered external test)",
+  "created_utc": "2026-10-27T19:35:21+00:00",
+  "script": "scripts/run_wp15_reference_models.py",
+  "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
+  "git_commit": "34c6cbfe4add9f4e7c01da6ca380fbd869cb06f2",
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "torch": "2.6.0+cu124",
+    "wfdb": "4.3.1",
+    "PIL": "12.2.0",
+    "cv2": "5.0.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "config": {
+    "restricted": true,
+    "authors_code": "github.com/BCV-Uniandes/Heartbeat (data/third_party/Heartbeat)",
+    "reported_source": "github.com/BCV-Uniandes/Heartbeat README (commit 91d9772), read on 27 Oct 2026",
+    "reported_2T_test": {
+      "mobilenet": {
+        "sensitivity": [
+          29.17,
+          25.0
+        ],
+        "specificity": [
+          87.73,
+          7.62
+        ],
+        "ppv": [
+          15.3,
+          11.87
+        ],
+        "auroc": [
+          82.73,
+          5.06
+        ],
+        "f1": [
+          19.9,
+          15.98
+        ]
+      },
+      "vgg16": {
+        "sensitivity": [
+          62.5,
+          15.96
+        ],
+        "specificity": [
+          88.64,
+          6.86
+        ],
+        "ppv": [
+          41.28,
+          12.77
+        ],
+        "auroc": [
+          85.46,
+          2.98
+        ],
+        "f1": [
+          47.48,
+          5.02
+        ]
+      },
+      "resnet18": {
+        "sensitivity": [
+          66.67,
+          23.57
+        ],
+        "specificity": [
+          87.73,
+          4.78
+        ],
+        "ppv": [
+          37.3,
+          4.89
+        ],
+        "auroc": [
+          86.44,
+          4.32
+        ],
+        "f1": [
+          46.67,
+          9.03
+        ]
+      },
+      "resnet50": {
+        "sensitivity": [
+          75.0,
+          9.62
+        ],
+        "specificity": [
+          85.46,
+          4.92
+        ],
+        "ppv": [
+          37.45,
+          8.6
+        ],
+        "auroc": [
+          85.53,
+          2.48
+        ],
+        "f1": [
+          49.22,
+          6.23
+        ]
+      },
+      "vit": {
+        "sensitivity": [
+          70.84,
+          8.33
+        ],
+        "specificity": [
+          88.64,
+          5.01
+        ],
+        "ppv": [
+          42.7,
+          11.13
+        ],
+        "auroc": [
+          85.83,
+          2.73
+        ],
+        "f1": [
+          52.4,
+          7.97
+        ]
+      },
+      "heart-vit": {
+        "sensitivity": [
+          79.17,
+          8.33
+        ],
+        "specificity": [
+          93.18,
+          2.29
+        ],
+        "ppv": [
+          56.95,
+          6.99
+        ],
+        "auroc": [
+          88.56,
+          3.8
+        ],
+        "f1": [
+          65.63,
+          2.09
+        ]
+      }
+    },
+    "reported_cv_f1": {
+      "2T": [
+        52.17,
+        71.43,
+        60.0,
+        66.67
+      ],
+      "3T": [
+        72.0,
+        66.67,
+        66.67,
+        66.67
+      ]
+    },
+    "tolerance_points": 0.5,
+    "gate_rule": "Heart-ViT 2T test: mean sensitivity, specificity and AUROC each within the tolerance",
+    "settings": {
+      "heart-vit|2T|cross_val|1": {
+        "dim": 8,
+        "layers": 2,
+        "heads": 2,
+        "threshold": null
+      },
+      "heart-vit|2T|cross_val|2": {
+        "dim": 16,
+        "layers": 3,
+        "heads": 3,
+        "threshold": null
+      },
+      "heart-vit|2T|cross_val|3": {
+        "dim": 16,
+        "layers": 3,
+        "heads": 3,
+        "threshold": null
+      },
+      "heart-vit|2T|cross_val|4": {
+        "dim": 16,
+        "layers": 2,
+        "heads": 2,
+        "threshold": null
+      },
+      "heart-vit|2T|test|1": {
+        "dim": 8,
+        "layers": 2,
+        "heads": 2,
+        "threshold": 0.44
+      },
+      "heart-vit|2T|test|2": {
+        "dim": 16,
+        "layers": 3,
+        "heads": 3,
+        "threshold": 0.03
+      },
+      "heart-vit|2T|test|3": {
+        "dim": 16,
+        "layers": 3,
+        "heads": 3,
+        "threshold": 0.47
+      },
+      "heart-vit|2T|test|4": {
+        "dim": 16,
+        "layers": 2,
+        "heads": 2,
+        "threshold": 0.33
+      },
+      "heart-vit|3T|cross_val|1": {
+        "dim": 16,
+        "layers": 2,
+        "heads": 2,
+        "threshold": null
+      },
+      "heart-vit|3T|cross_val|2": {
+        "dim": 16,
+        "layers": 3,
+        "heads": 3,
+        "threshold": null
+      },
+      "heart-vit|3T|cross_val|3": {
+        "dim": 16,
+        "layers": 3,
+        "heads": 3,
+        "threshold": null
+      },
+      "heart-vit|3T|cross_val|4": {
+        "dim": 16,
+        "layers": 3,
+        "heads": 3,
+        "threshold": null
+      },
+      "vit|2T|cross_val|1": {
+        "threshold": null
+      },
+      "vit|2T|cross_val|2": {
+        "threshold": null
+      },
+      "vit|2T|cross_val|3": {
+        "threshold": null
+      },
+      "vit|2T|cross_val|4": {
+        "threshold": null
+      },
+      "vit|2T|test|1": {
+        "threshold": 0.69
+      },
+      "vit|2T|test|2": {
+        "threshold": 0.24
+      },
+      "vit|2T|test|3": {
+        "threshold": 0.51
+      },
+      "vit|2T|test|4": {
+        "threshold": 0.49
+      },
+      "resnet18|2T|cross_val|1": {
+        "threshold": null
+      },
+      "resnet18|2T|cross_val|2": {
+        "threshold": null
+      },
+      "resnet18|2T|cross_val|3": {
+        "threshold": null
+      },
+      "resnet18|2T|cross_val|4": {
+        "threshold": null
+      },
+      "resnet18|2T|test|1": {
+        "threshold": 0.8
+      },
+      "resnet18|2T|test|2": {
+        "threshold": 0.64
+      },
+      "resnet18|2T|test|3": {
+        "threshold": 0.69
+      },
+      "resnet18|2T|test|4": {
+        "threshold": 0.46
+      },
+      "resnet50|2T|cross_val|1": {
+        "threshold": null
+      },
+      "resnet50|2T|cross_val|2": {
+        "threshold": null
+      },
+      "resnet50|2T|cross_val|3": {
+        "threshold": null
+      },
+      "resnet50|2T|cross_val|4": {
+        "threshold": null
+      },
+      "resnet50|2T|test|1": {
+        "threshold": 0.5
+      },
+      "resnet50|2T|test|2": {
+        "threshold": 0.31
+      },
+      "resnet50|2T|test|3": {
+        "threshold": 0.25
+      },
+      "resnet50|2T|test|4": {
+        "threshold": 0.24
+      },
+      "vgg16|2T|cross_val|1": {
+        "threshold": null
+      },
+      "vgg16|2T|cross_val|2": {
+        "threshold": null
+      },
+      "vgg16|2T|cross_val|3": {
+        "threshold": null
+      },
+      "vgg16|2T|cross_val|4": {
+        "threshold": null
+      },
+      "vgg16|2T|test|1": {
+        "threshold": 0.5
+      },
+      "vgg16|2T|test|2": {
+        "threshold": 0.38
+      },
+      "vgg16|2T|test|3": {
+        "threshold": 0.94
+      },
+      "vgg16|2T|test|4": {
+        "threshold": 0.41
+      },
+      "mobilenet|2T|cross_val|1": {
+        "threshold": null
+      },
+      "mobilenet|2T|cross_val|2": {
+        "threshold": null
+      },
+      "mobilenet|2T|cross_val|3": {
+        "threshold": null
+      },
+      "mobilenet|2T|cross_val|4": {
+        "threshold": null
+      },
+      "mobilenet|2T|test|1": {
+        "threshold": 0.98
+      },
+      "mobilenet|2T|test|2": {
+        "threshold": 0.94
+      },
+      "mobilenet|2T|test|3": {
+        "threshold": 0.93
+      },
+      "mobilenet|2T|test|4": {
+        "threshold": 0.91
+      }
+    },
+    "device": "cuda",
+    "trimester_shift": "2T models on the 3T patients never seen in 2T data, at each fold's own test threshold"
+  },
+  "data": {
+    "checkpoints": {
+      "n_files": 28,
+      "total_bytes": 7763536034,
+      "manifest_sha256": "e7a1f108e0d3c97724f20a9f39b38e2efc282cc421a666707e75136321a626a6"
+    },
+    "metadata": {
+      "n_files": 15,
+      "total_bytes": 2064405,
+      "manifest_sha256": "0c62ba86cb298f7d415cd8659c82df1d5e8edad3cb43fea48d4496d420ff9a99"
+    }
+  },
+  "n_real": 1178,
+  "n_synthetic": 0,
+  "synthetic": false,
+  "synthetic_kind": "",
+  "models": [],
+  "seed": 0,
+  "argv": [
+    "scripts/run_wp15_reference_models.py"
+  ]
+}

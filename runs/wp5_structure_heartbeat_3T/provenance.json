@@ -1,10 +1,10 @@
 {
   "run": "wp5_structure_heartbeat_3T",
   "description": "Structure expert: frozen FetalCLIP features, linear probe with case-level folds, shortcut audit, conformal alarm.",
-  "created_utc": "2026-10-27T17:04:57+00:00",
+  "created_utc": "2026-10-28T03:46:05+00:00",
   "script": "scripts/run_wp5_structure.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "9c93f62e75e9d737b93fd2a373a21d60a87692d3",
+  "git_commit": "71d81f930d23e84b5e6fd5708a0bd57d45bcfa3f",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",
@@ -63,13 +63,13 @@
   ],
   "seed": 0,
   "argv": [
-    "scripts/run_wp5_structure.py",
+    "C:\\Finalyearproject\\scripts\\run_wp5_structure.py",
     "--name",
     "heartbeat_3T",
     "--root",
-    "data/heartbeat/dataset",
+    "C:\\Finalyearproject\\data\\heartbeat\\dataset",
     "--index",
-    "data/indexes/echo_heartbeat_3T_index.csv",
+    "C:\\Finalyearproject\\data\\indexes\\echo_heartbeat_3T_index.csv",
     "--source",
     "Heartbeat (BCV-Uniandes), Front Cardiovasc Med 2026, doi:10.3389/fcvm.2026.1726484; academic and research use only",
     "--restricted"

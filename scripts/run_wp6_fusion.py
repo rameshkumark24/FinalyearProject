@@ -24,7 +24,6 @@ from __future__ import annotations
 import csv
 import json
 import sys
-from dataclasses import asdict
 from pathlib import Path
 
 import numpy as np

@@ -30,7 +30,7 @@ from sklearn.model_selection import StratifiedKFold
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from sfr.data.nifeadb import ALL_RECORDS, label_of, record_files  # noqa: E402
-from sfr.eval.stats import auroc, auroc_ci  # noqa: E402
+from sfr.eval.stats import auroc_ci  # noqa: E402
 from sfr.paths import RUNS  # noqa: E402
 from sfr.provenance import Run, load_run  # noqa: E402
 from sfr.rhythm.evaluate import evaluate, forest, logistic, out_of_fold, single_index, summarise  # noqa: E402

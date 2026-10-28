@@ -1,10 +1,10 @@
 {
   "run": "wp9_checks_after_results",
   "description": "Checks made after seeing the results: rhythm AUROC on 1 kHz recordings only, paired differences of rhythm scores, robust ECG-Doppler agreement, alarms by subgroup, missed structural defects. Saved outputs only; nothing re-fitted.",
-  "created_utc": "2026-10-17T05:32:48+00:00",
+  "created_utc": "2026-10-27T21:33:38+00:00",
   "script": "scripts/run_wp9_checks_after_results.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "5e9fd9a7b28c1873f4e62f0eb36c8a0517a400c9",
+  "git_commit": "71d81f930d23e84b5e6fd5708a0bd57d45bcfa3f",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",

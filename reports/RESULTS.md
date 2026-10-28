@@ -21,6 +21,7 @@ Every claim of the project in one table, generated from the run folders. 'Confir
 | The structure expert's DELTA alarm level holds in another country's data | confirmatory: preregistered on 20 Oct 2026, data seen only afterwards (clarifications of 27 Oct) | 734 normal patients | 94 flagged (12.8%) [10.5%, 15.4%] at level 0.05 | Heartbeat, 2nd trimester | wp11_external_echo_heartbeat_2T | already falsified: the interval excludes the level |
 | Local calibration repairs the echo expert's false alarms but not its detection | exploratory: made after seeing the results; interval not corrected for the number of checks | 734 healthy and 50 CHD patients | false alarms within the level from 19 local healthy patients; 4.3% of CHD caught then | Heartbeat, 2nd trimester | wp17_structure_calibration | detection well above the level after local calibration |
 | The echo expert gives the same answer for the same fetus scanned twice | exploratory: made after seeing the results; interval not corrected for the number of checks | 294 fetuses (2nd and 3rd trimester) | Spearman 0.05 [-0.07, 0.17] | Heartbeat | wp18_echo_retest | already falsified: the two scores do not agree |
+| The Heartbeat images, labels and splits are read as the authors intended | exploratory: made after seeing the results; interval not corrected for the number of checks | 61 test patients, 6 released models | Heart-ViT AUROC 0.886, sensitivity 79.2%, specificity 93.2%; every published test metric within 0.007 points | Heartbeat, 2nd-trimester test set | wp15_reference_models | a released model missing its published result by more than 0.5 points |
 | False referrals of three experts for any dependence (Frechet range) | exploratory: made after seeing the results; interval not corrected for the number of checks | measured rates of each expert | [7.1%, 16.9%]; with uncertainty [4.5%, 57.4%] | three datasets | wp7_dependence_bounds | a joint rate on paired patients outside the range |
 | With 14 calibration recordings the rhythm level acts as a multiple of 1/15 | exploratory: made after seeing the results; interval not corrected for the number of checks (arithmetic) | 14 calibration recordings | effective level 0.067; effective ceiling 16.7% | NIFEADB | wp8_tradeoff | none: it follows from the p-value formula |
 | The rhythm expert does not rely on the sampling rate itself | exploratory: made after seeing the results; interval not corrected for the number of checks | 26 recordings, all brought to 500 Hz | AUROC 0.810 [0.581, 0.994]; change 0.012 [0.000, 0.054] | NIFEADB | wp4e_rhythm_500hz | AUROC falling after the common 500 Hz step; the recording setting itself is not removed by resampling |
@@ -33,13 +34,13 @@ Every claim of the project in one table, generated from the run folders. 'Confir
 
 | Gate | Outcome | Rule | Run | Code hash | Run time (UTC) |
 |---|---|---|---|---|---|
-| G1 | met | median F1 >= 0.90 and follows-mother rate <= 0.05 on the held-out test recordings | wp1_cinc2013 | fe14c714b7e8 | 2026-10-17T04:03:29+00:00 |
-| G2 | met | on the held-out strips: median F1 >= 0.90 at 15 columns, and Doppler rate within 5 bpm of the marked rate in >= 90% of strips | wp2_doppler_cycles | fe14c714b7e8 | 2026-10-17T04:08:38+00:00 |
-| G3 | NOT met | test women: beat-to-beat Bland-Altman limits within +-10 bpm in recordings that pass the ECG quality check, and AUROC >= 0.90 for maternal substitution | wp3_trust_check | fe14c714b7e8 | 2026-10-17T04:11:18+00:00 |
-| G4 | met | every row has n, an interval and a run folder; the checkpoint hash matches the published file; the negative-control rows are present | wp4c_foundation | fe14c714b7e8 | 2026-10-17T04:35:38+00:00 |
-| G5 | partly met: patient-level AUROC with an interval and the shortcut audit are reported; no released reference model exists for this dataset | the released reference model reproduced; pooled patient-level AUROC with an interval; shortcut audit reported | wp5_structure_delta | fe14c714b7e8 | 2026-10-17T05:03:05+00:00 |
-| G6 | decided by the property tests (python -m pytest tests/test_fusion.py) | all property tests pass; every table row states how many scores are real, how many virtual, and which coupling | wp6_fusion | fe14c714b7e8 | 2026-10-17T05:30:55+00:00 |
-| G7 | at the measured rates met ([7.1%, 16.9%]); with uncertainty NOT met ([4.5%, 57.4%]); gate defined after seeing the results | the false-referral range for any dependence lies inside the design ceiling (sum of the alarm levels); three experts, each at its alarm rate on its own healthy data | wp7_dependence_bounds | fe14c714b7e8 | 2026-10-17T05:32:24+00:00 |
+| G1 | met | median F1 >= 0.90 and follows-mother rate <= 0.05 on the held-out test recordings | wp1_cinc2013 | fe14c714b7e8 | 2026-10-27T20:23:46+00:00 |
+| G2 | met | on the held-out strips: median F1 >= 0.90 at 15 columns, and Doppler rate within 5 bpm of the marked rate in >= 90% of strips | wp2_doppler_cycles | fe14c714b7e8 | 2026-10-27T20:27:30+00:00 |
+| G3 | NOT met | test women: beat-to-beat Bland-Altman limits within +-10 bpm in recordings that pass the ECG quality check, and AUROC >= 0.90 for maternal substitution | wp3_trust_check | fe14c714b7e8 | 2026-10-27T20:29:26+00:00 |
+| G4 | met | every row has n, an interval and a run folder; the checkpoint hash matches the published file; the negative-control rows are present | wp4c_foundation | fe14c714b7e8 | 2026-10-27T20:46:49+00:00 |
+| G5 | met on Heartbeat: the released Heart-ViT was reproduced (run wp15_reference_models), and patient-level AUROC with an interval and the shortcut audit are reported (run wp5_structure_heartbeat_2T); on DELTA no released model exists | the released reference model reproduced; pooled patient-level AUROC with an interval; shortcut audit reported | wp5_structure_delta | fe14c714b7e8 | 2026-10-27T21:05:20+00:00 |
+| G6 | decided by the property tests (python -m pytest tests/test_fusion.py) | all property tests pass; every table row states how many scores are real, how many virtual, and which coupling | wp6_fusion | fe14c714b7e8 | 2026-10-27T21:31:41+00:00 |
+| G7 | at the measured rates met ([7.1%, 16.9%]); with uncertainty NOT met ([4.5%, 57.4%]); gate defined after seeing the results | the false-referral range for any dependence lies inside the design ceiling (sum of the alarm levels); three experts, each at its alarm rate on its own healthy data | wp7_dependence_bounds | fe14c714b7e8 | 2026-10-27T21:33:12+00:00 |
 
 ## 1. Fetal beat detection (CinC 2013 set A)
 
@@ -683,6 +684,30 @@ Heartbeat and CARDIUM store frames of different sizes, so run wp14b compared the
 
 **Preregistered reading, primary dataset:** does not support 'reads heart structure' (its AUROC is not distinguishable from 0.5 and a single image number separates the classes at least as well), which the fixed rule counts as 'shortcut'. The rule asks for an AUROC interval above 0.5 and an AUROC above the strongest single-number shortcut (0.666 here). The transported alarm level does not hold (its false-alarm interval excludes the level 0.05). Secondary datasets, same rule: Heartbeat, 2nd-trimester test set: shortcut, calibration does not hold; Heartbeat, 3rd trimester: shortcut, calibration does not hold; CARDIUM, all images: shortcut, calibration does not hold; CARDIUM, grey images only: shortcut, calibration does not hold.
 
+**13.3 The authors' released models (run wp15_reference_models; exploratory).** Heart-ViT and five ImageNet-initialised baselines, loaded strictly from the released checkpoints and run with the authors' own inference and metric code on their splits. Heart-ViT on the 2nd-trimester test set minus the authors' README, in percentage points: sensitivity +0.00, specificity +0.00, auroc +0.00; every reported test metric of all six models within 0.007 points, and Heart-ViT's cross-validation F1 of each fold in both trimesters within 0.004 points. Gate G5's 'reference model reproduced' is **met** (tolerance 0.5 points), so the images, labels and splits are read as the authors intended. '3T-unseen' applies each 2nd-trimester fold model to the 394 3rd-trimester patients never seen in the 2nd-trimester data. Mean ± SD over the 4 fold models (sample SD, as the authors report).
+
+| Model | Patients | Split | n per fold | AUROC | Sensitivity | Specificity | F1 |
+|---|---|---|---|---|---|---|---|
+| heart-vit | 2T | cross_val | 180 | 0.886 ± 0.062 | 65.9% ± 17.2% | 97.2% ± 1.2% | 62.6% ± 8.4% |
+| heart-vit | 2T | test | 61 | 0.886 ± 0.038 | 79.2% ± 8.3% | 93.2% ± 2.3% | 65.6% ± 2.1% |
+| heart-vit | 3T-unseen | cross_val | 394 | 0.855 ± 0.035 | 46.7% ± 15.6% | 94.4% ± 2.7% | 42.7% ± 10.4% |
+| heart-vit | 3T | cross_val | 172 | 0.874 ± 0.044 | 66.4% ± 10.0% | 97.8% ± 1.2% | 68.0% ± 2.7% |
+| mobilenet | 2T | cross_val | 180 | 0.777 ± 0.042 | 54.5% ± 23.5% | 90.4% ± 7.1% | 36.5% ± 3.3% |
+| mobilenet | 2T | test | 61 | 0.827 ± 0.051 | 29.2% ± 25.0% | 87.7% ± 7.6% | 19.9% ± 16.0% |
+| mobilenet | 3T-unseen | cross_val | 394 | 0.751 ± 0.017 | 17.5% ± 12.6% | 95.3% ± 3.1% | 17.5% ± 11.9% |
+| resnet18 | 2T | cross_val | 180 | 0.804 ± 0.065 | 61.4% ± 17.2% | 91.3% ± 4.6% | 41.8% ± 3.1% |
+| resnet18 | 2T | test | 61 | 0.864 ± 0.043 | 66.7% ± 23.6% | 87.7% ± 4.8% | 46.7% ± 9.0% |
+| resnet18 | 3T-unseen | cross_val | 394 | 0.782 ± 0.042 | 50.8% ± 15.0% | 84.6% ± 10.3% | 31.5% ± 4.8% |
+| resnet50 | 2T | cross_val | 180 | 0.828 ± 0.062 | 70.5% ± 8.7% | 91.8% ± 1.5% | 47.3% ± 1.6% |
+| resnet50 | 2T | test | 61 | 0.855 ± 0.025 | 75.0% ± 9.6% | 85.5% ± 4.9% | 49.2% ± 6.2% |
+| resnet50 | 3T-unseen | cross_val | 394 | 0.793 ± 0.030 | 54.2% ± 5.7% | 86.5% ± 2.8% | 34.3% ± 4.9% |
+| vgg16 | 2T | cross_val | 180 | 0.809 ± 0.081 | 59.1% ± 15.7% | 91.9% ± 2.9% | 41.8% ± 8.5% |
+| vgg16 | 2T | test | 61 | 0.855 ± 0.030 | 62.5% ± 16.0% | 88.6% ± 6.9% | 47.5% ± 5.0% |
+| vgg16 | 3T-unseen | cross_val | 394 | 0.796 ± 0.016 | 39.2% ± 17.7% | 93.3% ± 4.2% | 34.6% ± 12.7% |
+| vit | 2T | cross_val | 180 | 0.839 ± 0.052 | 75.0% ± 8.7% | 91.0% ± 2.0% | 47.9% ± 2.9% |
+| vit | 2T | test | 61 | 0.858 ± 0.027 | 70.8% ± 8.3% | 88.6% ± 5.0% | 52.4% ± 8.0% |
+| vit | 3T-unseen | cross_val | 394 | 0.832 ± 0.020 | 50.8% ± 9.6% | 91.3% ± 3.7% | 39.9% ± 3.4% |
+
 **13.4 A FetalCLIP probe fitted on each dataset, with the same controls as DELTA (runs wp5_structure_*; exploratory).** Case-level folds inside each dataset; the controls are the same network with random weights, the parts removed by the cleaning step, and six numbers that describe the image rather than its content.
 
 | Dataset | FetalCLIP, cleaned scan | Random weights | Removed parts only | Six image numbers | Commonest image size: scan / six numbers |
@@ -714,6 +739,12 @@ Trimester shift (hypothesis H6): mean AUROC on the authors' 2nd-trimester valida
 | Model | 2T validation AUROC | Unseen 3T AUROC | Drop |
 |---|---|---|---|
 | fetalclip_probe | 0.786 | 0.711 | 0.075 |
+| heart-vit | 0.886 | 0.855 | 0.032 |
+| vit | 0.839 | 0.832 | 0.007 |
+| resnet18 | 0.804 | 0.782 | 0.022 |
+| resnet50 | 0.828 | 0.793 | 0.035 |
+| vgg16 | 0.809 | 0.796 | 0.013 |
+| mobilenet | 0.777 | 0.751 | 0.026 |
 
 **13.6 Does the structure expert's alarm level travel, and what does local calibration cost in detection? (run wp17_structure_calibration; exploratory).** Heartbeat, 2nd trimester (primary): transported calibration flagged 12.8% of normal fetuses and caught 14.0% of CHD; local calibration holds from 19 healthy patients, where it catches 4.3% of CHD; KS distance 0.132 [0.105, 0.255]; Heartbeat, 3rd trimester: transported calibration flagged 21.2% of normal fetuses and caught 18.0% of CHD; local calibration holds from 19 healthy patients, where it catches 6.9% of CHD; KS distance 0.264 [0.196, 0.384]; CARDIUM, all images: transported calibration flagged 16.9% of normal fetuses and caught 12.2% of CHD; local calibration holds from 19 healthy patients, where it catches 3.1% of CHD; KS distance 0.201 [0.147, 0.334].
 
