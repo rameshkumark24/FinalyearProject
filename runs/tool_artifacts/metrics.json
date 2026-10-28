@@ -7,7 +7,7 @@
       "ninfea_scores_of_wp6_reproduced_max_abs_diff": 4.989008110523052e-07,
       "ninfea_recordings_checked": 57,
       "ninfea_p_values_of_wp6_reproduced_max_abs_diff": 3.33333333379926e-07,
-      "sha256": "c3d01ee448ed22ebb826f33a322df5b69fd5f6a4f25800e47d8c59caeebf56d1"
+      "sha256": "7970a5b0fa2fb820d32ff4f717d67f1ffaa52caf3058d423aae629fe437e8fc0"
     },
     "function": {
       "exported": true,
@@ -15,7 +15,7 @@
       "loo_scores_of_wp2b_reproduced_max_abs_diff": 4.947213543271545e-07,
       "loo_p_values_of_wp2b_reproduced_max_abs_diff": 4.827586206346268e-07,
       "recordings": 60,
-      "sha256": "25e993c5241e3c1d4065e82bc6be3893d6878d09c1fbe9b8e82c8490843b3f3f"
+      "sha256": "034598b5cf260889be9c136a2cd486f5e25ab15052beea3cbd20a2932519abb7"
     },
     "structure": {
       "exported": true,
@@ -29,7 +29,7 @@
       "published_test_defects_caught": 18,
       "test_normal_flagged": 9,
       "published_test_normal_flagged": 9,
-      "sha256": "68b2afafc7761c48525644fde9cdba36320639586c229ab54469b060a11768d5"
+      "sha256": "66527ca1e8f19b6f3cda7b6156111aa48cf62af089a6328dabdd52d469b160bf"
     }
   }
 }

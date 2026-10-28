@@ -1,10 +1,10 @@
 {
   "run": "wp18_echo_retest",
   "description": "Structure expert on the same fetuses scanned in the 2nd and the 3rd trimester (Heartbeat; exploratory)",
-  "created_utc": "2026-10-27T16:31:10+00:00",
+  "created_utc": "2026-10-27T23:02:31+00:00",
   "script": "scripts/run_wp18_echo_retest.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "3b6a6220f87433ccb3ad961db60b14f2c92dcf26",
+  "git_commit": "71d81f930d23e84b5e6fd5708a0bd57d45bcfa3f",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",
@@ -41,6 +41,6 @@
   "models": [],
   "seed": 0,
   "argv": [
-    "scripts/run_wp18_echo_retest.py"
+    "C:\\Finalyearproject\\scripts\\run_wp18_echo_retest.py"
   ]
 }

@@ -1,10 +1,10 @@
 {
   "run": "wp11_external_echo_cardium",
   "description": "Frozen DELTA structure expert on an external echo dataset (no refitting), as preregistered",
-  "created_utc": "2026-10-27T15:43:03+00:00",
+  "created_utc": "2026-10-27T22:37:19+00:00",
   "script": "scripts/run_wp11_external_echo.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "0a8d5df71b7ddace6f12a0c6f659c2d48746f870",
+  "git_commit": "71d81f930d23e84b5e6fd5708a0bd57d45bcfa3f",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",
@@ -73,13 +73,13 @@
   ],
   "seed": 0,
   "argv": [
-    "scripts/run_wp11_external_echo.py",
+    "C:\\Finalyearproject\\scripts\\run_wp11_external_echo.py",
     "--name",
     "cardium",
     "--root",
-    "data/cardium_clinical/CARDIUM_dataset",
+    "C:\\Finalyearproject\\data\\cardium_clinical\\CARDIUM_dataset",
     "--index",
-    "data/indexes/echo_cardium_index.csv",
+    "C:\\Finalyearproject\\data\\indexes\\echo_cardium_index.csv",
     "--source",
     "CARDIUM (BCV-Uniandes), arXiv:2510.15208; data CC BY-NC 4.0, academic and research use"
   ]

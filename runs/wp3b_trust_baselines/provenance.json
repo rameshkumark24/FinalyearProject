@@ -1,10 +1,10 @@
 {
   "run": "wp3b_trust_baselines",
   "description": "Heart-rate-only and pulse-train cross-correlation baselines for the ECG-Doppler trust check (check made after seeing the results)",
-  "created_utc": "2026-10-20T05:24:56+00:00",
+  "created_utc": "2026-10-27T21:51:04+00:00",
   "script": "scripts/run_wp3b_trust_baselines.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "be7cc95c943433e7c04ded41b3b12808ca493a7c",
+  "git_commit": "71d81f930d23e84b5e6fd5708a0bd57d45bcfa3f",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",
@@ -50,6 +50,6 @@
   "models": [],
   "seed": 0,
   "argv": [
-    "scripts/run_wp3b_trust_baselines.py"
+    "C:\\Finalyearproject\\scripts\\run_wp3b_trust_baselines.py"
   ]
 }

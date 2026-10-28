@@ -1,10 +1,10 @@
 {
   "run": "wp5_structure_cardium",
   "description": "Structure expert: frozen FetalCLIP features, linear probe with case-level folds, shortcut audit, conformal alarm.",
-  "created_utc": "2026-10-27T17:27:47+00:00",
+  "created_utc": "2026-10-28T04:11:05+00:00",
   "script": "scripts/run_wp5_structure.py",
   "code_sha256": "fe14c714b7e84e5ab6052ee8f5e57c742df4d3a11a3afcec1bb1203717f98460",
-  "git_commit": "e363bf6c67e06ad9e108ebf0a30ea62a2ad05b08",
+  "git_commit": "71d81f930d23e84b5e6fd5708a0bd57d45bcfa3f",
   "packages": {
     "python": "3.13.12",
     "numpy": "2.4.6",
@@ -63,13 +63,13 @@
   ],
   "seed": 0,
   "argv": [
-    "scripts/run_wp5_structure.py",
+    "C:\\Finalyearproject\\scripts\\run_wp5_structure.py",
     "--name",
     "cardium",
     "--root",
-    "data/cardium_clinical/CARDIUM_dataset",
+    "C:\\Finalyearproject\\data\\cardium_clinical\\CARDIUM_dataset",
     "--index",
-    "data/indexes/echo_cardium_index.csv",
+    "C:\\Finalyearproject\\data\\indexes\\echo_cardium_index.csv",
     "--source",
     "CARDIUM (BCV-Uniandes), arXiv:2510.15208; data CC BY-NC 4.0, academic and research use",
     "--restricted"

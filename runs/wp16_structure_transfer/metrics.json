@@ -146,9 +146,39 @@
           0.723992673992674
         ]
       }
+    },
+    "heart-vit": {
+      "val_auroc_mean": 0.8862371447451227,
+      "unseen_3T_auroc_mean": 0.8546016483516484,
+      "drop": 0.031635496393474294
+    },
+    "vit": {
+      "val_auroc_mean": 0.8391996475647345,
+      "unseen_3T_auroc_mean": 0.8317765567765567,
+      "drop": 0.007423090788177822
+    },
+    "resnet18": {
+      "val_auroc_mean": 0.8038636914142987,
+      "unseen_3T_auroc_mean": 0.7816163003663005,
+      "drop": 0.022247391047998222
+    },
+    "resnet50": {
+      "val_auroc_mean": 0.828032657718297,
+      "unseen_3T_auroc_mean": 0.7933836996336996,
+      "drop": 0.03464895808459745
+    },
+    "vgg16": {
+      "val_auroc_mean": 0.8090648872442157,
+      "unseen_3T_auroc_mean": 0.7961080586080587,
+      "drop": 0.012956828636156992
+    },
+    "mobilenet": {
+      "val_auroc_mean": 0.777103055580074,
+      "unseen_3T_auroc_mean": 0.7514652014652013,
+      "drop": 0.025637854114872627
     }
   },
-  "authors_models_compared": false,
+  "authors_models_compared": true,
   "unseen_3T_patients": 394,
   "made_after_seeing_results": true
 }

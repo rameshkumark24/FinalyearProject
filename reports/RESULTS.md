@@ -34,13 +34,13 @@ Every claim of the project in one table, generated from the run folders. 'Confir
 
 | Gate | Outcome | Rule | Run | Code hash | Run time (UTC) |
 |---|---|---|---|---|---|
-| G1 | met | median F1 >= 0.90 and follows-mother rate <= 0.05 on the held-out test recordings | wp1_cinc2013 | fe14c714b7e8 | 2026-10-17T04:03:29+00:00 |
-| G2 | met | on the held-out strips: median F1 >= 0.90 at 15 columns, and Doppler rate within 5 bpm of the marked rate in >= 90% of strips | wp2_doppler_cycles | fe14c714b7e8 | 2026-10-17T04:08:38+00:00 |
-| G3 | NOT met | test women: beat-to-beat Bland-Altman limits within +-10 bpm in recordings that pass the ECG quality check, and AUROC >= 0.90 for maternal substitution | wp3_trust_check | fe14c714b7e8 | 2026-10-17T04:11:18+00:00 |
-| G4 | met | every row has n, an interval and a run folder; the checkpoint hash matches the published file; the negative-control rows are present | wp4c_foundation | fe14c714b7e8 | 2026-10-17T04:35:38+00:00 |
-| G5 | met on Heartbeat: the released Heart-ViT was reproduced (run wp15_reference_models), and patient-level AUROC with an interval and the shortcut audit are reported (run wp5_structure_heartbeat_2T); on DELTA no released model exists | the released reference model reproduced; pooled patient-level AUROC with an interval; shortcut audit reported | wp5_structure_delta | fe14c714b7e8 | 2026-10-17T05:03:05+00:00 |
-| G6 | decided by the property tests (python -m pytest tests/test_fusion.py) | all property tests pass; every table row states how many scores are real, how many virtual, and which coupling | wp6_fusion | fe14c714b7e8 | 2026-10-17T05:30:55+00:00 |
-| G7 | at the measured rates met ([7.1%, 16.9%]); with uncertainty NOT met ([4.5%, 57.4%]); gate defined after seeing the results | the false-referral range for any dependence lies inside the design ceiling (sum of the alarm levels); three experts, each at its alarm rate on its own healthy data | wp7_dependence_bounds | fe14c714b7e8 | 2026-10-17T05:32:24+00:00 |
+| G1 | met | median F1 >= 0.90 and follows-mother rate <= 0.05 on the held-out test recordings | wp1_cinc2013 | fe14c714b7e8 | 2026-10-27T20:23:46+00:00 |
+| G2 | met | on the held-out strips: median F1 >= 0.90 at 15 columns, and Doppler rate within 5 bpm of the marked rate in >= 90% of strips | wp2_doppler_cycles | fe14c714b7e8 | 2026-10-27T20:27:30+00:00 |
+| G3 | NOT met | test women: beat-to-beat Bland-Altman limits within +-10 bpm in recordings that pass the ECG quality check, and AUROC >= 0.90 for maternal substitution | wp3_trust_check | fe14c714b7e8 | 2026-10-27T20:29:26+00:00 |
+| G4 | met | every row has n, an interval and a run folder; the checkpoint hash matches the published file; the negative-control rows are present | wp4c_foundation | fe14c714b7e8 | 2026-10-27T20:46:49+00:00 |
+| G5 | met on Heartbeat: the released Heart-ViT was reproduced (run wp15_reference_models), and patient-level AUROC with an interval and the shortcut audit are reported (run wp5_structure_heartbeat_2T); on DELTA no released model exists | the released reference model reproduced; pooled patient-level AUROC with an interval; shortcut audit reported | wp5_structure_delta | fe14c714b7e8 | 2026-10-27T21:05:20+00:00 |
+| G6 | decided by the property tests (python -m pytest tests/test_fusion.py) | all property tests pass; every table row states how many scores are real, how many virtual, and which coupling | wp6_fusion | fe14c714b7e8 | 2026-10-27T21:31:41+00:00 |
+| G7 | at the measured rates met ([7.1%, 16.9%]); with uncertainty NOT met ([4.5%, 57.4%]); gate defined after seeing the results | the false-referral range for any dependence lies inside the design ceiling (sum of the alarm levels); three experts, each at its alarm rate on its own healthy data | wp7_dependence_bounds | fe14c714b7e8 | 2026-10-27T21:33:12+00:00 |
 
 ## 1. Fetal beat detection (CinC 2013 set A)
 
@@ -739,6 +739,12 @@ Trimester shift (hypothesis H6): mean AUROC on the authors' 2nd-trimester valida
 | Model | 2T validation AUROC | Unseen 3T AUROC | Drop |
 |---|---|---|---|
 | fetalclip_probe | 0.786 | 0.711 | 0.075 |
+| heart-vit | 0.886 | 0.855 | 0.032 |
+| vit | 0.839 | 0.832 | 0.007 |
+| resnet18 | 0.804 | 0.782 | 0.022 |
+| resnet50 | 0.828 | 0.793 | 0.035 |
+| vgg16 | 0.809 | 0.796 | 0.013 |
+| mobilenet | 0.777 | 0.751 | 0.026 |
 
 **13.6 Does the structure expert's alarm level travel, and what does local calibration cost in detection? (run wp17_structure_calibration; exploratory).** Heartbeat, 2nd trimester (primary): transported calibration flagged 12.8% of normal fetuses and caught 14.0% of CHD; local calibration holds from 19 healthy patients, where it catches 4.3% of CHD; KS distance 0.132 [0.105, 0.255]; Heartbeat, 3rd trimester: transported calibration flagged 21.2% of normal fetuses and caught 18.0% of CHD; local calibration holds from 19 healthy patients, where it catches 6.9% of CHD; KS distance 0.264 [0.196, 0.384]; CARDIUM, all images: transported calibration flagged 16.9% of normal fetuses and caught 12.2% of CHD; local calibration holds from 19 healthy patients, where it catches 3.1% of CHD; KS distance 0.201 [0.147, 0.334].
 

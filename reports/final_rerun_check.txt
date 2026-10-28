@@ -1,42 +1,79 @@
 Final re-run check
 ==================
 Every analysis was run again from the start with scripts/run_all.py on the final code (analysis
-package hash fe14c714b7e8, git commit 5e9fd9a) on 17 Oct 2026, from 09:33 to 11:03 local time:
-all 16 steps, wp1 to wp9 and the export of the one-patient tool's artifacts, ended with exit code 0.
-Their outputs were compared with the previously committed run folders by scripts/compare_runs.py
+package hash fe14c714b7e8, git commit 71d81f9) on 28 Oct 2026, from 01:53 to 10:23 local time: all
+37 steps (wp1 to wp18, the Heartbeat and CARDIUM index files, and the export of the one-patient
+tool's artifacts), each ending with exit code 0. The steps took 8.5 hours in all; one of them
+(wp5_structure_heartbeat_2T: 282.7 minutes, against 31.2 on 27 Oct) ran while the laptop slept, so
+about 4.3 hours were computing if that step is counted at its 27 Oct length.
+
+Run wp15_reference_models was not re-run here: it executes the Heartbeat authors' downloaded code,
+which the assistant's safety check does not run. The team leader ran it on 28 Oct on the same code
+(commit 34c6cbf); neither its script nor the analysis package has changed since.
+
+Before the re-run, every run folder (private per-patient files included) and the six private index
+files were copied aside. scripts/compare_runs.py then compared the new outputs with that copy
 (provenance.json, which holds run times and the git commit, is not compared).
 
-Result: every per-case output and every metric is identical. The only differences are
-- the run time of the echo run (wp5_structure_delta, "minutes" in metrics.json: 131.4 before, 26.5 now);
-- the creation date written on the tool's three artifact cards (16 Oct before, 17 Oct now), which
-  changes the card hashes listed in runs/tool_artifacts/metrics.json; all 19 array files of the
-  artifacts are byte-identical.
+Result: every per-case output and every metric is identical, and so are the six private index
+files. The only differences are
+- the run times of the four echo structure runs ("minutes" in metrics.json);
+- the creation date on the one-patient tool's three artifact cards (17 Oct before, 28 Oct now),
+  which changes the card hashes listed in runs/tool_artifacts/metrics.json; every array file of the
+  artifacts is byte-identical;
+- run wp16_structure_transfer now also lists the authors' six released models in its
+  trimester-shift comparison, because run wp15 exists; all of its earlier values are unchanged.
 The two runs kept from the first held-out passes (wp1_cinc2013_v1_first_run and
 wp3_trust_check_v1_prespecified) are records of those passes and are not re-run.
 
-The regenerated report differs only in the run times shown in the gates table; every other table
-and every figure is unchanged. Tests: 80 of 80 pass. Audit: 5 of 5 checks pass.
+The regenerated report differs only in the run times shown in the gates table and in the authors'
+models added to the trimester-shift table (section 13.5). Tests: 118 of 118 pass. Audit: 5 of 5
+checks pass.
 
-An earlier full re-run (13 Oct 22:43 to 14 Oct 01:49), made before the checks of 16 Oct existed,
-had also reproduced every output.
+Earlier complete re-runs had also reproduced every output: 13 Oct 22:43 to 14 Oct 01:49 (before the
+checks of 16 Oct) and 17 Oct 09:33 to 11:03 (before the external echo data).
 
-Comparison output:
+Comparison output (28 Oct 2026):
 
 tool_artifacts: DIFFERENT
-  metrics.json: 3 values differ; first: .artifacts.function.sha256 'dc53feaea09d39ddbfb0cbe0ee20b9a7df30c54b087490b3c10e2b128884' against '25e993c5241e3c1d4065e82bc6be3893d6878d09c1fbe9b8e82c8490843b'
+  metrics.json: 3 values differ; first: .artifacts.function.sha256 '25e993c5241e3c1d4065e82bc6be3893d6878d09c1fbe9b8e82c8490843b' against '034598b5cf260889be9c136a2cd486f5e25ab15052beea3cbd20a2932519'
+wp10_allocation: identical
+wp11_external_echo_cardium: identical
+wp11_external_echo_cardium_grey: identical
+wp11_external_echo_heartbeat_2T: identical
+wp11_external_echo_heartbeat_2T_test: identical
+wp11_external_echo_heartbeat_3T: identical
+wp12_theory_simulation: identical
+wp13_calibration_transfer: identical
+wp14_echo_overlap: identical
+wp14b_echo_overlap_scan: identical
+wp15_reference_models: identical
+wp16_structure_transfer: DIFFERENT
+  metrics.json: 7 values differ; first: .authors_models_compared 'False' against 'True'
+wp17_structure_calibration: identical
+wp18_echo_retest: identical
 wp1_cinc2013: identical
 wp1_cinc2013_v1_first_run: identical
 wp2_doppler_cycles: identical
 wp2b_function_reference: identical
 wp3_trust_check: identical
 wp3_trust_check_v1_prespecified: identical
+wp3b_trust_baselines: identical
 wp4a_nifeadb_beats: identical
 wp4b_rhythm_intervals: identical
 wp4c_foundation: identical
 wp4d_cnn: identical
+wp4e_rhythm_500hz: identical
+wp5_structure_cardium: identical
+  metrics.json: 1 run-time values differ (expected)
 wp5_structure_delta: identical
   metrics.json: 1 run-time values differ (expected)
+wp5_structure_heartbeat_2T: identical
+  metrics.json: 1 run-time values differ (expected)
+wp5_structure_heartbeat_3T: identical
+  metrics.json: 1 run-time values differ (expected)
 wp5b_structure_controls_delta: identical
+wp5c_structure_by_size: identical
 wp6_fusion: identical
 wp6b_fusion_structure: identical
 wp7_dependence_bounds: identical
